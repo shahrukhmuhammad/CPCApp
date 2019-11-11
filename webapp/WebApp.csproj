@@ -246,6 +246,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\CPC\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\CPC\Controllers\AnnexureIController.cs" />
     <Compile Include="Areas\CPC\CPCAreaRegistration.cs" />
     <Compile Include="Areas\CRM\Controllers\ContactController.cs" />
     <Compile Include="Areas\CRM\Controllers\SettingsController.cs" />
@@ -783,9 +784,13 @@
     <Content Include="Areas\CRM\Views\Settings\Index.cshtml" />
     <Content Include="Areas\CRM\Views\web.config" />
     <Content Include="Areas\CRM\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\CPC\Views\web.config" />
+    <Content Include="Areas\CPC\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\CPC\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\CPC\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CPC\Views\AnnexureI\AnnexureIs.cshtml" />
+    <Content Include="Areas\CPC\Views\AnnexureI\_AllAnnexureI.cshtml" />
     <None Include="Properties\PublishProfiles\BaseApp %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - CMS - V2.0 %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - V3.0 %28Published%29.pubxml" />

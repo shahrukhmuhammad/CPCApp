@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Entity\CPCContants.cs" />
     <Compile Include="Entity\Common.cs" />
+    <Compile Include="Entity\AnnexureIEntity.cs" />
     <Compile Include="Model\CPCAnnexureI.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
