@@ -481,6 +481,7 @@
     <Content Include="Content\Dropdown\noJS.css" />
     <Content Include="Content\operations.css" />
     <Content Include="Content\parallaxLogin.css" />
+    <Content Include="Scripts\App\Ecommerce.js" />
     <Content Include="Scripts\select2\select2.min.css" />
     <Content Include="Scripts\select2\select2.min.js" />
     <Content Include="Content\SelectJS\css\normalize.css" />
@@ -791,6 +792,7 @@
     <Content Include="Areas\CPC\Views\_ViewStart.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureI\AnnexureIs.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureI\_AllAnnexureI.cshtml" />
+    <Content Include="Areas\CPC\Views\AnnexureI\Record.cshtml" />
     <None Include="Properties\PublishProfiles\BaseApp %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - CMS - V2.0 %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - V3.0 %28Published%29.pubxml" />
