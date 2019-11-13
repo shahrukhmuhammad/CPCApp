@@ -17,12 +17,14 @@ namespace WebApp.Areas.CPC.Controllers
     {
         private AnnexureIEntity annexureIRepo;
         private EmployeeEntity employeeRepo;
+        private BranchEntity branchRepo;
         private Common commonRepo;
 
         public AnnexureIController()
         {
             annexureIRepo = new AnnexureIEntity();
             employeeRepo = new EmployeeEntity();
+            branchRepo = new BranchEntity();
             commonRepo = new Common();
         }
         public ActionResult AnnexureIs()
@@ -52,12 +54,14 @@ namespace WebApp.Areas.CPC.Controllers
             {
                 model = annexureIRepo.GetById(Id.Value);
             }
-            else
-            {
-                model.SrNo = annexureIRepo.GetNextSrNo();
-                //model.IsActive = true;
-            }
+            //else
+            //{
+            //   // model.SrNo = annexureIRepo.GetNextSrNo();
+            //    //model.IsActive = true;
+            //}
             ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
+            ViewBag.BrachList = new SelectList(branchRepo.GetDropdown(), "Value", "Text");
+            ViewBag.DenominationList = new SelectList(commonRepo.GetAllDenominationDropdown(), "Value", "Text");
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
