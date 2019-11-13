@@ -15,21 +15,22 @@ namespace WebApp.Areas.CPC.Controllers
     [AppAuthorize(AppPermission.All, AppPermission.ViewCPC, AppPermission.CPC)]
     public class AnnexureIIIController : AppController
     {
-        private AnnexureIEntity annexureIRepo;
+        private AnnexureIIIEntity annexureIIIRepo;
+        private EmployeeEntity employeeRepo;
         private Common commonRepo;
 
         public AnnexureIIIController()
         {
-            annexureIRepo = new AnnexureIEntity();
+            annexureIIIRepo = new AnnexureIIIEntity();
             commonRepo = new Common();
         }
-        public ActionResult AnnexureIs()
+        public ActionResult AnnexureIIIs()
         {
             return View();
         }
-        public PartialViewResult _AllAnnexureI()
+        public PartialViewResult _AllAnnexureIII()
         {
-            var model = annexureIRepo.GetAll();
+            var model = annexureIIIRepo.GetAll();
             return PartialView(model);
         }
 
@@ -45,16 +46,17 @@ namespace WebApp.Areas.CPC.Controllers
         public ActionResult Record(Guid? Id)
         {
             ViewData["IsView"] = Convert.ToString(TempData["IsView"]);
-            var model = new CPCAnnexureI();
+            var model = new CPCAnnexureIII();
             if (Id.HasValue)
             {
-                model = annexureIRepo.GetById(Id.Value);
+                model = annexureIIIRepo.GetById(Id.Value);
             }
             else
             {
-                model.SrNo = annexureIRepo.GetNextSrNo();
+                model.SrNo = annexureIIIRepo.GetNextSrNo();
                 //model.IsActive = true;
             }
+            ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
@@ -68,7 +70,7 @@ namespace WebApp.Areas.CPC.Controllers
                     model.CreatedOn = DateTime.Now;
                     //model.IsActive = true;
                     model.Id = Guid.NewGuid();
-                    var res = annexureIRepo.Create(model);
+                    var res = annexureIIIRepo.Create(model);
                     if (res.HasValue)
                     {
                         model.Id = res.Value;
@@ -104,7 +106,7 @@ namespace WebApp.Areas.CPC.Controllers
                 {
                     model.UpdatedBy = CurrentUser.Id;
                     model.UpdatedOn = DateTime.Now;
-                    bool res = annexureIRepo.Update(model);
+                    bool res = annexureIIIRepo.Update(model);
 
 
                     if (res)

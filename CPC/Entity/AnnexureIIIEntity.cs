@@ -13,13 +13,13 @@ namespace CPC
     {
         private SOSTechCPCEntities context;
 
-        public List<CPCAnnexureI> GetAll()
+        public List<CPCAnnexureIII> GetAll()
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIs.OrderBy(x => x.Id).ToList();
+                    return context.CPCAnnexureIIIs.OrderBy(x => x.Id).ToList();
                 }
             }
             catch (Exception ex)
@@ -27,13 +27,13 @@ namespace CPC
                 throw ex;
             }
         }
-        public CPCAnnexureI GetById(Guid Id)
+        public CPCAnnexureIII GetById(Guid Id)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIs.Where(x => x.Id == Id).FirstOrDefault();
+                    return context.CPCAnnexureIIIs.Where(x => x.Id == Id).FirstOrDefault();
                 }
             }
             catch (Exception ex)
