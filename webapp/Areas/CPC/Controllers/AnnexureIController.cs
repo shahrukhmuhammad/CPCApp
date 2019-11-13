@@ -54,18 +54,19 @@ namespace WebApp.Areas.CPC.Controllers
             {
                 model = annexureIRepo.GetById(Id.Value);
             }
-            //else
-            //{
-            //   // model.SrNo = annexureIRepo.GetNextSrNo();
-            //    //model.IsActive = true;
-            //}
+            else
+            {
+                model.DateOfCollection = DateTime.Now;
+                // model.SrNo = annexureIRepo.GetNextSrNo();
+                //model.IsActive = true;
+            }
             ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             ViewBag.BrachList = new SelectList(branchRepo.GetDropdown(), "Value", "Text");
             ViewBag.DenominationList = new SelectList(commonRepo.GetAllDenominationDropdown(), "Value", "Text");
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Record(CPCAnnexureI model)
+        public ActionResult Record(CPCAnnexureI model, List<CPCAnnexureIDetail> CPCAnnexureIDetail)
         {
             try
             {
@@ -78,6 +79,12 @@ namespace WebApp.Areas.CPC.Controllers
                     var res = annexureIRepo.Create(model);
                     if (res.HasValue)
                     {
+                        var lsToSave = CPCAnnexureIDetail.Where(x => !string.IsNullOrEmpty(x.CashProcessingCell) && x.NoOfBundles > 0).ToList();
+                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.AnnexureIId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
+                        #region Save Details
+                        annexureIRepo.Create(lsToSave);
+                        #endregion
+
                         model.Id = res.Value;
                     }
 
