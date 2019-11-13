@@ -17,11 +17,14 @@ namespace WebApp.Areas.CPC.Controllers
     {
         private AnnexureIIIEntity annexureIIIRepo;
         private EmployeeEntity employeeRepo;
+        private BranchEntity branchRepo;
         private Common commonRepo;
 
         public AnnexureIIIController()
         {
             annexureIIIRepo = new AnnexureIIIEntity();
+            employeeRepo = new EmployeeEntity();
+            branchRepo = new BranchEntity();
             commonRepo = new Common();
         }
         public ActionResult AnnexureIIIs()
@@ -56,7 +59,8 @@ namespace WebApp.Areas.CPC.Controllers
                 model.SrNo = annexureIIIRepo.GetNextSrNo();
                 //model.IsActive = true;
             }
-            ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
+            //ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
+            ViewBag.BrachList = new SelectList(branchRepo.GetDropdown(), "Value", "Text");
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]

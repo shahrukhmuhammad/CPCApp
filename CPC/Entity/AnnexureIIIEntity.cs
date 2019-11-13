@@ -34,6 +34,16 @@ namespace CPC
                 using (context = new SOSTechCPCEntities())
                 {
                     return context.CPCAnnexureIIIs.Where(x => x.Id == Id).FirstOrDefault();
+                    //(from anxIII in context.CPCAnnexureIIIs
+                    // join anxID in context.CPCAnnexureIDetails on anxIII.CPCAnnexureIId equals anxID.AnnexureIId
+                    // where Id == anxID.AnnexureIId
+                    // select new
+                    // {
+                    //     UID = e.OwnerID,
+                    //     TID = e.TID,
+                    //     Title = t.Title,
+                    //     EID = e.EID
+                    // }).Take(10);
                 }
             }
             catch (Exception ex)
