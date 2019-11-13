@@ -8,7 +8,7 @@
 <form id="lead-frm" class="user-Profile" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
 
-   @Html.HiddenFor(x=> x.Id)
+    @Html.HiddenFor(x => x.Id)
 
     <div class="row">
         <div class="col-sm-12 text-right">
@@ -24,25 +24,106 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 @*<div class="panel-heading">
-                    <span>Add Products</span>
-                </div>*@
+                        <span>Add Products</span>
+                    </div>*@
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-sm-1">
-                            <label>&nbsp; &nbsp;</label> <br />
-                            <button class="btn btn-primary btn-sm btn-custom" type="button" id="btn_AddProduct" title="Add Product"><i class="fa fa-plus"></i> Add New Row</button>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="row form-group">
+                                        <label class="col-sm-4 text-left horizontal-label">Sr. Number</label>
+                                        <div class="col-sm-8">
+                                            @Html.TextBoxFor(x => x.SrNo, new { @class = "form-control input-sm", @readonly = "readonly" })
+                                            @*<input type="text" class="form-control input-sm" value="@Model.SrNo" readonly />*@
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row form-group">
+                                        <label class="col-sm-3 horizontal-label">Collection Date</label>
+                                        <div class="col-sm-9">
+                                            <div class="input-group input-group-sm datePicker">
+                                                <input name="DateOfCollection" class="form-control input-sm" type="text" value="@Model.DateOfCollection" required autocomplete="off">
+                                                <span class="input-group-addon">
+                                                    <span class="fa fa-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                        <br />
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
+                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CPC</b> Staff Name</label>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(x => x.CashHandedOverCPCStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
+                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CPC</b> Staff Name</label>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(x => x.CashHandedOverCPCStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
+                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Name</label>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
+                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Name</label>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
+                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Name</label>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
+                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Name</label>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <br />
+                    
                     <div class="row tb-padding">
                         <table id="mytable" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th style="width:5% !important">S.No</th>
                                     <th>Collection Date</th>
-                                    <th>Cash Processing Cell</th>
                                     <th>Branch</th>
                                     <th>Denomination</th>
                                     <th>No. Of Bundles</th>
@@ -54,7 +135,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><label id="SrNo">1000</label></td>
+                                    <td><label id="SrNo">1</label></td>
                                     <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
                                     <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
                                     <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
@@ -62,13 +143,19 @@
                                     <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
                                     <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
                                     <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td> 
-                                        <a href="javascript://" onclick="" class="btn btn-xs btn-danger" title="Delete"><i class="fa fa-trash"></i> Delete</a></td>
+                                    <td>
+                                        <a href="javascript://" onclick="" class="btn btn-xs btn-danger" title="Delete"><i class="fa fa-trash"></i> Delete</a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
+
+                        <div class="col-sm-1">
+                            <label>&nbsp; &nbsp;</label> <br />
+                            <button class="btn btn-primary btn-sm btn-custom" type="button" id="btn_AddProduct" title="Add Product"><i class="fa fa-plus"></i> Add New Row</button>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -87,7 +174,7 @@
 
 @section scripts{
 
-<script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function () {
             //-- Read Only Mode Trigger -//
             @*if ('@ViewData["IsView"]' != '') {
@@ -96,7 +183,7 @@
                 $("#submit").hide();
             }*@
 
-
+            $(".select2").select2();
 
             //$("#txtVoucherDate").mask("99-99-9999");
             var accountGridRowIndex;
@@ -187,6 +274,6 @@
                 $("#TotalCredit").val(parseFloat(credit).toFixed(2));
             }
         }
-</script>
+    </script>
 }
 

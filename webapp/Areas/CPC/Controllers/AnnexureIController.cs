@@ -16,11 +16,13 @@ namespace WebApp.Areas.CPC.Controllers
     public class AnnexureIController : AppController
     {
         private AnnexureIEntity annexureIRepo;
+        private EmployeeEntity employeeRepo;
         private Common commonRepo;
 
         public AnnexureIController()
         {
             annexureIRepo = new AnnexureIEntity();
+            employeeRepo = new EmployeeEntity();
             commonRepo = new Common();
         }
         public ActionResult AnnexureIs()
@@ -55,7 +57,7 @@ namespace WebApp.Areas.CPC.Controllers
                 model.SrNo = annexureIRepo.GetNextSrNo();
                 //model.IsActive = true;
             }
-
+            ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
