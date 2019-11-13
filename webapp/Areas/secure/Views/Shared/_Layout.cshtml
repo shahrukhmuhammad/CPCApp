@@ -48,7 +48,9 @@
     @Styles.Render("~/Content/BaseApp")
     @Styles.Render("~/Content/CustomBaseApp")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Scripts/select2/select2.min.css" rel="stylesheet" />
     @RenderSection("styles", required: false)
+
 </head>
 <body>
     <div id="notifyMe" class="notifications bottom-right"></div>
@@ -215,9 +217,9 @@
                     <div class="row login-Row">
                         <div class="col-md-8 text-center">
                             <h4>&nbsp;</h4>
-                                <a href="javascript://">
-                                    <img class="img-responsive img-centre" src="~/Content/Images/logo.jpg" style="max-width:25%;" />
-                                </a>
+                            <a href="javascript://">
+                                <img class="img-responsive img-centre" src="~/Content/Images/logo.jpg" style="max-width:25%;" />
+                            </a>
                         </div>
                         <div class="col-md-4">
                             @RenderBody()
@@ -257,7 +259,7 @@
 
     @Scripts.Render("~/bundles/CustomBaseApp")
 
-
+    <script src="~/Scripts/select2/select2.min.js"></script>
     <!-- SignalR -->
     <!--Reference the SignalR library. -->
     <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>

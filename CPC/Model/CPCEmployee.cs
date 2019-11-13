@@ -15,6 +15,7 @@ namespace CPC.Model
     public partial class CPCEmployee
     {
         public System.Guid Id { get; set; }
+        public string Code { get; set; }
         public string Name { get; set; }
         public Nullable<System.Guid> DepartmentId { get; set; }
         public System.DateTime CreatedOn { get; set; }

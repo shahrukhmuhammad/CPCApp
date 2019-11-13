@@ -50,7 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\AnnexureIIIEntity.cs" />
+  <Compile Include="Entity\EmployeeEntity.cs" />
+  <Compile Include="Entity\AnnexureIIIEntity.cs" />
     <Compile Include="Entity\CPCContants.cs" />
     <Compile Include="Entity\Common.cs" />
     <Compile Include="Entity\AnnexureIEntity.cs" />
