@@ -26,7 +26,41 @@ namespace CPC
             }
         }
 
+        //public List<CPCDenomination> GetAllDenominationDropdown()
+        //{
+        //    try
+        //    {
+        //        using (var context = new SOSTechCPCEntities())
+        //        {
+        //            return context.CPCDenominations.OrderBy(x => x.Id).ToList();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
+        public List<CustomSelectList> GetAllDenominationDropdown()
+        {
+            try
+            {
+                using (var context = new SOSTechCPCEntities())
+                {
+                    var ls = context.CPCDenominations.ToList();
+                    return ls.Select(x => new CustomSelectList { Value = x.Id.ToString(), Text = x.DenominationTitle }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                return null;
+            }
+        }
+
     }
+
+
 
     public class CustomSelectList
     {
