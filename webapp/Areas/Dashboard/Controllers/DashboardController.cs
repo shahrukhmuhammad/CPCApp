@@ -32,11 +32,11 @@ namespace WebApp.Areas.Dashboard.Controllers
         public ActionResult Index()
         {
             #region CMS
-            ViewBag.RecentPages = 0;
-            ViewBag.RecentSlides = 0;
-            ViewBag.RecentContents = 0;
-            ViewBag.RecentNews = 0;
-            ViewBag.RecentFiles = 0;
+            //ViewBag.RecentPages = 0;
+            //ViewBag.RecentSlides = 0;
+            //ViewBag.RecentContents = 0;
+            //ViewBag.RecentNews = 0;
+            //ViewBag.RecentFiles = 0;
             #endregion
 
             return View();

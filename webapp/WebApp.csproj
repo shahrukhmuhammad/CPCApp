@@ -245,6 +245,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\CPC\Controllers\AnnexureIIIController.cs" />
     <Compile Include="Areas\CPC\Controllers\DashboardController.cs" />
     <Compile Include="Areas\CPC\Controllers\AnnexureIController.cs" />
     <Compile Include="Areas\CPC\CPCAreaRegistration.cs" />
@@ -793,6 +794,7 @@
     <Content Include="Areas\CPC\Views\AnnexureI\AnnexureIs.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureI\_AllAnnexureI.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureI\Record.cshtml" />
+    <Content Include="Areas\CPC\Views\AnnexureIII\Record.cshtml" />
     <None Include="Properties\PublishProfiles\BaseApp %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - CMS - V2.0 %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - V3.0 %28Published%29.pubxml" />

@@ -12,20 +12,17 @@ namespace CPC.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CPCAnnexureI
+    public partial class CPCAnnexureIII
     {
         public System.Guid Id { get; set; }
+        public Nullable<System.Guid> CPCAnnexureIId { get; set; }
+        public Nullable<System.Guid> CPCProjectBranchId { get; set; }
         public Nullable<int> SrNo { get; set; }
-        public Nullable<System.Guid> CashHandedOverCPCStaffAId { get; set; }
-        public Nullable<System.Guid> CashHandedOverCPCStaffBId { get; set; }
-        public Nullable<System.Guid> CashHandedOverCITStaffAId { get; set; }
-        public Nullable<System.Guid> CashHandedOverCITStaffBId { get; set; }
-        public Nullable<System.Guid> SignatureCPCHandingOverCashAId { get; set; }
-        public Nullable<System.Guid> SignatureCPCHandingOverCashBId { get; set; }
+        public Nullable<System.Guid> CashReceivedCPCStaffA { get; set; }
+        public Nullable<System.Guid> CashReceivedCPCStaffB { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public Nullable<System.Guid> UpdatedBy { get; set; }
-        public Nullable<System.DateTime> DateOfCollection { get; set; }
     }
 }
