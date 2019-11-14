@@ -9,6 +9,9 @@
     #annexurelI th {
         text-align: center !important;
     }
+    .field-validation-error {
+        color :red;
+    }
 </style>
 <form id="lead-frm" class="user-Profile" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
@@ -39,7 +42,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 text-left horizontal-label">Sr. Number</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBoxFor(x => x.SrNo, new { @class = "form-control input-sm", @type="number", @required = "required", @autofocus="true" })
+                                            @Html.TextBoxFor(x => x.SrNo, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.ValidationMessageFor(m => m.SrNo)
                                         </div>
                                     </div>
                                 </div>
@@ -53,6 +57,7 @@
                                                     <span class="fa fa-calendar"></span>
                                                 </span>
                                             </div>
+                                            @Html.ValidationMessageFor(m => m.DateOfCollection)
                                         </div>
                                     </div>
                                 </div>
@@ -77,23 +82,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @*<tr>
-                                        <td><label id="SrNo">1</label></td>
-                                        <td><input class="form-control input-sm" name="CPCAnnexureIDetail[0].CashProcessingCell" /></td>
-                                        <td>
-                                            @Html.DropDownList("CPCAnnexureIDetail[0].ProjectBranchId", (SelectList)ViewBag.BrachList, " Select Branch ", new { @class = "form-control input-sm select2" })
-                                        </td>
-                                        <td>
-                                            @Html.DropDownList("CPCAnnexureIDetail[0].DenominationId", (SelectList)ViewBag.DenominationList, " Select Denom ", new { @class = "form-control input-sm select2" })
-                                        </td>
-                                        <td><input class="form-control input-sm" name="CPCAnnexureIDetail[0].NoOfBundles" /></td>
-                                        <td><input class="form-control input-sm" name="CPCAnnexureIDetail[0].TotalAmount" /></td>
-                                        <td><input class="form-control input-sm" name="CPCAnnexureIDetail[0].SealNo" /></td>
-                                        <td><input class="form-control input-sm" name="CPCAnnexureIDetail[0].ShipmentReciptNo" /></td>
-                                        <td>
-                                            <a href="javascript://" onclick="" class="btn btn-xs btn-danger" title="Delete"><i class="fa fa-trash"></i> Delete</a>
-                                        </td>
-                                    </tr>*@
                             </tbody>
                         </table>
 
@@ -111,6 +99,7 @@
                                         <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CPC</b> Staff Name</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.CashHandedOverCPCStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.ValidationMessageFor(m => m.CashHandedOverCPCStaffAId)
                                         </div>
                                     </div>
                                 </div>
@@ -119,6 +108,7 @@
                                         <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CPC</b> Staff Name</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.CashHandedOverCPCStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.ValidationMessageFor(m => m.CashHandedOverCPCStaffBId)
                                         </div>
                                     </div>
                                 </div>
@@ -129,6 +119,7 @@
                                         <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Name</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.CashHandedOverCITStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.ValidationMessageFor(m => m.CashHandedOverCITStaffAId)
                                         </div>
                                     </div>
                                 </div>
@@ -147,7 +138,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label"> <b>CPC</b> Staff Handing Over Cash and Verifying</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +146,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label"><b>CPC</b> Staff Handing Over Cash and Verifying</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
                                     </div>
                                 </div>

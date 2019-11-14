@@ -33,6 +33,8 @@ namespace WebApp.Areas.CPC.Controllers
         }
         public PartialViewResult _AllAnnexureI()
         {
+            //ViewBag.AnnexureDetails = annexureIRepo.GetAllDetails();
+            ViewBag.EmployeeList = employeeRepo.GetAll();
             var model = annexureIRepo.GetAll();
             return PartialView(model);
         }
@@ -149,7 +151,7 @@ namespace WebApp.Areas.CPC.Controllers
             //}
             //else
             //{
-            return RedirectToAction("AnnexureI");
+            return RedirectToAction("AnnexureIs");
         }
         #endregion
 
