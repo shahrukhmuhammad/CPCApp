@@ -7,13 +7,13 @@
       <Diagram DiagramId="42eae355de1748a3ac5ef07d44027e91" Name="Diagram1">
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCDenomination" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCDepartment" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCEmployee" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCProject" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCProjectBranch" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIII" Width="1.5" PointX="5.375" PointY="6.75" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIIIDescriptionCash" Width="1.5" PointX="7.375" PointY="3.75" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureI" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIDetail" Width="1.5" PointX="7.75" PointY="8.75" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIII" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCEmployee" Width="1.5" PointX="0.75" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

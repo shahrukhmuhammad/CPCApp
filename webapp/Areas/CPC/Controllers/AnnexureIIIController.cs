@@ -61,6 +61,8 @@ namespace WebApp.Areas.CPC.Controllers
             }
             //ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             ViewBag.BrachList = new SelectList(branchRepo.GetDropdown(), "Value", "Text");
+            ViewBag.DenominationList = new SelectList(commonRepo.GetAllDenominationDropdown(), "Value", "Text");
+            ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
