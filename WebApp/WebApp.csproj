@@ -245,6 +245,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\CPC\Controllers\AnnexureIIController.cs" />
     <Compile Include="Areas\CPC\Controllers\AnnexureIIIController.cs" />
     <Compile Include="Areas\CPC\Controllers\DashboardController.cs" />
     <Compile Include="Areas\CPC\Controllers\AnnexureIController.cs" />
@@ -277,6 +278,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="appfavicon.ico" />
+    <Content Include="Areas\CPC\Views\AnnexureIII\Record.cshtml" />
     <Content Include="Content\activityStream.css" />
     <Content Include="Content\alloy-editor\alloy-editor-all-min.js" />
     <Content Include="Content\alloy-editor\alloy-editor-all.js" />
@@ -794,10 +796,11 @@
     <Content Include="Areas\CPC\Views\AnnexureI\AnnexureIs.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureI\_AllAnnexureI.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureI\Record.cshtml" />
-    <Content Include="Areas\CPC\Views\AnnexureIII\Record.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureIII\AnnexureIIIs.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureIII\_AllAnnexureIII.cshtml" />
-    <Content Include="Areas\CPC\Views\AnnexureIII\Record.cshtml" />
+    <Content Include="Areas\CPC\Views\AnnexureII\AnnexureIIs.cshtml" />
+    <Content Include="Areas\CPC\Views\AnnexureII\_AllAnnexureII.cshtml" />
+    <Content Include="Areas\CPC\Views\AnnexureII\Record.cshtml" />
     <None Include="Properties\PublishProfiles\BaseApp %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - CMS - V2.0 %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - V3.0 %28Published%29.pubxml" />
