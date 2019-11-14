@@ -34,7 +34,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 text-left horizontal-label">Sr. Number</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBoxFor(x => x.SrNo, new { @class = "form-control input-sm" })
+                                            @Html.TextBoxFor(x => x.SrNo, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.ValidationMessageFor(m => m.SrNo)
                                         </div>
                                     </div>
                                 </div>
@@ -177,11 +178,7 @@
                                 </tr>
                             </tbody>
                         </table>
-
-                        <div class="col-sm-1">
-                            <label>&nbsp; &nbsp;</label> <br />
-                            <button class="btn btn-primary btn-sm btn-custom" type="button" id="btn_AddProduct" title="Add Product"><i class="fa fa-plus"></i> Add New Row</button>
-                        </div>
+                       
                     </div>
 
                     <div class="row">
@@ -253,74 +250,9 @@
 
             $(".select2").select2();
 
-            //$("#txtVoucherDate").mask("99-99-9999");
-            var accountGridRowIndex;
 
-            @*$('#txtVoucherDate').datepicker({
-            dateFormat: 'dd-mm-yy',
-            prevText: '<i class="fa fa-chevron-left"></i>',
-            nextText: '<i class="fa fa-chevron-right"></i>',
-            minDate: '@(new AppSession().getFinancialStartDate())',
-            maxDate: '@(new AppSession().getFinancialEndDate())'
-            });*@
 
-            //Page Load
-            var rowCount = $('#Grid tbody tr').length;
-            //alert(rowCount);
-            if (rowCount == 0) {
-                rowCount++;
-                AddFirstRow(rowCount);
-
-                //alert("In");
-            }
-            function isLastRow() {
-                //debugger;
-                return accountGridRowIndex == $("#Grid tr:last").attr("data-id")
-            }
-
-            //btn-remove Click
-            $(document).on('click', '.btn-removeRow', function (e) {
-                e.preventDefault();
-
-                //accountGridRowIndex = $(this).closest('tr').attr("data-id");
-                $(this).closest('tr').remove();
-                // console.log(accountGridRowIndex);
-                GetTotal();
-            });
         });
-
-        //Functions
-                function generateHtml(row) {
-                var _html = '<tr class="rows" data-id="' + row + '">'
-                _html += '<td class="text-center" > ' + row + '</td >'
-                _html += '<td><div class="input-group"><input name="AccountsList[' + (row - 1) + '].AccountCode" id="txt_AccountCode' + row + '" onkeydown="showAccountPopup(event);" type="text" class="AccountCode form-control" /><div class="input-group-btn"><button class="btn btn-info btn-sm btn-accountGrid" type="button" id="btn_help' + row + '" data-toggle="modal" data-target="#myModal"> <i class="fa fa-search"></i></button></div></div></td>'
-                _html += '<td><input name="AccountsList[' + (row - 1) + '].AccountName" id="txt_AccountName' + row + '" type="text" readonly="readonly" class="form-control"></td>'
-                _html += '<td><input name="AccountsList[' + (row - 1) + '].Narration" id="txt_Narration' + row + '" type="text" class="form-control"></td>'
-                _html += '<td><input name="AccountsList[' + (row - 1) + '].Debit" id="txt_Debit' + row + '" type="number" class="Debit form-control" pattern="[0-9]"></td>'
-                _html += '<td><input name="AccountsList[' + (row - 1) + '].Credit" id="txt_Credit' + row + '" class="Credit form-control" type="number" pattern="[0-9]"></td>'
-                _html += '<td> <a id="btn_delete' + row + '" class="btn btn-danger btn-sm btn-removeRow"><i class="glyphicon glyphicon-remove"></i></a> </td></tr>';
-                return _html;
-            }
-
-        function AddFirstRow(row) {
-            if (isEmptyLastRow()) {
-                $('#Grid tbody').append(generateHtml(row));
-                $("#divGrid").find("input[type=text]").addClass("form-control input-sm"); //adding class to inputs in Grid
-               // $('.autonumber').autoNumeric('init');
-            }
-        }
-
-        function AddNewRow(row) {
-            if (isEmptyLastRow()) {
-                $('#Grid tr:last').after(generateHtml(row));
-                //$('.autonumber').autoNumeric('init');
-            }
-        }
-
-        function isEmptyLastRow() {
-            var test = $("#Grid tr:last td:eq(1)").find("input");
-            return "" !== $("#Grid tr:last td:eq(1)").find("input").val() && "" !== $("#Grid tr:last td:eq(2)").find("input").val();
-        }
 
         function GetTotal() {
             //debugger;

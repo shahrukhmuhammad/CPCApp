@@ -15,7 +15,7 @@ namespace CPC.Model
     public partial class CPCAnnexureIDetail
     {
         public System.Guid Id { get; set; }
-        public Nullable<System.Guid> AnnexureIId { get; set; }
+        public System.Guid AnnexureIId { get; set; }
         public string CashProcessingCell { get; set; }
         public Nullable<System.Guid> ProjectBranchId { get; set; }
         public Nullable<System.Guid> DenominationId { get; set; }
