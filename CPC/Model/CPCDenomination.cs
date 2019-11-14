@@ -15,6 +15,6 @@ namespace CPC.Model
     public partial class CPCDenomination
     {
         public System.Guid Id { get; set; }
-        public string DenominationTitle { get; set; }
+        public Nullable<int> DenominationTitle { get; set; }
     }
 }

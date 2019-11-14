@@ -19,12 +19,27 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIs.OrderBy(x => x.Id).ToList();
+                    return context.CPCAnnexureIs.OrderBy(x => x.CreatedOn).ToList();
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public List<Vew_CPCAnnexureI> GetAllDetails()
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.Vew_CPCAnnexureI.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
         public CPCAnnexureI GetById(Guid Id)

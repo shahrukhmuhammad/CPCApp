@@ -47,8 +47,8 @@ namespace CPC
             {
                 using (var context = new SOSTechCPCEntities())
                 {
-                    var ls = context.CPCDenominations.ToList();
-                    return ls.Select(x => new CustomSelectList { Value = x.Id.ToString(), Text = x.DenominationTitle }).ToList();
+                    var ls = context.CPCDenominations.OrderBy(x=> x.DenominationTitle).ToList();
+                    return ls.Select(x => new CustomSelectList { Value = x.Id.ToString(), Text = x.DenominationTitle.ToString() }).ToList();
                 }
             }
             catch (Exception ex)

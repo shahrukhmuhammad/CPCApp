@@ -98,6 +98,9 @@
     <Compile Include="Model\CPCProjectBranch.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Vew_CPCAnnexureI.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

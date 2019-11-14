@@ -794,6 +794,7 @@
     <Content Include="Areas\CPC\Views\AnnexureI\AnnexureIs.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureI\_AllAnnexureI.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureI\Record.cshtml" />
+    <Content Include="Areas\CPC\Views\AnnexureIII\Record.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureIII\AnnexureIIIs.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureIII\_AllAnnexureIII.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureIII\Record.cshtml" />
