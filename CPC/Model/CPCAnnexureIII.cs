@@ -15,8 +15,9 @@ namespace CPC.Model
     public partial class CPCAnnexureIII
     {
         public System.Guid Id { get; set; }
-        public Nullable<System.Guid> CPCAnnexureIId { get; set; }
-        public Nullable<System.Guid> CPCProjectBranchId { get; set; }
+        public Nullable<System.Guid> AnnexureId { get; set; }
+        public System.DateTime AnnexureIIIDate { get; set; }
+        public Nullable<System.Guid> ProjectBranchId { get; set; }
         public Nullable<int> SrNo { get; set; }
         public Nullable<System.Guid> CashReceivedCPCStaffA { get; set; }
         public Nullable<System.Guid> CashReceivedCPCStaffB { get; set; }

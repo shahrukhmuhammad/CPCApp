@@ -13,29 +13,27 @@ using System.Web.Mvc;
 namespace WebApp.Areas.CPC.Controllers
 {
     [AppAuthorize(AppPermission.All, AppPermission.ViewCPC, AppPermission.CPC)]
-    public class AnnexureIController : AppController
+    public class CashInTransitController : AppController
     {
-        private AnnexureIEntity annexureIRepo;
+        private AnnexureIIIEntity annexureIIIRepo;
         private EmployeeEntity employeeRepo;
         private BranchEntity branchRepo;
         private Common commonRepo;
 
-        public AnnexureIController()
+        public CashInTransitController()
         {
-            annexureIRepo = new AnnexureIEntity();
+            annexureIIIRepo = new AnnexureIIIEntity();
             employeeRepo = new EmployeeEntity();
             branchRepo = new BranchEntity();
             commonRepo = new Common();
         }
-        public ActionResult AnnexureIs()
+        public ActionResult CashInTransits()
         {
             return View();
         }
-        public PartialViewResult _AllAnnexureI()
+        public PartialViewResult _AllCashInTransits()
         {
-            //ViewBag.AnnexureDetails = annexureIRepo.GetAllDetails();
-            ViewBag.EmployeeList = employeeRepo.GetAll();
-            var model = annexureIRepo.GetAll();
+            var model = annexureIIIRepo.GetAll();
             return PartialView(model);
         }
 
@@ -51,24 +49,24 @@ namespace WebApp.Areas.CPC.Controllers
         public ActionResult Record(Guid? Id)
         {
             ViewData["IsView"] = Convert.ToString(TempData["IsView"]);
-            var model = new CPCAnnexureI();
+            var model = new CPCAnnexureIII();
             if (Id.HasValue)
             {
-                model = annexureIRepo.GetById(Id.Value);
+                model = annexureIIIRepo.GetById(Id.Value);
             }
             else
             {
-                model.DateOfCollection = DateTime.Now;
-                // model.SrNo = annexureIRepo.GetNextSrNo();
+                model.SrNo = annexureIIIRepo.GetNextSrNo();
                 //model.IsActive = true;
             }
-            ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
+            //ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             ViewBag.BrachList = new SelectList(branchRepo.GetDropdown(), "Value", "Text");
             ViewBag.DenominationList = new SelectList(commonRepo.GetAllDenominationDropdown(), "Value", "Text");
+            ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Record(CPCAnnexureI model, List<CPCAnnexureIDetail> CPCAnnexureIDetail)
+        public ActionResult Record(CPCAnnexureI model)
         {
             try
             {
@@ -78,15 +76,9 @@ namespace WebApp.Areas.CPC.Controllers
                     model.CreatedOn = DateTime.Now;
                     //model.IsActive = true;
                     model.Id = Guid.NewGuid();
-                    var res = annexureIRepo.Create(model);
+                    var res = annexureIIIRepo.Create(model);
                     if (res.HasValue)
                     {
-                        var lsToSave = CPCAnnexureIDetail.Where(x => !string.IsNullOrEmpty(x.CashProcessingCell) && x.NoOfBundles > 0).ToList();
-                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.AnnexureIId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
-                        #region Save Details
-                        annexureIRepo.Create(lsToSave);
-                        #endregion
-
                         model.Id = res.Value;
                     }
 
@@ -120,7 +112,7 @@ namespace WebApp.Areas.CPC.Controllers
                 {
                     model.UpdatedBy = CurrentUser.Id;
                     model.UpdatedOn = DateTime.Now;
-                    bool res = annexureIRepo.Update(model);
+                    bool res = annexureIIIRepo.Update(model);
 
 
                     if (res)
@@ -151,18 +143,17 @@ namespace WebApp.Areas.CPC.Controllers
             //}
             //else
             //{
-            return RedirectToAction("AnnexureIs");
+            return RedirectToAction("AnnexureIII");
         }
         #endregion
 
         #region Remote Functions
 
-        [HttpGet]
-        public JsonResult GetAnnexureI(Guid Id, string date)
-        {
-            var ls = annexureIRepo.GetByDateBranchId(Id, Convert.ToDateTime(date));
-            return Json(ls, JsonRequestBehavior.AllowGet);
-        }
+        //[HttpPost]
+        //public JsonResult GetCentersByRegionId(Guid Id)
+        //{
+        //    return Json("");//centerRepo.GetCentersDropdown(Id));
+        //}
         //[HttpPost]
         //public JsonResult GetDesignationsByDepartId(Guid Id)
         //{

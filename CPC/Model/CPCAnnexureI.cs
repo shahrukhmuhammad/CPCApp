@@ -26,6 +26,6 @@ namespace CPC.Model
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public Nullable<System.Guid> UpdatedBy { get; set; }
-        public Nullable<System.DateTime> DateOfCollection { get; set; }
+        public System.DateTime DateOfCollection { get; set; }
     }
 }

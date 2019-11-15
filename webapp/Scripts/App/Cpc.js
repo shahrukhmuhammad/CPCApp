@@ -1,9 +1,9 @@
 ﻿
-//HRMS
+//CPC
 
 
 
-/*------------------- Employee Form -------------------*/
+/*------------------- General Functions -------------------*/
 function bindDropdown(ddlToAppend, postedUrl, postedData, selectedVal) {
     //debugger;
     //var ddlToAppend = $('#Center');
@@ -42,3 +42,7 @@ function bindDropdown(ddlToAppend, postedUrl, postedData, selectedVal) {
     }
     
 }
+
+
+/*------------------- CPC Annexure I Functions -------------------*/
+

@@ -65,7 +65,7 @@
     <Compile Include="Model\CPCAnnexureIII.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\CPCAnnexureIIIDescriptionCash.cs">
+    <Compile Include="Model\CPCAnnexureIIIDetail.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CPCDenomination.cs">
@@ -92,6 +92,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CPCModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\CPCModel1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CPCModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Model\CPCProject.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
@@ -109,7 +114,7 @@
     </None>
     <EntityDeploy Include="Model\CPCModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CPCModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>CPCModel1.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="Model\CPCModel.edmx.diagram">
       <DependentUpon>CPCModel.edmx</DependentUpon>

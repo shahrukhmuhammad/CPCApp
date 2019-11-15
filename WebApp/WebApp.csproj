@@ -246,6 +246,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\CPC\Controllers\AnnexureIIController.cs" />
+    <Compile Include="Areas\CPC\Controllers\CashInTransitController.cs" />
     <Compile Include="Areas\CPC\Controllers\AnnexureIIIController.cs" />
     <Compile Include="Areas\CPC\Controllers\DashboardController.cs" />
     <Compile Include="Areas\CPC\Controllers\AnnexureIController.cs" />
@@ -603,7 +604,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\App\Checklist.js" />
     <Content Include="Scripts\App\Crm.js" />
-    <Content Include="Scripts\App\Hrms.js" />
+    <Content Include="Scripts\App\Cpc.js" />
     <Content Include="Scripts\BaseApp.js" />
     <Content Include="Scripts\Bhoechie-tabs.js" />
     <Content Include="Scripts\Bootbox\bootbox.js" />
@@ -801,6 +802,9 @@
     <Content Include="Areas\CPC\Views\AnnexureII\AnnexureIIs.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureII\_AllAnnexureII.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureII\Record.cshtml" />
+    <Content Include="Areas\CPC\Views\CashInTransit\CashInTransits.cshtml" />
+    <Content Include="Areas\CPC\Views\CashInTransit\_AllCashInTransits.cshtml" />
+    <Content Include="Areas\CPC\Views\CashInTransit\Record.cshtml" />
     <None Include="Properties\PublishProfiles\BaseApp %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - CMS - V2.0 %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - V3.0 %28Published%29.pubxml" />

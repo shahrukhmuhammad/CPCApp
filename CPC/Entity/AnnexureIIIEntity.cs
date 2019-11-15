@@ -75,15 +75,15 @@ namespace CPC
         //}
 
 
-        #region Add/Update Employee
-        public Guid? Create(CPCAnnexureI model)
+        #region Add/Update Annexure III
+        public Guid? Create(CPCAnnexureIII model)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    #region Save Department
-                    context.CPCAnnexureIs.Add(model);
+                    #region Save Annexure III
+                    context.CPCAnnexureIIIs.Add(model);
                     context.SaveChanges();
                     #endregion
                     return model.Id;
@@ -95,14 +95,14 @@ namespace CPC
             }
         }
 
-        public bool Create(List<CPCAnnexureIDetail> modelList)
+        public bool Create(List<CPCAnnexureIIIDetail> modelList)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    #region Save Department
-                    context.CPCAnnexureIDetails.AddRange(modelList);
+                    #region Save CPCAnnexure III
+                    context.CPCAnnexureIIIDetails.AddRange(modelList);
                     context.SaveChanges();
                     #endregion
                     return true;

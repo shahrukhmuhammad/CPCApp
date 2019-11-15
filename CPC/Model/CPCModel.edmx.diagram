@@ -5,16 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="42eae355de1748a3ac5ef07d44027e91" Name="Diagram1">
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureI" Width="1.75" PointX="0.75" PointY="0.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIDetail" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIDetail" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCDenomination" Width="1.5" PointX="4.375" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCDepartment" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCEmployee" Width="1.5" PointX="6.75" PointY="1.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCProject" Width="1.5" PointX="4.75" PointY="7.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCProjectBranch" Width="1.5" PointX="6.75" PointY="7.75" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCProject" Width="2.375" PointX="4.625" PointY="3" IsExpanded="false" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCProjectBranch" Width="2.375" PointX="4.625" PointY="2.5" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" Width="1.5" PointX="4.375" PointY="1.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIII" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIIIDescriptionCash" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureI" Width="2.75" PointX="3.375" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIII" Width="1.5" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIIIDetail" Width="1.5" PointX="0.75" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
