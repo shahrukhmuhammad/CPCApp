@@ -25,7 +25,9 @@ namespace CPC.Model
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public Nullable<System.Guid> UpdatedBy { get; set; }
-        public Nullable<System.Guid> CashHandedOverCITStaffAId { get; set; }
-        public Nullable<System.Guid> CashHandedOverCITStaffBId { get; set; }
+        public Nullable<System.Guid> CashReceivedByCPCStaffStaffAId { get; set; }
+        public Nullable<System.Guid> CashReceivedByCPCStaffStaffBId { get; set; }
+        public Nullable<System.Guid> CashHandedOverByCITStaffStaffAId { get; set; }
+        public Nullable<System.Guid> CashHandedOverByCITStaffStaffBId { get; set; }
     }
 }

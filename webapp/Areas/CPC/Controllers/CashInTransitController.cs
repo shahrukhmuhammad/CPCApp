@@ -76,11 +76,11 @@ namespace WebApp.Areas.CPC.Controllers
                     model.CreatedOn = DateTime.Now;
                     //model.IsActive = true;
                     model.Id = Guid.NewGuid();
-                    var res = annexureIIIRepo.Create(model);
-                    if (res.HasValue)
-                    {
-                        model.Id = res.Value;
-                    }
+                    //var res = annexureIIIRepo.Create(model);
+                    //if (res.HasValue)
+                    //{
+                    //    model.Id = res.Value;
+                    //}
 
                     #region Activity Log
                     //appLog.Create(CurrentUser.OfficeId, model.Id, CurrentUser.Id, AppLogType.Activity, "CRM - Lead", model.FullName + " lead created", "~/CRM/Contact/LeadRecord > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td><strong>" + model.FullName + "</strong> lead created by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");

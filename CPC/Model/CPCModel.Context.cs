@@ -31,9 +31,9 @@ namespace CPC.Model
         public virtual DbSet<CPCEmployee> CPCEmployees { get; set; }
         public virtual DbSet<CPCProject> CPCProjects { get; set; }
         public virtual DbSet<CPCProjectBranch> CPCProjectBranches { get; set; }
-        public virtual DbSet<Vew_CPCAnnexureI> Vew_CPCAnnexureI { get; set; }
         public virtual DbSet<CPCAnnexureI> CPCAnnexureIs { get; set; }
-        public virtual DbSet<CPCAnnexureIII> CPCAnnexureIIIs { get; set; }
         public virtual DbSet<CPCAnnexureIIIDetail> CPCAnnexureIIIDetails { get; set; }
+        public virtual DbSet<Vew_CPCAnnexureI> Vew_CPCAnnexureI { get; set; }
+        public virtual DbSet<CPCAnnexureIII> CPCAnnexureIIIs { get; set; }
     }
 }

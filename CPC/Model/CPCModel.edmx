@@ -54,8 +54,10 @@
           <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UpdatedOn" Type="datetime" />
           <Property Name="UpdatedBy" Type="uniqueidentifier" />
-          <Property Name="CashHandedOverCITStaffAId" Type="uniqueidentifier" />
-          <Property Name="CashHandedOverCITStaffBId" Type="uniqueidentifier" />
+          <Property Name="CashReceivedByCPCStaffStaffAId" Type="uniqueidentifier" />
+          <Property Name="CashReceivedByCPCStaffStaffBId" Type="uniqueidentifier" />
+          <Property Name="CashHandedOverByCITStaffStaffAId" Type="uniqueidentifier" />
+          <Property Name="CashHandedOverByCITStaffStaffBId" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="CPCAnnexureIIIDetails">
           <Key>
@@ -141,6 +143,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
         <EntityType Name="Vew_CPCAnnexureI">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="DateOfCollection" />
             <PropertyRef Name="CreatedOn" />
             <PropertyRef Name="CreatedBy" />
             <PropertyRef Name="CPCAnnexureIDetailsId" />
@@ -149,6 +152,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SrNo" Type="int" />
+          <Property Name="DateOfCollection" Type="date" Nullable="false" />
           <Property Name="CashHandedOverCPCStaffAId" Type="uniqueidentifier" />
           <Property Name="CashHandedOverCPCStaffBId" Type="uniqueidentifier" />
           <Property Name="CashHandedOverCITStaffAId" Type="uniqueidentifier" />
@@ -159,13 +163,13 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UpdatedOn" Type="datetime" />
           <Property Name="UpdatedBy" Type="uniqueidentifier" />
-          <Property Name="DateOfCollection" Type="date" />
           <Property Name="CPCAnnexureIDetailsId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CashProcessingCell" Type="nvarchar" MaxLength="200" />
           <Property Name="ProjectBranchId" Type="uniqueidentifier" />
           <Property Name="BranchCode" Type="nvarchar" MaxLength="20" />
           <Property Name="BranchName" Type="nvarchar" MaxLength="200" />
           <Property Name="DenominationId" Type="uniqueidentifier" />
+          <Property Name="DenominationTitle" Type="int" />
           <Property Name="NoOfBundles" Type="int" />
           <Property Name="TotalAmount" Type="int" />
           <Property Name="SealNo" Type="nvarchar" MaxLength="20" />
@@ -187,6 +191,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
             <DefiningQuery>SELECT 
     [Vew_CPCAnnexureI].[Id] AS [Id], 
     [Vew_CPCAnnexureI].[SrNo] AS [SrNo], 
+    [Vew_CPCAnnexureI].[DateOfCollection] AS [DateOfCollection], 
     [Vew_CPCAnnexureI].[CashHandedOverCPCStaffAId] AS [CashHandedOverCPCStaffAId], 
     [Vew_CPCAnnexureI].[CashHandedOverCPCStaffBId] AS [CashHandedOverCPCStaffBId], 
     [Vew_CPCAnnexureI].[CashHandedOverCITStaffAId] AS [CashHandedOverCITStaffAId], 
@@ -197,13 +202,13 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
     [Vew_CPCAnnexureI].[CreatedBy] AS [CreatedBy], 
     [Vew_CPCAnnexureI].[UpdatedOn] AS [UpdatedOn], 
     [Vew_CPCAnnexureI].[UpdatedBy] AS [UpdatedBy], 
-    [Vew_CPCAnnexureI].[DateOfCollection] AS [DateOfCollection], 
     [Vew_CPCAnnexureI].[CPCAnnexureIDetailsId] AS [CPCAnnexureIDetailsId], 
     [Vew_CPCAnnexureI].[CashProcessingCell] AS [CashProcessingCell], 
     [Vew_CPCAnnexureI].[ProjectBranchId] AS [ProjectBranchId], 
     [Vew_CPCAnnexureI].[BranchCode] AS [BranchCode], 
     [Vew_CPCAnnexureI].[BranchName] AS [BranchName], 
     [Vew_CPCAnnexureI].[DenominationId] AS [DenominationId], 
+    [Vew_CPCAnnexureI].[DenominationTitle] AS [DenominationTitle], 
     [Vew_CPCAnnexureI].[NoOfBundles] AS [NoOfBundles], 
     [Vew_CPCAnnexureI].[TotalAmount] AS [TotalAmount], 
     [Vew_CPCAnnexureI].[SealNo] AS [SealNo], 
@@ -224,10 +229,10 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <EntitySet Name="CPCEmployees" EntityType="SOSTechCPCModel.CPCEmployee" />
           <EntitySet Name="CPCProjects" EntityType="SOSTechCPCModel.CPCProject" />
           <EntitySet Name="CPCProjectBranches" EntityType="SOSTechCPCModel.CPCProjectBranch" />
-          <EntitySet Name="Vew_CPCAnnexureI" EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" />
           <EntitySet Name="CPCAnnexureIs" EntityType="SOSTechCPCModel.CPCAnnexureI" />
-          <EntitySet Name="CPCAnnexureIIIs" EntityType="SOSTechCPCModel.CPCAnnexureIII" />
           <EntitySet Name="CPCAnnexureIIIDetails" EntityType="SOSTechCPCModel.CPCAnnexureIIIDetail" />
+          <EntitySet Name="Vew_CPCAnnexureI" EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" />
+          <EntitySet Name="CPCAnnexureIIIs" EntityType="SOSTechCPCModel.CPCAnnexureIII" />
         </EntityContainer>
         <EntityType Name="CPCAnnexureIDetail">
           <Key>
@@ -298,41 +303,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ContactPerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Vew_CPCAnnexureI">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="CreatedOn" />
-            <PropertyRef Name="CreatedBy" />
-            <PropertyRef Name="CPCAnnexureIDetailsId" />
-            <PropertyRef Name="CashHandedOverCPCStaffAName" />
-            <PropertyRef Name="CashHandedOverCPCStaffBName" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="SrNo" Type="Int32" />
-          <Property Name="CashHandedOverCPCStaffAId" Type="Guid" />
-          <Property Name="CashHandedOverCPCStaffBId" Type="Guid" />
-          <Property Name="CashHandedOverCITStaffAId" Type="Guid" />
-          <Property Name="CashHandedOverCITStaffBId" Type="Guid" />
-          <Property Name="SignatureCPCHandingOverCashAId" Type="Guid" />
-          <Property Name="SignatureCPCHandingOverCashBId" Type="Guid" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Guid" />
-          <Property Name="DateOfCollection" Type="DateTime" Precision="0" />
-          <Property Name="CPCAnnexureIDetailsId" Type="Guid" Nullable="false" />
-          <Property Name="CashProcessingCell" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectBranchId" Type="Guid" />
-          <Property Name="BranchCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="BranchName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="DenominationId" Type="Guid" />
-          <Property Name="NoOfBundles" Type="Int32" />
-          <Property Name="TotalAmount" Type="Int32" />
-          <Property Name="SealNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ShipmentReciptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CashHandedOverCPCStaffAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-          <Property Name="CashHandedOverCPCStaffBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="CPCAnnexureI">
           <Key>
             <PropertyRef Name="Id" />
@@ -350,24 +320,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Guid" />
           <Property Name="DateOfCollection" Type="DateTime" Nullable="false" Precision="0" />
-        </EntityType>
-        <EntityType Name="CPCAnnexureIII">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="AnnexureId" Type="Guid" />
-          <Property Name="AnnexureIIIDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ProjectBranchId" Type="Guid" />
-          <Property Name="SrNo" Type="Int32" />
-          <Property Name="CashReceivedCPCStaffA" Type="Guid" />
-          <Property Name="CashReceivedCPCStaffB" Type="Guid" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Guid" />
-          <Property Name="CashHandedOverCITStaffAId" Type="Guid" />
-          <Property Name="CashHandedOverCITStaffBId" Type="Guid" />
         </EntityType>
         <EntityType Name="CPCAnnexureIIIDetail">
           <Key>
@@ -394,6 +346,63 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <Property Name="TotalCashReturnedValue" Type="Int32" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vew_CPCAnnexureI">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DateOfCollection" />
+            <PropertyRef Name="CreatedOn" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="CPCAnnexureIDetailsId" />
+            <PropertyRef Name="CashHandedOverCPCStaffAName" />
+            <PropertyRef Name="CashHandedOverCPCStaffBName" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SrNo" Type="Int32" />
+          <Property Name="DateOfCollection" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CashHandedOverCPCStaffAId" Type="Guid" />
+          <Property Name="CashHandedOverCPCStaffBId" Type="Guid" />
+          <Property Name="CashHandedOverCITStaffAId" Type="Guid" />
+          <Property Name="CashHandedOverCITStaffBId" Type="Guid" />
+          <Property Name="SignatureCPCHandingOverCashAId" Type="Guid" />
+          <Property Name="SignatureCPCHandingOverCashBId" Type="Guid" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="CPCAnnexureIDetailsId" Type="Guid" Nullable="false" />
+          <Property Name="CashProcessingCell" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectBranchId" Type="Guid" />
+          <Property Name="BranchCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BranchName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DenominationId" Type="Guid" />
+          <Property Name="DenominationTitle" Type="Int32" />
+          <Property Name="NoOfBundles" Type="Int32" />
+          <Property Name="TotalAmount" Type="Int32" />
+          <Property Name="SealNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ShipmentReciptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CashHandedOverCPCStaffAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
+          <Property Name="CashHandedOverCPCStaffBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CPCAnnexureIII">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="AnnexureId" Type="Guid" />
+          <Property Name="AnnexureIIIDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ProjectBranchId" Type="Guid" />
+          <Property Name="SrNo" Type="Int32" />
+          <Property Name="CashReceivedCPCStaffA" Type="Guid" />
+          <Property Name="CashReceivedCPCStaffB" Type="Guid" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="CashReceivedByCPCStaffStaffAId" Type="Guid" />
+          <Property Name="CashReceivedByCPCStaffStaffBId" Type="Guid" />
+          <Property Name="CashHandedOverByCITStaffStaffAId" Type="Guid" />
+          <Property Name="CashHandedOverByCITStaffStaffBId" Type="Guid" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -476,37 +485,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Vew_CPCAnnexureI">
-            <EntityTypeMapping TypeName="SOSTechCPCModel.Vew_CPCAnnexureI">
-              <MappingFragment StoreEntitySet="Vew_CPCAnnexureI">
-                <ScalarProperty Name="CashHandedOverCPCStaffBName" ColumnName="CashHandedOverCPCStaffBName" />
-                <ScalarProperty Name="CashHandedOverCPCStaffAName" ColumnName="CashHandedOverCPCStaffAName" />
-                <ScalarProperty Name="ShipmentReciptNo" ColumnName="ShipmentReciptNo" />
-                <ScalarProperty Name="SealNo" ColumnName="SealNo" />
-                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="NoOfBundles" ColumnName="NoOfBundles" />
-                <ScalarProperty Name="DenominationId" ColumnName="DenominationId" />
-                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
-                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
-                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
-                <ScalarProperty Name="CashProcessingCell" ColumnName="CashProcessingCell" />
-                <ScalarProperty Name="CPCAnnexureIDetailsId" ColumnName="CPCAnnexureIDetailsId" />
-                <ScalarProperty Name="DateOfCollection" ColumnName="DateOfCollection" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="SignatureCPCHandingOverCashBId" ColumnName="SignatureCPCHandingOverCashBId" />
-                <ScalarProperty Name="SignatureCPCHandingOverCashAId" ColumnName="SignatureCPCHandingOverCashAId" />
-                <ScalarProperty Name="CashHandedOverCITStaffBId" ColumnName="CashHandedOverCITStaffBId" />
-                <ScalarProperty Name="CashHandedOverCITStaffAId" ColumnName="CashHandedOverCITStaffAId" />
-                <ScalarProperty Name="CashHandedOverCPCStaffBId" ColumnName="CashHandedOverCPCStaffBId" />
-                <ScalarProperty Name="CashHandedOverCPCStaffAId" ColumnName="CashHandedOverCPCStaffAId" />
-                <ScalarProperty Name="SrNo" ColumnName="SrNo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CPCAnnexureIs">
             <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureI">
               <MappingFragment StoreEntitySet="CPCAnnexureI">
@@ -522,25 +500,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
                 <ScalarProperty Name="CashHandedOverCPCStaffBId" ColumnName="CashHandedOverCPCStaffBId" />
                 <ScalarProperty Name="CashHandedOverCPCStaffAId" ColumnName="CashHandedOverCPCStaffAId" />
                 <ScalarProperty Name="SrNo" ColumnName="SrNo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CPCAnnexureIIIs">
-            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureIII">
-              <MappingFragment StoreEntitySet="CPCAnnexureIII">
-                <ScalarProperty Name="CashHandedOverCITStaffBId" ColumnName="CashHandedOverCITStaffBId" />
-                <ScalarProperty Name="CashHandedOverCITStaffAId" ColumnName="CashHandedOverCITStaffAId" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CashReceivedCPCStaffB" ColumnName="CashReceivedCPCStaffB" />
-                <ScalarProperty Name="CashReceivedCPCStaffA" ColumnName="CashReceivedCPCStaffA" />
-                <ScalarProperty Name="SrNo" ColumnName="SrNo" />
-                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
-                <ScalarProperty Name="AnnexureIIIDate" ColumnName="AnnexureIIIDate" />
-                <ScalarProperty Name="AnnexureId" ColumnName="AnnexureId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -568,6 +527,59 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
                 <ScalarProperty Name="UnsortedCashCollected" ColumnName="UnsortedCashCollected" />
                 <ScalarProperty Name="DenominationsId" ColumnName="DenominationsId" />
                 <ScalarProperty Name="AnnexureIIId" ColumnName="AnnexureIIId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vew_CPCAnnexureI">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.Vew_CPCAnnexureI">
+              <MappingFragment StoreEntitySet="Vew_CPCAnnexureI">
+                <ScalarProperty Name="CashHandedOverCPCStaffBName" ColumnName="CashHandedOverCPCStaffBName" />
+                <ScalarProperty Name="CashHandedOverCPCStaffAName" ColumnName="CashHandedOverCPCStaffAName" />
+                <ScalarProperty Name="ShipmentReciptNo" ColumnName="ShipmentReciptNo" />
+                <ScalarProperty Name="SealNo" ColumnName="SealNo" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="NoOfBundles" ColumnName="NoOfBundles" />
+                <ScalarProperty Name="DenominationTitle" ColumnName="DenominationTitle" />
+                <ScalarProperty Name="DenominationId" ColumnName="DenominationId" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
+                <ScalarProperty Name="CashProcessingCell" ColumnName="CashProcessingCell" />
+                <ScalarProperty Name="CPCAnnexureIDetailsId" ColumnName="CPCAnnexureIDetailsId" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="SignatureCPCHandingOverCashBId" ColumnName="SignatureCPCHandingOverCashBId" />
+                <ScalarProperty Name="SignatureCPCHandingOverCashAId" ColumnName="SignatureCPCHandingOverCashAId" />
+                <ScalarProperty Name="CashHandedOverCITStaffBId" ColumnName="CashHandedOverCITStaffBId" />
+                <ScalarProperty Name="CashHandedOverCITStaffAId" ColumnName="CashHandedOverCITStaffAId" />
+                <ScalarProperty Name="CashHandedOverCPCStaffBId" ColumnName="CashHandedOverCPCStaffBId" />
+                <ScalarProperty Name="CashHandedOverCPCStaffAId" ColumnName="CashHandedOverCPCStaffAId" />
+                <ScalarProperty Name="DateOfCollection" ColumnName="DateOfCollection" />
+                <ScalarProperty Name="SrNo" ColumnName="SrNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CPCAnnexureIIIs">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureIII">
+              <MappingFragment StoreEntitySet="CPCAnnexureIII">
+                <ScalarProperty Name="CashHandedOverByCITStaffStaffBId" ColumnName="CashHandedOverByCITStaffStaffBId" />
+                <ScalarProperty Name="CashHandedOverByCITStaffStaffAId" ColumnName="CashHandedOverByCITStaffStaffAId" />
+                <ScalarProperty Name="CashReceivedByCPCStaffStaffBId" ColumnName="CashReceivedByCPCStaffStaffBId" />
+                <ScalarProperty Name="CashReceivedByCPCStaffStaffAId" ColumnName="CashReceivedByCPCStaffStaffAId" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CashReceivedCPCStaffB" ColumnName="CashReceivedCPCStaffB" />
+                <ScalarProperty Name="CashReceivedCPCStaffA" ColumnName="CashReceivedCPCStaffA" />
+                <ScalarProperty Name="SrNo" ColumnName="SrNo" />
+                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
+                <ScalarProperty Name="AnnexureIIIDate" ColumnName="AnnexureIIIDate" />
+                <ScalarProperty Name="AnnexureId" ColumnName="AnnexureId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

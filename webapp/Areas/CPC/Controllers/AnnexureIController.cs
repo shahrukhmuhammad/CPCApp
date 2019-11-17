@@ -161,7 +161,17 @@ namespace WebApp.Areas.CPC.Controllers
         public JsonResult GetAnnexureI(Guid Id, string date)
         {
             var ls = annexureIRepo.GetByDateBranchId(Id, Convert.ToDateTime(date));
-            return Json(ls, JsonRequestBehavior.AllowGet);
+            if (ls != null && ls.Count > 0)
+            {
+                return Json(new
+                {
+                    ShipmentReciptNo = ls.FirstOrDefault().ShipmentReciptNo,
+                    SealNo = ls.FirstOrDefault().SealNo,
+                    Id = ls.FirstOrDefault().Id,
+                    details = ls.Select(x => new { x.DenominationId, x.DenominationTitle, }).OrderBy(x => x.DenominationTitle)
+                }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
         }
         //[HttpPost]
         //public JsonResult GetDesignationsByDepartId(Guid Id)

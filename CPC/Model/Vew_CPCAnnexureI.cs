@@ -16,6 +16,7 @@ namespace CPC.Model
     {
         public System.Guid Id { get; set; }
         public Nullable<int> SrNo { get; set; }
+        public System.DateTime DateOfCollection { get; set; }
         public Nullable<System.Guid> CashHandedOverCPCStaffAId { get; set; }
         public Nullable<System.Guid> CashHandedOverCPCStaffBId { get; set; }
         public Nullable<System.Guid> CashHandedOverCITStaffAId { get; set; }
@@ -26,13 +27,13 @@ namespace CPC.Model
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public Nullable<System.Guid> UpdatedBy { get; set; }
-        public Nullable<System.DateTime> DateOfCollection { get; set; }
         public System.Guid CPCAnnexureIDetailsId { get; set; }
         public string CashProcessingCell { get; set; }
         public Nullable<System.Guid> ProjectBranchId { get; set; }
         public string BranchCode { get; set; }
         public string BranchName { get; set; }
         public Nullable<System.Guid> DenominationId { get; set; }
+        public Nullable<int> DenominationTitle { get; set; }
         public Nullable<int> NoOfBundles { get; set; }
         public Nullable<int> TotalAmount { get; set; }
         public string SealNo { get; set; }
