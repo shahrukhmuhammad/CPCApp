@@ -1,5 +1,5 @@
 ﻿
-@model CPCAnnexureIII
+@model CPCAnnexureII
 @{
     var queryId = ViewContext.RouteData.Values["Id"];
     ViewBag.Title = (queryId == null ? "Add New Annexure II" : "Edit Annexure II");
@@ -18,33 +18,32 @@
             </div>
         </div>
     </div>
-
+    @Html.HiddenFor(x => x.AnnexureId)
 
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-default">
-                
                 <div class="panel-body">
-                    <h4> Annexure II </h4>
+                    <h4> Annexure III </h4>
 
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 text-left horizontal-label">Sr. Number</label>
-                                        <div class="col-sm-6">
+                                        <label class="col-sm-4 text-left horizontal-label">Sr. Number</label>
+                                        <div class="col-sm-8">
                                             @Html.TextBoxFor(x => x.SrNo, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
                                             @Html.ValidationMessageFor(m => m.SrNo)
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 text-left horizontal-label">Date of Collection</label>
-                                        <div class="col-sm-6">
+                                        <label class="col-sm-3 text-left horizontal-label">Date</label>
+                                        <div class="col-sm-9">
                                             <div class="input-group input-group-sm">
-                                                <input name="DateOfCollection" class="form-control input-sm" type="date" value="" required autocomplete="off">
+                                                <input name="AnnexureIIIDate" id="AnnexureIIIDate" class="form-control input-sm" type="date" value="@Model.AnnexureIIDate.ToString("yyyy-MM-dd")" required autocomplete="off">
                                                 <span class="input-group-addon">
                                                     <span class="fa fa-calendar"></span>
                                                 </span>
@@ -52,72 +51,31 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-5">
+                                    <div class="row form-group">
+                                        <label class="col-sm-4 text-left horizontal-label">Branch Name/Code</label>
+                                        <div class="col-sm-8">
+                                            @Html.DropDownListFor(x => x.ProjectBranchId, (SelectList)ViewBag.BrachList, " Select Branch ", new { @class = "form-control input-sm select2" })
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Collected from</label>
+                                        <label class="col-sm-6 horizontal-label">Shipment Bag Seal Number</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownList("ProjectBranchId", (SelectList)ViewBag.BrachList, " Select Branch ", new { @class = "form-control input-sm select2" })
+                                            <input class="form-control input-sm" id="ShipmentSealNumber" name="ShipmentSealNumber" readonly />
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Total No of Bundles Collected</label>
-                                        <div class="col-sm-6">
-                                            <input class="form-control input-sm" name="AccountsList[0].AccountName" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Total Cash Collected Value</label>
-                                        <div class="col-sm-6">
-                                            <input class="form-control input-sm" name="AccountsList[0].AccountName" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Date of Cash Return</label>
-                                        <div class="col-sm-6">
-                                            <div class="input-group input-group-sm">
-                                                <input name="DateOfCollection" class="form-control input-sm" type="date" value="" required autocomplete="off">
-                                                <span class="input-group-addon">
-                                                    <span class="fa fa-calendar"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Total No of loose Packets/Notes Returend</label>
-                                        <div class="col-sm-6">
-                                            <input class="form-control input-sm" name="AccountsList[0].AccountName" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Total Cash Returned Value</label>
-                                        <div class="col-sm-6">
-                                            <input class="form-control input-sm" name="AccountsList[0].AccountName" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-sm-6">
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Shipment Receipt Number</label>
                                         <div class="col-sm-6">
-                                            <input class="form-control input-sm" name="AccountsList[0].AccountName" />
+                                            <input class="form-control input-sm" id="ShipmentReceiptNumber" name="ShipmentReceiptNumber" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -125,18 +83,27 @@
                         </div>
                     </div>
 
-
                     <div class="row tb-padding">
                         <table id="mytable" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th colspan="2" rowspan="2">Description of Cash</th>
                                     <th>Rs</th>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td>
+                                        <input class="form-control input-sm text-center" id="DenomTitle0" />
+                                        <input type="hidden" name="CPCAnnexureIIIDetail[0].DenominationId" id="DenomOneId" />
+                                    </td>
                                     <th>Rs</th>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td>
+                                        <input class="form-control input-sm text-center" id="DenomTitle1" />
+                                        <input type="hidden" name="CPCAnnexureIIIDetail[1].DenominationId" id="DenomTwoId" />
+                                    </td>
                                     <th>Rs</th>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td>
+                                        <input class="form-control input-sm text-center" id="DenomTitle2" />
+                                        <input type="hidden" name="CPCAnnexureIIIDetail[2].DenominationId" id="DenomThreeId" />
+
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>No. of Bundles/Pieces</th>
@@ -150,79 +117,78 @@
                             <tbody>
                                 <tr>
                                     <td colspan="2">Unsorted Cash Collected</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td data-id="0"><input class="form-control input-sm unsortedCash" id="unsortedCash0" name="CPCAnnexureIIIDetail[0].UnsortedCashCollected" /></td>
+                                    <td data-id="0"><input class="form-control input-sm" id="unsortedCashValue0" name="CPCAnnexureIIIDetail[0].UnsortedCashCollectedValue" /></td>
+                                    <td data-id="1"><input class="form-control input-sm unsortedCash" id="unsortedCash1" name="CPCAnnexureIIIDetail[1].UnsortedCashCollected" /></td>
+                                    <td data-id="1"><input class="form-control input-sm" id="unsortedCashValue1" name="CPCAnnexureIIIDetail[1].UnsortedCashCollectedValue" /></td>
+                                    <td data-id="2"><input class="form-control input-sm unsortedCash" id="unsortedCash2" name="CPCAnnexureIIIDetail[2].UnsortedCashCollected" /></td>
+                                    <td data-id="2"><input class="form-control input-sm" id="unsortedCashValue2" name="CPCAnnexureIIIDetail[2].UnsortedCashCollectedValue" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">FIT/Re-Issuable</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].FITReIssuable" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].FITReIssuableValue" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].FITReIssuable" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].FITReIssuableValue" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].FITReIssuable" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].FITReIssuableValue" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">Unfit/Soiled</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].UnfitSoiled" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].UnfitSoiledValue" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].UnfitSoiled" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].UnfitSoiledValue" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].UnfitSoiled" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].UnfitSoiledValue" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">Mismatch/Defaced Zero Value</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].MismatchDefacedZero" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].MismatchDefacedZeroValue" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].MismatchDefacedZero" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].MismatchDefacedZeroValue" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].MismatchDefacedZero" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].MismatchDefacedZeroValue" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">Counterfeit Notes</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].CounterfeitNotes" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].CounterfeitNotesValue" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].CounterfeitNotes" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].CounterfeitNotesValue" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].CounterfeitNotes" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].CounterfeitNotesValue" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">Net Excess</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].NetExcess" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].NetExcessValue" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].NetExcess" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].NetExcessValue" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].NetExcess" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].NetExcessValue" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">Net Storage</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].NetShortage" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].NetShortageValue" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].NetShortage" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].NetShortageValue" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].NetShortage" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].NetShortageValue" /></td>
                                 </tr>
-                                @*<tr>
-                        <td colspan="2">Total Cash Returned</td>
-                        <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                        <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                        <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                        <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                        <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                        <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                    </tr>*@
+                                <tr>
+                                    <td colspan="2">Total Cash Returned</td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].TotalCashReturned" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].TotalCashReturnedValue" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].TotalCashReturned" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].TotalCashReturnedValue" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].TotalCashReturned" /></td>
+                                    <td><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].TotalCashReturnedValue" /></td>
+                                </tr>
                             </tbody>
                         </table>
-
                     </div>
 
                     <div class="row">
@@ -232,7 +198,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Cash Received By <b>CPC</b> Staff Name</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashReceivedCPCStaffA, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.CashReceivedByCPCStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
                                     </div>
                                 </div>
@@ -240,7 +206,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Cash Received By <b>CPC</b> Staff Name</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashReceivedCPCStaffB, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.CashReceivedByCPCStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +216,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Name</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverByCITStaffStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.CashHandedOverByCITStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
                                     </div>
                                 </div>
@@ -258,7 +224,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Name</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverByCITStaffStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.CashHandedOverByCITStaffStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
                                     </div>
                                 </div>
@@ -292,9 +258,62 @@
                 $("#submit").hide();
             }*@
 
+            //txt_Credit leave event
+            $(document).on('focusout', '.unsortedCash', function (e) {
+                e.preventDefault();
+                accountGridRowIndex = $(this).closest('td').attr("data-id");
+                const unsortedValue = $('#unsortedCash' + accountGridRowIndex).val();
+                const denomVal = $('#DenomTitle' + accountGridRowIndex).val();
+                //console.log(parseInt(denomVal));
+                //console.log(parseInt(unsortedValue));
+                const totalVal = parseInt(unsortedValue) * parseInt(denomVal);
+                $('#unsortedCashValue' + accountGridRowIndex).val(totalVal == NaN ? '0' : totalVal);
+
+                //console.log(unsortedValue);
+
+                //GetTotal();
+            });
+
             $(".select2").select2();
 
+            $('#ProjectBranchId').change(function (e) {
+                e.preventDefault();
+                const id = $('#ProjectBranchId option:selected').attr('value');
+                const date = $('#AnnexureIIIDate').val();
+                //console.log(id + ' ' + date);
+                //var dataItem = $('#inp-sku').val();
+                if (id != "") {
+                    $.get('/CPC/AnnexureI/GetAnnexureI?Id=' + id + '&date=' + date, function (response) {
+                        if (response != null) {
+                            //console.log(response);
+                            $('#ShipmentReceiptNumber').val(response.ShipmentReciptNo);
+                            $('#ShipmentSealNumber').val(response.SealNo);
+                            $('#AnnexureId').val(response.Id);
 
+                            for (var i = 0; i < response.details.length; i++) {
+                                if (i == 0) {
+                                    $('#DenomOneId').val(response.details[0].DenominationId);
+                                    $('#DenomTitle0').val(response.details[0].DenominationTitle);
+                                }
+                                if (i == 1) {
+                                    $('#DenomTwoId').val(response.details[1].DenominationId);
+                                    $('#DenomTitle1').val(response.details[1].DenominationTitle);
+                                }
+                                if (i == 2) {
+                                    $('#DenomThreeId').val(response.details[2].DenominationId);
+                                    $('#DenomTitle2').val(response.details[2].DenominationTitle);
+                                }
+                            }
+
+                            //console.log(response);
+
+                            $('input#UnsortedCashCollected0').focus();
+                        }
+                    });
+                } else {
+                    $('form#add-item input').val('');
+                }
+            });
 
         });
 

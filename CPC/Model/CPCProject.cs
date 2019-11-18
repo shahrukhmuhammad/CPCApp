@@ -16,7 +16,6 @@ namespace CPC.Model
     {
         public System.Guid Id { get; set; }
         public string Name { get; set; }
-        public string ContactPersonName { get; set; }
         public string ContactPersonPhone { get; set; }
     }
 }

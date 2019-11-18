@@ -15,14 +15,14 @@ namespace WebApp.Areas.CPC.Controllers
     [AppAuthorize(AppPermission.All, AppPermission.ViewCPC, AppPermission.CPC)]
     public class CashInTransitController : AppController
     {
-        private AnnexureIIIEntity annexureIIIRepo;
+        private AnnexureIIEntity annexureIIIRepo;
         private EmployeeEntity employeeRepo;
         private BranchEntity branchRepo;
         private Common commonRepo;
 
         public CashInTransitController()
         {
-            annexureIIIRepo = new AnnexureIIIEntity();
+            annexureIIIRepo = new AnnexureIIEntity();
             employeeRepo = new EmployeeEntity();
             branchRepo = new BranchEntity();
             commonRepo = new Common();
@@ -52,7 +52,7 @@ namespace WebApp.Areas.CPC.Controllers
             var model = new CPCAnnexureIII();
             if (Id.HasValue)
             {
-                model = annexureIIIRepo.GetById(Id.Value);
+                //model = annexureIIIRepo.GetById(Id.Value);
             }
             else
             {

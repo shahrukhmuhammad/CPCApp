@@ -12,10 +12,10 @@ namespace CPC.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CPCAnnexureIIIDetail
+    public partial class CPCAnnexureIIDetail
     {
         public System.Guid Id { get; set; }
-        public System.Guid AnnexureIIIId { get; set; }
+        public System.Guid AnnexureIIId { get; set; }
         public System.Guid DenominationsId { get; set; }
         public Nullable<int> UnsortedCashCollected { get; set; }
         public Nullable<int> UnsortedCashCollectedValue { get; set; }
@@ -31,6 +31,8 @@ namespace CPC.Model
         public Nullable<int> NetExcessValue { get; set; }
         public Nullable<int> NetShortage { get; set; }
         public Nullable<int> NetShortageValue { get; set; }
+        public Nullable<int> TotalCashReturned { get; set; }
+        public Nullable<int> TotalCashReturnedValue { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
     }
