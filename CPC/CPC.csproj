@@ -50,9 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\AnnexureIIIEntity.cs" />
     <Compile Include="Entity\BranchEntity.cs" />
     <Compile Include="Entity\EmployeeEntity.cs" />
-    <Compile Include="Entity\AnnexureIIIEntity.cs" />
+    <Compile Include="Entity\AnnexureIIEntity.cs" />
     <Compile Include="Entity\CPCContants.cs" />
     <Compile Include="Entity\Common.cs" />
     <Compile Include="Entity\AnnexureIEntity.cs" />
@@ -60,6 +61,12 @@
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CPCAnnexureIDetail.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CPCAnnexureII.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CPCAnnexureIIDetail.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CPCAnnexureIII.cs">

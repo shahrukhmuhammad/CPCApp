@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace CPC
 {
-    public class AnnexureIIIEntity
+    public class AnnexureIIEntity
     {
         private SOSTechCPCEntities context;
 
-        public List<CPCAnnexureIII> GetAll()
+        public List<CPCAnnexureII> GetAll()
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIIIs.OrderBy(x => x.Id).ToList();
+                    return context.CPCAnnexureIIs.OrderBy(x => x.Id).ToList();
                 }
             }
             catch (Exception ex)
@@ -27,13 +27,13 @@ namespace CPC
                 throw ex;
             }
         }
-        public CPCAnnexureIII GetById(Guid Id)
+        public CPCAnnexureII GetById(Guid Id)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIIIs.Where(x => x.Id == Id).FirstOrDefault();
+                    return context.CPCAnnexureIIs.Where(x => x.Id == Id).FirstOrDefault();
                     //(from anxIII in context.CPCAnnexureIIs
                     // join anxID in context.CPCAnnexureIDetails on anxIII.CPCAnnexureIId equals anxID.AnnexureIId
                     // where Id == anxID.AnnexureIId
@@ -76,14 +76,14 @@ namespace CPC
 
 
         #region Add/Update Annexure III
-        public Guid? Create(CPCAnnexureIII model)
+        public Guid? Create(CPCAnnexureII model)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Save Annexure III
-                    context.CPCAnnexureIIIs.Add(model);
+                    context.CPCAnnexureIIs.Add(model);
                     context.SaveChanges();
                     #endregion
                     return model.Id;
@@ -153,10 +153,10 @@ namespace CPC
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Delete
-                    var res = context.CPCAnnexureIIIDetails.Where(x => x.AnnexureIIIId == Id).ToList();
+                    var res = context.CPCAnnexureIDetails.Where(x => x.AnnexureIId == Id).ToList();
                     if (res != null)
                     {
-                        context.CPCAnnexureIIIDetails.RemoveRange(res);
+                        context.CPCAnnexureIDetails.RemoveRange(res);
                         context.SaveChanges();
                     }
                     #endregion
@@ -223,7 +223,7 @@ namespace CPC
             {
                 using (var context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIIIs.Max(x => x.SrNo) <= 0 ? 1 : (int)context.CPCAnnexureIs.Max(x => x.SrNo) + 1;
+                    return context.CPCAnnexureIIs.Max(x => x.SrNo) <= 0 ? 1 : (int)context.CPCAnnexureIs.Max(x => x.SrNo) + 1;
                 }
             }
             catch (Exception ex)
