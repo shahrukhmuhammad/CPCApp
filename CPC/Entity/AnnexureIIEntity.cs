@@ -95,7 +95,7 @@ namespace CPC
             }
         }
 
-        public bool Create(List<CPCAnnexureIIIDetail> modelList)
+        public bool Create(List<CPCAnnexureIIDetail> modelList)
         {
             try
             {

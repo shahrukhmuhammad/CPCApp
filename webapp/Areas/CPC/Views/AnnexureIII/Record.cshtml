@@ -25,8 +25,7 @@
             <div class="panel panel-default">
                 
                 <div class="panel-body">
-                    <h4> Annexure II </h4>
-
+                    <h4> Annexure III </h4>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">
@@ -41,7 +40,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 text-left horizontal-label">Date of Collection</label>
+                                        <label class="col-sm-6 text-left horizontal-label">Date</label>
                                         <div class="col-sm-6">
                                             <div class="input-group input-group-sm">
                                                 <input name="DateOfCollection" class="form-control input-sm" type="date" value="" required autocomplete="off">
@@ -58,7 +57,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Cash Collected from</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownList("ProjectBranchId", (SelectList)ViewBag.BrachList, " Select Branch ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x=> x.CashCollectedFromId, (SelectList)ViewBag.BrachList, " Select Branch ", new { @class = "form-control input-sm select2" })
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +65,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Total No of Bundles Collected</label>
                                         <div class="col-sm-6">
-                                            <input class="form-control input-sm" name="AccountsList[0].AccountName" />
+                                            @Html.TextBoxFor(x => x.TotalBundlesCollected, new { @class = "form-control input-sm", @type = "number" })
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +75,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Total Cash Collected Value</label>
                                         <div class="col-sm-6">
-                                            <input class="form-control input-sm" name="AccountsList[0].AccountName" />
+                                            @Html.TextBoxFor(x => x.TotalCashCollected, new { @class = "form-control input-sm", @type = "number" })
+
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
                                         <label class="col-sm-6 horizontal-label">Date of Cash Return</label>
                                         <div class="col-sm-6">
                                             <div class="input-group input-group-sm">
-                                                <input name="DateOfCollection" class="form-control input-sm" type="date" value="" required autocomplete="off">
+                                                <input name="DateOfCashReturn" class="form-control input-sm" type="date" value="" required autocomplete="off">
                                                 <span class="input-group-addon">
                                                     <span class="fa fa-calendar"></span>
                                                 </span>
@@ -99,7 +99,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Total No of loose Packets/Notes Returend</label>
                                         <div class="col-sm-6">
-                                            <input class="form-control input-sm" name="AccountsList[0].AccountName" />
+                                            @Html.TextBoxFor(x => x.TotalLoosePacketsNotesReturned, new { @class = "form-control input-sm", @type = "number" })
+
                                         </div>
                                     </div>
                                 </div>
@@ -107,7 +108,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Total Cash Returned Value</label>
                                         <div class="col-sm-6">
-                                            <input class="form-control input-sm" name="AccountsList[0].AccountName" />
+                                            @Html.TextBoxFor(x => x.TotalCashReturned, new { @class = "form-control input-sm", @type = "number" })
+
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +119,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Shipment Receipt Number</label>
                                         <div class="col-sm-6">
-                                            <input class="form-control input-sm" name="AccountsList[0].AccountName" />
+                                            @Html.TextBoxFor(x => x.ShipmentReceiptNo, new { @class = "form-control input-sm", @type = "number" })
+
                                         </div>
                                     </div>
                                 </div>
@@ -132,11 +135,20 @@
                                 <tr>
                                     <th colspan="2" rowspan="2">Description of Cash</th>
                                     <th>Rs</th>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td>
+                                        <input class="form-control input-sm text-center" id="DenomTitle0" />
+                                        <input type="hidden" name="CPCAnnexureIIIDetail[0].DenominationId" id="DenomOneId" />
+                                    </td>
                                     <th>Rs</th>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td>
+                                        <input class="form-control input-sm text-center" id="DenomTitle1" />
+                                        <input type="hidden" name="CPCAnnexureIIIDetail[1].DenominationId" id="DenomTwoId" />
+                                    </td>
                                     <th>Rs</th>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td>
+                                        <input class="form-control input-sm text-center" id="DenomTitle2" />
+                                        <input type="hidden" name="CPCAnnexureIIIDetail[2].DenominationId" id="DenomThreeId" />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>No. of Bundles/Pieces</th>
@@ -150,76 +162,67 @@
                             <tbody>
                                 <tr>
                                     <td colspan="2">Unsorted Cash Collected</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td data-id="0"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[0].UnsortedCashCollected" /></td>
+                                    <td data-id="0"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].UnsortedCashCollectedValue" /></td>
+                                    <td data-id="1"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[1].UnsortedCashCollected" /></td>
+                                    <td data-id="1"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].UnsortedCashCollectedValue" /></td>
+                                    <td data-id="2"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[2].UnsortedCashCollected" /></td>
+                                    <td data-id="2"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].UnsortedCashCollectedValue" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">FIT/Re-Issuable</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td data-id="0"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[0].FITReIssuable" /></td>
+                                    <td data-id="0"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].FITReIssuableValue" /></td>
+                                    <td data-id="1"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[1].FITReIssuable" /></td>
+                                    <td data-id="1"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].FITReIssuableValue" /></td>
+                                    <td data-id="2"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[2].FITReIssuable" /></td>
+                                    <td data-id="2"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].FITReIssuableValue" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">Unfit/Soiled</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td data-id="0"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[0].UnfitSoiled" /></td>
+                                    <td data-id="0"><input class="form-control input-sm" id="unfitSoiledValue0" name="CPCAnnexureIIIDetail[0].UnfitSoiledValue" /></td>
+                                    <td data-id="1"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[1].UnfitSoiled" /></td>
+                                    <td data-id="1"><input class="form-control input-sm" id="unfitSoiledValue1" name="CPCAnnexureIIIDetail[1].UnfitSoiledValue" /></td>
+                                    <td data-id="2"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[2].UnfitSoiled" /></td>
+                                    <td data-id="2"><input class="form-control input-sm" id="unfitSoiledValue2" name="CPCAnnexureIIIDetail[2].UnfitSoiledValue" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">Mismatch/Defaced Zero Value</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td data-id="0"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[0].MismatchDefacedZero" /></td>
+                                    <td data-id="0"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].MismatchDefacedZeroValue" /></td>
+                                    <td data-id="1"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[1].MismatchDefacedZero" /></td>
+                                    <td data-id="1"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].MismatchDefacedZeroValue" /></td>
+                                    <td data-id="2"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[2].MismatchDefacedZero" /></td>
+                                    <td data-id="2"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].MismatchDefacedZeroValue" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">Counterfeit Notes</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td data-id="0"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[0].CounterfeitNotes" /></td>
+                                    <td data-id="0"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].CounterfeitNotesValue" /></td>
+                                    <td data-id="1"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[1].CounterfeitNotes" /></td>
+                                    <td data-id="1"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].CounterfeitNotesValue" /></td>
+                                    <td data-id="2"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[2].CounterfeitNotes" /></td>
+                                    <td data-id="2"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].CounterfeitNotesValue" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">Net Excess</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td data-id="0"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[0].NetExcess" /></td>
+                                    <td data-id="0"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].NetExcessValue" /></td>
+                                    <td data-id="1"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[1].NetExcess" /></td>
+                                    <td data-id="1"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].NetExcessValue" /></td>
+                                    <td data-id="2"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[2].NetExcess" /></td>
+                                    <td data-id="2"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].NetExcessValue" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">Net Storage</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td data-id="0"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[0].NetShortage" /></td>
+                                    <td data-id="0"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].NetShortageValue" /></td>
+                                    <td data-id="1"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[1].NetShortage" /></td>
+                                    <td data-id="1"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].NetShortageValue" /></td>
+                                    <td data-id="2"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[2].NetShortage" /></td>
+                                    <td data-id="2"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].NetShortageValue" /></td>
                                 </tr>
-                                @*<tr>
-                        <td colspan="2">Total Cash Returned</td>
-                        <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                        <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                        <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                        <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                        <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                        <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                    </tr>*@
                             </tbody>
                         </table>
 
@@ -230,7 +233,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Received By <b>CPC</b> Staff Name</label>
+                                        <label class="col-sm-6 horizontal-label">Cash Received By <b>CPC</b> First Staff Name</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.CashReceivedByCPCStaffA, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
@@ -238,7 +241,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Received By <b>CPC</b> Staff Name</label>
+                                        <label class="col-sm-6 horizontal-label">Cash Received By <b>CPC</b> Second Staff Name</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.CashReceivedByCPCStaffB, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
@@ -248,7 +251,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Name</label>
+                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> First Staff Name</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.CashHandedOverByCITStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
@@ -256,7 +259,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Name</label>
+                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Second Staff Name</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.CashHandedOverByCITStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
@@ -294,29 +297,21 @@
 
             $(".select2").select2();
 
+            //input fields leave event
+            $(document).on('focusout', '.inp', function (e) {
+                e.preventDefault();
+                accountGridRowIndex = $(this).closest('td').attr("data-id");
+                const totalValue = GetTotalVal($(this).val(), $('#DenomTitle' + accountGridRowIndex).val());
+                $(this).closest('td').next('td').find('input').val(totalValue);
+            });
+
 
 
         });
 
-        function GetTotal() {
-            //debugger;
-            debit = 0;
-            credit = 0;
-            //console.log(accountGridRowIndex);
-
-            for (var i = 1; i < accountGridRowIndex; i++) {
-                //console.log("For LOOP, i= " + i);
-                if ($("#txt_AccountCode" + i).val() != "" && $("#txt_AccountName" + i).val() != "") {
-
-                    debit += parseFloat($("#txt_Debit" + i).val());
-                    credit += parseFloat($("#txt_Credit" + i).val());
-
-                    //console.log("D :" + debit + "C :" + credit);
-                }
-                $("#txt_difference").val(parseFloat(debit - credit).toFixed(2));
-                $("#TotalDebit").val(parseFloat(debit).toFixed(2));
-                $("#TotalCredit").val(parseFloat(credit).toFixed(2));
-            }
+        function GetTotalVal(unsortedValue, denomVal) {
+            const totalVal = parseInt(unsortedValue) * parseInt(denomVal);
+            return isNaN(totalVal) ? '0' : totalVal;
         }
     </script>
 }

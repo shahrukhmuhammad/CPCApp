@@ -67,7 +67,7 @@ namespace WebApp.Areas.CPC.Controllers
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Record(CPCAnnexureI model)
+        public ActionResult Record(CPCAnnexureIII model, List<CPCAnnexureIIIDetail> CPCAnnexureIIIDetail)
         {
             try
             {
@@ -77,11 +77,17 @@ namespace WebApp.Areas.CPC.Controllers
                     model.CreatedOn = DateTime.Now;
                     //model.IsActive = true;
                     model.Id = Guid.NewGuid();
-                    //var res = annexureIIIRepo.Create(model);
-                    //if (res.HasValue)
-                    //{
-                    //    model.Id = res.Value;
-                    //}
+                    var res = annexureIIIRepo.Create(model);
+                    if (res.HasValue)
+                    {
+                        var lsToSave = CPCAnnexureIIIDetail.Where(x => x.UnfitSoiled > 0 && (x.FITReIssuable > 0 || x.UnfitSoiled > 0)).ToList();
+                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.AnnexureIIIId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
+                        #region Save Details
+                        annexureIIIRepo.Create(lsToSave);
+                        #endregion
+
+                        model.Id = res.Value;
+                    }
 
                     #region Activity Log
                     //appLog.Create(CurrentUser.OfficeId, model.Id, CurrentUser.Id, AppLogType.Activity, "CRM - Lead", model.FullName + " lead created", "~/CRM/Contact/LeadRecord > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td><strong>" + model.FullName + "</strong> lead created by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
@@ -111,19 +117,20 @@ namespace WebApp.Areas.CPC.Controllers
                 }
                 else
                 {
-                    model.UpdatedBy = CurrentUser.Id;
-                    model.UpdatedOn = DateTime.Now;
-                    bool res = annexureIIIRepo.Update(model);
+                    //model.UpdatedBy = CurrentUser.Id;
+                    //model.UpdatedOn = DateTime.Now;
+                    //bool res = annexureIIIRepo.Update(model);
 
 
-                    if (res)
-                    {
-                        TempData["SuccessMsg"] = model.SrNo + " has been updated successfully.";
-                    }
-                    else
-                    {
-                        TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
-                    }
+                    //if (res)
+                    //{
+                    //    TempData["SuccessMsg"] = model.SrNo + " has been updated successfully.";
+                    //}
+                    //else
+                    //{
+                    //    TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
+                    //}
+
                     #region Activity Log
                     //appLog.Create(CurrentUser.OfficeId, model.Id, CurrentUser.Id, AppLogType.Activity, "CRM - Lead", model.FullName + " lead updated", "~/CRM/Contact/LeadRecord > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td><strong>" + model.FullName + "</strong> lead updated by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
                     #endregion

@@ -67,7 +67,7 @@ namespace WebApp.Areas.CPC.Controllers
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Record(CPCAnnexureII model, List<CPCAnnexureIIIDetail> CPCAnnexureIIIDetail)
+        public ActionResult Record(CPCAnnexureII model, List<CPCAnnexureIIDetail> CPCAnnexureIIDetail)
         {
             try
             {
@@ -80,8 +80,8 @@ namespace WebApp.Areas.CPC.Controllers
                     var res = annexureIIRepo.Create(model);
                     if (res.HasValue)
                     {
-                        var lsToSave = CPCAnnexureIIIDetail.Where(x => x.UnfitSoiled > 0 && ( x.FITReIssuable > 0 || x.UnfitSoiled > 0)).ToList();
-                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.AnnexureIIIId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
+                        var lsToSave = CPCAnnexureIIDetail.Where(x => x.UnfitSoiled > 0 && ( x.FITReIssuable > 0 || x.UnfitSoiled > 0)).ToList();
+                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.AnnexureIIId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
                         #region Save Details
                         annexureIIRepo.Create(lsToSave);
                         #endregion
