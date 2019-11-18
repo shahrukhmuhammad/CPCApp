@@ -797,6 +797,7 @@
     <Content Include="Areas\CPC\Views\AnnexureIII\Record.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureIII\AnnexureIIIs.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureIII\_AllAnnexureIII.cshtml" />
+    <Content Include="Areas\CPC\Views\AnnexureIII\Record.cshtml" />
     <None Include="Properties\PublishProfiles\BaseApp %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - CMS - V2.0 %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - V3.0 %28Published%29.pubxml" />
