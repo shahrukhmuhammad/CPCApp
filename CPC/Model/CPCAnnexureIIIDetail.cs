@@ -12,20 +12,28 @@ namespace CPC.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CPCAnnexureIIIDescriptionCash
+    public partial class CPCAnnexureIIIDetail
     {
         public System.Guid Id { get; set; }
-        public Nullable<System.Guid> CPCAnnexureIIId { get; set; }
-        public Nullable<System.Guid> CPCDenominationsId { get; set; }
+        public System.Guid AnnexureIIId { get; set; }
+        public System.Guid DenominationsId { get; set; }
         public Nullable<int> UnsortedCashCollected { get; set; }
+        public Nullable<int> UnsortedCashCollectedValue { get; set; }
         public Nullable<int> FITReIssuable { get; set; }
+        public Nullable<int> FITReIssuableValue { get; set; }
         public Nullable<int> UnfitSoiled { get; set; }
+        public Nullable<int> UnfitSoiledValue { get; set; }
+        public Nullable<int> MismatchDefacedZero { get; set; }
         public Nullable<int> MismatchDefacedZeroValue { get; set; }
         public Nullable<int> CounterfeitNotes { get; set; }
+        public Nullable<int> CounterfeitNotesValue { get; set; }
         public Nullable<int> NetExcess { get; set; }
+        public Nullable<int> NetExcessValue { get; set; }
         public Nullable<int> NetShortage { get; set; }
+        public Nullable<int> NetShortageValue { get; set; }
         public Nullable<int> TotalCashReturned { get; set; }
-        public Nullable<int> NumberOfBundles { get; set; }
-        public Nullable<int> Value { get; set; }
+        public Nullable<int> TotalCashReturnedValue { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public System.Guid CreatedBy { get; set; }
     }
 }

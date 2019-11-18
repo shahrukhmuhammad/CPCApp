@@ -15,8 +15,9 @@ namespace CPC.Model
     public partial class CPCAnnexureIII
     {
         public System.Guid Id { get; set; }
-        public Nullable<System.Guid> CPCAnnexureIId { get; set; }
-        public Nullable<System.Guid> CPCProjectBranchId { get; set; }
+        public Nullable<System.Guid> AnnexureId { get; set; }
+        public System.DateTime AnnexureIIIDate { get; set; }
+        public Nullable<System.Guid> ProjectBranchId { get; set; }
         public Nullable<int> SrNo { get; set; }
         public Nullable<System.Guid> CashReceivedCPCStaffA { get; set; }
         public Nullable<System.Guid> CashReceivedCPCStaffB { get; set; }
@@ -24,7 +25,9 @@ namespace CPC.Model
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public Nullable<System.Guid> UpdatedBy { get; set; }
-        public Nullable<System.Guid> CashHandedOverCITStaffAId { get; set; }
-        public Nullable<System.Guid> CashHandedOverCITStaffBId { get; set; }
+        public Nullable<System.Guid> CashReceivedByCPCStaffStaffAId { get; set; }
+        public Nullable<System.Guid> CashReceivedByCPCStaffStaffBId { get; set; }
+        public Nullable<System.Guid> CashHandedOverByCITStaffStaffAId { get; set; }
+        public Nullable<System.Guid> CashHandedOverByCITStaffStaffBId { get; set; }
     }
 }

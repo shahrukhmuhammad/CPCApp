@@ -25,14 +25,15 @@ namespace CPC.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
         public virtual DbSet<CPCDenomination> CPCDenominations { get; set; }
         public virtual DbSet<CPCDepartment> CPCDepartments { get; set; }
+        public virtual DbSet<CPCEmployee> CPCEmployees { get; set; }
         public virtual DbSet<CPCProject> CPCProjects { get; set; }
         public virtual DbSet<CPCProjectBranch> CPCProjectBranches { get; set; }
-        public virtual DbSet<CPCAnnexureIIIDescriptionCash> CPCAnnexureIIIDescriptionCashes { get; set; }
         public virtual DbSet<CPCAnnexureI> CPCAnnexureIs { get; set; }
-        public virtual DbSet<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
+        public virtual DbSet<CPCAnnexureIIIDetail> CPCAnnexureIIIDetails { get; set; }
+        public virtual DbSet<Vew_CPCAnnexureI> Vew_CPCAnnexureI { get; set; }
         public virtual DbSet<CPCAnnexureIII> CPCAnnexureIIIs { get; set; }
-        public virtual DbSet<CPCEmployee> CPCEmployees { get; set; }
     }
 }

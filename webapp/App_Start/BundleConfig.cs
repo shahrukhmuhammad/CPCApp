@@ -62,7 +62,7 @@ namespace WebApp
             bundles.Add(new ScriptBundle("~/bundles/CustomBaseApp").Include("~/Scripts/BaseApp.js"));
             #endregion
 
-           // bundles.Add(new ScriptBundle("~/bundles/SummerNote").Include("~/Scripts/Summer Note/summernote.js"));
+            // bundles.Add(new ScriptBundle("~/bundles/SummerNote").Include("~/Scripts/Summer Note/summernote.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/AlloyEditor").Include("~/Content/alloy-editor/alloy-editor-all.js"));
 
@@ -71,6 +71,8 @@ namespace WebApp
             bundles.Add(new ScriptBundle("~/bundles/Bootstrap").Include(
                       "~/Scripts/Bootstrap/bootstrap.js",
                       "~/Scripts/Respond/respond.js"));
+            bundles.Add(new ScriptBundle("~/bundles/CPCModule").Include(
+                      "~/Scripts/App/Cpc.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/BootstrapNewsTicker").Include("~/Scripts/Bootstrap News Ticker/jquery.bootstrap.newsbox.js"));
             #endregion

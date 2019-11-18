@@ -42,6 +42,21 @@ namespace CPC
                 return null;
             }
         }
+        public List<Vew_CPCAnnexureI> GetByDateBranchId(Guid branchId, DateTime dateofCollection)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.Vew_CPCAnnexureI.Where(x => x.ProjectBranchId == branchId && x.DateOfCollection == dateofCollection).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                return null;
+            }
+        }
         public CPCAnnexureI GetById(Guid Id)
         {
             try
