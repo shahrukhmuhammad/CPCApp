@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace CPC
 {
-    public class AnnexureIIEntity
+    public class CashInTransitEntity
     {
         private SOSTechCPCEntities context;
 
-        public List<CPCAnnexureII> GetAll()
+        public List<CPCCashInTransit> GetAll()
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIIs.OrderBy(x => x.Id).ToList();
+                    return context.CPCCashInTransits.OrderBy(x => x.Date).ToList();
                 }
             }
             catch (Exception ex)
@@ -27,23 +27,43 @@ namespace CPC
                 throw ex;
             }
         }
-        public CPCAnnexureII GetById(Guid Id)
+
+        public List<Vew_CPCAnnexureI> GetAllDetails()
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIIs.Where(x => x.Id == Id).FirstOrDefault();
-                    //(from anxIII in context.CPCAnnexureIIs
-                    // join anxID in context.CPCAnnexureIDetails on anxIII.CPCAnnexureIId equals anxID.AnnexureIId
-                    // where Id == anxID.AnnexureIId
-                    // select new
-                    // {
-                    //     UID = e.OwnerID,
-                    //     TID = e.TID,
-                    //     Title = t.Title,
-                    //     EID = e.EID
-                    // }).Take(10);
+                    return context.Vew_CPCAnnexureI.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public List<Vew_CPCAnnexureI> GetByDateBranchId(Guid branchId, DateTime dateofCollection)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.Vew_CPCAnnexureI.Where(x => x.ProjectBranchId == branchId && x.DateOfCollection == dateofCollection).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                return null;
+            }
+        }
+        public CPCCashInTransit GetById(Guid Id)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.CPCCashInTransits.Where(x => x.Id == Id).FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -75,15 +95,15 @@ namespace CPC
         //}
 
 
-        #region Add/Update Annexure II
-        public Guid? Create(CPCAnnexureII model)
+        #region Add/Update Employee
+        public Guid? Create(CPCCashInTransit model)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    #region Save Annexure II
-                    context.CPCAnnexureIIs.Add(model);
+                    #region Save Department
+                    context.CPCCashInTransits.Add(model);
                     context.SaveChanges();
                     #endregion
                     return model.Id;
@@ -95,14 +115,14 @@ namespace CPC
             }
         }
 
-        public bool Create(List<CPCAnnexureIIDetail> modelList)
+        public bool Create(List<CPCCashInTransitChild> modelList)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    #region Save CPCAnnexure II
-                    context.CPCAnnexureIIDetails.AddRange(modelList);
+                    #region Save Department
+                    context.CPCCashInTransitChilds.AddRange(modelList);
                     context.SaveChanges();
                     #endregion
                     return true;
@@ -114,25 +134,25 @@ namespace CPC
             }
         }
 
-        public bool Update(CPCAnnexureI model)
+        public bool Update(CPCCashInTransit model)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    #region Update
-                    var res = context.CPCAnnexureIs.Where(x => x.Id == model.Id).FirstOrDefault();
+                    #region Update Employee
+                    var res = context.CPCCashInTransits.Where(x => x.Id == model.Id).FirstOrDefault();
                     if (res != null)
                     {
-                        res.CashHandedOverCPCStaffAId = model.CashHandedOverCPCStaffAId;
-                        res.CashHandedOverCPCStaffBId = model.CashHandedOverCPCStaffBId;
-                        res.CashHandedOverCITStaffAId = model.CashHandedOverCITStaffAId;
-                        res.CashHandedOverCITStaffBId = model.CashHandedOverCITStaffBId;
-                        res.SignatureCPCHandingOverCashAId = model.SignatureCPCHandingOverCashAId;
-                        res.SignatureCPCHandingOverCashBId = model.SignatureCPCHandingOverCashBId;
-                        res.UpdatedOn = model.UpdatedOn;
-                        res.UpdatedBy = model.UpdatedBy;
-                        context.SaveChanges();
+                        //res.CashHandedOverCPCStaffAId = model.CashHandedOverCPCStaffAId;
+                        //res.CashHandedOverCPCStaffBId = model.CashHandedOverCPCStaffBId;
+                        //res.CashHandedOverCITStaffAId = model.CashHandedOverCITStaffAId;
+                        //res.CashHandedOverCITStaffBId = model.CashHandedOverCITStaffBId;
+                        //res.SignatureCPCHandingOverCashAId = model.SignatureCPCHandingOverCashAId;
+                        //res.SignatureCPCHandingOverCashBId = model.SignatureCPCHandingOverCashBId;
+                        //res.UpdatedOn = model.UpdatedOn;
+                        //res.UpdatedBy = model.UpdatedBy;
+                        //context.SaveChanges();
                     }
                     #endregion
                     return true;
@@ -152,7 +172,7 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    #region Delete
+                    #region Update Employee
                     var res = context.CPCAnnexureIDetails.Where(x => x.AnnexureIId == Id).ToList();
                     if (res != null)
                     {
@@ -217,13 +237,13 @@ namespace CPC
 
         #endregion
 
-        public int GetNextSrNo()
+        public int GetNextShipmentNo()
         {
             try
             {
                 using (var context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIIs.Max(x => x.SrNo) <= 0 ? 1 : (int)context.CPCAnnexureIs.Max(x => x.SrNo) + 1;
+                    return context.CPCCashInTransits.Max(x => x.ShipmentReceiptNumber) <= 0 ? 1 : (int)context.CPCCashInTransits.Max(x => x.ShipmentReceiptNumber) + 1;
                 }
             }
             catch (Exception ex)

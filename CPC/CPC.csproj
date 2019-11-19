@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Entity\AnnexureIIIEntity.cs" />
     <Compile Include="Entity\BranchEntity.cs" />
+    <Compile Include="Entity\CashInTransitEntity.cs" />
     <Compile Include="Entity\EmployeeEntity.cs" />
     <Compile Include="Entity\AnnexureIIEntity.cs" />
     <Compile Include="Entity\CPCContants.cs" />
@@ -73,6 +74,12 @@
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CPCAnnexureIIIDetail.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CPCCashInTransit.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CPCCashInTransitChild.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CPCDenomination.cs">

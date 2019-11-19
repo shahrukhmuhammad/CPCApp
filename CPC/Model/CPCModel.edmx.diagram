@@ -16,7 +16,9 @@
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIIDetail" Width="2" PointX="0.5" PointY="3" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIII" Width="2" PointX="0.5" PointY="3.375" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIIIDetail" Width="2" PointX="0.5" PointY="3.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCProject" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCProject" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCCashInTransit" Width="1.5" PointX="3.375" PointY="5.75" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCCashInTransitChild" Width="1.5" PointX="5.375" PointY="5.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

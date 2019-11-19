@@ -15,14 +15,14 @@ namespace WebApp.Areas.CPC.Controllers
     [AppAuthorize(AppPermission.All, AppPermission.ViewCPC, AppPermission.CPC)]
     public class CashInTransitController : AppController
     {
-        private AnnexureIIIEntity annexureIIIRepo;
+        private CashInTransitEntity cashInTransitRepo;
         private EmployeeEntity employeeRepo;
         private BranchEntity branchRepo;
         private Common commonRepo;
 
         public CashInTransitController()
         {
-            annexureIIIRepo = new AnnexureIIIEntity();
+            cashInTransitRepo = new CashInTransitEntity();
             employeeRepo = new EmployeeEntity();
             branchRepo = new BranchEntity();
             commonRepo = new Common();
@@ -33,30 +33,31 @@ namespace WebApp.Areas.CPC.Controllers
         }
         public PartialViewResult _AllCashInTransits()
         {
-            var model = annexureIIIRepo.GetAll();
+            var model = cashInTransitRepo.GetAll();
             return PartialView(model);
         }
 
         #region Details
-        [Route("HRMS/Region/Details/{Id}/{IsView}")]
-        public ActionResult Details(Guid Id, string IsView)
+        
+        public ActionResult Details(Guid Id)
         {
-            TempData["IsView"] = IsView;
-            return RedirectToAction("Record", "Region", new { Id });
+            var model = cashInTransitRepo.GetById(Id);
+            ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
+            return View(model);
         }
         #endregion
         #region Record
         public ActionResult Record(Guid? Id)
         {
             ViewData["IsView"] = Convert.ToString(TempData["IsView"]);
-            var model = new CPCAnnexureIII();
+            var model = new CPCCashInTransit();
             if (Id.HasValue)
             {
-                //model = annexureIIIRepo.GetById(Id.Value);
+                model = cashInTransitRepo.GetById(Id.Value);
             }
             else
             {
-                model.SrNo = annexureIIIRepo.GetNextSrNo();
+                model.ShipmentReceiptNumber = cashInTransitRepo.GetNextShipmentNo();
                 //model.IsActive = true;
             }
             //ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
@@ -66,7 +67,7 @@ namespace WebApp.Areas.CPC.Controllers
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Record(CPCAnnexureI model)
+        public ActionResult Record(CPCCashInTransit model, List<CPCCashInTransitChild> CPCCashInTransitChild)
         {
             try
             {
@@ -76,11 +77,17 @@ namespace WebApp.Areas.CPC.Controllers
                     model.CreatedOn = DateTime.Now;
                     //model.IsActive = true;
                     model.Id = Guid.NewGuid();
-                    //var res = annexureIIIRepo.Create(model);
-                    //if (res.HasValue)
-                    //{
-                    //    model.Id = res.Value;
-                    //}
+                    var res = cashInTransitRepo.Create(model);
+                    if (res.HasValue)
+                    {
+                        var lsToSave = CPCCashInTransitChild.Where(x => x.SealNumber > 0 && (x.Item != "" || x.Value == 0 || x.PartialDelivery != "")).ToList();
+                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.CashInTransitId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
+                        #region Save Details
+                        cashInTransitRepo.Create(lsToSave);
+                        #endregion
+
+                        model.Id = res.Value;
+                    }
 
                     #region Activity Log
                     //appLog.Create(CurrentUser.OfficeId, model.Id, CurrentUser.Id, AppLogType.Activity, "CRM - Lead", model.FullName + " lead created", "~/CRM/Contact/LeadRecord > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td><strong>" + model.FullName + "</strong> lead created by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
@@ -106,23 +113,23 @@ namespace WebApp.Areas.CPC.Controllers
                     //realtime.UpdateMessages(null);
                     #endregion
 
-                    TempData["SuccessMsg"] = model.SrNo + " has been created successfully.";
+                    TempData["SuccessMsg"] = model.ShipmentReceiptNumber + " has been created successfully.";
                 }
                 else
                 {
-                    model.UpdatedBy = CurrentUser.Id;
-                    model.UpdatedOn = DateTime.Now;
-                    bool res = annexureIIIRepo.Update(model);
+                    //model.UpdatedBy = CurrentUser.Id;
+                    //model.UpdatedOn = DateTime.Now;
+                    //bool res = annexureIIRepo.Update(model);
 
 
-                    if (res)
-                    {
-                        TempData["SuccessMsg"] = model.SrNo + " has been updated successfully.";
-                    }
-                    else
-                    {
-                        TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
-                    }
+                    //if (res)
+                    //{
+                    //    TempData["SuccessMsg"] = model.SrNo + " has been updated successfully.";
+                    //}
+                    //else
+                    //{
+                    //    TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
+                    //}
                     #region Activity Log
                     //appLog.Create(CurrentUser.OfficeId, model.Id, CurrentUser.Id, AppLogType.Activity, "CRM - Lead", model.FullName + " lead updated", "~/CRM/Contact/LeadRecord > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td><strong>" + model.FullName + "</strong> lead updated by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
                     #endregion
@@ -143,7 +150,7 @@ namespace WebApp.Areas.CPC.Controllers
             //}
             //else
             //{
-            return RedirectToAction("AnnexureIII");
+            return RedirectToAction("CashInTransits");
         }
         #endregion
 

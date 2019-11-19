@@ -37,5 +37,7 @@ namespace CPC.Model
         public virtual DbSet<CPCAnnexureIII> CPCAnnexureIIIs { get; set; }
         public virtual DbSet<CPCAnnexureIIIDetail> CPCAnnexureIIIDetails { get; set; }
         public virtual DbSet<CPCProject> CPCProjects { get; set; }
+        public virtual DbSet<CPCCashInTransit> CPCCashInTransits { get; set; }
+        public virtual DbSet<CPCCashInTransitChild> CPCCashInTransitChilds { get; set; }
     }
 }

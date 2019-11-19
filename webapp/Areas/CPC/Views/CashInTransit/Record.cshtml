@@ -1,5 +1,5 @@
 ﻿
-@model CPCAnnexureIII
+@model CPCCashInTransit
 @{
     var queryId = ViewContext.RouteData.Values["Id"];
     ViewBag.Title = (queryId == null ? "Add New Cash In Transit" : "Edit Cash In Transit");
@@ -25,7 +25,6 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h4> Cash In Transit </h4>
-
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">
@@ -33,8 +32,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-5 text-left horizontal-label">Shipment Receipt No.</label>
                                         <div class="col-sm-7">
-                                            @Html.TextBoxFor(x => x.SrNo, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
-                                            @Html.ValidationMessageFor(m => m.SrNo)
+                                            @Html.TextBoxFor(x => x.ShipmentReceiptNumber, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
+                                            @Html.ValidationMessageFor(m => m.ShipmentReceiptNumber)
                                         </div>
                                     </div>
                                 </div>
@@ -42,7 +41,9 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 text-left horizontal-label">Vehicle No.</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBox("VehicleNo", "", new { @class = "form-control input-sm" })
+                                            @*@Html.TextBox("VehicleNo", Model.VehicleNumber, new { @class = "form-control input-sm" })*@
+                                            @Html.TextBoxFor(x => x.VehicleNumber, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
+                                            @Html.ValidationMessageFor(m => m.VehicleNumber)
                                         </div>
                                     </div>
                                 </div>
@@ -51,7 +52,7 @@
                                         <label class="col-sm-3 text-left horizontal-label">Date</label>
                                         <div class="col-sm-8">
                                             <div class="input-group input-group-sm">
-                                                <input name="DateOfCollection" class="form-control input-sm" type="date" value="" required autocomplete="off">
+                                                <input name="Date" id="Date" class="form-control input-sm" type="date" value="@Model.Date.ToString("yyyy-MM-dd")" required autocomplete="off">
                                                 <span class="input-group-addon">
                                                     <span class="fa fa-calendar"></span>
                                                 </span>
@@ -65,7 +66,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 horizontal-label">Customer To Be Billed</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBox("CustomertobeBilled", "", new { @class = "form-control input-sm" })
+                                            @Html.TextBoxFor(x => x.CustomerToBeBilled, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
+                                            @Html.ValidationMessageFor(m => m.CustomerToBeBilled)
                                         </div>
                                     </div>
                                 </div>
@@ -73,8 +75,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 horizontal-label">A/C Code</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBox("CustomertobeBilled", "", new { @class = "form-control input-sm" })
-
+                                            @Html.TextBoxFor(x => x.AcCode, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
+                                            @Html.ValidationMessageFor(m => m.AcCode)
                                         </div>
                                     </div>
                                 </div>
@@ -84,16 +86,17 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 horizontal-label">Collection</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBox("Collection", "", new { @class = "form-control input-sm" })
+                                            @Html.TextBoxFor(x => x.Collection, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
+                                            @Html.ValidationMessageFor(m => m.AcCode)
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="row form-group">
-                                        <label class="col-sm-4 text-left horizontal-label">Date &#38; Time</label>
+                                        <label class="col-sm-4 text-left horizontal-label">Collection/Date &#38; Time</label>
                                         <div class="col-sm-8">
                                             <div class="input-group input-group-sm">
-                                                <input name="DateOfCollection" class="form-control input-sm" type="date" value="" required autocomplete="off">
+                                                <input name="CollectionDateTime" id="CollectionDateTime" class="form-control input-sm" type="date" value="@Model.CollectionDateTime.ToString("yyyy-MM-dd")" required autocomplete="off">
                                                 <span class="input-group-addon">
                                                     <span class="fa fa-calendar"></span>
                                                 </span>
@@ -107,7 +110,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 horizontal-label">Delivery</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBox("Delivery", "", new { @class = "form-control input-sm" })
+                                            @Html.TextBoxFor(x => x.Delivery, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
+                                            @Html.ValidationMessageFor(m => m.Delivery)
                                         </div>
                                     </div>
                                 </div>
@@ -116,7 +120,7 @@
                                         <label class="col-sm-4 text-left horizontal-label">Date &#38; Time</label>
                                         <div class="col-sm-8">
                                             <div class="input-group input-group-sm">
-                                                <input name="DateOfCollection" class="form-control input-sm" type="date" value="" required autocomplete="off">
+                                                <input name="DeliveryDateTime" id="DeliveryDateTime" class="form-control input-sm" type="date" value="@Model.DeliveryDateTime.ToString("yyyy-MM-dd")" required autocomplete="off">
                                                 <span class="input-group-addon">
                                                     <span class="fa fa-calendar"></span>
                                                 </span>
@@ -136,35 +140,35 @@
                             <tbody>
                                 <tr>
                                     <td colspan="2">Seal No</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[0].SealNumber" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[1].SealNumber" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[2].SealNumber" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[3].SealNumber" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[4].SealNumber" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">Item</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[0].Item" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[1].Item" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[2].Item" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[3].Item" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[4].Item" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">Value</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[0].Value" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[1].Value" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[2].Value" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[3].Value" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[4].Value" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">Partial Delivery</td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
-                                    <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[0].PartialDelivery" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[1].PartialDelivery" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[2].PartialDelivery" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[3].PartialDelivery" /></td>
+                                    <td><input class="form-control input-sm" name="CPCCashInTransitChild[4].PartialDelivery" /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -178,7 +182,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 horizontal-label">Waiting Time</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBox("WaitingTime", "", new { @class = "form-control input-sm" })
+                                            @Html.TextBoxFor(x => x.WaitingTime, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
+                                            @Html.ValidationMessageFor(m => m.WaitingTime)
                                         </div>
                                     </div>
                                 </div>
@@ -186,7 +191,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 horizontal-label">No of Plastic/Lead Seals</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBox("NoofPlasticLeadSeals", "", new { @class = "form-control input-sm" })
+                                            @Html.TextBoxFor(x => x.NumberOfPlasticLeadSeals, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.ValidationMessageFor(m => m.NumberOfPlasticLeadSeals)
                                         </div>
                                     </div>
                                 </div>
@@ -194,7 +200,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 horizontal-label">No. of Bags</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBox("NoofBags", "", new { @class = "form-control input-sm" })
+                                            @Html.TextBoxFor(x => x.NumberOfBags, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.ValidationMessageFor(m => m.NumberOfBags)
                                         </div>
                                     </div>
                                 </div>
@@ -204,23 +211,26 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 horizontal-label">Days In Vault</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBox("DaysInVault", "", new { @class = "form-control input-sm" })
+                                            @Html.TextBoxFor(x => x.DaysInVault, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.ValidationMessageFor(m => m.DaysInVault)
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="row form-group">
-                                        <label class="col-sm-4 horizontal-label">No Wage Packets</label>
+                                        <label class="col-sm-4 horizontal-label">No. of Wage Packets</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBox("NoWagePackets", "", new { @class = "form-control input-sm" })
+                                            @Html.TextBoxFor(x => x.NumberOfWagePackets, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.ValidationMessageFor(m => m.NumberOfWagePackets)
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="row form-group">
-                                        <label class="col-sm-4 horizontal-label">No Of Additional Service</label>
+                                        <label class="col-sm-4 horizontal-label">No. of Additional Service</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBox("NoOfAdditionalService", "", new { @class = "form-control input-sm" })
+                                            @Html.TextBoxFor(x => x.NumberOfAdditionalService, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.ValidationMessageFor(m => m.NumberOfAdditionalService)
                                         </div>
                                     </div>
                                 </div>
@@ -228,35 +238,17 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-4 horizontal-label">Considered By</label>
+                                        <label class="col-sm-4 horizontal-label">Consigned By A</label>
                                         <div class="col-sm-8">
-                                            @Html.DropDownListFor(x => x.CashReceivedCPCStaffA, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.ConsignedByNameA, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-4 horizontal-label">Considered By</label>
+                                        <label class="col-sm-4 horizontal-label">Consigned By B</label>
                                         <div class="col-sm-8">
-                                            @Html.DropDownListFor(x => x.CashReceivedCPCStaffA, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="row form-group">
-                                        <label class="col-sm-4 horizontal-label">Accepted By SOS </label>
-                                        <div class="col-sm-8">
-                                            @Html.DropDownListFor(x => x.CashReceivedCPCStaffB, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="row form-group">
-                                        <label class="col-sm-4 horizontal-label">Accepted By SOS </label>
-                                        <div class="col-sm-8">
-                                            @Html.DropDownListFor(x => x.CashReceivedCPCStaffB, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.ConsignedByNameB, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
                                     </div>
                                 </div>
@@ -264,17 +256,35 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-4 horizontal-label">Received By </label>
+                                        <label class="col-sm-4 horizontal-label">Accepted By SOS  A</label>
                                         <div class="col-sm-8">
-                                            @Html.DropDownListFor(x => x.CashReceivedCPCStaffB, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.AcceptedByNameA, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-4 horizontal-label">Received By </label>
+                                        <label class="col-sm-4 horizontal-label">Accepted By SOS B</label>
                                         <div class="col-sm-8">
-                                            @Html.DropDownListFor(x => x.CashReceivedCPCStaffB, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.AcceptedByNameB, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
+                                        <label class="col-sm-4 horizontal-label">Received By A</label>
+                                        <div class="col-sm-8">
+                                            @Html.DropDownListFor(x => x.ReceivedByNameA, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
+                                        <label class="col-sm-4 horizontal-label">Received By B</label>
+                                        <div class="col-sm-8">
+                                            @Html.DropDownListFor(x => x.ReceivedByNameB, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
                                     </div>
                                 </div>
@@ -291,40 +301,70 @@
                                     <tbody>
                                         <tr>
                                             <td>Rs. 5000 x </td>
-                                            <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.DetailDenomination5000, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                                @Html.ValidationMessageFor(m => m.DetailDenomination5000)
+                                            </td>
                                             <td>Nos.</td>
                                             <td>Rs. 1000 x </td>
-                                            <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.DetailDenomination1000, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                                @Html.ValidationMessageFor(m => m.DetailDenomination1000)
+                                            </td>
                                             <td>Nos.</td>
                                             <td>Rs. 500 x </td>
-                                            <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.DetailDenomination500, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                                @Html.ValidationMessageFor(m => m.DetailDenomination500)
+                                            </td>
                                             <td>Nos.</td>
                                         </tr>
                                         <tr>
                                             <td>Rs. 100 x </td>
-                                            <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.DetailDenomination100, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                                @Html.ValidationMessageFor(m => m.DetailDenomination100)
+                                            </td>
                                             <td>Nos.</td>
                                             <td>Rs. 50 x </td>
-                                            <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.DetailDenomination50, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                                @Html.ValidationMessageFor(m => m.DetailDenomination50)
+                                            </td>
                                             <td>Nos.</td>
                                             <td>Rs. 20 x </td>
-                                            <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.DetailDenomination20, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                                @Html.ValidationMessageFor(m => m.DetailDenomination20)
+                                            </td>
                                             <td>Nos.</td>
                                         </tr>
                                         <tr>
                                             <td>Rs. 10 x </td>
-                                            <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.DetailDenomination10, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                                @Html.ValidationMessageFor(m => m.DetailDenomination10)
+                                            </td>
                                             <td>Nos.</td>
                                             <td>Rs. 5 x </td>
-                                            <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.DetailDenomination5, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                                @Html.ValidationMessageFor(m => m.DetailDenomination5)
+                                            </td>
                                             <td>Nos.</td>
                                             <td>Rs. 2 x </td>
-                                            <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.DetailDenomination2, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                                @Html.ValidationMessageFor(m => m.DetailDenomination2)
+                                            </td>
                                             <td>Nos.</td>
                                         </tr>
                                         <tr>
                                             <td>Rs. 1 x </td>
-                                            <td><input class="form-control input-sm" name="AccountsList[0].AccountName" /></td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.DetailDenomination1, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                                @Html.ValidationMessageFor(m => m.DetailDenomination1)
+                                            </td>
                                             <td>Nos.</td>
                                         </tr>
                                     </tbody>
