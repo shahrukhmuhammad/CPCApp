@@ -17,13 +17,11 @@
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCProject" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCCashInTransit" Width="2.375" PointX="5.375" PointY="5.25" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCCashInTransitChild" Width="2.375" PointX="5.375" PointY="5.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIII" Width="1.5" PointX="9" PointY="7.875" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIIIDetail" Width="1.5" PointX="11.25" PointY="8.25" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCCashIn__CashI__019E3B86" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIII" Width="1.5" PointX="7.75" PointY="8.875" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__7908F585" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__CashH__7BE56230" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__CashH__7CD98669" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__CashR__79FD19BE" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__CashR__7AF13DF7" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__CashC__02925FBF" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

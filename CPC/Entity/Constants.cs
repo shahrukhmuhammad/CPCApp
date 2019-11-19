@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PropertyManagement
+namespace CPC
 {
     public static class Constants
     {

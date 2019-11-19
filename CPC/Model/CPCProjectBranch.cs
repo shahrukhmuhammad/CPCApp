@@ -14,6 +14,12 @@ namespace CPC.Model
     
     public partial class CPCProjectBranch
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CPCProjectBranch()
+        {
+            this.CPCAnnexureIIIs = new HashSet<CPCAnnexureIII>();
+        }
+    
         public System.Guid Id { get; set; }
         public string BranchName { get; set; }
         public string BranchCode { get; set; }
@@ -24,5 +30,8 @@ namespace CPC.Model
         public Nullable<bool> IsActive { get; set; }
         public string Phone { get; set; }
         public string ContactPerson { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCAnnexureIII> CPCAnnexureIIIs { get; set; }
     }
 }

@@ -3,7 +3,6 @@ using BaseApp.System;
 using CPC;
 using CPC.Model;
 using ImageResizer;
-using PropertyManagement;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -36,6 +35,7 @@ namespace WebApp.Areas.CPC.Controllers
         public PartialViewResult _AllAnnexureIII()
         {
             var model = annexureIIIRepo.GetAll();
+            ViewBag.Employees = employeeRepo.GetAll();
             return PartialView(model);
         }
 
@@ -45,6 +45,8 @@ namespace WebApp.Areas.CPC.Controllers
             var model = annexureIIIRepo.GetById(Id);
             //model.CPCAnnexureIIIDetails = annexureIIIRepo.GetDetailsByMasterId(Id);
             ViewBag.Employees = employeeRepo.GetAll();
+            var branchInfo = branchRepo.GetById(model.CashCollectedFromId.Value);
+            ViewData["BranchName"] = $"{branchInfo.BranchCode} - {branchInfo.BranchName}";
             return View(model);
 
         }
@@ -53,7 +55,7 @@ namespace WebApp.Areas.CPC.Controllers
         #region Record
         public ActionResult Record(Guid? Id)
         {
-            ViewData["IsView"] = Convert.ToString(TempData["IsView"]);
+            //ViewData["IsView"] = Convert.ToString(TempData["IsView"]);
             var model = new CPCAnnexureIII();
             if (Id.HasValue)
             {
@@ -180,28 +182,28 @@ namespace WebApp.Areas.CPC.Controllers
         #endregion
 
         #region Delete
-        //[HttpPost]
-        //public JsonResult Delete(Guid Id)
-        //{
-        //    try
-        //    {
-        //        #region Activity Log
-        //        //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
-        //        #endregion
-        //        annexureIRepo.Delete(Id);
+        [HttpPost]
+        public JsonResult Delete(Guid Id)
+        {
+            try
+            {
+                #region Activity Log
+                //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
+                #endregion
+                annexureIIIRepo.InActiveRecord(Id);
 
-        //        TempData["SuccessMsg"] = "Department has been deleted successfully.";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        #region Error Log
-        //        //appLog.Create(CurrentUser.OfficeId, null, CurrentUser.Id, AppLogType.Error, "CRM", ex.GetType().Name.ToSpacedTitleCase(), "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped'><tr><th class='text-right'>Source</th><td>" + ex.Source + "</td></tr><tr><th class='text-right'>URL</th><td>" + Request.Url.ToString() + "</td></tr><tr><th class='text-right'>Message</th><td>" + ex.Message + "</td></tr></table><table class='table table-hover table-striped table-condensed'><tr><th class='text-center'>Inner Exception</th></tr><tr><td>" + ex.InnerException + "</td></tr><tr><th class='text-center'>Stack Trace</th></tr><tr><td>" + ex.StackTrace.ToString() + "</td></tr></table>");
-        //        #endregion
+                TempData["SuccessMsg"] = "AnnexureIII has been deleted successfully.";
+            }
+            catch (Exception ex)
+            {
+                #region Error Log
+                //appLog.Create(CurrentUser.OfficeId, null, CurrentUser.Id, AppLogType.Error, "CRM", ex.GetType().Name.ToSpacedTitleCase(), "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped'><tr><th class='text-right'>Source</th><td>" + ex.Source + "</td></tr><tr><th class='text-right'>URL</th><td>" + Request.Url.ToString() + "</td></tr><tr><th class='text-right'>Message</th><td>" + ex.Message + "</td></tr></table><table class='table table-hover table-striped table-condensed'><tr><th class='text-center'>Inner Exception</th></tr><tr><td>" + ex.InnerException + "</td></tr><tr><th class='text-center'>Stack Trace</th></tr><tr><td>" + ex.StackTrace.ToString() + "</td></tr></table>");
+                #endregion
 
-        //        TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
-        //    }
-        //    return Json(true);
-        //}
+                TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
+            }
+            return Json(true);
+        }
 
         //[HttpPost]
         //public JsonResult DeleteMultiple(string Ids)

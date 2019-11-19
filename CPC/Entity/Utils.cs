@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Globalization;
 using System.Security;
 
-namespace PropertyManagement
+namespace CPC
 {
     public static class Utils
     {
