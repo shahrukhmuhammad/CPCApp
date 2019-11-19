@@ -53,6 +53,8 @@
   <ItemGroup>
     <Compile Include="Entity\AnnexureIIIEntity.cs" />
     <Compile Include="Entity\BranchEntity.cs" />
+    <Compile Include="Entity\CashInTransitEntity.cs" />
+    <Compile Include="Entity\Constants.cs" />
     <Compile Include="Entity\EmployeeEntity.cs" />
     <Compile Include="Entity\AnnexureIIEntity.cs" />
     <Compile Include="Entity\CPCContants.cs" />
