@@ -33,5 +33,7 @@ namespace CPC.Model
         public Nullable<int> NetShortageValue { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
+    
+        public virtual CPCAnnexureIII CPCAnnexureIII { get; set; }
     }
 }

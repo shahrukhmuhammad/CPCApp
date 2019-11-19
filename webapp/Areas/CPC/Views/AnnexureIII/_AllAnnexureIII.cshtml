@@ -65,7 +65,7 @@
                                 <td></td>
                                 <td class="text-center">
                                     <div class="btn-group btn-group-xs" role="group">
-                                        <a href="@Url.Action("Details","AnnexureIII")/@x.Id/1" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
+                                        <a href="@Url.Action("Details","AnnexureIII")/@x.Id" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
                                         @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.CPC))
                                         {
                                             <a href="@Url.Action("Record","AnnexureIII")/@x.Id" class="btn btn-info" title="Edit"><i class="fa fa-edit"></i></a>

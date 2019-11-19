@@ -3,8 +3,10 @@ using BaseApp.System;
 using CPC;
 using CPC.Model;
 using ImageResizer;
+using PropertyManagement;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -38,11 +40,13 @@ namespace WebApp.Areas.CPC.Controllers
         }
 
         #region Details
-        [Route("HRMS/Region/Details/{Id}/{IsView}")]
-        public ActionResult Details(Guid Id, string IsView)
+        public ActionResult Details(Guid Id)
         {
-            TempData["IsView"] = IsView;
-            return RedirectToAction("Record", "Region", new { Id });
+            var model = annexureIIIRepo.GetById(Id);
+            //model.CPCAnnexureIIIDetails = annexureIIIRepo.GetDetailsByMasterId(Id);
+            ViewBag.Employees = employeeRepo.GetAll();
+            return View(model);
+
         }
         #endregion
 
@@ -58,16 +62,18 @@ namespace WebApp.Areas.CPC.Controllers
             else
             {
                 model.SrNo = annexureIIIRepo.GetNextSrNo();
+                model.AnnexureIIIDate = DateTime.UtcNow;
+                model.DateOfCashReturn = DateTime.Now;
                 //model.IsActive = true;
             }
             //ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             ViewBag.BrachList = new SelectList(branchRepo.GetDropdown(), "Value", "Text");
-            ViewBag.DenominationList = new SelectList(commonRepo.GetAllDenominationDropdown(), "Value", "Text");
+            //ViewBag.DenominationList = new SelectList(commonRepo.GetAllDenominationDropdown(), "Value", "Text");
             ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Record(CPCAnnexureIII model, List<CPCAnnexureIIIDetail> CPCAnnexureIIIDetail)
+        public ActionResult Record(CPCAnnexureIII model, List<CPCAnnexureIIIDetail> CPCAnnexureIIIDetail, string AnnexureIIIDate, string DateOfCashReturn)
         {
             try
             {
@@ -75,6 +81,8 @@ namespace WebApp.Areas.CPC.Controllers
                 {
                     model.CreatedBy = CurrentUser.Id;
                     model.CreatedOn = DateTime.Now;
+                    model.AnnexureIIIDate = Utils.SetDateFormate(AnnexureIIIDate);
+                    model.DateOfCashReturn = Utils.SetDateFormate(DateOfCashReturn);
                     //model.IsActive = true;
                     model.Id = Guid.NewGuid();
                     var res = annexureIIIRepo.Create(model);
@@ -83,9 +91,11 @@ namespace WebApp.Areas.CPC.Controllers
                         var lsToSave = CPCAnnexureIIIDetail.Where(x => x.UnfitSoiled > 0 && (x.FITReIssuable > 0 || x.UnfitSoiled > 0)).ToList();
                         lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.AnnexureIIIId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
                         #region Save Details
-                        annexureIIIRepo.Create(lsToSave);
+                        if (lsToSave.Count > 0)
+                        {
+                            annexureIIIRepo.Create(lsToSave);
+                        }
                         #endregion
-
                         model.Id = res.Value;
                     }
 
@@ -151,7 +161,7 @@ namespace WebApp.Areas.CPC.Controllers
             //}
             //else
             //{
-            return RedirectToAction("AnnexureIII");
+            return RedirectToAction("AnnexureIIIs");
         }
         #endregion
 

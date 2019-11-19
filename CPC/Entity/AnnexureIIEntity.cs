@@ -102,7 +102,7 @@ namespace CPC
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Save CPCAnnexure III
-                    context.CPCAnnexureIIIDetails.AddRange(modelList);
+                    context.CPCAnnexureIIDetails.AddRange(modelList);
                     context.SaveChanges();
                     #endregion
                     return true;

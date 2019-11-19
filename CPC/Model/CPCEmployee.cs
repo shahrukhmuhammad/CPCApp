@@ -14,6 +14,15 @@ namespace CPC.Model
     
     public partial class CPCEmployee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CPCEmployee()
+        {
+            this.CPCAnnexureIIIs = new HashSet<CPCAnnexureIII>();
+            this.CPCAnnexureIIIs1 = new HashSet<CPCAnnexureIII>();
+            this.CPCAnnexureIIIs2 = new HashSet<CPCAnnexureIII>();
+            this.CPCAnnexureIIIs3 = new HashSet<CPCAnnexureIII>();
+        }
+    
         public System.Guid Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
@@ -23,5 +32,14 @@ namespace CPC.Model
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public Nullable<System.Guid> UpdatedBy { get; set; }
         public Nullable<byte> Status { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCAnnexureIII> CPCAnnexureIIIs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCAnnexureIII> CPCAnnexureIIIs1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCAnnexureIII> CPCAnnexureIIIs2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCAnnexureIII> CPCAnnexureIIIs3 { get; set; }
     }
 }
