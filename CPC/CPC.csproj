@@ -42,6 +42,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,12 +53,12 @@
   <ItemGroup>
     <Compile Include="Entity\AnnexureIIIEntity.cs" />
     <Compile Include="Entity\BranchEntity.cs" />
-    <Compile Include="Entity\CashInTransitEntity.cs" />
     <Compile Include="Entity\EmployeeEntity.cs" />
     <Compile Include="Entity\AnnexureIIEntity.cs" />
     <Compile Include="Entity\CPCContants.cs" />
     <Compile Include="Entity\Common.cs" />
     <Compile Include="Entity\AnnexureIEntity.cs" />
+    <Compile Include="Entity\Utils.cs" />
     <Compile Include="Model\CPCAnnexureI.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>

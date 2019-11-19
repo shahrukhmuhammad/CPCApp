@@ -48,7 +48,7 @@
     @Styles.Render("~/Content/BaseApp")
     @Styles.Render("~/Content/CustomBaseApp")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/CPCModule")
+  
     <link href="~/Scripts/select2/select2.min.css" rel="stylesheet" />
     @RenderSection("styles", required: false)
 
@@ -259,6 +259,7 @@
     @RenderSection("scripts", required: false)
 
     @Scripts.Render("~/bundles/CustomBaseApp")
+    @Scripts.Render("~/bundles/CPCModule")
 
     <script src="~/Scripts/select2/select2.min.js"></script>
     <!-- SignalR -->

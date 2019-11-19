@@ -14,6 +14,12 @@ namespace CPC.Model
     
     public partial class CPCAnnexureIII
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CPCAnnexureIII()
+        {
+            this.CPCAnnexureIIIDetails = new HashSet<CPCAnnexureIIIDetail>();
+        }
+    
         public System.Guid Id { get; set; }
         public Nullable<System.Guid> CashCollectedFromId { get; set; }
         public System.DateTime AnnexureIIIDate { get; set; }
@@ -33,5 +39,12 @@ namespace CPC.Model
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public Nullable<System.Guid> UpdatedBy { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCAnnexureIIIDetail> CPCAnnexureIIIDetails { get; set; }
+        public virtual CPCEmployee CPCEmployee { get; set; }
+        public virtual CPCEmployee CPCEmployee1 { get; set; }
+        public virtual CPCEmployee CPCEmployee2 { get; set; }
+        public virtual CPCEmployee CPCEmployee3 { get; set; }
     }
 }
