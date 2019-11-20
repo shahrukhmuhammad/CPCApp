@@ -278,63 +278,15 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <Property Name="CashHandedOverCPCStaffAName" Type="nvarchar" MaxLength="223" Nullable="false" />
           <Property Name="CashHandedOverCPCStaffBName" Type="nvarchar" MaxLength="223" Nullable="false" />
         </EntityType>
-        <Association Name="FK__CPCAnnexu__Annex__7908F585">
-          <End Role="CPCAnnexureIII" Type="Self.CPCAnnexureIII" Multiplicity="1" />
-          <End Role="CPCAnnexureIIIDetails" Type="Self.CPCAnnexureIIIDetails" Multiplicity="*" />
+        <Association Name="FK__CPCCashIn__CashI__5B78929E">
+          <End Role="CPCCashInTransit" Type="Self.CPCCashInTransit" Multiplicity="1" />
+          <End Role="CPCCashInTransitChild" Type="Self.CPCCashInTransitChild" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CPCAnnexureIII">
+            <Principal Role="CPCCashInTransit">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="CPCAnnexureIIIDetails">
-              <PropertyRef Name="AnnexureIIIId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CPCAnnexu__CashH__7BE56230">
-          <End Role="CPCEmployees" Type="Self.CPCEmployees" Multiplicity="0..1" />
-          <End Role="CPCAnnexureIII" Type="Self.CPCAnnexureIII" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CPCEmployees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CPCAnnexureIII">
-              <PropertyRef Name="CashHandedOverByCITStaffAId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CPCAnnexu__CashH__7CD98669">
-          <End Role="CPCEmployees" Type="Self.CPCEmployees" Multiplicity="0..1" />
-          <End Role="CPCAnnexureIII" Type="Self.CPCAnnexureIII" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CPCEmployees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CPCAnnexureIII">
-              <PropertyRef Name="CashHandedOverByCITStaffBId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CPCAnnexu__CashR__79FD19BE">
-          <End Role="CPCEmployees" Type="Self.CPCEmployees" Multiplicity="0..1" />
-          <End Role="CPCAnnexureIII" Type="Self.CPCAnnexureIII" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CPCEmployees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CPCAnnexureIII">
-              <PropertyRef Name="CashReceivedByCPCStaffA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CPCAnnexu__CashR__7AF13DF7">
-          <End Role="CPCEmployees" Type="Self.CPCEmployees" Multiplicity="0..1" />
-          <End Role="CPCAnnexureIII" Type="Self.CPCAnnexureIII" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CPCEmployees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CPCAnnexureIII">
-              <PropertyRef Name="CashReceivedByCPCStaffB" />
+            <Dependent Role="CPCCashInTransitChild">
+              <PropertyRef Name="CashInTransitId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -382,25 +334,9 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
     [Vew_CPCAnnexureI].[CashHandedOverCPCStaffBName] AS [CashHandedOverCPCStaffBName]
     FROM [dbo].[Vew_CPCAnnexureI] AS [Vew_CPCAnnexureI]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__CPCAnnexu__Annex__7908F585" Association="Self.FK__CPCAnnexu__Annex__7908F585">
-            <End Role="CPCAnnexureIII" EntitySet="CPCAnnexureIII" />
-            <End Role="CPCAnnexureIIIDetails" EntitySet="CPCAnnexureIIIDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CPCAnnexu__CashH__7BE56230" Association="Self.FK__CPCAnnexu__CashH__7BE56230">
-            <End Role="CPCEmployees" EntitySet="CPCEmployees" />
-            <End Role="CPCAnnexureIII" EntitySet="CPCAnnexureIII" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CPCAnnexu__CashH__7CD98669" Association="Self.FK__CPCAnnexu__CashH__7CD98669">
-            <End Role="CPCEmployees" EntitySet="CPCEmployees" />
-            <End Role="CPCAnnexureIII" EntitySet="CPCAnnexureIII" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CPCAnnexu__CashR__79FD19BE" Association="Self.FK__CPCAnnexu__CashR__79FD19BE">
-            <End Role="CPCEmployees" EntitySet="CPCEmployees" />
-            <End Role="CPCAnnexureIII" EntitySet="CPCAnnexureIII" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CPCAnnexu__CashR__7AF13DF7" Association="Self.FK__CPCAnnexu__CashR__7AF13DF7">
-            <End Role="CPCEmployees" EntitySet="CPCEmployees" />
-            <End Role="CPCAnnexureIII" EntitySet="CPCAnnexureIII" />
+          <AssociationSet Name="FK__CPCCashIn__CashI__5B78929E" Association="Self.FK__CPCCashIn__CashI__5B78929E">
+            <End Role="CPCCashInTransit" EntitySet="CPCCashInTransit" />
+            <End Role="CPCCashInTransitChild" EntitySet="CPCCashInTransitChild" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -418,8 +354,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <EntitySet Name="CPCAnnexureIIs" EntityType="SOSTechCPCModel.CPCAnnexureII" />
           <EntitySet Name="CPCAnnexureIIDetails" EntityType="SOSTechCPCModel.CPCAnnexureIIDetail" />
           <EntitySet Name="CPCProjects" EntityType="SOSTechCPCModel.CPCProject" />
-          <EntitySet Name="CPCCashInTransits" EntityType="SOSTechCPCModel.CPCCashInTransit" />
-          <EntitySet Name="CPCCashInTransitChilds" EntityType="SOSTechCPCModel.CPCCashInTransitChild" />
           <EntitySet Name="CPCAnnexureIIIs" EntityType="SOSTechCPCModel.CPCAnnexureIII" />
           <EntitySet Name="CPCAnnexureIIIDetails" EntityType="SOSTechCPCModel.CPCAnnexureIIIDetail" />
           <AssociationSet Name="FK__CPCAnnexu__Annex__7908F585" Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__7908F585">
@@ -441,6 +375,12 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <AssociationSet Name="FK__CPCAnnexu__CashR__7AF13DF7" Association="SOSTechCPCModel.FK__CPCAnnexu__CashR__7AF13DF7">
             <End Role="CPCEmployee" EntitySet="CPCEmployees" />
             <End Role="CPCAnnexureIII" EntitySet="CPCAnnexureIIIs" />
+          </AssociationSet>
+          <EntitySet Name="CPCCashInTransits" EntityType="SOSTechCPCModel.CPCCashInTransit" />
+          <EntitySet Name="CPCCashInTransitChilds" EntityType="SOSTechCPCModel.CPCCashInTransitChild" />
+          <AssociationSet Name="FK__CPCCashIn__CashI__5B78929E" Association="SOSTechCPCModel.FK__CPCCashIn__CashI__5B78929E">
+            <End Role="CPCCashInTransit" EntitySet="CPCCashInTransits" />
+            <End Role="CPCCashInTransitChild" EntitySet="CPCCashInTransitChilds" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="CPCDenomination">
@@ -614,62 +554,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ContactPersonPhone" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="CPCCashInTransit">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="CustomerToBeBilled" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="ShipmentReceiptNumber" Type="Int32" Nullable="false" />
-          <Property Name="Collection" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CollectionDateTime" Type="DateTime" Precision="3" />
-          <Property Name="DeliveryDateTime" Type="DateTime" Precision="3" />
-          <Property Name="Delivery" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="VehicleNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="AcCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="WaitingTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NumberOfPlasticLeadSeals" Type="Int32" />
-          <Property Name="NumberOfBags" Type="Int32" />
-          <Property Name="DaysInVault" Type="Int32" />
-          <Property Name="NumberOfWagePackets" Type="Int32" />
-          <Property Name="NumberOfAdditionalService" Type="Int32" />
-          <Property Name="ConsignedByNameA" Type="Guid" />
-          <Property Name="ConsignedByNameB" Type="Guid" />
-          <Property Name="AcceptedByNameA" Type="Guid" />
-          <Property Name="AcceptedByNameB" Type="Guid" />
-          <Property Name="ReceivedByNameA" Type="Guid" />
-          <Property Name="ReceivedByNameB" Type="Guid" />
-          <Property Name="DetailDenomination5000" Type="Int32" />
-          <Property Name="DetailDenomination1000" Type="Int32" />
-          <Property Name="DetailDenomination500" Type="Int32" />
-          <Property Name="DetailDenomination100" Type="Int32" />
-          <Property Name="DetailDenomination50" Type="Int32" />
-          <Property Name="DetailDenomination20" Type="Int32" />
-          <Property Name="DetailDenomination10" Type="Int32" />
-          <Property Name="DetailDenomination5" Type="Int32" />
-          <Property Name="DetailDenomination2" Type="Int32" />
-          <Property Name="DetailDenomination1" Type="Int32" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Guid" />
-        </EntityType>
-        <EntityType Name="CPCCashInTransitChild">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="CashInTransitId" Type="Guid" Nullable="false" />
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="SealNumber" Type="Int32" />
-          <Property Name="Item" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Value" Type="Int32" />
-          <Property Name="PartialDelivery" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Guid" />
-        </EntityType>
         <EntityType Name="CPCAnnexureIII">
           <Key>
             <PropertyRef Name="Id" />
@@ -781,6 +665,76 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
             </Principal>
             <Dependent Role="CPCAnnexureIII">
               <PropertyRef Name="CashReceivedByCPCStaffB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CPCCashInTransit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CustomerToBeBilled" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ShipmentReceiptNumber" Type="Int32" Nullable="false" />
+          <Property Name="Collection" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CollectionDateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeliveryDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Delivery" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VehicleNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="AcCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WaitingTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfPlasticLeadSeals" Type="Int32" />
+          <Property Name="NumberOfBags" Type="Int32" />
+          <Property Name="DaysInVault" Type="Int32" />
+          <Property Name="NumberOfWagePackets" Type="Int32" />
+          <Property Name="NumberOfAdditionalService" Type="Int32" />
+          <Property Name="ConsignedByNameA" Type="Guid" />
+          <Property Name="ConsignedByNameB" Type="Guid" />
+          <Property Name="AcceptedByNameA" Type="Guid" />
+          <Property Name="AcceptedByNameB" Type="Guid" />
+          <Property Name="ReceivedByNameA" Type="Guid" />
+          <Property Name="ReceivedByNameB" Type="Guid" />
+          <Property Name="DetailDenomination5000" Type="Int32" />
+          <Property Name="DetailDenomination1000" Type="Int32" />
+          <Property Name="DetailDenomination500" Type="Int32" />
+          <Property Name="DetailDenomination100" Type="Int32" />
+          <Property Name="DetailDenomination50" Type="Int32" />
+          <Property Name="DetailDenomination20" Type="Int32" />
+          <Property Name="DetailDenomination10" Type="Int32" />
+          <Property Name="DetailDenomination5" Type="Int32" />
+          <Property Name="DetailDenomination2" Type="Int32" />
+          <Property Name="DetailDenomination1" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <NavigationProperty Name="CPCCashInTransitChilds" Relationship="SOSTechCPCModel.FK__CPCCashIn__CashI__5B78929E" FromRole="CPCCashInTransit" ToRole="CPCCashInTransitChild" />
+        </EntityType>
+        <EntityType Name="CPCCashInTransitChild">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CashInTransitId" Type="Guid" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SealNumber" Type="Int32" />
+          <Property Name="Item" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="Int32" />
+          <Property Name="PartialDelivery" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <NavigationProperty Name="CPCCashInTransit" Relationship="SOSTechCPCModel.FK__CPCCashIn__CashI__5B78929E" FromRole="CPCCashInTransitChild" ToRole="CPCCashInTransit" />
+        </EntityType>
+        <Association Name="FK__CPCCashIn__CashI__5B78929E">
+          <End Type="SOSTechCPCModel.CPCCashInTransit" Role="CPCCashInTransit" Multiplicity="1" />
+          <End Type="SOSTechCPCModel.CPCCashInTransitChild" Role="CPCCashInTransitChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCCashInTransit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCCashInTransitChild">
+              <PropertyRef Name="CashInTransitId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -961,6 +915,56 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CPCAnnexureIIIs">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureIII">
+              <MappingFragment StoreEntitySet="CPCAnnexureIII">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CashHandedOverByCITStaffBId" ColumnName="CashHandedOverByCITStaffBId" />
+                <ScalarProperty Name="CashHandedOverByCITStaffAId" ColumnName="CashHandedOverByCITStaffAId" />
+                <ScalarProperty Name="CashReceivedByCPCStaffB" ColumnName="CashReceivedByCPCStaffB" />
+                <ScalarProperty Name="CashReceivedByCPCStaffA" ColumnName="CashReceivedByCPCStaffA" />
+                <ScalarProperty Name="ShipmentReceiptNo" ColumnName="ShipmentReceiptNo" />
+                <ScalarProperty Name="TotalCashReturned" ColumnName="TotalCashReturned" />
+                <ScalarProperty Name="TotalLoosePacketsNotesReturned" ColumnName="TotalLoosePacketsNotesReturned" />
+                <ScalarProperty Name="TotalBundlesReturn" ColumnName="TotalBundlesReturn" />
+                <ScalarProperty Name="DateOfCashReturn" ColumnName="DateOfCashReturn" />
+                <ScalarProperty Name="TotalCashCollected" ColumnName="TotalCashCollected" />
+                <ScalarProperty Name="SrNo" ColumnName="SrNo" />
+                <ScalarProperty Name="TotalBundlesCollected" ColumnName="TotalBundlesCollected" />
+                <ScalarProperty Name="AnnexureIIIDate" ColumnName="AnnexureIIIDate" />
+                <ScalarProperty Name="CashCollectedFromId" ColumnName="CashCollectedFromId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CPCAnnexureIIIDetails">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureIIIDetail">
+              <MappingFragment StoreEntitySet="CPCAnnexureIIIDetails">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="NetShortageValue" ColumnName="NetShortageValue" />
+                <ScalarProperty Name="NetShortage" ColumnName="NetShortage" />
+                <ScalarProperty Name="NetExcessValue" ColumnName="NetExcessValue" />
+                <ScalarProperty Name="NetExcess" ColumnName="NetExcess" />
+                <ScalarProperty Name="CounterfeitNotesValue" ColumnName="CounterfeitNotesValue" />
+                <ScalarProperty Name="CounterfeitNotes" ColumnName="CounterfeitNotes" />
+                <ScalarProperty Name="MismatchDefacedZeroValue" ColumnName="MismatchDefacedZeroValue" />
+                <ScalarProperty Name="MismatchDefacedZero" ColumnName="MismatchDefacedZero" />
+                <ScalarProperty Name="UnfitSoiledValue" ColumnName="UnfitSoiledValue" />
+                <ScalarProperty Name="UnfitSoiled" ColumnName="UnfitSoiled" />
+                <ScalarProperty Name="FITReIssuableValue" ColumnName="FITReIssuableValue" />
+                <ScalarProperty Name="FITReIssuable" ColumnName="FITReIssuable" />
+                <ScalarProperty Name="UnsortedCashCollectedValue" ColumnName="UnsortedCashCollectedValue" />
+                <ScalarProperty Name="UnsortedCashCollected" ColumnName="UnsortedCashCollected" />
+                <ScalarProperty Name="DenominationsId" ColumnName="DenominationsId" />
+                <ScalarProperty Name="AnnexureIIIId" ColumnName="AnnexureIIIId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CPCCashInTransits">
             <EntityTypeMapping TypeName="SOSTechCPCModel.CPCCashInTransit">
               <MappingFragment StoreEntitySet="CPCCashInTransit">
@@ -1016,56 +1020,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
                 <ScalarProperty Name="SealNumber" ColumnName="SealNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CashInTransitId" ColumnName="CashInTransitId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CPCAnnexureIIIs">
-            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureIII">
-              <MappingFragment StoreEntitySet="CPCAnnexureIII">
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CashHandedOverByCITStaffBId" ColumnName="CashHandedOverByCITStaffBId" />
-                <ScalarProperty Name="CashHandedOverByCITStaffAId" ColumnName="CashHandedOverByCITStaffAId" />
-                <ScalarProperty Name="CashReceivedByCPCStaffB" ColumnName="CashReceivedByCPCStaffB" />
-                <ScalarProperty Name="CashReceivedByCPCStaffA" ColumnName="CashReceivedByCPCStaffA" />
-                <ScalarProperty Name="ShipmentReceiptNo" ColumnName="ShipmentReceiptNo" />
-                <ScalarProperty Name="TotalCashReturned" ColumnName="TotalCashReturned" />
-                <ScalarProperty Name="TotalLoosePacketsNotesReturned" ColumnName="TotalLoosePacketsNotesReturned" />
-                <ScalarProperty Name="TotalBundlesReturn" ColumnName="TotalBundlesReturn" />
-                <ScalarProperty Name="DateOfCashReturn" ColumnName="DateOfCashReturn" />
-                <ScalarProperty Name="TotalCashCollected" ColumnName="TotalCashCollected" />
-                <ScalarProperty Name="SrNo" ColumnName="SrNo" />
-                <ScalarProperty Name="TotalBundlesCollected" ColumnName="TotalBundlesCollected" />
-                <ScalarProperty Name="AnnexureIIIDate" ColumnName="AnnexureIIIDate" />
-                <ScalarProperty Name="CashCollectedFromId" ColumnName="CashCollectedFromId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CPCAnnexureIIIDetails">
-            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureIIIDetail">
-              <MappingFragment StoreEntitySet="CPCAnnexureIIIDetails">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="NetShortageValue" ColumnName="NetShortageValue" />
-                <ScalarProperty Name="NetShortage" ColumnName="NetShortage" />
-                <ScalarProperty Name="NetExcessValue" ColumnName="NetExcessValue" />
-                <ScalarProperty Name="NetExcess" ColumnName="NetExcess" />
-                <ScalarProperty Name="CounterfeitNotesValue" ColumnName="CounterfeitNotesValue" />
-                <ScalarProperty Name="CounterfeitNotes" ColumnName="CounterfeitNotes" />
-                <ScalarProperty Name="MismatchDefacedZeroValue" ColumnName="MismatchDefacedZeroValue" />
-                <ScalarProperty Name="MismatchDefacedZero" ColumnName="MismatchDefacedZero" />
-                <ScalarProperty Name="UnfitSoiledValue" ColumnName="UnfitSoiledValue" />
-                <ScalarProperty Name="UnfitSoiled" ColumnName="UnfitSoiled" />
-                <ScalarProperty Name="FITReIssuableValue" ColumnName="FITReIssuableValue" />
-                <ScalarProperty Name="FITReIssuable" ColumnName="FITReIssuable" />
-                <ScalarProperty Name="UnsortedCashCollectedValue" ColumnName="UnsortedCashCollectedValue" />
-                <ScalarProperty Name="UnsortedCashCollected" ColumnName="UnsortedCashCollected" />
-                <ScalarProperty Name="DenominationsId" ColumnName="DenominationsId" />
-                <ScalarProperty Name="AnnexureIIIId" ColumnName="AnnexureIIIId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

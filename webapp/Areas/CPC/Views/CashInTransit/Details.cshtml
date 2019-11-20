@@ -3,11 +3,9 @@
 @model CPCCashInTransit
 @{
     ViewBag.Title = "Details";
-    //var employeeList = ViewBa
+    var empList = ViewBag.Employees as List<CPCEmployee>;
+    var detailsArray = Model.CPCCashInTransitChilds.ToArray();
 }
-
-@Model.AcceptedByNameA
-
 
 <div class="row">
     <div class="col-sm-12">
@@ -18,39 +16,39 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-5">
                                 <div class="row form-group">
-                                    <label class="col-sm-5 text-left horizontal-label">Shipment Receipt No.</label>
-                                    <div class="col-sm-7">
-                                        <label class="horizontal-label">@Model.ShipmentReceiptNumber</label>
+                                    <label class="col-sm-4 text-left horizontal-label">Date</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group input-group-sm">
+                                            <label class="label label-default">@Model.Date.ToString();</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="row form-group">
-                                    <label class="col-sm-4 text-left horizontal-label">Vehicle No.</label>
+                                    <label class="col-sm-4 text-left horizontal-label">Shipment Receipt No.</label>
                                     <div class="col-sm-8">
-                                        <label class="horizontal-label">@Model.VehicleNumber</label>
+                                        <label class="label label-default">@Model.ShipmentReceiptNumber</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="row form-group">
-                                    <label class="col-sm-3 text-left horizontal-label">Date</label>
+                                    <label class="col-sm-4 text-left horizontal-label">Vehicle No.</label>
                                     <div class="col-sm-8">
-                                        <div class="input-group input-group-sm">
-                                            <label class="horizontal-label">@Model.Date.ToString();</label>
-                                        </div>
+                                        <label class="label label-default">@Model.VehicleNumber</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-5">
                                 <div class="row form-group">
                                     <label class="col-sm-4 horizontal-label">Customer To Be Billed</label>
                                     <div class="col-sm-8">
-                                        <label class="horizontal-label">@Model.CustomerToBeBilled</label>
+                                        <label class="label label-default">@Model.CustomerToBeBilled</label>
                                     </div>
                                 </div>
                             </div>
@@ -58,43 +56,41 @@
                                 <div class="row form-group">
                                     <label class="col-sm-4 horizontal-label">A/C Code</label>
                                     <div class="col-sm-8">
-                                        <label class="horizontal-label">@Model.AcCode</label>
+                                        <label class="label label-default">@Model.AcCode</label>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <div class="row form-group">
                                     <label class="col-sm-4 horizontal-label">Collection</label>
                                     <div class="col-sm-8">
-                                        <label class="horizontal-label">@Model.Collection</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="row form-group">
-                                    <label class="col-sm-4 text-left horizontal-label">Collection/Date &#38; Time</label>
-                                    <div class="col-sm-8">
-                                        <label class="horizontal-label">@Model.CollectionDateTime.ToString("yyyy-MM-dd")</label>
+                                        <label class="label label-default">@Model.Collection</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-5">
                                 <div class="row form-group">
-                                    <label class="col-sm-4 horizontal-label">Delivery</label>
+                                    <label class="col-sm-4 text-left horizontal-label">Collection/Date &#38; Time</label>
                                     <div class="col-sm-8">
-                                        <label class="horizontal-label">@Model.Delivery</label>
+                                        <label class="label label-default">@Model.CollectionDateTime.ToString(Constants.DATE_FORMAT_CLIENT_SIDE)</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="row form-group">
+                                    <label class="col-sm-4 horizontal-label">Delivery</label>
+                                    <div class="col-sm-8">
+                                        <label class="label label-default">@Model.Delivery</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="row form-group">
                                     <label class="col-sm-4 text-left horizontal-label">Date &#38; Time</label>
                                     <div class="col-sm-8">
-                                        <label class="horizontal-label">@Model.DeliveryDateTime</label>
+                                        <label class="label label-default">@Model.DeliveryDateTime.ToString(Constants.DATE_FORMAT_CLIENT_SIDE)</label>
                                     </div>
                                 </div>
                             </div>
@@ -110,35 +106,95 @@
                         <tbody>
                             <tr>
                                 <td colspan="2">Seal No</td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[0].SealNumber" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[1].SealNumber" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[2].SealNumber" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[3].SealNumber" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[4].SealNumber" /></td>
+                                @if (detailsArray.Length >= 1)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[0].SealNumber" /></td>
+                                }
+                                @if (detailsArray.Length >= 2)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[1].SealNumber" /></td>
+                                }
+                                @if (detailsArray.Length >= 3)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[2].SealNumber" /></td>
+                                }
+                                @if (detailsArray.Length >= 4)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[3].SealNumber" /></td>
+                                }
+                                @if (detailsArray.Length == 5)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[4].SealNumber" /></td>
+                                }
                             </tr>
                             <tr>
                                 <td colspan="2">Item</td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[0].Item" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[1].Item" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[2].Item" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[3].Item" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[4].Item" /></td>
+                                @if (detailsArray.Length >= 1)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[0].Item" /></td>
+                                }
+                                @if (detailsArray.Length >= 2)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[1].Item" /></td>
+                                }
+                                @if (detailsArray.Length >= 3)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[2].Item" /></td>
+                                }
+                                @if (detailsArray.Length >= 4)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[3].Item" /></td>
+                                }
+                                @if (detailsArray.Length == 5)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[4].Item" /></td>
+                                }
                             </tr>
                             <tr>
                                 <td colspan="2">Value</td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[0].Value" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[1].Value" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[2].Value" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[3].Value" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[4].Value" /></td>
+                                @if (detailsArray.Length >= 1)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[0].Value" /></td>
+                                }
+                                @if (detailsArray.Length >= 2)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[1].Value" /></td>
+                                }
+                                @if (detailsArray.Length >= 3)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[2].Value" /></td>
+                                }
+                                @if (detailsArray.Length >= 4)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[3].Value" /></td>
+                                }
+                                @if (detailsArray.Length == 5)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[4].Value" /></td>
+                                }
                             </tr>
                             <tr>
                                 <td colspan="2">Partial Delivery</td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[0].PartialDelivery" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[1].PartialDelivery" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[2].PartialDelivery" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[3].PartialDelivery" /></td>
-                                <td><input class="form-control input-sm" name="CPCCashInTransitChild[4].PartialDelivery" /></td>
+                                @if (detailsArray.Length >= 1)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[0].PartialDelivery" /></td>
+                                }
+                                @if (detailsArray.Length >= 2)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[1].PartialDelivery" /></td>
+                                }
+                                @if (detailsArray.Length >= 3)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[2].PartialDelivery" /></td>
+                                }
+                                @if (detailsArray.Length >= 4)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[3].PartialDelivery" /></td>
+                                }
+                                @if (detailsArray.Length == 5)
+                                {
+                                    <td><input disabled class="form-control input-sm" value="@detailsArray[4].PartialDelivery" /></td>
+                                }
                             </tr>
                         </tbody>
                     </table>
@@ -152,7 +208,7 @@
                                 <div class="row form-group">
                                     <label class="col-sm-4 horizontal-label">Waiting Time</label>
                                     <div class="col-sm-8">
-                                        @Html.TextBoxFor(x => x.WaitingTime, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
+                                        @Html.TextBoxFor(x => x.WaitingTime, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                         @Html.ValidationMessageFor(m => m.WaitingTime)
                                     </div>
                                 </div>
@@ -161,7 +217,7 @@
                                 <div class="row form-group">
                                     <label class="col-sm-4 horizontal-label">No of Plastic/Lead Seals</label>
                                     <div class="col-sm-8">
-                                        @Html.TextBoxFor(x => x.NumberOfPlasticLeadSeals, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                        @Html.TextBoxFor(x => x.NumberOfPlasticLeadSeals, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                         @Html.ValidationMessageFor(m => m.NumberOfPlasticLeadSeals)
                                     </div>
                                 </div>
@@ -170,7 +226,7 @@
                                 <div class="row form-group">
                                     <label class="col-sm-4 horizontal-label">No. of Bags</label>
                                     <div class="col-sm-8">
-                                        @Html.TextBoxFor(x => x.NumberOfBags, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                        @Html.TextBoxFor(x => x.NumberOfBags, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                         @Html.ValidationMessageFor(m => m.NumberOfBags)
                                     </div>
                                 </div>
@@ -181,7 +237,7 @@
                                 <div class="row form-group">
                                     <label class="col-sm-4 horizontal-label">Days In Vault</label>
                                     <div class="col-sm-8">
-                                        @Html.TextBoxFor(x => x.DaysInVault, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                        @Html.TextBoxFor(x => x.DaysInVault, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                         @Html.ValidationMessageFor(m => m.DaysInVault)
                                     </div>
                                 </div>
@@ -190,7 +246,7 @@
                                 <div class="row form-group">
                                     <label class="col-sm-4 horizontal-label">No. of Wage Packets</label>
                                     <div class="col-sm-8">
-                                        @Html.TextBoxFor(x => x.NumberOfWagePackets, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                        @Html.TextBoxFor(x => x.NumberOfWagePackets, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                         @Html.ValidationMessageFor(m => m.NumberOfWagePackets)
                                     </div>
                                 </div>
@@ -199,26 +255,28 @@
                                 <div class="row form-group">
                                     <label class="col-sm-4 horizontal-label">No. of Additional Service</label>
                                     <div class="col-sm-8">
-                                        @Html.TextBoxFor(x => x.NumberOfAdditionalService, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                        @Html.TextBoxFor(x => x.NumberOfAdditionalService, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                         @Html.ValidationMessageFor(m => m.NumberOfAdditionalService)
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="row form-group">
-                                    <label class="col-sm-4 horizontal-label">Consigned By A</label>
+                                    <label class="col-sm-4 text-left horizontal-label">Consigned By A</label>
                                     <div class="col-sm-8">
-                                        @Model.ConsignedByNameA
+                                        <label class="label label-default">@(Model.ConsignedByNameA != null ? empList.Where(x => x.Id == Model.ConsignedByNameA).FirstOrDefault().Name : "")</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="row form-group">
-                                    <label class="col-sm-4 horizontal-label">Consigned By B</label>
+                                    <label class="col-sm-4 text-left horizontal-label">Consigned By B</label>
                                     <div class="col-sm-8">
-                                        @Model.ConsignedByNameA
+                                        <label class="label label-default">@(Model.ConsignedByNameB != null ? empList.Where(x => x.Id == Model.ConsignedByNameA).FirstOrDefault().Name : "")</label>
                                     </div>
                                 </div>
                             </div>
@@ -226,9 +284,9 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="row form-group">
-                                    <label class="col-sm-4 horizontal-label">Accepted By SOS  A</label>
+                                    <label class="col-sm-4 text-left horizontal-label">Accepted By SOS  A</label>
                                     <div class="col-sm-8">
-                                        @Model.AcceptedByNameA
+                                        <label class="label label-default">@(Model.AcceptedByNameA != null ? empList.Where(x => x.Id == Model.ConsignedByNameA).FirstOrDefault().Name : "")</label>
                                     </div>
                                 </div>
                             </div>
@@ -236,7 +294,7 @@
                                 <div class="row form-group">
                                     <label class="col-sm-4 horizontal-label">Accepted By SOS B</label>
                                     <div class="col-sm-8">
-                                        @Model.AcceptedByNameB
+                                        <label class="label label-default">@(Model.AcceptedByNameB != null ? empList.Where(x => x.Id == Model.ConsignedByNameA).FirstOrDefault().Name : "")</label>
                                     </div>
                                 </div>
                             </div>
@@ -246,7 +304,7 @@
                                 <div class="row form-group">
                                     <label class="col-sm-4 horizontal-label">Received By A</label>
                                     <div class="col-sm-8">
-                                        @Model.ReceivedByNameA
+                                        <label class="label label-default">@(Model.ReceivedByNameA != null ? empList.Where(x => x.Id == Model.ConsignedByNameA).FirstOrDefault().Name : "")</label>
                                     </div>
                                 </div>
                             </div>
@@ -254,7 +312,7 @@
                                 <div class="row form-group">
                                     <label class="col-sm-4 horizontal-label">Received By B</label>
                                     <div class="col-sm-8">
-                                        @Model.ReceivedByNameB
+                                        <label class="label label-default">@(Model.ReceivedByNameB != null ? empList.Where(x => x.Id == Model.ConsignedByNameA).FirstOrDefault().Name : "")</label>
                                     </div>
                                 </div>
                             </div>
@@ -272,19 +330,19 @@
                                     <tr>
                                         <td>Rs. 5000 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination5000, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.TextBoxFor(x => x.DetailDenomination5000, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                             @Html.ValidationMessageFor(m => m.DetailDenomination5000)
                                         </td>
                                         <td>Nos.</td>
                                         <td>Rs. 1000 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination1000, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.TextBoxFor(x => x.DetailDenomination1000, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                             @Html.ValidationMessageFor(m => m.DetailDenomination1000)
                                         </td>
                                         <td>Nos.</td>
                                         <td>Rs. 500 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination500, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.TextBoxFor(x => x.DetailDenomination500, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                             @Html.ValidationMessageFor(m => m.DetailDenomination500)
                                         </td>
                                         <td>Nos.</td>
@@ -292,19 +350,19 @@
                                     <tr>
                                         <td>Rs. 100 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination100, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.TextBoxFor(x => x.DetailDenomination100, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                             @Html.ValidationMessageFor(m => m.DetailDenomination100)
                                         </td>
                                         <td>Nos.</td>
                                         <td>Rs. 50 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination50, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.TextBoxFor(x => x.DetailDenomination50, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                             @Html.ValidationMessageFor(m => m.DetailDenomination50)
                                         </td>
                                         <td>Nos.</td>
                                         <td>Rs. 20 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination20, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.TextBoxFor(x => x.DetailDenomination20, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                             @Html.ValidationMessageFor(m => m.DetailDenomination20)
                                         </td>
                                         <td>Nos.</td>
@@ -312,19 +370,19 @@
                                     <tr>
                                         <td>Rs. 10 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination10, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.TextBoxFor(x => x.DetailDenomination10, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                             @Html.ValidationMessageFor(m => m.DetailDenomination10)
                                         </td>
                                         <td>Nos.</td>
                                         <td>Rs. 5 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination5, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.TextBoxFor(x => x.DetailDenomination5, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                             @Html.ValidationMessageFor(m => m.DetailDenomination5)
                                         </td>
                                         <td>Nos.</td>
                                         <td>Rs. 2 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination2, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.TextBoxFor(x => x.DetailDenomination2, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                             @Html.ValidationMessageFor(m => m.DetailDenomination2)
                                         </td>
                                         <td>Nos.</td>
@@ -332,7 +390,7 @@
                                     <tr>
                                         <td>Rs. 1 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination1, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
+                                            @Html.TextBoxFor(x => x.DetailDenomination1, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
                                             @Html.ValidationMessageFor(m => m.DetailDenomination1)
                                         </td>
                                         <td>Nos.</td>

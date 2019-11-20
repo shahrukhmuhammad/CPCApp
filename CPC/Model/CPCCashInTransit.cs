@@ -14,6 +14,12 @@ namespace CPC.Model
     
     public partial class CPCCashInTransit
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CPCCashInTransit()
+        {
+            this.CPCCashInTransitChilds = new HashSet<CPCCashInTransitChild>();
+        }
+    
         public System.Guid Id { get; set; }
         public string CustomerToBeBilled { get; set; }
         public int ShipmentReceiptNumber { get; set; }
@@ -50,5 +56,8 @@ namespace CPC.Model
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public Nullable<System.Guid> UpdatedBy { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCCashInTransitChild> CPCCashInTransitChilds { get; set; }
     }
 }

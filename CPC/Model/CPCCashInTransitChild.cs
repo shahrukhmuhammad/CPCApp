@@ -24,5 +24,7 @@ namespace CPC.Model
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public Nullable<System.Guid> UpdatedBy { get; set; }
+    
+        public virtual CPCCashInTransit CPCCashInTransit { get; set; }
     }
 }

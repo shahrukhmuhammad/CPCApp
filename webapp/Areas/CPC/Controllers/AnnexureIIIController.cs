@@ -3,7 +3,6 @@ using BaseApp.System;
 using CPC;
 using CPC.Model;
 using ImageResizer;
-using PropertyManagement;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
