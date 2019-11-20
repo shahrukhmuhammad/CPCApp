@@ -51,7 +51,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Cash Collected from</label>
                                         <div class="col-sm-6">
-                                            <label class="label label-default">@Model.CashCollectedFromId</label>
+                                            <label class="label label-default">@ViewData["BranchName"]</label>
                                         </div>
                                     </div>
                                 </div>
@@ -154,14 +154,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @*@foreach (var item in Model.CPCAnnexureIIIDetails)
-        {
-            <tr>
-                <td>@item.UnsortedCashCollected</td>
-                <td>@item.UnsortedCashCollectedValue</td>
-            </tr>
-        }*@
-
                                 <tr>
                                     <td colspan="2">Unsorted Cash Collected</td>
                                     @if (detailsArry.Length >= 1)
@@ -216,53 +208,78 @@
                                         <td data-id="2"><input class="form-control input-sm" value="@detailsArry[2].UnfitSoiledValue" /></td>
                                     }
                                 </tr>
-                                @*
-
-        <tr>
-            <td colspan="2">Unfit/Soiled</td>
-            <td data-id="0"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[0].UnfitSoiled" /></td>
-            <td data-id="0"><input class="form-control input-sm" id="unfitSoiledValue0" name="CPCAnnexureIIIDetail[0].UnfitSoiledValue" /></td>
-            <td data-id="1"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[1].UnfitSoiled" /></td>
-            <td data-id="1"><input class="form-control input-sm" id="unfitSoiledValue1" name="CPCAnnexureIIIDetail[1].UnfitSoiledValue" /></td>
-            <td data-id="2"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[2].UnfitSoiled" /></td>
-            <td data-id="2"><input class="form-control input-sm" id="unfitSoiledValue2" name="CPCAnnexureIIIDetail[2].UnfitSoiledValue" /></td>
-        </tr>
-        <tr>
-            <td colspan="2">Mismatch/Defaced Zero Value</td>
-            <td data-id="0"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[0].MismatchDefacedZero" /></td>
-            <td data-id="0"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].MismatchDefacedZeroValue" /></td>
-            <td data-id="1"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[1].MismatchDefacedZero" /></td>
-            <td data-id="1"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].MismatchDefacedZeroValue" /></td>
-            <td data-id="2"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[2].MismatchDefacedZero" /></td>
-            <td data-id="2"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].MismatchDefacedZeroValue" /></td>
-        </tr>
-        <tr>
-            <td colspan="2">Counterfeit Notes</td>
-            <td data-id="0"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[0].CounterfeitNotes" /></td>
-            <td data-id="0"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].CounterfeitNotesValue" /></td>
-            <td data-id="1"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[1].CounterfeitNotes" /></td>
-            <td data-id="1"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].CounterfeitNotesValue" /></td>
-            <td data-id="2"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[2].CounterfeitNotes" /></td>
-            <td data-id="2"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].CounterfeitNotesValue" /></td>
-        </tr>
-        <tr>
-            <td colspan="2">Net Excess</td>
-            <td data-id="0"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[0].NetExcess" /></td>
-            <td data-id="0"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].NetExcessValue" /></td>
-            <td data-id="1"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[1].NetExcess" /></td>
-            <td data-id="1"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].NetExcessValue" /></td>
-            <td data-id="2"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[2].NetExcess" /></td>
-            <td data-id="2"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].NetExcessValue" /></td>
-        </tr>
-        <tr>
-            <td colspan="2">Net Storage</td>
-            <td data-id="0"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[0].NetShortage" /></td>
-            <td data-id="0"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[0].NetShortageValue" /></td>
-            <td data-id="1"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[1].NetShortage" /></td>
-            <td data-id="1"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[1].NetShortageValue" /></td>
-            <td data-id="2"><input class="form-control input-sm inp" name="CPCAnnexureIIIDetail[2].NetShortage" /></td>
-            <td data-id="2"><input class="form-control input-sm" name="CPCAnnexureIIIDetail[2].NetShortageValue" /></td>
-        </tr>*@
+                                <tr>
+                                    <td colspan="2">Mismatch/Defaced Zero Value</td>
+                                    @if (detailsArry.Length >= 1)
+                                    {
+                                        <td data-id="0"><input class="form-control input-sm inp" value="@detailsArry[0].MismatchDefacedZero" /></td>
+                                        <td data-id="0"><input class="form-control input-sm" value="@detailsArry[0].MismatchDefacedZeroValue" /></td>
+                                    }
+                                    @if (detailsArry.Length >= 2)
+                                    {
+                                        <td data-id="1"><input class="form-control input-sm inp" value="@detailsArry[1].MismatchDefacedZero" /></td>
+                                        <td data-id="1"><input class="form-control input-sm" value="@detailsArry[1].MismatchDefacedZeroValue" /></td>
+                                    }
+                                    @if (detailsArry.Length == 3)
+                                    {
+                                        <td data-id="2"><input class="form-control input-sm inp" value="@detailsArry[2].MismatchDefacedZero" /></td>
+                                        <td data-id="2"><input class="form-control input-sm" value="@detailsArry[2].MismatchDefacedZeroValue" /></td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Counterfeit Notes</td>
+                                    @if (detailsArry.Length >= 1)
+                                    {
+                                        <td data-id="0"><input class="form-control input-sm inp" value="@detailsArry[0].CounterfeitNotes" /></td>
+                                        <td data-id="0"><input class="form-control input-sm" value="@detailsArry[0].CounterfeitNotesValue" /></td>
+                                    }
+                                    @if (detailsArry.Length >= 2)
+                                    {
+                                        <td data-id="1"><input class="form-control input-sm inp" value="@detailsArry[1].CounterfeitNotes" /></td>
+                                        <td data-id="1"><input class="form-control input-sm" value="@detailsArry[1].CounterfeitNotesValue" /></td>
+                                    }
+                                    @if (detailsArry.Length == 3)
+                                    {
+                                        <td data-id="2"><input class="form-control input-sm inp" value="@detailsArry[2].CounterfeitNotes" /></td>
+                                        <td data-id="2"><input class="form-control input-sm" value="@detailsArry[2].CounterfeitNotesValue" /></td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Net Exces</td>
+                                    @if (detailsArry.Length >= 1)
+                                    {
+                                        <td data-id="0"><input class="form-control input-sm inp" value="@detailsArry[0].NetExcess" /></td>
+                                        <td data-id="0"><input class="form-control input-sm" value="@detailsArry[0].NetExcessValue" /></td>
+                                    }
+                                    @if (detailsArry.Length >= 2)
+                                    {
+                                        <td data-id="1"><input class="form-control input-sm inp" value="@detailsArry[1].NetExcess" /></td>
+                                        <td data-id="1"><input class="form-control input-sm" value="@detailsArry[1].NetExcessValue" /></td>
+                                    }
+                                    @if (detailsArry.Length == 3)
+                                    {
+                                        <td data-id="2"><input class="form-control input-sm inp" value="@detailsArry[2].NetExcess" /></td>
+                                        <td data-id="2"><input class="form-control input-sm" value="@detailsArry[2].NetExcessValue" /></td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Net Storage</td>
+                                    @if (detailsArry.Length >= 1)
+                                    {
+                                        <td data-id="0"><input class="form-control input-sm inp" value="@detailsArry[0].NetShortage" /></td>
+                                        <td data-id="0"><input class="form-control input-sm" value="@detailsArry[0].NetShortageValue" /></td>
+                                    }
+                                    @if (detailsArry.Length >= 2)
+                                    {
+                                        <td data-id="1"><input class="form-control input-sm inp" value="@detailsArry[1].NetShortage" /></td>
+                                        <td data-id="1"><input class="form-control input-sm" value="@detailsArry[1].NetShortageValue" /></td>
+                                    }
+                                    @if (detailsArry.Length == 3)
+                                    {
+                                        <td data-id="2"><input class="form-control input-sm inp" value="@detailsArry[2].NetShortage" /></td>
+                                        <td data-id="2"><input class="form-control input-sm" value="@detailsArry[2].NetShortageValue" /></td>
+                                    }
+                                </tr>
                             </tbody>
                         </table>
 

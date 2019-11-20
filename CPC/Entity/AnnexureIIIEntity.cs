@@ -19,7 +19,7 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIIIs.OrderBy(x => x.Id).ToList();
+                    return context.CPCAnnexureIIIs.Include(x=> x.CPCProjectBranch).Where(x=>x.IsActive).OrderBy(x => x.Id).ToList();
                 }
             }
             catch (Exception ex)
@@ -183,6 +183,28 @@ namespace CPC
             }
         }
 
+        public bool InActiveRecord(Guid Id)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Update Employee
+                    var res = context.CPCAnnexureIIIs.Where(x => x.Id == Id).FirstOrDefault();
+                    if (res != null)
+                    {
+                        res.IsActive = false;
+                        context.SaveChanges();
+                    }
+                    #endregion
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         //public bool Delete(Guid Id)
         //{
         //    try
@@ -237,12 +259,16 @@ namespace CPC
             {
                 using (var context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIIIs.Max(x => x.SrNo) <= 0 ? 1 : (int)context.CPCAnnexureIs.Max(x => x.SrNo) + 1;
+                    int? res = context.CPCAnnexureIIIs.Max(x => x.SrNo);
+                    if (res.HasValue)
+                    {
+                        return Convert.ToInt32(res) + 1;
+                    }
+                    return 0;
                 }
             }
             catch (Exception ex)
             {
-                //new Logger().LogError(ex);
                 return 0;
             }
         }
