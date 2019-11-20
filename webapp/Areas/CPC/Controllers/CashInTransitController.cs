@@ -42,7 +42,7 @@ namespace WebApp.Areas.CPC.Controllers
         public ActionResult Details(Guid Id)
         {
             var model = cashInTransitRepo.GetById(Id);
-            ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
+            ViewBag.Employees = employeeRepo.GetAll();
             return View(model);
         }
         #endregion

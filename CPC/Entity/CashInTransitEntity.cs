@@ -63,7 +63,8 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCCashInTransits.Where(x => x.Id == Id).FirstOrDefault();
+                    //return context.CPCCashInTransits.Where(x => x.Id == Id).FirstOrDefault();
+                     return context.CPCCashInTransits.Include(x=> x.CPCCashInTransitChilds).Where(x => x.Id == Id).FirstOrDefault();
                 }
             }
             catch (Exception ex)
