@@ -38,11 +38,14 @@ namespace WebApp.Areas.CPC.Controllers
         }
 
         #region Details
-        [Route("HRMS/Region/Details/{Id}/{IsView}")]
-        public ActionResult Details(Guid Id, string IsView)
+        public ActionResult Details(Guid Id)
         {
-            TempData["IsView"] = IsView;
-            return RedirectToAction("Record", "Region", new { Id });
+            var model = annexureIIRepo.GetById(Id);
+            //model.CPCAnnexureIIIDetails = annexureIIIRepo.GetDetailsByMasterId(Id);
+            ViewBag.Employees = employeeRepo.GetAll();
+            //var branchInfo = branchRepo.GetById(model.CashCollectedFromId.Value);
+            //ViewData["BranchName"] = $"{branchInfo.BranchCode} - {branchInfo.BranchName}";
+            return View(model);
         }
         #endregion
         #region Record

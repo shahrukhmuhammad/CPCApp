@@ -14,11 +14,19 @@ namespace CPC.Model
     
     public partial class CPCAnnexureII
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CPCAnnexureII()
+        {
+            this.CPCAnnexureIIDetails = new HashSet<CPCAnnexureIIDetail>();
+        }
+    
         public System.Guid Id { get; set; }
         public System.Guid AnnexureId { get; set; }
         public System.DateTime AnnexureIIDate { get; set; }
         public Nullable<System.Guid> ProjectBranchId { get; set; }
-        public Nullable<int> SrNo { get; set; }
+        public int SrNo { get; set; }
+        public string SealNo { get; set; }
+        public string ShipmentReceiptNo { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
@@ -27,5 +35,9 @@ namespace CPC.Model
         public Nullable<System.Guid> CashReceivedByCPCStaffBId { get; set; }
         public Nullable<System.Guid> CashHandedOverByCITStaffAId { get; set; }
         public Nullable<System.Guid> CashHandedOverByCITStaffStaffBId { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCAnnexureIIDetail> CPCAnnexureIIDetails { get; set; }
+        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
     }
 }

@@ -35,5 +35,7 @@ namespace CPC.Model
         public Nullable<int> TotalCashReturnedValue { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
+    
+        public virtual CPCAnnexureII CPCAnnexureII { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace CPC.Model
         public CPCProjectBranch()
         {
             this.CPCAnnexureIIIs = new HashSet<CPCAnnexureIII>();
+            this.CPCAnnexureIIs = new HashSet<CPCAnnexureII>();
         }
     
         public System.Guid Id { get; set; }
@@ -33,5 +34,7 @@ namespace CPC.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCAnnexureIII> CPCAnnexureIIIs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCAnnexureII> CPCAnnexureIIs { get; set; }
     }
 }

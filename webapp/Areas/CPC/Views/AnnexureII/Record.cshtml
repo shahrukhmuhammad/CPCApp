@@ -65,7 +65,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Shipment Bag Seal Number</label>
                                         <div class="col-sm-6">
-                                            <input class="form-control input-sm" id="ShipmentSealNumber" name="ShipmentSealNumber" readonly />
+                                            <input class="form-control input-sm" id="ShipmentSealNumber" name="SealNo" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Shipment Receipt Number</label>
                                         <div class="col-sm-6">
-                                            <input class="form-control input-sm" id="ShipmentReceiptNumber" name="ShipmentReceiptNumber" readonly />
+                                            <input class="form-control input-sm" id="ShipmentReceiptNumber" name="ShipmentReceiptNo" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Received By <b>CPC</b> Staff Name</label>
+                                        <label class="col-sm-6 horizontal-label">Cash Received By <b>CPC</b> First Person</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.CashReceivedByCPCStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
@@ -202,7 +202,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Received By <b>CPC</b> Staff Name</label>
+                                        <label class="col-sm-6 horizontal-label">Cash Received By <b>CPC</b> Staff Second Person</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.CashReceivedByCPCStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
@@ -212,7 +212,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Name</label>
+                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff First Person</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.CashHandedOverByCITStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>
@@ -220,7 +220,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Name</label>
+                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Second Person</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.CashHandedOverByCITStaffStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
                                         </div>

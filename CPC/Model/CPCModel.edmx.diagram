@@ -12,16 +12,18 @@
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureI" Width="2.75" PointX="0.625" PointY="1.5" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" Width="2.75" PointX="4.625" PointY="4" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIDetail" Width="2.75" PointX="0.625" PointY="2" IsExpanded="false" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureII" Width="2" PointX="0.5" PointY="2.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIIDetail" Width="2" PointX="0.5" PointY="3" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCProject" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCCashInTransit" Width="2.375" PointX="5.375" PointY="5.25" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCCashInTransitChild" Width="2.375" PointX="5.375" PointY="5.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIIIDetail" Width="1.5" PointX="11.25" PointY="8.25" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIIIDetail" Width="1.5" PointX="8.875" PointY="2.875" IsExpanded="false" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCCashIn__CashI__019E3B86" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIII" Width="1.5" PointX="7.75" PointY="8.875" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIII" Width="1.5" PointX="8.875" PointY="2.375" IsExpanded="false" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__7908F585" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__CashC__02925FBF" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIIDetail" Width="1.5" PointX="8.875" PointY="4" IsExpanded="false" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureII" Width="1.5" PointX="7.75" PointY="7.875" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__0C1BC9F9" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Proje__0B27A5C0" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
