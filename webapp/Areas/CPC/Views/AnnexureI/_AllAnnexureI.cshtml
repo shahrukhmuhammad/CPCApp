@@ -28,7 +28,7 @@
                 </span>
             </h3>
         </div>
-        <div class="row" style="margin:15px 0">
+        @*<div class="row" style="margin:15px 0">
             <div class="col-md-12">
                 <ul class="nav nav-pills">
                     <li><a href="#" class="btn btn-default" style="padding:6px 20px;"> <i style="font-size:16px;" class="fa fa-hdd-o"></i> &nbsp; All</a></li>
@@ -37,7 +37,7 @@
                     <li><a href="#" class="btn btn-default" style="padding:6px 20px;"> <i style="font-size:16px;" class="fa fa-user-times"></i> &nbsp; Suspended</a></li>
                 </ul>
             </div>
-        </div>
+        </div>*@
         <div class="modal-body">
             <div class="table-responsive">
                 <table id="AnnexureI-dataTable" class="table table-hover table-striped table-condensed">
@@ -78,7 +78,7 @@
                             <td>@x.CreatedOn</td>
                             <td class="text-center">
                                 <div class="btn-group btn-group-xs" role="group">
-                                    <a href="@Url.Action("Details","AnnexureI")/@x.Id/1" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
+                                    <a href="@Url.Action("Details","AnnexureI")/@x.Id" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
                                     @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.CPC))
                                     {
                                         @*<a href="@Url.Action("Record","AnnexureI")/@x.Id" class="btn btn-info" title="Edit"><i class="fa fa-edit"></i></a>*@

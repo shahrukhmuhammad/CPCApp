@@ -304,26 +304,7 @@
             const totalVal = 1000 * parseInt(unsortedValue) * parseInt(denomVal);
             return isNaN(totalVal) ? '0' : totalVal;
         }
-        function GetTotal() {
-            //debugger;
-            debit = 0;
-            credit = 0;
-            //console.log(accountGridRowIndex);
-
-            for (var i = 1; i < accountGridRowIndex; i++) {
-                //console.log("For LOOP, i= " + i);
-                if ($("#txt_AccountCode" + i).val() != "" && $("#txt_AccountName" + i).val() != "") {
-
-                    debit += parseFloat($("#txt_Debit" + i).val());
-                    credit += parseFloat($("#txt_Credit" + i).val());
-
-                    //console.log("D :" + debit + "C :" + credit);
-                }
-                $("#txt_difference").val(parseFloat(debit - credit).toFixed(2));
-                $("#TotalDebit").val(parseFloat(debit).toFixed(2));
-                $("#TotalCredit").val(parseFloat(credit).toFixed(2));
-            }
-        }
+       
     </script>
 }
 

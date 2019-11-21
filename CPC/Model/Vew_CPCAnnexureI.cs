@@ -40,5 +40,10 @@ namespace CPC.Model
         public string ShipmentReciptNo { get; set; }
         public string CashHandedOverCPCStaffAName { get; set; }
         public string CashHandedOverCPCStaffBName { get; set; }
+        public string CashHandedOverCITStaffAName { get; set; }
+        public string CashHandedOverCITStaffBName { get; set; }
+        public string SignatureCPCHandingOverCashAName { get; set; }
+        public string SignatureCPCHandingOverCashBName { get; set; }
+        public bool IsActive { get; set; }
     }
 }

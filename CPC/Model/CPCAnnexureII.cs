@@ -37,8 +37,8 @@ namespace CPC.Model
         public byte Status { get; set; }
         public bool IsActive { get; set; }
     
-        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCAnnexureIIDetail> CPCAnnexureIIDetails { get; set; }
+        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
     }
 }

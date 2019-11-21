@@ -2,8 +2,8 @@
 @model CPCAnnexureI
 @{
     ViewBag.Title = "Details";
-    var empList = ViewBag.Employees as List<CPCEmployee>;
-    var denomList = ViewBag.DenomList as List<CustomSelectList>;
+    var details = ViewBag.Details as List<Vew_CPCAnnexureI>;
+    //var denomList = ViewBag.DenomList as List<CustomSelectList>;
 }
 
 <style>
@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="row tb-padding">
-                        <table id="annexurelI" class="table table-striped table-bordered table-hover">
+                        <table id="annexureI" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th style="width:5% !important">Sr.No</th>
@@ -67,20 +67,34 @@
                                     <th>Total Amount</th>
                                     <th>Seal No.</th>
                                     <th>Shipment Receipt</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @{
-                                    int i = 1;
-                                    foreach (var item in Model.CPCAnnexureIDetails)
+                                    if (details != null)
                                     {
-                                        <tr>
-                                           <td>@i</td>
-                                           <td>@item.CashProcessingCell</td>
-                                           <td>@item.CPCProjectBranch.BranchName</td>
+                                        int i = 1;
+                                        foreach (var item in details)
+                                        {
+                                            <tr>
+                                                <td>@i</td>
+                                                <td>@item.CashProcessingCell</td>
+                                                <td>@($"{item.BranchCode} - {item.BranchName}")</td>
+                                                <td>@item.DenominationTitle</td>
+                                                <td>@item.NoOfBundles</td>
+                                                <td>@item.TotalAmount</td>
+                                                <td>@item.SealNo</td>
+                                                <td>@item.ShipmentReciptNo</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr colspan="8">
+                                            <td>No Details Found</td>
                                         </tr>
                                     }
+
                                 }
                             </tbody>
                         </table>
@@ -91,20 +105,20 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CPC</b> Staff First Person</label>
-                                        <div class="col-sm-6">
+                                        <label class="col-sm-8 horizontal-label">Cash Handed Over By <b>CPC</b> Staff First Person</label>
+                                        <div class="col-sm-4">
                                             <label class="label label-default">
-                                                @(Model.CashHandedOverCPCStaffAId != null ? empList.Where(x => x.Id == Model.CashHandedOverCPCStaffAId).FirstOrDefault().Name : "")
+                                                @(Model.CashHandedOverCPCStaffAId != null ? details.First().CashHandedOverCPCStaffAName : "")
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CPC</b> Staff Second Person</label>
-                                        <div class="col-sm-6">
+                                        <label class="col-sm-8 horizontal-label">Cash Handed Over By <b>CPC</b> Staff Second Person</label>
+                                        <div class="col-sm-4">
                                             <label class="label label-default">
-                                                @(Model.CashHandedOverCPCStaffBId != null ? empList.Where(x => x.Id == Model.CashHandedOverCPCStaffBId).FirstOrDefault().Name : "")
+                                                @(Model.CashHandedOverCPCStaffBId != null ? details.First().CashHandedOverCPCStaffBName : "")
                                             </label>
                                         </div>
                                     </div>
@@ -113,20 +127,23 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> First Person</label>
-                                        <div class="col-sm-6">
+                                        <label class="col-sm-8 horizontal-label">Cash Handed Over By <b>CIT</b> First Person</label>
+                                        <div class="col-sm-4">
                                             <label class="label label-default">
-                                                @(Model.CashHandedOverCITStaffAId != null ? empList.Where(x => x.Id == Model.CashHandedOverCITStaffAId).FirstOrDefault().Name : "")
+                                                @(Model.CashHandedOverCITStaffAId != null ? details.First().CashHandedOverCITStaffAName : "")
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Second Person</label>
-                                        <label class="label label-default">
-                                            @(Model.CashHandedOverCITStaffAId != null ? empList.Where(x => x.Id == Model.CashHandedOverCITStaffAId).FirstOrDefault().Name : "")
-                                        </label>
+                                        <label class="col-sm-8 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Second Person</label>
+                                        <div class="col-sm-4">
+                                            <label class="label label-default">
+                                                @(Model.CashHandedOverCITStaffAId != null ? details.First().CashHandedOverCITStaffBName : "")
+                                            </label>
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -134,18 +151,24 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label"> <b>CPC</b> Staff Handing Over Cash and Verifying First Person</label>
-                                        <label class="label label-default">
-                                            @(Model.SignatureCPCHandingOverCashAId != null ? empList.Where(x => x.Id == Model.SignatureCPCHandingOverCashAId).FirstOrDefault().Name : "")
-                                        </label>
+                                        <label class="col-sm-8 horizontal-label"> <b>CPC</b> Staff Handing Over Cash and Verifying First Person</label>
+                                        <div class="col-sm-4">
+                                            <label class="label label-default">
+                                                @(Model.SignatureCPCHandingOverCashAId != null ? details.First().SignatureCPCHandingOverCashAName : "")
+                                            </label>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label"><b>CPC</b> Staff Handing Over Cash and Verifying Second Person</label>
-                                        <label class="label label-default">
-                                            @(Model.SignatureCPCHandingOverCashBId != null ? empList.Where(x => x.Id == Model.SignatureCPCHandingOverCashBId).FirstOrDefault().Name : "")
-                                        </label>
+                                        <label class="col-sm-8 horizontal-label"><b>CPC</b> Staff Handing Over Cash and Verifying Second Person</label>
+                                        <div class="col-sm-4">
+                                            <label class="label label-default">
+                                                @(Model.SignatureCPCHandingOverCashBId != null ? details.First().SignatureCPCHandingOverCashBName : "")
+                                            </label>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
