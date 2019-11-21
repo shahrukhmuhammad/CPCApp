@@ -7,7 +7,6 @@
     var detailsArry = Model.CPCAnnexureIIDetails.ToArray();
 }
 <form id="lead-frm" class="user-Profile" method="post" enctype="multipart/form-data">
-    @Html.AntiForgeryToken()
 
     <div class="row">
         <div class="col-sm-12 text-right">
@@ -78,20 +77,26 @@
                             <thead>
                                 <tr>
                                     <th colspan="2" rowspan="2">Description of Cash</th>
-                                    <th>Rs</th>
+                                    <th>Denomination</th>
                                     <td>
-                                        <input class="form-control input-sm text-center" id="DenomTitle0" />
-                                        <input type="hidden" name="CPCAnnexureIIIDetail[0].DenominationId" id="DenomOneId" />
+                                        @if (detailsArry.Length >= 1)
+                                        {
+                                            <label class="label label-default">@detailsArry[0].CPCDenomination.DenominationTitle</label>
+                                        }
                                     </td>
-                                    <th>Rs</th>
+                                    <th>Denomination</th>
                                     <td>
-                                        <input class="form-control input-sm text-center" id="DenomTitle1" />
-                                        <input type="hidden" name="CPCAnnexureIIIDetail[1].DenominationId" id="DenomTwoId" />
+                                        @if (detailsArry.Length >= 2)
+                                        {
+                                            <label class="label label-default">@detailsArry[1].CPCDenomination.DenominationTitle</label>
+                                        }
                                     </td>
-                                    <th>Rs</th>
+                                    <th>Denomination</th>
                                     <td>
-                                        <input class="form-control input-sm text-center" id="DenomTitle2" />
-                                        <input type="hidden" name="CPCAnnexureIIIDetail[2].DenominationId" id="DenomThreeId" />
+                                        @if (detailsArry.Length == 3)
+                                        {
+                                            <label class="label label-default">@detailsArry[2].CPCDenomination.DenominationTitle</label>
+                                        }
                                     </td>
                                 </tr>
                                 <tr>
@@ -144,7 +149,7 @@
                                     <td colspan="2">Unfit/Soiled</td>
                                     @if (detailsArry.Length >= 1)
                                     {
-                                        <td data-id="0"><input class="form-control input-sm inp" name="@detailsArry[0].UnfitSoiled" /></td>
+                                        <td data-id="0"><input class="form-control input-sm inp" value="@detailsArry[0].UnfitSoiled" /></td>
                                         <td data-id="0"><input class="form-control input-sm" value="@detailsArry[0].UnfitSoiledValue" /></td>
                                     }
                                     @if (detailsArry.Length >= 2)
@@ -325,6 +330,7 @@
         $(document).ready(function () {
             //-- Read Only Mode Trigger -//
             $("input").attr("readonly", true);
+        });
     </script>
 }
 

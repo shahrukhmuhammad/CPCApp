@@ -66,7 +66,6 @@ namespace WebApp.Areas.CPC.Controllers
                 model.SrNo = annexureIIIRepo.GetNextSrNo();
                 model.AnnexureIIIDate = DateTime.UtcNow;
                 model.DateOfCashReturn = DateTime.Now;
-                //model.IsActive = true;
             }
             //ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             ViewBag.BrachList = new SelectList(branchRepo.GetDropdown(), "Value", "Text");
@@ -85,7 +84,8 @@ namespace WebApp.Areas.CPC.Controllers
                     model.CreatedOn = DateTime.Now;
                     model.AnnexureIIIDate = Utils.SetDateFormate(AnnexureIIIDate);
                     model.DateOfCashReturn = Utils.SetDateFormate(DateOfCashReturn);
-                    //model.IsActive = true;
+                    model.Status = (int)AnnexureStatus.Inprocess;
+                    model.IsActive = true;
                     model.Id = Guid.NewGuid();
                     var res = annexureIIIRepo.Create(model);
                     if (res.HasValue)

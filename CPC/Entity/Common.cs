@@ -68,4 +68,9 @@ namespace CPC
         public string Text { get; set; }
         public string Details { get; set; }
     }
+
+    public enum AnnexureStatus {
+        Inprocess = 1,
+        Completed = 2
+    }
 }

@@ -25,5 +25,9 @@ namespace CPC.Model
         public string ShipmentReciptNo { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
+    
+        public virtual CPCAnnexureI CPCAnnexureI { get; set; }
+        public virtual CPCDenomination CPCDenomination { get; set; }
+        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
     }
 }

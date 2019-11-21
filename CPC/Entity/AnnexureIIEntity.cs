@@ -19,7 +19,7 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIIs.OrderBy(x => x.Id).ToList();
+                    return context.CPCAnnexureIIs.Include(x=> x.CPCAnnexureIIDetails).Include(x=> x.CPCProjectBranch).OrderBy(x => x.Id).ToList();
                 }
             }
             catch (Exception ex)
@@ -33,17 +33,7 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIIs.Where(x => x.Id == Id).FirstOrDefault();
-                    //(from anxIII in context.CPCAnnexureIIs
-                    // join anxID in context.CPCAnnexureIDetails on anxIII.CPCAnnexureIId equals anxID.AnnexureIId
-                    // where Id == anxID.AnnexureIId
-                    // select new
-                    // {
-                    //     UID = e.OwnerID,
-                    //     TID = e.TID,
-                    //     Title = t.Title,
-                    //     EID = e.EID
-                    // }).Take(10);
+                    return context.CPCAnnexureIIs.Include(x=>x.CPCAnnexureIIDetails.Select(y=> y.CPCDenomination)).Where(x => x.Id == Id).FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -146,17 +136,17 @@ namespace CPC
         #endregion
 
         #region Delete
-        public bool DeleteDetails(Guid Id)
+        public bool InActiveRecord(Guid Id)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    #region Delete
-                    var res = context.CPCAnnexureIDetails.Where(x => x.AnnexureIId == Id).ToList();
+                    #region Update Annexure
+                    var res = context.CPCAnnexureIIs.Where(x => x.Id == Id).FirstOrDefault();
                     if (res != null)
                     {
-                        context.CPCAnnexureIDetails.RemoveRange(res);
+                        res.IsActive = false;
                         context.SaveChanges();
                     }
                     #endregion
@@ -168,6 +158,28 @@ namespace CPC
                 return false;
             }
         }
+        //public bool DeleteDetails(Guid Id)
+        //{
+        //    try
+        //    {
+        //        using (context = new SOSTechCPCEntities())
+        //        {
+        //            #region Delete
+        //            var res = context.CPCAnnexureIDetails.Where(x => x.AnnexureIId == Id).ToList();
+        //            if (res != null)
+        //            {
+        //                context.CPCAnnexureIDetails.RemoveRange(res);
+        //                context.SaveChanges();
+        //            }
+        //            #endregion
+        //            return true;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return false;
+        //    }
+        //}
 
         //public bool Delete(Guid Id)
         //{
@@ -223,7 +235,12 @@ namespace CPC
             {
                 using (var context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIIs.Max(x => x.SrNo) <= 0 ? 1 : (int)context.CPCAnnexureIs.Max(x => x.SrNo) + 1;
+                    int? res = context.CPCAnnexureIIs.Max(x => x.SrNo);
+                    if (res.HasValue)
+                    {
+                        return Convert.ToInt32(res) + 1;
+                    }
+                    return 0;
                 }
             }
             catch (Exception ex)

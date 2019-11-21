@@ -18,8 +18,6 @@
             </div>
         </div>
     </div>
-    @Html.HiddenFor(x => x.AnnexureId)
-
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-default">
@@ -41,12 +39,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-3 text-left horizontal-label">Date</label>
                                         <div class="col-sm-9">
-                                            <div class="input-group input-group-sm">
-                                                <input name="AnnexureIIIDate" id="AnnexureIIIDate" class="form-control input-sm" type="date" value="@Model.AnnexureIIDate.ToString("yyyy-MM-dd")" required autocomplete="off">
-                                                <span class="input-group-addon">
-                                                    <span class="fa fa-calendar"></span>
-                                                </span>
-                                            </div>
+                                            <input name="AnnexureIIDate" id="AnnexureIIDate" class="form-control input-sm datePicker" type="text" value="@Model.AnnexureIIDate.ToShortDateString()" required autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -86,20 +79,20 @@
                             <thead>
                                 <tr id="add-item">
                                     <th colspan="2" rowspan="2">Description of Cash</th>
-                                    <th>Rs</th>
+                                    <th>Denomination</th>
                                     <td>
                                         <input class="form-control input-sm text-center" id="DenomTitle0" />
-                                        <input type="hidden" name="CPCAnnexureIIDetail[0].DenominationId" id="DenomOneId" />
+                                        <input type="hidden" name="CPCAnnexureIIDetail[0].DenominationsId" id="DenomOneId" />
                                     </td>
-                                    <th>Rs</th>
+                                    <th>Denomination</th>
                                     <td>
                                         <input class="form-control input-sm text-center" id="DenomTitle1" />
-                                        <input type="hidden" name="CPCAnnexureIIDetail[1].DenominationId" id="DenomTwoId" />
+                                        <input type="hidden" name="CPCAnnexureIIDetail[1].DenominationsId" id="DenomTwoId" />
                                     </td>
-                                    <th>Rs</th>
+                                    <th>Denomination</th>
                                     <td>
                                         <input class="form-control input-sm text-center" id="DenomTitle2" />
-                                        <input type="hidden" name="CPCAnnexureIIDetail[2].DenominationId" id="DenomThreeId" />
+                                        <input type="hidden" name="CPCAnnexureIIDetail[2].DenominationsId" id="DenomThreeId" />
 
                                     </td>
                                 </tr>
@@ -255,7 +248,7 @@
                 $("#IsActive").attr("disabled", true);
                 $("#submit").hide();
             }*@
-
+            $("#AnnexureIIDate").data("DateTimePicker").date(moment('@Model.AnnexureIIDate.ToShortDateString()'));
             //input fields leave event
             $(document).on('focusout', '.inp', function (e) {
                 e.preventDefault();
@@ -269,7 +262,7 @@
             $('#ProjectBranchId').change(function (e) {
                 e.preventDefault();
                 const id = $('#ProjectBranchId option:selected').attr('value');
-                const date = $('#AnnexureIIIDate').val();
+                const date = $('#AnnexureIIDate').val();
                 //console.log(id + ' ' + date);
                 //var dataItem = $('#inp-sku').val();
                 if (id != "") {
@@ -308,8 +301,7 @@
 
         });
         function GetTotalVal(unsortedValue, denomVal) {
-            //debugger
-            const totalVal = parseInt(unsortedValue) * parseInt(denomVal);
+            const totalVal = 1000 * parseInt(unsortedValue) * parseInt(denomVal);
             return isNaN(totalVal) ? '0' : totalVal;
         }
         function GetTotal() {

@@ -22,6 +22,8 @@
           <Property Name="UpdatedOn" Type="datetime" />
           <Property Name="UpdatedBy" Type="uniqueidentifier" />
           <Property Name="DateOfCollection" Type="date" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CPCAnnexureIDetails">
           <Key>
@@ -44,9 +46,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="AnnexureId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="AnnexureIIDate" Type="date" Nullable="false" />
-          <Property Name="ProjectBranchId" Type="uniqueidentifier" />
+          <Property Name="ProjectBranchId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SrNo" Type="int" Nullable="false" />
           <Property Name="SealNo" Type="nvarchar" MaxLength="20" />
           <Property Name="ShipmentReceiptNo" Type="nvarchar" MaxLength="20" />
@@ -58,6 +59,8 @@
           <Property Name="CashReceivedByCPCStaffBId" Type="uniqueidentifier" />
           <Property Name="CashHandedOverByCITStaffAId" Type="uniqueidentifier" />
           <Property Name="CashHandedOverByCITStaffStaffBId" Type="uniqueidentifier" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CPCAnnexureIIDetails">
           <Key>
@@ -294,6 +297,18 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__CPCAnnexu__Annex__2022C2A6">
+          <End Role="CPCAnnexureI" Type="Self.CPCAnnexureI" Multiplicity="1" />
+          <End Role="CPCAnnexureIDetails" Type="Self.CPCAnnexureIDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCAnnexureI">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCAnnexureIDetails">
+              <PropertyRef Name="AnnexureIId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__CPCAnnexu__Annex__7908F585">
           <End Role="CPCAnnexureIII" Type="Self.CPCAnnexureIII" Multiplicity="1" />
           <End Role="CPCAnnexureIIIDetails" Type="Self.CPCAnnexureIIIDetails" Multiplicity="*" />
@@ -318,14 +333,50 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__CPCAnnexu__Denom__1F2E9E6D">
+          <End Role="CPCDenominations" Type="Self.CPCDenominations" Multiplicity="1" />
+          <End Role="CPCAnnexureIIDetails" Type="Self.CPCAnnexureIIDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCDenominations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCAnnexureIIDetails">
+              <PropertyRef Name="DenominationsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CPCAnnexu__Denom__220B0B18">
+          <End Role="CPCDenominations" Type="Self.CPCDenominations" Multiplicity="0..1" />
+          <End Role="CPCAnnexureIDetails" Type="Self.CPCAnnexureIDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCDenominations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCAnnexureIDetails">
+              <PropertyRef Name="DenominationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__CPCAnnexu__Proje__0B27A5C0">
-          <End Role="CPCProjectBranch" Type="Self.CPCProjectBranch" Multiplicity="0..1" />
+          <End Role="CPCProjectBranch" Type="Self.CPCProjectBranch" Multiplicity="1" />
           <End Role="CPCAnnexureII" Type="Self.CPCAnnexureII" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CPCProjectBranch">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CPCAnnexureII">
+              <PropertyRef Name="ProjectBranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CPCAnnexu__Proje__2116E6DF">
+          <End Role="CPCProjectBranch" Type="Self.CPCProjectBranch" Multiplicity="0..1" />
+          <End Role="CPCAnnexureIDetails" Type="Self.CPCAnnexureIDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCProjectBranch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCAnnexureIDetails">
               <PropertyRef Name="ProjectBranchId" />
             </Dependent>
           </ReferentialConstraint>
@@ -390,6 +441,10 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
             <End Role="CPCAnnexureII" EntitySet="CPCAnnexureII" />
             <End Role="CPCAnnexureIIDetails" EntitySet="CPCAnnexureIIDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK__CPCAnnexu__Annex__2022C2A6" Association="Self.FK__CPCAnnexu__Annex__2022C2A6">
+            <End Role="CPCAnnexureI" EntitySet="CPCAnnexureI" />
+            <End Role="CPCAnnexureIDetails" EntitySet="CPCAnnexureIDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK__CPCAnnexu__Annex__7908F585" Association="Self.FK__CPCAnnexu__Annex__7908F585">
             <End Role="CPCAnnexureIII" EntitySet="CPCAnnexureIII" />
             <End Role="CPCAnnexureIIIDetails" EntitySet="CPCAnnexureIIIDetails" />
@@ -398,9 +453,21 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
             <End Role="CPCProjectBranch" EntitySet="CPCProjectBranch" />
             <End Role="CPCAnnexureIII" EntitySet="CPCAnnexureIII" />
           </AssociationSet>
+          <AssociationSet Name="FK__CPCAnnexu__Denom__1F2E9E6D" Association="Self.FK__CPCAnnexu__Denom__1F2E9E6D">
+            <End Role="CPCDenominations" EntitySet="CPCDenominations" />
+            <End Role="CPCAnnexureIIDetails" EntitySet="CPCAnnexureIIDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CPCAnnexu__Denom__220B0B18" Association="Self.FK__CPCAnnexu__Denom__220B0B18">
+            <End Role="CPCDenominations" EntitySet="CPCDenominations" />
+            <End Role="CPCAnnexureIDetails" EntitySet="CPCAnnexureIDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK__CPCAnnexu__Proje__0B27A5C0" Association="Self.FK__CPCAnnexu__Proje__0B27A5C0">
             <End Role="CPCProjectBranch" EntitySet="CPCProjectBranch" />
             <End Role="CPCAnnexureII" EntitySet="CPCAnnexureII" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CPCAnnexu__Proje__2116E6DF" Association="Self.FK__CPCAnnexu__Proje__2116E6DF">
+            <End Role="CPCProjectBranch" EntitySet="CPCProjectBranch" />
+            <End Role="CPCAnnexureIDetails" EntitySet="CPCAnnexureIDetails" />
           </AssociationSet>
           <AssociationSet Name="FK__CPCCashIn__CashI__019E3B86" Association="Self.FK__CPCCashIn__CashI__019E3B86">
             <End Role="CPCCashInTransit" EntitySet="CPCCashInTransit" />
@@ -416,9 +483,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <EntitySet Name="CPCDepartments" EntityType="SOSTechCPCModel.CPCDepartment" />
           <EntitySet Name="CPCEmployees" EntityType="SOSTechCPCModel.CPCEmployee" />
           <EntitySet Name="CPCProjectBranches" EntityType="SOSTechCPCModel.CPCProjectBranch" />
-          <EntitySet Name="CPCAnnexureIs" EntityType="SOSTechCPCModel.CPCAnnexureI" />
           <EntitySet Name="Vew_CPCAnnexureI" EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" />
-          <EntitySet Name="CPCAnnexureIDetails" EntityType="SOSTechCPCModel.CPCAnnexureIDetail" />
           <EntitySet Name="CPCProjects" EntityType="SOSTechCPCModel.CPCProject" />
           <EntitySet Name="CPCCashInTransits" EntityType="SOSTechCPCModel.CPCCashInTransit" />
           <EntitySet Name="CPCCashInTransitChilds" EntityType="SOSTechCPCModel.CPCCashInTransitChild" />
@@ -436,15 +501,33 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
             <End Role="CPCProjectBranch" EntitySet="CPCProjectBranches" />
             <End Role="CPCAnnexureIII" EntitySet="CPCAnnexureIIIs" />
           </AssociationSet>
-          <EntitySet Name="CPCAnnexureIIDetails" EntityType="SOSTechCPCModel.CPCAnnexureIIDetail" />
           <EntitySet Name="CPCAnnexureIIs" EntityType="SOSTechCPCModel.CPCAnnexureII" />
+          <AssociationSet Name="FK__CPCAnnexu__Proje__0B27A5C0" Association="SOSTechCPCModel.FK__CPCAnnexu__Proje__0B27A5C0">
+            <End Role="CPCProjectBranch" EntitySet="CPCProjectBranches" />
+            <End Role="CPCAnnexureII" EntitySet="CPCAnnexureIIs" />
+          </AssociationSet>
+          <EntitySet Name="CPCAnnexureIIDetails" EntityType="SOSTechCPCModel.CPCAnnexureIIDetail" />
           <AssociationSet Name="FK__CPCAnnexu__Annex__0C1BC9F9" Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__0C1BC9F9">
             <End Role="CPCAnnexureII" EntitySet="CPCAnnexureIIs" />
             <End Role="CPCAnnexureIIDetail" EntitySet="CPCAnnexureIIDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__CPCAnnexu__Proje__0B27A5C0" Association="SOSTechCPCModel.FK__CPCAnnexu__Proje__0B27A5C0">
+          <AssociationSet Name="FK__CPCAnnexu__Denom__1F2E9E6D" Association="SOSTechCPCModel.FK__CPCAnnexu__Denom__1F2E9E6D">
+            <End Role="CPCDenomination" EntitySet="CPCDenominations" />
+            <End Role="CPCAnnexureIIDetail" EntitySet="CPCAnnexureIIDetails" />
+          </AssociationSet>
+          <EntitySet Name="CPCAnnexureIs" EntityType="SOSTechCPCModel.CPCAnnexureI" />
+          <EntitySet Name="CPCAnnexureIDetails" EntityType="SOSTechCPCModel.CPCAnnexureIDetail" />
+          <AssociationSet Name="FK__CPCAnnexu__Annex__2022C2A6" Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__2022C2A6">
+            <End Role="CPCAnnexureI" EntitySet="CPCAnnexureIs" />
+            <End Role="CPCAnnexureIDetail" EntitySet="CPCAnnexureIDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CPCAnnexu__Denom__220B0B18" Association="SOSTechCPCModel.FK__CPCAnnexu__Denom__220B0B18">
+            <End Role="CPCDenomination" EntitySet="CPCDenominations" />
+            <End Role="CPCAnnexureIDetail" EntitySet="CPCAnnexureIDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CPCAnnexu__Proje__2116E6DF" Association="SOSTechCPCModel.FK__CPCAnnexu__Proje__2116E6DF">
             <End Role="CPCProjectBranch" EntitySet="CPCProjectBranches" />
-            <End Role="CPCAnnexureII" EntitySet="CPCAnnexureIIs" />
+            <End Role="CPCAnnexureIDetail" EntitySet="CPCAnnexureIDetails" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="CPCDenomination">
@@ -453,6 +536,8 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="DenominationTitle" Type="Int32" />
+          <NavigationProperty Name="CPCAnnexureIIDetails" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Denom__1F2E9E6D" FromRole="CPCDenomination" ToRole="CPCAnnexureIIDetail" />
+          <NavigationProperty Name="CPCAnnexureIDetails" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Denom__220B0B18" FromRole="CPCDenomination" ToRole="CPCAnnexureIDetail" />
         </EntityType>
         <EntityType Name="CPCDepartment">
           <Key>
@@ -492,24 +577,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <Property Name="ContactPerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CPCAnnexureIIIs" Relationship="SOSTechCPCModel.FK__CPCAnnexu__CashC__02925FBF" FromRole="CPCProjectBranch" ToRole="CPCAnnexureIII" />
           <NavigationProperty Name="CPCAnnexureIIs" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Proje__0B27A5C0" FromRole="CPCProjectBranch" ToRole="CPCAnnexureII" />
-        </EntityType>
-        <EntityType Name="CPCAnnexureI">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="SrNo" Type="Int32" />
-          <Property Name="CashHandedOverCPCStaffAId" Type="Guid" />
-          <Property Name="CashHandedOverCPCStaffBId" Type="Guid" />
-          <Property Name="CashHandedOverCITStaffAId" Type="Guid" />
-          <Property Name="CashHandedOverCITStaffBId" Type="Guid" />
-          <Property Name="SignatureCPCHandingOverCashAId" Type="Guid" />
-          <Property Name="SignatureCPCHandingOverCashBId" Type="Guid" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Guid" />
-          <Property Name="DateOfCollection" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="CPCAnnexureIDetails" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Proje__2116E6DF" FromRole="CPCProjectBranch" ToRole="CPCAnnexureIDetail" />
         </EntityType>
         <EntityType Name="Vew_CPCAnnexureI">
           <Key>
@@ -547,22 +615,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <Property Name="ShipmentReciptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="CashHandedOverCPCStaffAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
           <Property Name="CashHandedOverCPCStaffBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="CPCAnnexureIDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="AnnexureIId" Type="Guid" Nullable="false" />
-          <Property Name="CashProcessingCell" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectBranchId" Type="Guid" />
-          <Property Name="DenominationId" Type="Guid" />
-          <Property Name="NoOfBundles" Type="Int32" />
-          <Property Name="TotalAmount" Type="Int32" />
-          <Property Name="SealNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ShipmentReciptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="CPCProject">
           <Key>
@@ -719,6 +771,41 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CPCAnnexureII">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="AnnexureIIDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ProjectBranchId" Type="Guid" Nullable="false" />
+          <Property Name="SrNo" Type="Int32" Nullable="false" />
+          <Property Name="SealNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ShipmentReceiptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="CashReceivedByCPCStaffAId" Type="Guid" />
+          <Property Name="CashReceivedByCPCStaffBId" Type="Guid" />
+          <Property Name="CashHandedOverByCITStaffAId" Type="Guid" />
+          <Property Name="CashHandedOverByCITStaffStaffBId" Type="Guid" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CPCProjectBranch" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Proje__0B27A5C0" FromRole="CPCAnnexureII" ToRole="CPCProjectBranch" />
+          <NavigationProperty Name="CPCAnnexureIIDetails" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Annex__0C1BC9F9" FromRole="CPCAnnexureII" ToRole="CPCAnnexureIIDetail" />
+        </EntityType>
+        <Association Name="FK__CPCAnnexu__Proje__0B27A5C0">
+          <End Type="SOSTechCPCModel.CPCProjectBranch" Role="CPCProjectBranch" Multiplicity="1" />
+          <End Type="SOSTechCPCModel.CPCAnnexureII" Role="CPCAnnexureII" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCProjectBranch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCAnnexureII">
+              <PropertyRef Name="ProjectBranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="CPCAnnexureIIDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -745,28 +832,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
           <NavigationProperty Name="CPCAnnexureII" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Annex__0C1BC9F9" FromRole="CPCAnnexureIIDetail" ToRole="CPCAnnexureII" />
-        </EntityType>
-        <EntityType Name="CPCAnnexureII">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="AnnexureId" Type="Guid" Nullable="false" />
-          <Property Name="AnnexureIIDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ProjectBranchId" Type="Guid" />
-          <Property Name="SrNo" Type="Int32" Nullable="false" />
-          <Property Name="SealNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ShipmentReceiptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Guid" />
-          <Property Name="CashReceivedByCPCStaffAId" Type="Guid" />
-          <Property Name="CashReceivedByCPCStaffBId" Type="Guid" />
-          <Property Name="CashHandedOverByCITStaffAId" Type="Guid" />
-          <Property Name="CashHandedOverByCITStaffStaffBId" Type="Guid" />
-          <NavigationProperty Name="CPCAnnexureIIDetails" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Annex__0C1BC9F9" FromRole="CPCAnnexureII" ToRole="CPCAnnexureIIDetail" />
-          <NavigationProperty Name="CPCProjectBranch" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Proje__0B27A5C0" FromRole="CPCAnnexureII" ToRole="CPCProjectBranch" />
+          <NavigationProperty Name="CPCDenomination" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Denom__1F2E9E6D" FromRole="CPCAnnexureIIDetail" ToRole="CPCDenomination" />
         </EntityType>
         <Association Name="FK__CPCAnnexu__Annex__0C1BC9F9">
           <End Type="SOSTechCPCModel.CPCAnnexureII" Role="CPCAnnexureII" Multiplicity="1" />
@@ -780,14 +846,90 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CPCAnnexu__Proje__0B27A5C0">
+        <Association Name="FK__CPCAnnexu__Denom__1F2E9E6D">
+          <End Type="SOSTechCPCModel.CPCDenomination" Role="CPCDenomination" Multiplicity="1" />
+          <End Type="SOSTechCPCModel.CPCAnnexureIIDetail" Role="CPCAnnexureIIDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCDenomination">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCAnnexureIIDetail">
+              <PropertyRef Name="DenominationsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CPCAnnexureI">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SrNo" Type="Int32" />
+          <Property Name="CashHandedOverCPCStaffAId" Type="Guid" />
+          <Property Name="CashHandedOverCPCStaffBId" Type="Guid" />
+          <Property Name="CashHandedOverCITStaffAId" Type="Guid" />
+          <Property Name="CashHandedOverCITStaffBId" Type="Guid" />
+          <Property Name="SignatureCPCHandingOverCashAId" Type="Guid" />
+          <Property Name="SignatureCPCHandingOverCashBId" Type="Guid" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="DateOfCollection" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CPCAnnexureIDetails" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Annex__2022C2A6" FromRole="CPCAnnexureI" ToRole="CPCAnnexureIDetail" />
+        </EntityType>
+        <EntityType Name="CPCAnnexureIDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="AnnexureIId" Type="Guid" Nullable="false" />
+          <Property Name="CashProcessingCell" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectBranchId" Type="Guid" />
+          <Property Name="DenominationId" Type="Guid" />
+          <Property Name="NoOfBundles" Type="Int32" />
+          <Property Name="TotalAmount" Type="Int32" />
+          <Property Name="SealNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ShipmentReciptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="CPCAnnexureI" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Annex__2022C2A6" FromRole="CPCAnnexureIDetail" ToRole="CPCAnnexureI" />
+          <NavigationProperty Name="CPCDenomination" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Denom__220B0B18" FromRole="CPCAnnexureIDetail" ToRole="CPCDenomination" />
+          <NavigationProperty Name="CPCProjectBranch" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Proje__2116E6DF" FromRole="CPCAnnexureIDetail" ToRole="CPCProjectBranch" />
+        </EntityType>
+        <Association Name="FK__CPCAnnexu__Annex__2022C2A6">
+          <End Type="SOSTechCPCModel.CPCAnnexureI" Role="CPCAnnexureI" Multiplicity="1" />
+          <End Type="SOSTechCPCModel.CPCAnnexureIDetail" Role="CPCAnnexureIDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCAnnexureI">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCAnnexureIDetail">
+              <PropertyRef Name="AnnexureIId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CPCAnnexu__Denom__220B0B18">
+          <End Type="SOSTechCPCModel.CPCDenomination" Role="CPCDenomination" Multiplicity="0..1" />
+          <End Type="SOSTechCPCModel.CPCAnnexureIDetail" Role="CPCAnnexureIDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCDenomination">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCAnnexureIDetail">
+              <PropertyRef Name="DenominationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CPCAnnexu__Proje__2116E6DF">
           <End Type="SOSTechCPCModel.CPCProjectBranch" Role="CPCProjectBranch" Multiplicity="0..1" />
-          <End Type="SOSTechCPCModel.CPCAnnexureII" Role="CPCAnnexureII" Multiplicity="*" />
+          <End Type="SOSTechCPCModel.CPCAnnexureIDetail" Role="CPCAnnexureIDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CPCProjectBranch">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="CPCAnnexureII">
+            <Dependent Role="CPCAnnexureIDetail">
               <PropertyRef Name="ProjectBranchId" />
             </Dependent>
           </ReferentialConstraint>
@@ -846,25 +988,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CPCAnnexureIs">
-            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureI">
-              <MappingFragment StoreEntitySet="CPCAnnexureI">
-                <ScalarProperty Name="DateOfCollection" ColumnName="DateOfCollection" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="SignatureCPCHandingOverCashBId" ColumnName="SignatureCPCHandingOverCashBId" />
-                <ScalarProperty Name="SignatureCPCHandingOverCashAId" ColumnName="SignatureCPCHandingOverCashAId" />
-                <ScalarProperty Name="CashHandedOverCITStaffBId" ColumnName="CashHandedOverCITStaffBId" />
-                <ScalarProperty Name="CashHandedOverCITStaffAId" ColumnName="CashHandedOverCITStaffAId" />
-                <ScalarProperty Name="CashHandedOverCPCStaffBId" ColumnName="CashHandedOverCPCStaffBId" />
-                <ScalarProperty Name="CashHandedOverCPCStaffAId" ColumnName="CashHandedOverCPCStaffAId" />
-                <ScalarProperty Name="SrNo" ColumnName="SrNo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Vew_CPCAnnexureI">
             <EntityTypeMapping TypeName="SOSTechCPCModel.Vew_CPCAnnexureI">
               <MappingFragment StoreEntitySet="Vew_CPCAnnexureI">
@@ -893,23 +1016,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
                 <ScalarProperty Name="CashHandedOverCPCStaffAId" ColumnName="CashHandedOverCPCStaffAId" />
                 <ScalarProperty Name="DateOfCollection" ColumnName="DateOfCollection" />
                 <ScalarProperty Name="SrNo" ColumnName="SrNo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CPCAnnexureIDetails">
-            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureIDetail">
-              <MappingFragment StoreEntitySet="CPCAnnexureIDetails">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ShipmentReciptNo" ColumnName="ShipmentReciptNo" />
-                <ScalarProperty Name="SealNo" ColumnName="SealNo" />
-                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="NoOfBundles" ColumnName="NoOfBundles" />
-                <ScalarProperty Name="DenominationId" ColumnName="DenominationId" />
-                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
-                <ScalarProperty Name="CashProcessingCell" ColumnName="CashProcessingCell" />
-                <ScalarProperty Name="AnnexureIId" ColumnName="AnnexureIId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1033,6 +1139,28 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CPCAnnexureIIs">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureII">
+              <MappingFragment StoreEntitySet="CPCAnnexureII">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CashHandedOverByCITStaffStaffBId" ColumnName="CashHandedOverByCITStaffStaffBId" />
+                <ScalarProperty Name="CashHandedOverByCITStaffAId" ColumnName="CashHandedOverByCITStaffAId" />
+                <ScalarProperty Name="CashReceivedByCPCStaffBId" ColumnName="CashReceivedByCPCStaffBId" />
+                <ScalarProperty Name="CashReceivedByCPCStaffAId" ColumnName="CashReceivedByCPCStaffAId" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ShipmentReceiptNo" ColumnName="ShipmentReceiptNo" />
+                <ScalarProperty Name="SealNo" ColumnName="SealNo" />
+                <ScalarProperty Name="SrNo" ColumnName="SrNo" />
+                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
+                <ScalarProperty Name="AnnexureIIDate" ColumnName="AnnexureIIDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CPCAnnexureIIDetails">
             <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureIIDetail">
               <MappingFragment StoreEntitySet="CPCAnnexureIIDetails">
@@ -1060,23 +1188,40 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CPCAnnexureIIs">
-            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureII">
-              <MappingFragment StoreEntitySet="CPCAnnexureII">
-                <ScalarProperty Name="CashHandedOverByCITStaffStaffBId" ColumnName="CashHandedOverByCITStaffStaffBId" />
-                <ScalarProperty Name="CashHandedOverByCITStaffAId" ColumnName="CashHandedOverByCITStaffAId" />
-                <ScalarProperty Name="CashReceivedByCPCStaffBId" ColumnName="CashReceivedByCPCStaffBId" />
-                <ScalarProperty Name="CashReceivedByCPCStaffAId" ColumnName="CashReceivedByCPCStaffAId" />
+          <EntitySetMapping Name="CPCAnnexureIs">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureI">
+              <MappingFragment StoreEntitySet="CPCAnnexureI">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateOfCollection" ColumnName="DateOfCollection" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ShipmentReceiptNo" ColumnName="ShipmentReceiptNo" />
-                <ScalarProperty Name="SealNo" ColumnName="SealNo" />
+                <ScalarProperty Name="SignatureCPCHandingOverCashBId" ColumnName="SignatureCPCHandingOverCashBId" />
+                <ScalarProperty Name="SignatureCPCHandingOverCashAId" ColumnName="SignatureCPCHandingOverCashAId" />
+                <ScalarProperty Name="CashHandedOverCITStaffBId" ColumnName="CashHandedOverCITStaffBId" />
+                <ScalarProperty Name="CashHandedOverCITStaffAId" ColumnName="CashHandedOverCITStaffAId" />
+                <ScalarProperty Name="CashHandedOverCPCStaffBId" ColumnName="CashHandedOverCPCStaffBId" />
+                <ScalarProperty Name="CashHandedOverCPCStaffAId" ColumnName="CashHandedOverCPCStaffAId" />
                 <ScalarProperty Name="SrNo" ColumnName="SrNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CPCAnnexureIDetails">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureIDetail">
+              <MappingFragment StoreEntitySet="CPCAnnexureIDetails">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ShipmentReciptNo" ColumnName="ShipmentReciptNo" />
+                <ScalarProperty Name="SealNo" ColumnName="SealNo" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="NoOfBundles" ColumnName="NoOfBundles" />
+                <ScalarProperty Name="DenominationId" ColumnName="DenominationId" />
                 <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
-                <ScalarProperty Name="AnnexureIIDate" ColumnName="AnnexureIIDate" />
-                <ScalarProperty Name="AnnexureId" ColumnName="AnnexureId" />
+                <ScalarProperty Name="CashProcessingCell" ColumnName="CashProcessingCell" />
+                <ScalarProperty Name="AnnexureIId" ColumnName="AnnexureIId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

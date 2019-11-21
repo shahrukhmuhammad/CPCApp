@@ -19,7 +19,7 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIs.OrderBy(x => x.CreatedOn).ToList();
+                    return context.CPCAnnexureIs.Include(x=> x.CPCAnnexureIDetails.Select(y=> y.CPCProjectBranch)).OrderBy(x => x.CreatedOn).ToList();
                 }
             }
             catch (Exception ex)

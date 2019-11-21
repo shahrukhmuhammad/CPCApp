@@ -21,9 +21,8 @@ namespace CPC.Model
         }
     
         public System.Guid Id { get; set; }
-        public System.Guid AnnexureId { get; set; }
         public System.DateTime AnnexureIIDate { get; set; }
-        public Nullable<System.Guid> ProjectBranchId { get; set; }
+        public System.Guid ProjectBranchId { get; set; }
         public int SrNo { get; set; }
         public string SealNo { get; set; }
         public string ShipmentReceiptNo { get; set; }
@@ -35,9 +34,11 @@ namespace CPC.Model
         public Nullable<System.Guid> CashReceivedByCPCStaffBId { get; set; }
         public Nullable<System.Guid> CashHandedOverByCITStaffAId { get; set; }
         public Nullable<System.Guid> CashHandedOverByCITStaffStaffBId { get; set; }
+        public byte Status { get; set; }
+        public bool IsActive { get; set; }
     
+        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCAnnexureIIDetail> CPCAnnexureIIDetails { get; set; }
-        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
     }
 }
