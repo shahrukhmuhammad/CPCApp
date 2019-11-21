@@ -88,7 +88,7 @@ namespace WebApp.Areas.CPC.Controllers
                     var res = annexureIRepo.Create(model);
                     if (res.HasValue)
                     {
-                        var lsToSave = CPCAnnexureIDetail.Where(x => !string.IsNullOrEmpty(x.CashProcessingCell) && x.NoOfBundles > 0).ToList();
+                        var lsToSave = CPCAnnexureIDetail.Where(x => x.CashProcessingCellId.HasValue && x.NoOfBundles > 0).ToList();
                         lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.AnnexureIId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
                         #region Save Details
                         annexureIRepo.Create(lsToSave);

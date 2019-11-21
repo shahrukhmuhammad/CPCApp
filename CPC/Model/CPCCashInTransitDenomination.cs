@@ -22,7 +22,7 @@ namespace CPC.Model
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
     
-        public virtual CPCDenomination CPCDenomination { get; set; }
         public virtual CPCCashInTransit CPCCashInTransit { get; set; }
+        public virtual CPCDenomination CPCDenomination { get; set; }
     }
 }
