@@ -12,31 +12,22 @@ namespace CPC.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CPCAnnexureI
+    public partial class CPCCashProcessingHouse
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CPCAnnexureI()
+        public CPCCashProcessingHouse()
         {
-            this.CPCAnnexureIDetails = new HashSet<CPCAnnexureIDetail>();
+            this.CPCProjectBranches = new HashSet<CPCProjectBranch>();
         }
     
         public System.Guid Id { get; set; }
-        public Nullable<int> SrNo { get; set; }
-        public Nullable<System.Guid> CashHandedOverCPCStaffAId { get; set; }
-        public Nullable<System.Guid> CashHandedOverCPCStaffBId { get; set; }
-        public Nullable<System.Guid> CashHandedOverCITStaffAId { get; set; }
-        public Nullable<System.Guid> CashHandedOverCITStaffBId { get; set; }
-        public Nullable<System.Guid> SignatureCPCHandingOverCashAId { get; set; }
-        public Nullable<System.Guid> SignatureCPCHandingOverCashBId { get; set; }
+        public string Code { get; set; }
+        public string Title { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
-        public Nullable<System.DateTime> UpdatedOn { get; set; }
-        public Nullable<System.Guid> UpdatedBy { get; set; }
-        public System.DateTime DateOfCollection { get; set; }
-        public byte Status { get; set; }
         public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
+        public virtual ICollection<CPCProjectBranch> CPCProjectBranches { get; set; }
     }
 }

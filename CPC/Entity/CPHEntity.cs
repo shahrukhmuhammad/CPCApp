@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace CPC
 {
-    public class BranchEntity
+    public class CPHEntity
     {
         private SOSTechCPCEntities context;
 
-        public List<CPCProjectBranch> GetAll()
+        public List<CPCCashProcessingHouse> GetAll()
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCProjectBranches.OrderBy(x => x.BranchCode).ToList();
+                    return context.CPCCashProcessingHouses.OrderBy(x => x.Title).ToList();
                 }
             }
             catch (Exception ex)
@@ -27,13 +27,13 @@ namespace CPC
                 throw ex;
             }
         }
-        public CPCProjectBranch GetById(Guid Id)
+        public CPCCashProcessingHouse GetById(Guid Id)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCProjectBranches.Where(x => x.Id == Id).FirstOrDefault();
+                    return context.CPCCashProcessingHouses.Where(x => x.Id == Id).FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -48,14 +48,8 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    var ls = new List<CPCProjectBranch>();
-                    if (Id.HasValue)
-                    {
-                        ls = context.CPCProjectBranches.Where(x => x.CPHId == Id).ToList();
-                        return ls.Select(x => new CustomSelectList { Value = x.Id.ToString(), Text = x.BranchCode + " - " + x.BranchName }).ToList();
-                    }
-                    ls = context.CPCProjectBranches.ToList();
-                    return ls.Select(x => new CustomSelectList { Value = x.Id.ToString(), Text = x.BranchCode + " - " + x.BranchName }).ToList();
+                    var ls = context.CPCCashProcessingHouses.Where(x => x.IsActive).ToList();
+                    return ls.Select(x => new CustomSelectList { Value = x.Id.ToString(), Text = x.Title }).ToList();
                 }
             }
             catch (Exception ex)

@@ -37,5 +37,6 @@ namespace CPC.Model
         public System.Guid CreatedBy { get; set; }
     
         public virtual CPCAnnexureII CPCAnnexureII { get; set; }
+        public virtual CPCDenomination CPCDenomination { get; set; }
     }
 }

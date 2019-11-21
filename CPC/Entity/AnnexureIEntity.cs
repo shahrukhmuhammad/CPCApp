@@ -19,7 +19,7 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIs.OrderBy(x => x.CreatedOn).ToList();
+                    return context.CPCAnnexureIs.Where(x=> x.IsActive).OrderBy(x => x.CreatedOn).ToList();
                 }
             }
             catch (Exception ex)
@@ -34,12 +34,40 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.Vew_CPCAnnexureI.ToList();
+                    return context.Vew_CPCAnnexureI.Where(x => x.IsActive).ToList();
                 }
             }
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+        public List<Vew_CPCAnnexureI> GetAllDetailsById(Guid Id)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.Vew_CPCAnnexureI.Where(x=> x.Id == Id).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public bool IsDuplicate(int SrNo)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.CPCAnnexureIs.Where(x => x.SrNo == SrNo).FirstOrDefault() != null ? true : false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return true;
             }
         }
         public List<Vew_CPCAnnexureI> GetByDateBranchId(Guid branchId, DateTime dateofCollection)
@@ -48,12 +76,11 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.Vew_CPCAnnexureI.Where(x => x.ProjectBranchId == branchId && x.DateOfCollection == dateofCollection).ToList();
+                    return context.Vew_CPCAnnexureI.Where(x => x.ProjectBranchId == branchId && x.DateOfCollection == dateofCollection && x.IsActive).ToList();
                 }
             }
             catch (Exception ex)
             {
-                //throw ex;
                 return null;
             }
         }
@@ -63,7 +90,7 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIs.Where(x => x.Id == Id).FirstOrDefault();
+                    return context.CPCAnnexureIs.Find(Id);
                 }
             }
             catch (Exception ex)
@@ -166,6 +193,28 @@ namespace CPC
         #endregion
 
         #region Delete
+        public bool InActiveRecord(Guid Id)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Update Annexure Status
+                    var res = context.CPCAnnexureIs.Where(x => x.Id == Id).FirstOrDefault();
+                    if (res != null)
+                    {
+                        res.IsActive = false;
+                        context.SaveChanges();
+                    }
+                    #endregion
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         public bool DeleteDetails(Guid Id)
         {
             try
@@ -243,7 +292,12 @@ namespace CPC
             {
                 using (var context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIs.Max(x => x.SrNo) <= 0 ? 1 : (int)context.CPCAnnexureIs.Max(x => x.SrNo) + 1;
+                    int? res = context.CPCAnnexureIs.Max(x => x.SrNo);
+                    if (res.HasValue)
+                    {
+                        return Convert.ToInt32(res) + 1;
+                    }
+                    return 0;
                 }
             }
             catch (Exception ex)

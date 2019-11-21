@@ -19,6 +19,7 @@ namespace WebApp.Areas.CPC.Controllers
         private EmployeeEntity employeeRepo;
         private BranchEntity branchRepo;
         private Common commonRepo;
+        private CPHEntity cashpPocessinHousegRepo;
 
         public AnnexureIController()
         {
@@ -26,6 +27,7 @@ namespace WebApp.Areas.CPC.Controllers
             employeeRepo = new EmployeeEntity();
             branchRepo = new BranchEntity();
             commonRepo = new Common();
+            cashpPocessinHousegRepo = new CPHEntity();
         }
         public ActionResult AnnexureIs()
         {
@@ -33,18 +35,19 @@ namespace WebApp.Areas.CPC.Controllers
         }
         public PartialViewResult _AllAnnexureI()
         {
-            //ViewBag.AnnexureDetails = annexureIRepo.GetAllDetails();
-            ViewBag.EmployeeList = employeeRepo.GetAll();
             var model = annexureIRepo.GetAll();
+            ViewBag.EmployeeList = employeeRepo.GetAll();
+            ViewBag.DenomList = commonRepo.GetAllDenominationDropdown();
             return PartialView(model);
         }
 
         #region Details
-        [Route("HRMS/Region/Details/{Id}/{IsView}")]
-        public ActionResult Details(Guid Id, string IsView)
+        public ActionResult Details(Guid Id)
         {
-            TempData["IsView"] = IsView;
-            return RedirectToAction("Record", "Region", new { Id });
+            var model = annexureIRepo.GetById(Id);
+            //ViewBag.Employees = employeeRepo.GetAll();
+            ViewBag.Details = annexureIRepo.GetAllDetailsById(Id);
+            return View(model);
         }
         #endregion
         #region Record
@@ -59,16 +62,17 @@ namespace WebApp.Areas.CPC.Controllers
             else
             {
                 model.DateOfCollection = DateTime.Now;
-                // model.SrNo = annexureIRepo.GetNextSrNo();
+                model.SrNo = annexureIRepo.GetNextSrNo();
                 //model.IsActive = true;
             }
             ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             ViewBag.BrachList = new SelectList(branchRepo.GetDropdown(), "Value", "Text");
             ViewBag.DenominationList = new SelectList(commonRepo.GetAllDenominationDropdown(), "Value", "Text");
+            ViewBag.CPHList = new SelectList(cashpPocessinHousegRepo.GetDropdown(), "Value", "Text");
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Record(CPCAnnexureI model, List<CPCAnnexureIDetail> CPCAnnexureIDetail)
+        public ActionResult Record(CPCAnnexureI model, List<CPCAnnexureIDetail> CPCAnnexureIDetail, string DateOfCollection)
         {
             try
             {
@@ -76,8 +80,11 @@ namespace WebApp.Areas.CPC.Controllers
                 {
                     model.CreatedBy = CurrentUser.Id;
                     model.CreatedOn = DateTime.Now;
-                    //model.IsActive = true;
+                    model.IsActive = true;
+                    model.Status = (int)AnnexureStatus.Inprocess;
                     model.Id = Guid.NewGuid();
+                    model.DateOfCollection = Utils.SetDateFormate(DateOfCollection);
+
                     var res = annexureIRepo.Create(model);
                     if (res.HasValue)
                     {
@@ -160,7 +167,7 @@ namespace WebApp.Areas.CPC.Controllers
         [HttpGet]
         public JsonResult GetAnnexureI(Guid Id, string date)
         {
-            var ls = annexureIRepo.GetByDateBranchId(Id, Convert.ToDateTime(date));
+            var ls = annexureIRepo.GetByDateBranchId(Id, Utils.SetDateFormate(date));
             if (ls != null && ls.Count > 0)
             {
                 return Json(new
@@ -173,14 +180,49 @@ namespace WebApp.Areas.CPC.Controllers
             }
             return Json(null, JsonRequestBehavior.AllowGet);
         }
-        //[HttpPost]
-        //public JsonResult GetDesignationsByDepartId(Guid Id)
-        //{
-        //    return Json("");//designationRepo.GetDesignationDropdown(Id));
-        //}
+        [HttpGet]
+        public JsonResult DuplicationCheck(int SrNo)
+        {
+            return Json(annexureIRepo.IsDuplicate(SrNo), JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult FetchHirerachy(Guid id)
+        {
+            try
+            {
+                //var List = branchRepo.GetDropdown(id);
+                return Json(branchRepo.GetDropdown(id), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region Delete
+        [HttpPost]
+        public JsonResult Delete(Guid Id)
+        {
+            try
+            {
+                #region Activity Log
+                //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
+                #endregion
+                annexureIRepo.InActiveRecord(Id);
+
+                TempData["SuccessMsg"] = "AnnexureII has been deleted successfully.";
+            }
+            catch (Exception ex)
+            {
+                #region Error Log
+                //appLog.Create(CurrentUser.OfficeId, null, CurrentUser.Id, AppLogType.Error, "CRM", ex.GetType().Name.ToSpacedTitleCase(), "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped'><tr><th class='text-right'>Source</th><td>" + ex.Source + "</td></tr><tr><th class='text-right'>URL</th><td>" + Request.Url.ToString() + "</td></tr><tr><th class='text-right'>Message</th><td>" + ex.Message + "</td></tr></table><table class='table table-hover table-striped table-condensed'><tr><th class='text-center'>Inner Exception</th></tr><tr><td>" + ex.InnerException + "</td></tr><tr><th class='text-center'>Stack Trace</th></tr><tr><td>" + ex.StackTrace.ToString() + "</td></tr></table>");
+                #endregion
+
+                TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
+            }
+            return Json(true);
+        }
         //[HttpPost]
         //public JsonResult Delete(Guid Id)
         //{
