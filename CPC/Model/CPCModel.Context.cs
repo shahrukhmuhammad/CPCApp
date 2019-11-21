@@ -33,11 +33,14 @@ namespace CPC.Model
         public virtual DbSet<Vew_CPCAnnexureI> Vew_CPCAnnexureI { get; set; }
         public virtual DbSet<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
         public virtual DbSet<CPCProject> CPCProjects { get; set; }
-        public virtual DbSet<CPCAnnexureIII> CPCAnnexureIIIs { get; set; }
         public virtual DbSet<CPCAnnexureIIIDetail> CPCAnnexureIIIDetails { get; set; }
-        public virtual DbSet<CPCCashInTransit> CPCCashInTransits { get; set; }
-        public virtual DbSet<CPCCashInTransitChild> CPCCashInTransitChilds { get; set; }
+        public virtual DbSet<CPCAnnexureIII> CPCAnnexureIIIs { get; set; }
         public virtual DbSet<CPCAnnexureIIDetail> CPCAnnexureIIDetails { get; set; }
         public virtual DbSet<CPCAnnexureII> CPCAnnexureIIs { get; set; }
+        public virtual DbSet<CPCCashInTransitChild> CPCCashInTransitChilds { get; set; }
+        public virtual DbSet<CPCCashInTransitDenomination> CPCCashInTransitDenominations { get; set; }
+        public virtual DbSet<CPCCashInTransit> CPCCashInTransits { get; set; }
+        public virtual DbSet<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
+        public virtual DbSet<CPCUnsortedCashDetail> CPCUnsortedCashDetails { get; set; }
     }
 }

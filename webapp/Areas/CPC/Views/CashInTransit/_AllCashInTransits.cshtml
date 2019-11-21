@@ -40,9 +40,9 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" onchange="checkAll(this, 'checkIt');" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Sr No" id="CashInTransit-dataTable_0" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Name" id="CashInTransit-dataTable_1" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Created On" id="CashInTransit-dataTable_2" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Shipment No." id="CashInTransit-dataTable_0" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Customer" id="CashInTransit-dataTable_1" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Vehicle No." id="CashInTransit-dataTable_2" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Updated On" id="CashInTransit-dataTable_3" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Status" id="CashInTransit-dataTable_4" /></th>
                             <th class="text-center" width="100px">Action</th>
@@ -59,18 +59,25 @@
                                 }
                             </td>
                             <td><a href="@Url.Action("Details","CashInTransit",new { Id = x.Id })">@x.ShipmentReceiptNumber</a></td>
-                            <td></td>
+                            <td>@x.CustomerToBeBilled</td>
+                            <td>@x.VehicleNumber</td>
                             <td>@x.Date</td>
-                            <td></td>
-                            <td></td>
+                            @if (x.Status == 1)
+                            {
+                            <td> <label class="label label-warning">@AnnexureStatus.Inprocess</label></td>
+                            }
+                            else
+                            {
+                            <td> <label class="label label-warning">@AnnexureStatus.Completed</label></td>
+                            }
                             <td class="text-center">
                                 <div class="btn-group btn-group-xs" role="group">
                                     @*<a href="@Url.Action("Details","CashInTransit")/@x.Id/1" class="btn btn-primary" title="Details">*@
-                                        <a href="@Url.Action("Details","CashInTransit",new { Id = x.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
+                                    <a href="@Url.Action("Details","CashInTransit",new { Id = x.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
                                     @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.CPC))
                                     {
-                                        <a href="@Url.Action("Record","CashInTransit")/@x.Id" class="btn btn-info" title="Edit"><i class="fa fa-edit"></i></a>
-                                        @*<a href="javascript://" onclick="deleteRecord('@Url.Action("Delete")', '@x.Id')" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>*@
+                                        @*<a href="@Url.Action("Record","CashInTransit")/@x.Id" class="btn btn-info" title="Edit"><i class="fa fa-edit"></i></a>*@
+                                        <a href="javascript://" onclick="deleteRecord('@Url.Action("Delete")', '@x.Id')" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
                                     }
                                 </div>
                             </td>

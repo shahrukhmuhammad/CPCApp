@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace CPC
 {
-    public class CashInTransitEntity
+    public class UnsortedCashEntity
     {
         private SOSTechCPCEntities context;
 
-        public List<CPCCashInTransit> GetAll()
+        public List<CPCUnsortedCash> GetAll()
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    //return context.CPCCashInTransits.OrderBy(x => x.Date).ToList();
-                    return context.CPCCashInTransits.Where(x => x.IsActive).OrderBy(x => x.Id).ToList();
+                    //return context.CPCUnsortedCashs.OrderBy(x => x.Date).ToList();
+                    return context.CPCUnsortedCashes.Where(x => x.IsActive).OrderBy(x => x.Id).ToList();
                 }
             }
             catch (Exception ex)
@@ -58,14 +58,15 @@ namespace CPC
                 return null;
             }
         }
-        public CPCCashInTransit GetById(Guid Id)
+
+
+        public CPCUnsortedCash GetById(Guid Id)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    //return context.CPCCashInTransits.Where(x => x.Id == Id).FirstOrDefault();
-                     return context.CPCCashInTransits.Include(x=> x.CPCCashInTransitChilds).Include(x=> x.CPCCashInTransitDenominations.Select(y=> y.CPCDenomination)).Where(x => x.Id == Id).FirstOrDefault();
+                    return context.CPCUnsortedCashes.Include(x => x.CPCUnsortedCashDetails.Select(y => y.CPCDenomination)).Where(x => x.Id == Id).FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -98,7 +99,7 @@ namespace CPC
 
 
         #region Add/Update Employee
-        public Guid? Create(CPCCashInTransit model)
+        public Guid? Create(CPCUnsortedCash model)
         {
             try
             {
@@ -106,7 +107,8 @@ namespace CPC
                 {
                     #region Save Department
                     model.Status = 1;
-                    context.CPCCashInTransits.Add(model);
+                    model.CreatedOn = DateTime.Now;
+                    context.CPCUnsortedCashes.Add(model);
                     context.SaveChanges();
                     #endregion
                     return model.Id;
@@ -118,33 +120,14 @@ namespace CPC
             }
         }
 
-        public bool Create(List<CPCCashInTransitChild> modelList)
+        public bool Create(List<CPCUnsortedCashDetail> modelList)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Save Department
-                    context.CPCCashInTransitChilds.AddRange(modelList);
-                    context.SaveChanges();
-                    #endregion
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
-
-        public bool Create(List<CPCCashInTransitDenomination> modelList)
-        {
-            try
-            {
-                using (context = new SOSTechCPCEntities())
-                {
-                    #region Save Department
-                    context.CPCCashInTransitDenominations.AddRange(modelList);
+                    context.CPCUnsortedCashDetails.AddRange(modelList);
                     context.SaveChanges();
                     #endregion
                     return true;
@@ -163,7 +146,7 @@ namespace CPC
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Update Employee
-                    var res = context.CPCCashInTransits.Where(x => x.Id == model.Id).FirstOrDefault();
+                    var res = context.CPCUnsortedCashes.Where(x => x.Id == model.Id).FirstOrDefault();
                     if (res != null)
                     {
                         //res.CashHandedOverCPCStaffAId = model.CashHandedOverCPCStaffAId;
@@ -259,13 +242,13 @@ namespace CPC
 
         #endregion
 
-        public int GetNextShipmentNo()
+        public int GetNextSerialNumber()
         {
             try
             {
                 using (var context = new SOSTechCPCEntities())
                 {
-                    return context.CPCCashInTransits.Max(x => x.ShipmentReceiptNumber) <= 0 ? 1 : (int)context.CPCCashInTransits.Max(x => x.ShipmentReceiptNumber) + 1;
+                    return context.CPCUnsortedCashes.Max(x => x.SerialNumber) <= 0 ? 1 : (int)context.CPCUnsortedCashes.Max(x => x.SerialNumber) + 1;
                 }
             }
             catch (Exception ex)
@@ -282,7 +265,7 @@ namespace CPC
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Update Employee
-                    var res = context.CPCCashInTransits.Where(x => x.Id == Id).FirstOrDefault();
+                    var res = context.CPCUnsortedCashes.Where(x => x.Id == Id).FirstOrDefault();
                     if (res != null)
                     {
                         res.IsActive = false;

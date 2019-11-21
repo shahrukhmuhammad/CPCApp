@@ -13,10 +13,7 @@
         <EntityTypeShape EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" Width="2.75" PointX="4.625" PointY="4" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIDetail" Width="2.75" PointX="0.625" PointY="2" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCProject" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCCashInTransit" Width="2.375" PointX="5.375" PointY="5.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCCashInTransitChild" Width="2.375" PointX="5.375" PointY="5.75" IsExpanded="false" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIIIDetail" Width="1.5" PointX="8.875" PointY="2.875" IsExpanded="false" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCCashIn__CashI__019E3B86" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIII" Width="1.5" PointX="8.875" PointY="2.375" IsExpanded="false" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__7908F585" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__CashC__02925FBF" />
@@ -24,6 +21,16 @@
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureII" Width="1.5" PointX="7.75" PointY="7.875" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__0C1BC9F9" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Proje__0B27A5C0" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCCashInTransitChild" Width="1.5" PointX="12.625" PointY="12.5" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCCashInTransitDenomination" Width="2.375" PointX="12.625" PointY="6.75" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CashInTra__Denom__6BCEF5F8" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCCashInTransit" Width="1.5" PointX="10.375" PointY="7.75" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CashInTra__CashI__6ADAD1BF" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCCashIn__CashI__5B78929E" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCUnsortedCash" Width="1.5" PointX="4" PointY="8.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCUnsortedCashDetail" Width="1.5" PointX="4" PointY="7.875" IsExpanded="false" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Denom__01BE3717" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Unsor__00CA12DE" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -5,6 +5,8 @@
     ViewBag.Title = "Details";
     var empList = ViewBag.Employees as List<CPCEmployee>;
     var detailsArray = Model.CPCCashInTransitChilds.ToArray();
+    var detailsDenom = Model.CPCCashInTransitDenominations;
+    var denomList = ViewBag.DenominationList as List<CPCDenomination>;
 }
 
 <div class="row">
@@ -21,7 +23,7 @@
                                     <label class="col-sm-4 text-left horizontal-label">Date</label>
                                     <div class="col-sm-8">
                                         <div class="input-group input-group-sm">
-                                            <label class="label label-default">@Model.Date.ToString();</label>
+                                            <label class="label label-default">@Model.Date.ToString(Constants.DATE_FORMAT_CLIENT_SIDE);</label>
                                         </div>
                                     </div>
                                 </div>
@@ -330,68 +332,91 @@
                                     <tr>
                                         <td>Rs. 5000 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination5000, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
-                                            @Html.ValidationMessageFor(m => m.DetailDenomination5000)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().NumberOfPackets)
+                                        </td>
+                                        <td>
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().TotalValue)
                                         </td>
                                         <td>Nos.</td>
+
                                         <td>Rs. 1000 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination1000, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
-                                            @Html.ValidationMessageFor(m => m.DetailDenomination1000)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().NumberOfPackets)
+                                        </td>
+                                        <td>
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().TotalValue)
                                         </td>
                                         <td>Nos.</td>
+
                                         <td>Rs. 500 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination500, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
-                                            @Html.ValidationMessageFor(m => m.DetailDenomination500)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().NumberOfPackets)
+                                        </td>
+                                        <td>
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().NumberOfPackets)
                                         </td>
                                         <td>Nos.</td>
                                     </tr>
                                     <tr>
                                         <td>Rs. 100 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination100, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
-                                            @Html.ValidationMessageFor(m => m.DetailDenomination100)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().NumberOfPackets)
+                                        </td>
+                                        <td>
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().NumberOfPackets)
                                         </td>
                                         <td>Nos.</td>
+
                                         <td>Rs. 50 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination50, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
-                                            @Html.ValidationMessageFor(m => m.DetailDenomination50)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().NumberOfPackets)
+                                        </td>
+                                        <td>
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().NumberOfPackets)
                                         </td>
                                         <td>Nos.</td>
                                         <td>Rs. 20 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination20, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
-                                            @Html.ValidationMessageFor(m => m.DetailDenomination20)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().NumberOfPackets)
+                                        </td>
+                                        <td>
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().NumberOfPackets)
                                         </td>
                                         <td>Nos.</td>
                                     </tr>
                                     <tr>
                                         <td>Rs. 10 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination10, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
-                                            @Html.ValidationMessageFor(m => m.DetailDenomination10)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().NumberOfPackets)
+                                        </td>
+                                        <td>
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().NumberOfPackets)
                                         </td>
                                         <td>Nos.</td>
                                         <td>Rs. 5 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination5, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
-                                            @Html.ValidationMessageFor(m => m.DetailDenomination5)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().NumberOfPackets)
+                                        </td>
+                                        <td>
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().NumberOfPackets)
                                         </td>
                                         <td>Nos.</td>
                                         <td>Rs. 2 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination2, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
-                                            @Html.ValidationMessageFor(m => m.DetailDenomination2)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().NumberOfPackets)
+                                        </td>
+                                        <td>
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().NumberOfPackets)
                                         </td>
                                         <td>Nos.</td>
                                     </tr>
                                     <tr>
                                         <td>Rs. 1 x </td>
                                         <td>
-                                            @Html.TextBoxFor(x => x.DetailDenomination1, new { @class = "form-control input-sm", @disabled = "disabled", @autofocus = "true" })
-                                            @Html.ValidationMessageFor(m => m.DetailDenomination1)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().NumberOfPackets)
+                                        </td>
+                                        <td>
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().NumberOfPackets)
                                         </td>
                                         <td>Nos.</td>
                                     </tr>

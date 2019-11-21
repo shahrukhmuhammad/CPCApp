@@ -17,6 +17,7 @@ namespace CPC.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CPCCashInTransit()
         {
+            this.CPCCashInTransitDenominations = new HashSet<CPCCashInTransitDenomination>();
             this.CPCCashInTransitChilds = new HashSet<CPCCashInTransitChild>();
         }
     
@@ -24,11 +25,11 @@ namespace CPC.Model
         public string CustomerToBeBilled { get; set; }
         public int ShipmentReceiptNumber { get; set; }
         public string Collection { get; set; }
-        public Nullable<System.DateTime> CollectionDateTime { get; set; }
-        public Nullable<System.DateTime> DeliveryDateTime { get; set; }
+        public System.DateTime CollectionDateTime { get; set; }
+        public System.DateTime DeliveryDateTime { get; set; }
         public string Delivery { get; set; }
         public string VehicleNumber { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public System.DateTime Date { get; set; }
         public string AcCode { get; set; }
         public string WaitingTime { get; set; }
         public Nullable<int> NumberOfPlasticLeadSeals { get; set; }
@@ -42,21 +43,15 @@ namespace CPC.Model
         public Nullable<System.Guid> AcceptedByNameB { get; set; }
         public Nullable<System.Guid> ReceivedByNameA { get; set; }
         public Nullable<System.Guid> ReceivedByNameB { get; set; }
-        public Nullable<int> DetailDenomination5000 { get; set; }
-        public Nullable<int> DetailDenomination1000 { get; set; }
-        public Nullable<int> DetailDenomination500 { get; set; }
-        public Nullable<int> DetailDenomination100 { get; set; }
-        public Nullable<int> DetailDenomination50 { get; set; }
-        public Nullable<int> DetailDenomination20 { get; set; }
-        public Nullable<int> DetailDenomination10 { get; set; }
-        public Nullable<int> DetailDenomination5 { get; set; }
-        public Nullable<int> DetailDenomination2 { get; set; }
-        public Nullable<int> DetailDenomination1 { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public Nullable<System.Guid> UpdatedBy { get; set; }
+        public Nullable<byte> Status { get; set; }
+        public bool IsActive { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCCashInTransitDenomination> CPCCashInTransitDenominations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCCashInTransitChild> CPCCashInTransitChilds { get; set; }
     }

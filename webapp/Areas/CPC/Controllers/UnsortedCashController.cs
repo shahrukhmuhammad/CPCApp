@@ -9,31 +9,30 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-
 namespace WebApp.Areas.CPC.Controllers
 {
     [AppAuthorize(AppPermission.All, AppPermission.ViewCPC, AppPermission.CPC)]
-    public class CashInTransitController : AppController
+    public class UnsortedCashController : AppController
     {
-        private CashInTransitEntity cashInTransitRepo;
+        private UnsortedCashEntity unsortedCashRepo;
         private EmployeeEntity employeeRepo;
         private BranchEntity branchRepo;
         private Common commonRepo;
 
-        public CashInTransitController()
+        public UnsortedCashController()
         {
-            cashInTransitRepo = new CashInTransitEntity();
+            unsortedCashRepo = new UnsortedCashEntity();
             employeeRepo = new EmployeeEntity();
             branchRepo = new BranchEntity();
             commonRepo = new Common();
         }
-        public ActionResult CashInTransits()
+        public ActionResult UnsortedCashs()
         {
             return View();
         }
-        public PartialViewResult _AllCashInTransits()
+        public PartialViewResult _AllUnsortedCashs()
         {
-            var model = cashInTransitRepo.GetAll();
+            var model = unsortedCashRepo.GetAll();
             return PartialView(model);
         }
 
@@ -41,7 +40,7 @@ namespace WebApp.Areas.CPC.Controllers
 
         public ActionResult Details(Guid Id)
         {
-            var model = cashInTransitRepo.GetById(Id);
+            var model = unsortedCashRepo.GetById(Id);
             ViewBag.Employees = employeeRepo.GetAll();
             ViewBag.DenominationList = commonRepo.GetAllDenomination();
             return View(model);
@@ -50,18 +49,15 @@ namespace WebApp.Areas.CPC.Controllers
         #region Record
         public ActionResult Record(Guid? Id)
         {
-            ViewData["IsView"] = Convert.ToString(TempData["IsView"]);
-            var model = new CPCCashInTransit();
+            var model = new CPCUnsortedCash();
             if (Id.HasValue)
             {
-                model = cashInTransitRepo.GetById(Id.Value);
-                model.Date = DateTime.Now;
-                model.DeliveryDateTime = DateTime.Now;
-                model.CollectionDateTime = DateTime.Now;
+                model = unsortedCashRepo.GetById(Id.Value);
             }
             else
             {
-                model.ShipmentReceiptNumber = cashInTransitRepo.GetNextShipmentNo();
+                model.SerialNumber = unsortedCashRepo.GetNextSerialNumber();
+                model.Date = DateTime.Now;
                 //model.IsActive = true;
             }
             //ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
@@ -72,7 +68,7 @@ namespace WebApp.Areas.CPC.Controllers
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Record(CPCCashInTransit model, List<CPCCashInTransitChild> CPCCashInTransitChild, List<CPCCashInTransitDenomination> CPCCashInTransitDenomination, string Date, string CollectionDateTime, string DeliveryDateTime)
+        public ActionResult Record(CPCUnsortedCash model, List<CPCUnsortedCashDetail> CPCUnsortedCashDetail, string Date)
         {
             try
             {
@@ -81,23 +77,16 @@ namespace WebApp.Areas.CPC.Controllers
                     model.CreatedBy = CurrentUser.Id;
                     model.CreatedOn = DateTime.Now;
                     model.IsActive = true;
+                    model.Status = 1;
                     model.Date = Utils.SetDateFormate(Date);
-                    model.CollectionDateTime = Utils.SetDateFormate(CollectionDateTime);
-                    model.DeliveryDateTime = Utils.SetDateFormate(DeliveryDateTime);
                     model.Id = Guid.NewGuid();
-                    var res = cashInTransitRepo.Create(model);
+                    var res = unsortedCashRepo.Create(model);
                     if (res.HasValue)
                     {
-                        var lsToSave = CPCCashInTransitChild.Where(x => x.SealNumber > 0 && (x.Item != "" || x.Value == 0 || x.PartialDelivery != "")).ToList();
-                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.CashInTransitId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
+                        var lsToSave = CPCUnsortedCashDetail.Where(x => x.NumberOfBundles > 0 && (x.TotalValue != 0)).ToList();
+                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.UnsortedCashId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
                         #region Save Details
-                        cashInTransitRepo.Create(lsToSave);
-                        #endregion
-
-                        var lsToSaveDenom = CPCCashInTransitDenomination.Where(y => y.NumberOfPackets != 0 && (y.TotalValue != 0)).ToList();
-                        lsToSaveDenom.ForEach(y => { y.Id = Guid.NewGuid(); y.CashInTransitId = model.Id; y.CreatedOn = DateTime.Now; y.CreatedBy = CurrentUser.Id; });
-                        #region Save Details
-                        cashInTransitRepo.Create(lsToSaveDenom);
+                        unsortedCashRepo.Create(lsToSave);
                         #endregion
 
                         model.Id = res.Value;
@@ -127,7 +116,7 @@ namespace WebApp.Areas.CPC.Controllers
                     //realtime.UpdateMessages(null);
                     #endregion
 
-                    TempData["SuccessMsg"] = model.ShipmentReceiptNumber + " has been created successfully.";
+                    TempData["SuccessMsg"] = model.SerialNumber + " has been created successfully.";
                 }
                 else
                 {
@@ -164,7 +153,7 @@ namespace WebApp.Areas.CPC.Controllers
             //}
             //else
             //{
-            return RedirectToAction("CashInTransits");
+            return RedirectToAction("UnsortedCashs");
         }
         #endregion
 
@@ -191,7 +180,7 @@ namespace WebApp.Areas.CPC.Controllers
                 #region Activity Log
                 //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
                 #endregion
-                cashInTransitRepo.InActiveRecord(Id);
+                unsortedCashRepo.InActiveRecord(Id);
 
                 TempData["SuccessMsg"] = "Department has been deleted successfully.";
             }

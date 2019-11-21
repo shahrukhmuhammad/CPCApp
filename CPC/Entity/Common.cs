@@ -58,6 +58,43 @@ namespace CPC
             }
         }
 
+        public Guid? GetDinomIdByName(int denomName)
+        {
+            try
+            {
+                using (var context = new SOSTechCPCEntities())
+                {
+                    var obj = context.CPCDenominations.Where(x => x.DenominationTitle == denomName).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        return obj.Id;
+                    }
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                return null;
+            }
+        }
+
+        public List<CPCDenomination> GetAllDenomination()
+        {
+            try
+            {
+                using (var context = new SOSTechCPCEntities())
+                {
+                    return context.CPCDenominations.OrderBy(x => x.Id).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 
 
@@ -67,5 +104,11 @@ namespace CPC
         public string Value { get; set; }
         public string Text { get; set; }
         public string Details { get; set; }
+    }
+
+    public enum AnnexureStatus
+    {
+        Inprocess = 1,
+        Completed = 2
     }
 }
