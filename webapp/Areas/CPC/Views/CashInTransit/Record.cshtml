@@ -308,10 +308,10 @@
                                                 <input type="hidden" name="CPCCashInTransitDenomination[0].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 5000).FirstOrDefault().Id)" />
                                             </td>
                                             <td data-id="5000">
-                                                <input type="number" name="CPCCashInTransitDenomination[0].NumberOfPackets" class="form-control input-sm inp" />
+                                                <input id="numberOfPacketsZero" type="number" value="0" name="CPCCashInTransitDenomination[0].NumberOfPackets" class="form-control input-sm inp totalfinalNumber" />
                                             </td>
                                             <td>
-                                                <input type="number" name="CPCCashInTransitDenomination[0].TotalValue" class="form-control input-sm" readonly="readonly" />
+                                                <input id="totalValueZero" type="number" value="0" name="CPCCashInTransitDenomination[0].TotalValue" class="form-control input-sm" readonly="readonly" />
                                             </td>
                                             <td>Nos.</td>
                                         </tr>
@@ -321,10 +321,10 @@
                                                 <input type="hidden" name="CPCCashInTransitDenomination[1].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 1000).FirstOrDefault().Id)" />
                                             </td>
                                             <td data-id="1000">
-                                                <input type="number" name="CPCCashInTransitDenomination[1].NumberOfPackets" class="form-control input-sm inp" />
+                                                <input id="numberOfPacketsOne" type="number" value="0" name="CPCCashInTransitDenomination[1].NumberOfPackets" class="form-control input-sm inp totalfinalNumber" />
                                             </td>
                                             <td>
-                                                <input type="number" name="CPCCashInTransitDenomination[1].TotalValue" class="form-control input-sm" readonly="readonly" />
+                                                <input id="totalValueOne" type="number" value="0" name="CPCCashInTransitDenomination[1].TotalValue" class="form-control input-sm" readonly="readonly" />
                                             </td>
                                             <td>Nos.</td>
                                         </tr>
@@ -334,10 +334,10 @@
                                                 <input type="hidden" name="CPCCashInTransitDenomination[2].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 500).FirstOrDefault().Id)" />
                                             </td>
                                             <td data-id="500">
-                                                <input type="number" name="CPCCashInTransitDenomination[2].NumberOfPackets" class="form-control input-sm inp" />
+                                                <input id="numberOfPacketsTwo" type="number" value="0" name="CPCCashInTransitDenomination[2].NumberOfPackets" class="form-control input-sm inp totalfinalNumber" />
                                             </td>
                                             <td>
-                                                <input type="number" name="CPCCashInTransitDenomination[2].TotalValue" class="form-control input-sm" readonly="readonly"/>
+                                                <input id="totalValueTwo" type="number" value="0" name="CPCCashInTransitDenomination[2].TotalValue" class="form-control input-sm" readonly="readonly" />
                                             </td>
                                             <td>Nos.</td>
                                         </tr>
@@ -347,10 +347,10 @@
                                                 <input type="hidden" name="CPCCashInTransitDenomination[3].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 100).FirstOrDefault().Id)" />
                                             </td>
                                             <td data-id="100">
-                                                <input type="number" name="CPCCashInTransitDenomination[3].NumberOfPackets" class="form-control input-sm inp" />
+                                                <input id="numberOfPacketsThree" type="number" value="0" name="CPCCashInTransitDenomination[3].NumberOfPackets" class="form-control input-sm inp totalfinalNumber" />
                                             </td>
                                             <td>
-                                                <input type="number" name="CPCCashInTransitDenomination[3].TotalValue" class="form-control input-sm" readonly="readonly"/>
+                                                <input id="totalValueThree" type="number" value="0" name="CPCCashInTransitDenomination[3].TotalValue" class="form-control input-sm" readonly="readonly" />
                                             </td>
                                             <td>Nos.</td>
                                         </tr>
@@ -360,10 +360,10 @@
                                                 <input class="inp" type="hidden" name="CPCCashInTransitDenomination[4].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 50).FirstOrDefault().Id)" />
                                             </td>
                                             <td data-id="50">
-                                                <input type="number" name="CPCCashInTransitDenomination[4].NumberOfPackets" class="form-control input-sm inp" />
+                                                <input id="numberOfPacketsFour" type="number" value="0" name="CPCCashInTransitDenomination[4].NumberOfPackets" class="form-control input-sm inp totalfinalNumber" />
                                             </td>
                                             <td>
-                                                <input type="number" name="CPCCashInTransitDenomination[4].TotalValue" class="form-control input-sm" readonly="readonly" />
+                                                <input id="totalValueFour" type="number" value="0" name="CPCCashInTransitDenomination[4].TotalValue" class="form-control input-sm" readonly="readonly" />
                                             </td>
                                             <td>Nos.</td>
                                         </tr>
@@ -373,10 +373,10 @@
                                                 <input type="hidden" name="CPCCashInTransitDenomination[5].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 20).FirstOrDefault().Id)" />
                                             </td>
                                             <td data-id="20">
-                                                <input type="number" name="CPCCashInTransitDenomination[5].NumberOfPackets" class="form-control input-sm inp" />
+                                                <input id="numberOfPacketsFive" type="number" value="0" name="CPCCashInTransitDenomination[5].NumberOfPackets" class="form-control input-sm inp totalfinalNumber" />
                                             </td>
                                             <td>
-                                                <input type="number" name="CPCCashInTransitDenomination[5].TotalValue" class="form-control input-sm" readonly="readonly" />
+                                                <input id="totalValueFive" type="number" value="0" name="CPCCashInTransitDenomination[5].TotalValue" class="form-control input-sm" readonly="readonly" />
                                             </td>
                                             <td>Nos.</td>
                                         </tr>
@@ -386,10 +386,10 @@
                                                 <input type="hidden" name="CPCCashInTransitDenomination[6].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 10).FirstOrDefault().Id)" />
                                             </td>
                                             <td data-id="10">
-                                                <input type="number" name="CPCCashInTransitDenomination[6].NumberOfPackets" class="form-control input-sm inp" />
+                                                <input id="numberOfPacketsSix" type="number" value="0" name="CPCCashInTransitDenomination[6].NumberOfPackets" class="form-control input-sm inp totalfinalNumber"/>
                                             </td>
                                             <td>
-                                                <input type="number" name="CPCCashInTransitDenomination[6].TotalValue" class="form-control input-sm" readonly="readonly" />
+                                                <input id="totalValueSix" type="number" value="0" name="CPCCashInTransitDenomination[6].TotalValue" class="form-control input-sm" readonly="readonly" />
                                             </td>
                                             <td>Nos.</td>
                                         </tr>
@@ -399,10 +399,10 @@
                                                 <input type="hidden" name="CPCCashInTransitDenomination[7].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 5).FirstOrDefault().Id)" />
                                             </td>
                                             <td data-id="5">
-                                                <input type="number" name="CPCCashInTransitDenomination[7].NumberOfPackets" class="form-control input-sm inp" />
+                                                <input id="numberOfPacketsSeven" type="number" value="0" name="CPCCashInTransitDenomination[7].NumberOfPackets" class="form-control input-sm inp totalfinalNumber" />
                                             </td>
                                             <td>
-                                                <input type="number" name="CPCCashInTransitDenomination[7].TotalValue" class="form-control input-sm" readonly="readonly" />
+                                                <input id="totalValueSeven" type="number" value="0" name="CPCCashInTransitDenomination[7].TotalValue" class="form-control input-sm" readonly="readonly" />
                                             </td>
                                             <td>Nos.</td>
                                         </tr>
@@ -412,10 +412,10 @@
                                                 <input type="hidden" name="CPCCashInTransitDenomination[8].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 2).FirstOrDefault().Id)" />
                                             </td>
                                             <td data-id="2">
-                                                <input type="number" name="CPCCashInTransitDenomination[8].NumberOfPackets" class="form-control input-sm inp" />
+                                                <input id="numberOfPacketsEight" type="number" value="0" name="CPCCashInTransitDenomination[8].NumberOfPackets" class="form-control input-sm inp totalfinalNumber"/>
                                             </td>
                                             <td>
-                                                <input type="number" name="CPCCashInTransitDenomination[8].TotalValue" class="form-control input-sm" readonly="readonly" />
+                                                <input id="totalValueEight" type="number" value="0" name="CPCCashInTransitDenomination[8].TotalValue" class="form-control input-sm" readonly="readonly" />
                                             </td>
                                             <td>Nos.</td>
                                         </tr>
@@ -425,10 +425,10 @@
                                                 <input type="hidden" name="CPCCashInTransitDenomination[9].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 1).FirstOrDefault().Id)" />
                                             </td>
                                             <td data-id="1">
-                                                <input type="number" name="CPCCashInTransitDenomination[9].NumberOfPackets" class="form-control input-sm inp" />
+                                                <input id="numberOfPacketsNine" type="number" value="0" name="CPCCashInTransitDenomination[9].NumberOfPackets" class="form-control input-sm inp totalfinalNumber" />
                                             </td>
                                             <td>
-                                                <input type="number" name="CPCCashInTransitDenomination[9].TotalValue" class="form-control input-sm" readonly="readonly" />
+                                                <input id="totalValueNine" type="number" value="0" name="CPCCashInTransitDenomination[9].TotalValue" class="form-control input-sm" readonly="readonly" />
                                             </td>
                                             <td>Nos.</td>
                                         </tr>
@@ -437,7 +437,8 @@
                                         </tr>
                                         <tr>
                                             <td colspan="2"> Total </td>
-                                            <td><input type="number" value="" class="form-control input-sm" readonly="readonly" /> </td>
+                                            <td><input id="finalTotalNumber" type="number" value="" class="form-control input-sm" readonly="readonly" /> </td>
+                                            <td><input id="finalTotalValue" type="number" value="" class="form-control input-sm" readonly="readonly" /> </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -477,6 +478,12 @@
                 accountGridRowIndex = $(this).closest('td').attr("data-id");
                 const totalValue = GetTotalVal($(this).val(), accountGridRowIndex);
                 $(this).closest('td').next('td').find('input').val(totalValue);
+
+                var finalTotalValue = parseInt($("#totalValueZero").val()) + parseInt($("#totalValueOne").val()) + parseInt($("#totalValueTwo").val())
+                    + parseInt($("#totalValueThree").val()) + parseInt($("#totalValueFour").val()) + parseInt($("#totalValueFive").val())
+                    + parseInt($("#totalValueSix").val()) + parseInt($("#totalValueSeven").val()) + parseInt($("#totalValueEight").val())
+                    + parseInt($("#totalValueNine").val());
+                $("#finalTotalValue").val(finalTotalValue);
             });
 
 
@@ -487,5 +494,13 @@
             const totalVal = parseInt(unsortedValue) * parseInt(denomVal) * 1000;
             return isNaN(totalVal) ? '0' : totalVal;
         }
+
+        $(".totalfinalNumber").focusout(function () {
+            var finalTotalNumber = parseInt($("#numberOfPacketsZero").val()) + parseInt($("#numberOfPacketsOne").val()) + parseInt($("#numberOfPacketsTwo").val())
+                + parseInt($("#numberOfPacketsThree").val()) + parseInt($("#numberOfPacketsFour").val()) + parseInt($("#numberOfPacketsFive").val())
+                + parseInt($("#numberOfPacketsSix").val()) + parseInt($("#numberOfPacketsSeven").val()) + parseInt($("#numberOfPacketsEight").val())
+                + parseInt($("#numberOfPacketsNine").val());
+            $("#finalTotalNumber").val(finalTotalNumber);
+        });
     </script>
 }
