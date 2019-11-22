@@ -20,7 +20,6 @@
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCEmployee" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCProject" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCProjectBranch" Width="1.5" PointX="3" PointY="7.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" Width="1.5" PointX="12.75" PointY="0.75" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__2022C2A6" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Denom__220B0B18" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Proje__2116E6DF" />
@@ -33,11 +32,12 @@
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCCashIn__CashI__208CD6FA" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCCashIn__Denom__22751F6C" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCProjec__CPHId__236943A5" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCUnsortedCash" Width="1.5" PointX="9" PointY="34.125" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCUnsortedCashDetail" Width="1.5" PointX="11.25" PointY="20.75" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Denom__245D67DE" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Proje__57A801BA" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Unsor__589C25F3" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCUnsortedCash" Width="1.5" PointX="5.25" PointY="32.875" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Proje__703EA55A" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Unsor__66B53B20" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" Width="1.5" PointX="0.75" PointY="12.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
