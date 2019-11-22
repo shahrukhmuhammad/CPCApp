@@ -8,8 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using WebApp.Hubs;
 using Insight.Database;
-using CRM.Entity;
-using CRM.Logic;
 
 namespace WebApp.Areas.Secure.Controllers
 {
@@ -27,7 +25,6 @@ namespace WebApp.Areas.Secure.Controllers
         private IBonusType bonusTypeRepo;
         private CertificateSettingsRepository certificateSettingsRepo;
         CertificationsRepository certificatesRepo;
-        private IContact crmRepo;
         //IContactRepository contactsRepo;
 
         public SettingController()
@@ -41,7 +38,6 @@ namespace WebApp.Areas.Secure.Controllers
             bonusTypeRepo = db.As<IBonusType>();
             certificateSettingsRepo = db.As<CertificateSettingsRepository>();
             certificatesRepo = db.As<CertificationsRepository>();
-            crmRepo = db.As<IContact>();
         }
 
         public ActionResult Index()

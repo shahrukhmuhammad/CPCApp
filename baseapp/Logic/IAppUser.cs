@@ -1,4 +1,5 @@
 ﻿using BaseApp.Entity;
+using BaseApp.Logic;
 using Insight.Database;
 using System;
 using System.Collections.Generic;
