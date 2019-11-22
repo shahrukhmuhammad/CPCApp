@@ -43,6 +43,8 @@ namespace WebApp.Areas.CPC.Controllers
             var model = unsortedCashRepo.GetById(Id);
             ViewBag.Employees = employeeRepo.GetAll();
             ViewBag.DenominationList = commonRepo.GetAllDenomination();
+            var branchInfo = branchRepo.GetById(model.ProjectBranchId);
+            ViewData["BranchName"] = $"{branchInfo.BranchCode} - {branchInfo.BranchName}";
             return View(model);
         }
         #endregion
