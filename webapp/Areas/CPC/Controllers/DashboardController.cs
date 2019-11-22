@@ -5,7 +5,7 @@ using Insight.Database;
 
 namespace WebApp.Areas.CPC.Controllers
 {
-    [ModuleActivator, AppAuthorize(AppPermission.All)]
+    [ModuleActivator, AppAuthorize(AppPermission.All, AppPermission.CPC, AppPermission.ViewCPC)]
     //[AllowAnonymous]
     public class DashboardController : AppController
     {

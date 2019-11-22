@@ -11,7 +11,7 @@ using WebApp.Hubs;
 
 namespace WebApp.Areas.CRM.Controllers
 {
-    [AppAuthorize(AppPermission.All, AppPermission.ViewContact, AppPermission.Contact)]
+    [AppAuthorize(AppPermission.All)]
     public class AccessControlController : AppController
     {
         RealTimeHub realtime = new RealTimeHub();

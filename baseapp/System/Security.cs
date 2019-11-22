@@ -1,5 +1,4 @@
 ﻿using BaseApp.Entity;
-using CRM.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Web.Routing;
@@ -23,8 +22,8 @@ namespace System.Web.Mvc
         {
             var authorized = base.AuthorizeCore(httpContext);
             if (!authorized) return false;
-            var user = new WebPrincipal(httpContext.User as ClaimsPrincipal);
-            if (user.ContactType == ContactType.Customer) return false;
+            //var user = new WebPrincipal(httpContext.User as ClaimsPrincipal);
+            //if (user.ContactType == ContactType.Customer) return false;
             return true;
         }
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
@@ -103,8 +102,8 @@ namespace System.Web.Mvc
         {
             var authorized = base.AuthorizeCore(httpContext);
             if (!authorized) return false;
-            var user = new WebPrincipal(httpContext.User as ClaimsPrincipal);
-            if (user.ContactType == ContactType.Customer) return false;
+            //var user = new WebPrincipal(httpContext.User as ClaimsPrincipal);
+            //if (user.ContactType == ContactType.Customer) return false;
             return true;
         }
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
@@ -120,8 +119,6 @@ namespace System.Security.Claims
 {
     using BaseApp.Entity;
     using BaseApp.Logic;
-    using CRM.Entity;
-    using CRM.Logic;
     using Insight.Database;
     using Web.Mvc;
 
@@ -134,7 +131,6 @@ namespace System.Security.Claims
             Data.IDbConnection Db = DependencyResolver.Current.GetService<Data.IDbConnection>();
             var appRole = Db.As<IAppRole>();
             var repo = Db.As<IAppUser>();
-            var contactRepo = Db.As<IContact>();
             appUser = repo.GetUserById(Id);
 
             if (appUser != null)
@@ -220,6 +216,11 @@ namespace System.Security.Claims
             }
         }
 
+        public bool IsSuperAdmin()
+        {
+            return appUser.Role.IsSystem;
+        }
+
         public DateTime LastLoginDate
         {
             get { return appUser.LastLogin; }
@@ -239,76 +240,4 @@ namespace System.Security.Claims
         }
     }
 
-    public class WebPrincipal : ClaimsPrincipal
-    {
-        Contact webUser;
-
-        public WebPrincipal(ClaimsPrincipal principal) : base(principal)
-        {
-            Data.IDbConnection Db = DependencyResolver.Current.GetService<Data.IDbConnection>();
-            var repo = Db.As<IContact>();
-            webUser = repo.GetById(Id);
-        }
-
-        public string Code
-        {
-            get
-            {
-                return webUser.Code;
-            }
-        }
-        public DateTime MemberSince
-        {
-            get
-            {
-                return webUser.CreatedOn;
-            }
-        }
-
-        //public DateTime LastLoggedIn
-        //{
-        //    get
-        //    {
-        //        return webUser.LoginDateTime;
-        //    }
-        //}
-        public string FullName
-        {
-            get
-            {
-                if (webUser == null)
-                {
-                    return "";
-                }
-                else
-                {
-                    return string.Format("{0} {1} {2}", webUser.FirstName, webUser.MiddleName, webUser.LastName);
-                }
-                
-            }
-        }
-        public string Email
-        {
-            get
-            {
-                return webUser.Email;
-            }
-        }
-
-        public Guid Id
-        {
-            get
-            {
-                return Guid.Parse(this.FindFirst(ClaimTypes.Sid).Value);
-            }
-        }
-
-        public ContactType ContactType
-        {
-            get
-            {
-                return webUser.ContactType;
-            }
-        }
-    }
 }

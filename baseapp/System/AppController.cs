@@ -23,14 +23,6 @@ namespace BaseApp.System
             }
         }
 
-        protected WebPrincipal CurrentWebUser
-        {
-            get
-            {
-                return new WebPrincipal(User as ClaimsPrincipal);
-            }
-        }
-
         public AppController()
         {
             var dr = DependencyResolver.Current;

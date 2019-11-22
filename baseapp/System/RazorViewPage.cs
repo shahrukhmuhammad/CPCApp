@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using BaseApp.Logic;
+using System.Security.Claims;
 using System.Web.Mvc;
 
 namespace BaseApp.Mvc
@@ -6,6 +7,7 @@ namespace BaseApp.Mvc
     public abstract class AppViewPage<TModel> : WebViewPage<TModel>
     {
         protected IAppModule AppModule { get; private set; }
+        protected IAppUser AppUser { get; private set; }
         protected IAppSettings AppSettings { get; private set; }
         protected IUuid Uuid { get; private set; }
         public AppViewPage()
@@ -14,6 +16,7 @@ namespace BaseApp.Mvc
             AppSettings = dr.GetService<IAppSettings>();
             Uuid = dr.GetService<IUuid>();
             AppModule = dr.GetService<IAppModule>();
+            AppUser = dr.GetService<IAppUser>();
         }
         protected AppPrincipal CurrentUser
         {
@@ -23,13 +26,6 @@ namespace BaseApp.Mvc
             }
         }
 
-        protected WebPrincipal CurrentWebUser
-        {
-            get
-            {
-                return new WebPrincipal(User as ClaimsPrincipal);
-            }
-        }
     }
 
     public abstract class AppViewPage : AppViewPage<dynamic>
