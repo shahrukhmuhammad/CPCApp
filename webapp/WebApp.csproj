@@ -252,23 +252,16 @@
     <Compile Include="Areas\CPC\Controllers\AnnexureIController.cs" />
     <Compile Include="Areas\CPC\Controllers\UnsortedCashController.cs" />
     <Compile Include="Areas\CPC\CPCAreaRegistration.cs" />
-    <Compile Include="Areas\CRM\Controllers\ContactController.cs" />
-    <Compile Include="Areas\CRM\Controllers\SettingsController.cs" />
-    <Compile Include="Areas\CRM\CRMAreaRegistration.cs" />
     <Compile Include="Areas\Dashboard\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
-    <Compile Include="Areas\Operations\Controllers\AccountController.cs" />
-    <Compile Include="Areas\Operations\OperationsAreaRegistration.cs" />
-    <Compile Include="Areas\CRM\Controllers\AccessControlController.cs" />
+    <Compile Include="Areas\Secure\Controllers\AccessControlController.cs" />
     <Compile Include="Areas\Secure\Controllers\AccountController.cs" />
     <Compile Include="Areas\Secure\Controllers\AppLogController.cs" />
     <Compile Include="Areas\Secure\Controllers\CompanyController.cs" />
-    <Compile Include="Areas\Secure\Controllers\IntegrationController.cs" />
     <Compile Include="Areas\Secure\Controllers\MessageCenterController.cs" />
     <Compile Include="Areas\Secure\Controllers\AppNotificationController.cs" />
     <Compile Include="Areas\Secure\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Secure\Controllers\NotificationController.cs" />
-    <Compile Include="Areas\Secure\Controllers\SchedularController.cs" />
     <Compile Include="Areas\Secure\Controllers\SettingController.cs" />
     <Compile Include="Areas\Secure\SecureAreaRegistration.cs" />
     <Compile Include="Global.asax.cs">
@@ -486,6 +479,7 @@
     <Content Include="Content\Dropdown\noJS.css" />
     <Content Include="Content\operations.css" />
     <Content Include="Content\parallaxLogin.css" />
+    <Content Include="index.html" />
     <Content Include="Scripts\App\Ecommerce.js" />
     <Content Include="Scripts\select2\select2.min.css" />
     <Content Include="Scripts\select2\select2.min.js" />
@@ -695,12 +689,12 @@
     <Content Include="Areas\Secure\Views\MessageCenter\Outbox.cshtml" />
     <Content Include="Areas\Secure\Views\MessageCenter\Draft.cshtml" />
     <Content Include="Areas\Secure\Views\MessageCenter\Reader.cshtml" />
-    <Content Include="Areas\CRM\Views\AccessControl\Index.cshtml" />
-    <Content Include="Areas\CRM\Views\AccessControl\Contacts.cshtml" />
-    <Content Include="Areas\CRM\Views\AccessControl\Details.cshtml" />
-    <Content Include="Areas\CRM\Views\AccessControl\Record.cshtml" />
-    <Content Include="Areas\CRM\Views\AccessControl\Roles.cshtml" />
-    <Content Include="Areas\CRM\Views\AccessControl\Role.cshtml" />
+    <Content Include="Areas\Secure\Views\AccessControl\Index.cshtml" />
+    <Content Include="Areas\Secure\Views\AccessControl\Contacts.cshtml" />
+    <Content Include="Areas\Secure\Views\AccessControl\Details.cshtml" />
+    <Content Include="Areas\Secure\Views\AccessControl\Record.cshtml" />
+    <Content Include="Areas\Secure\Views\AccessControl\Roles.cshtml" />
+    <Content Include="Areas\Secure\Views\AccessControl\Role.cshtml" />
     <Content Include="Areas\Secure\Views\AppNotification\Details.cshtml" />
     <Content Include="Areas\Secure\Views\Account\Security.cshtml" />
     <Content Include="Areas\Secure\Views\Setting\System.cshtml" />
@@ -725,12 +719,6 @@
     <Content Include="Content\Template\fonts\themify.woff" />
     <Content Include="Areas\Secure\Views\Company\Index.cshtml" />
     <Content Include="Areas\Secure\Views\Company\Settings.cshtml" />
-    <Content Include="Areas\Operations\Views\web.config" />
-    <Content Include="Areas\Operations\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Operations\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Operations\Views\Account\Login.cshtml" />
-    <Content Include="Areas\Operations\Views\Account\Index.cshtml" />
-    <Content Include="Areas\Operations\Views\Shared\_Header.cshtml" />
     <Content Include="Areas\Secure\Views\Setting\Employees.cshtml" />
     <Content Include="Areas\Secure\Views\Setting\CRM.cshtml" />
     <Content Include="Areas\Secure\Views\Setting\TaskManager.cshtml" />
@@ -740,9 +728,6 @@
     <Content Include="Content\assets\fonts\jquery.filer-icons\jquery-filer.woff" />
     <Content Include="Content\Choices\scripts\dist\choices.js.map" />
     <Content Include="Content\Choices\scripts\dist\choices.min.js.map" />
-    <Content Include="Areas\Secure\Views\Schedular\Reader.cshtml" />
-    <Content Include="Areas\Secure\Views\Schedular\_CreateEventBox.cshtml" />
-    <Content Include="Areas\Secure\Views\Schedular\Calendar.cshtml" />
     <Content Include="Content\JsTree\asdf\ajax_children.json" />
     <Content Include="Content\JsTree\asdf\ajax_children2.json" />
     <Content Include="Content\JsTree\asdf\asdf asdf" />
@@ -774,22 +759,11 @@
     <Content Include="Areas\Secure\Views\Notification\Settings.cshtml" />
     <Content Include="Areas\Secure\Views\Config\_Configuration.cshtml" />
     <Content Include="Areas\Secure\Views\Config\_ConfigureModule.cshtml" />
-    <Content Include="Areas\Secure\Views\Integration\PaymentGateway.cshtml" />
     <Content Include="Areas\Secure\Views\Notification\_NotificationsRecord.cshtml" />
-    <Content Include="Areas\CRM\Views\AccessControl\Home.cshtml" />
-    <Content Include="Areas\CRM\Views\AccessControl\_ManageAccess.cshtml" />
-    <Content Include="Areas\CRM\Views\AccessControl\AccessManagement.cshtml" />
-    <Content Include="Areas\CRM\Views\AccessControl\_RolePermissions.cshtml" />
-    <Content Include="Areas\CRM\Views\Contact\Customers.cshtml" />
-    <Content Include="Areas\CRM\Views\Contact\Dropshipers.cshtml" />
-    <Content Include="Areas\CRM\Views\Contact\Index.cshtml" />
-    <Content Include="Areas\CRM\Views\Contact\Record.cshtml" />
-    <Content Include="Areas\CRM\Views\Contact\Summary.cshtml" />
-    <Content Include="Areas\CRM\Views\Contact\Suppliers.cshtml" />
-    <Content Include="Areas\CRM\Views\Contact\Traders.cshtml" />
-    <Content Include="Areas\CRM\Views\Settings\Index.cshtml" />
-    <Content Include="Areas\CRM\Views\web.config" />
-    <Content Include="Areas\CRM\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Secure\Views\AccessControl\Home.cshtml" />
+    <Content Include="Areas\Secure\Views\AccessControl\_ManageAccess.cshtml" />
+    <Content Include="Areas\Secure\Views\AccessControl\AccessManagement.cshtml" />
+    <Content Include="Areas\Secure\Views\AccessControl\_RolePermissions.cshtml" />
     <Content Include="Areas\CPC\Views\web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -819,6 +793,7 @@
     <None Include="Properties\PublishProfiles\BaseApp - A - V3.0 %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\Clinicul %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\Tenders Africa %28Published%29.pubxml" />
     <Content Include="Scripts\FusionChart\fusioncharts.powercharts.js" />
     <Content Include="Scripts\Input Mask\amazonawsjQuery.inputmask.js" />
@@ -896,10 +871,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\CPC\Models\" />
     <Folder Include="Areas\CPC\Views\Shared\" />
-    <Folder Include="Areas\CRM\Models\" />
-    <Folder Include="Areas\CRM\Views\Shared\" />
     <Folder Include="Areas\Dashboard\Models\" />
-    <Folder Include="Areas\Operations\Models\" />
     <Folder Include="Areas\Secure\Models\" />
     <Folder Include="Content\alloy-editor\assets\" />
     <Folder Include="Content\alloy-editor\lang\" />
@@ -931,10 +903,6 @@
     <ProjectReference Include="..\CPC\CPC.csproj">
       <Project>{4483c4b4-c80f-49fe-b8e9-02d152763734}</Project>
       <Name>CPC</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CRM\CRM.csproj">
-      <Project>{ac01e41c-d962-4fd3-aae7-8ebb993f4181}</Project>
-      <Name>CRM</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
