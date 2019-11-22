@@ -2,7 +2,7 @@
 @model CPCAnnexureIII
 @{
     var queryId = ViewContext.RouteData.Values["Id"];
-    ViewBag.Title = (queryId == null ? "Add New Annexure II" : "Edit Annexure II");
+    ViewBag.Title = (queryId == null ? "Add New Cash Reconciliation" : "Edit Cash Reconciliation");
 }
 
 <form id="lead-frm" class="user-Profile" method="post" enctype="multipart/form-data">
@@ -25,7 +25,7 @@
             <div class="panel panel-default">
 
                 <div class="panel-body">
-                    <h4> Annexure III </h4>
+                    <h4> @ViewBag.Title </h4>
 
                     <div class="row">
                         <div class="col-sm-12">
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Date of Cash Return</label>
+                                        <label class="col-sm-6 horizontal-label">Date of Cash Reconciliation</label>
                                         <div class="col-sm-6">
                                             <input name="DateOfCashReturn" id="DateOfCashReturn" class="form-control input-sm datePicker" type="text" value="@Model.DateOfCashReturn.Value.ToShortDateString()" required autocomplete="off">
                                             @*<div class="input-group input-group-sm">

@@ -2,7 +2,7 @@
 @model CPCAnnexureII
 @{
     var queryId = ViewContext.RouteData.Values["Id"];
-    ViewBag.Title = (queryId == null ? "Add New Annexure II" : "Edit Annexure II");
+    ViewBag.Title = (queryId == null ? "Add New Branch Cash Receipt" : "Edit Branch Cash Receipt");
 }
 
 <form id="lead-frm" class="user-Profile" method="post" enctype="multipart/form-data">
@@ -22,7 +22,7 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h4> Annexure II </h4>
+                    <h4> @ViewBag.Title </h4>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">

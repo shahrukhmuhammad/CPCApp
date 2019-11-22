@@ -1,7 +1,7 @@
 ﻿
 @model CPCAnnexureII
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Branch Cash Receipt Details";
 
     var empList = ViewBag.Employees as List<CPCEmployee>;
     var detailsArry = Model.CPCAnnexureIIDetails.ToArray();
@@ -21,7 +21,7 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h4> Annexure II </h4>
+                    <h4> @ViewBag.Title </h4>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">

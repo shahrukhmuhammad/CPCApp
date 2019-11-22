@@ -257,18 +257,14 @@
     <Compile Include="Areas\CRM\CRMAreaRegistration.cs" />
     <Compile Include="Areas\Dashboard\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
-    <Compile Include="Areas\Operations\Controllers\AccountController.cs" />
-    <Compile Include="Areas\Operations\OperationsAreaRegistration.cs" />
     <Compile Include="Areas\CRM\Controllers\AccessControlController.cs" />
     <Compile Include="Areas\Secure\Controllers\AccountController.cs" />
     <Compile Include="Areas\Secure\Controllers\AppLogController.cs" />
     <Compile Include="Areas\Secure\Controllers\CompanyController.cs" />
-    <Compile Include="Areas\Secure\Controllers\IntegrationController.cs" />
     <Compile Include="Areas\Secure\Controllers\MessageCenterController.cs" />
     <Compile Include="Areas\Secure\Controllers\AppNotificationController.cs" />
     <Compile Include="Areas\Secure\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Secure\Controllers\NotificationController.cs" />
-    <Compile Include="Areas\Secure\Controllers\SchedularController.cs" />
     <Compile Include="Areas\Secure\Controllers\SettingController.cs" />
     <Compile Include="Areas\Secure\SecureAreaRegistration.cs" />
     <Compile Include="Global.asax.cs">
@@ -725,12 +721,6 @@
     <Content Include="Content\Template\fonts\themify.woff" />
     <Content Include="Areas\Secure\Views\Company\Index.cshtml" />
     <Content Include="Areas\Secure\Views\Company\Settings.cshtml" />
-    <Content Include="Areas\Operations\Views\web.config" />
-    <Content Include="Areas\Operations\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Operations\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Operations\Views\Account\Login.cshtml" />
-    <Content Include="Areas\Operations\Views\Account\Index.cshtml" />
-    <Content Include="Areas\Operations\Views\Shared\_Header.cshtml" />
     <Content Include="Areas\Secure\Views\Setting\Employees.cshtml" />
     <Content Include="Areas\Secure\Views\Setting\CRM.cshtml" />
     <Content Include="Areas\Secure\Views\Setting\TaskManager.cshtml" />
@@ -740,9 +730,6 @@
     <Content Include="Content\assets\fonts\jquery.filer-icons\jquery-filer.woff" />
     <Content Include="Content\Choices\scripts\dist\choices.js.map" />
     <Content Include="Content\Choices\scripts\dist\choices.min.js.map" />
-    <Content Include="Areas\Secure\Views\Schedular\Reader.cshtml" />
-    <Content Include="Areas\Secure\Views\Schedular\_CreateEventBox.cshtml" />
-    <Content Include="Areas\Secure\Views\Schedular\Calendar.cshtml" />
     <Content Include="Content\JsTree\asdf\ajax_children.json" />
     <Content Include="Content\JsTree\asdf\ajax_children2.json" />
     <Content Include="Content\JsTree\asdf\asdf asdf" />
@@ -774,7 +761,6 @@
     <Content Include="Areas\Secure\Views\Notification\Settings.cshtml" />
     <Content Include="Areas\Secure\Views\Config\_Configuration.cshtml" />
     <Content Include="Areas\Secure\Views\Config\_ConfigureModule.cshtml" />
-    <Content Include="Areas\Secure\Views\Integration\PaymentGateway.cshtml" />
     <Content Include="Areas\Secure\Views\Notification\_NotificationsRecord.cshtml" />
     <Content Include="Areas\CRM\Views\AccessControl\Home.cshtml" />
     <Content Include="Areas\CRM\Views\AccessControl\_ManageAccess.cshtml" />
@@ -819,6 +805,7 @@
     <None Include="Properties\PublishProfiles\BaseApp - A - V3.0 %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\Clinicul %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\Tenders Africa %28Published%29.pubxml" />
     <Content Include="Scripts\FusionChart\fusioncharts.powercharts.js" />
     <Content Include="Scripts\Input Mask\amazonawsjQuery.inputmask.js" />
@@ -899,7 +886,6 @@
     <Folder Include="Areas\CRM\Models\" />
     <Folder Include="Areas\CRM\Views\Shared\" />
     <Folder Include="Areas\Dashboard\Models\" />
-    <Folder Include="Areas\Operations\Models\" />
     <Folder Include="Areas\Secure\Models\" />
     <Folder Include="Content\alloy-editor\assets\" />
     <Folder Include="Content\alloy-editor\lang\" />

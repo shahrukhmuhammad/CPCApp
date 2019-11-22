@@ -11,16 +11,16 @@
         <div class="modal-content bg-transparent">
             <div class="modal-header">
                 <h3 class="modal-title">
-                    Annexure III Management
+                    Cash Reconciliation Management
                     <span class="pull-right menu-links">
                         <a href="javascript://" class="text-muted" title="go to previous" style="margin:0 8px;" onclick="window.history.back()">
                             <i class="fa fa-angle-left"></i> <span class="grid-buttons"> Go Back</span>
                         </a>
                         @*<a href="javascript://" class="text-danger forceRedirect" title="delete record" style="margin:0 8px;" onclick="deleteMultipleRecords('@Url.Action("DeleteMultiple")', '.checkIt')">
-                            <i class="fa fa-trash"></i>
-                        </a>*@
+                <i class="fa fa-trash"></i>
+            </a>*@
                         <a href="@Url.Action("Record","AnnexureIII")" style="margin:0 8px;" title="add new">
-                            <i class="fa fa-plus-circle text-primary"></i> <span class="grid-buttons"> Add New Annexure III</span>
+                            <i class="fa fa-plus-circle text-primary"></i> <span class="grid-buttons"> Add New Cash Reconciliation</span>
                         </a>
                     </span>
                 </h3>
@@ -46,8 +46,8 @@
                                 <th><input class="form-control input-sm input-tbl" type="text" placeholder="Branch" id="AnnexureIII-dataTable_2" /></th>
                                 <th><input class="form-control input-sm input-tbl" type="text" placeholder="Bundles Collected" id="AnnexureIII-dataTable_3" /></th>
                                 <th><input class="form-control input-sm input-tbl" type="text" placeholder="Cash Collected" id="AnnexureIII-dataTable_4" /></th>
-                                <th><input class="form-control input-sm input-tbl" type="text" placeholder="Cash Return Date" id="AnnexureIII-dataTable_5" /></th>
-                                <th><input class="form-control input-sm input-tbl" type="text" placeholder="Tota Cash Return" id="AnnexureIII-dataTable_6" /></th>
+                                <th><input class="form-control input-sm input-tbl" type="text" placeholder="Cash Reconciliation Date" id="AnnexureIII-dataTable_5" /></th>
+                                <th><input class="form-control input-sm input-tbl" type="text" placeholder="Tota Cash Reconciliation" id="AnnexureIII-dataTable_6" /></th>
                                 <th><input class="form-control input-sm input-tbl" type="text" placeholder="Status" id="AnnexureIII-dataTable_7" /></th>
                                 <th class="text-center" width="100px">Action</th>
                             </tr>
@@ -98,7 +98,7 @@
                         <i class="fa fa-trash fa-2x"></i>
                     </a>*@
                     <a href="@Url.Action("Record","AnnexureIII")" style="margin:0 8px;" title="add new">
-                        <i class="fa fa-plus-circle fa-2x text-primary"></i> <span class="grid-buttons"> Add New Annexure III</span>
+                        <i class="fa fa-plus-circle fa-2x text-primary"></i> <span class="grid-buttons"> Add New Cash Reconciliation</span>
                     </a>
                 </div>
             </div>
