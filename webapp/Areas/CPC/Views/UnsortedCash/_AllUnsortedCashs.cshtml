@@ -61,7 +61,7 @@
                                 <td><a href="@Url.Action("Details","UnsortedCash",new { Id = x.Id })">@x.SerialNumber</a></td>
                                 <td>@x.Date</td>
                                 <td>@x.Station</td>
-                                <td>@x.Client</td>
+                                <td> @($"{x.CPCProjectBranch.BranchCode} - {x.CPCProjectBranch.BranchName}")</td>
                                 @if (x.Status == 1)
                                 {
                                     <td> <label class="label label-warning">@AnnexureStatus.Inprocess</label></td>

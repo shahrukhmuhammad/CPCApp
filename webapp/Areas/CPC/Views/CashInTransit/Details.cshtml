@@ -324,36 +324,50 @@
                             <table id="mytable" class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th colspan="4" class="text-center">Details of Packets</th>
-                                        <th colspan="5" class="text-center">Denomination No of Packets</th>
+                                        <th colspan="9" class="text-center">Details of Packets</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="9" class="text-center">Denomination No of Packets</th>
                                     </tr>
                                 </thead>
+                                @{ 
+                                    var finalNumberOfPackets = 0;
+                                    var finalTotalValue = 0;
+                                }
                                 <tbody>
                                     <tr>
                                         <td>Rs. 5000 x </td>
                                         <td>
                                             @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().NumberOfPackets)
+                                            @{ finalNumberOfPackets += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().NumberOfPackets); }
                                         </td>
                                         <td>
                                             @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().TotalValue)
+                                            @{ finalTotalValue += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().TotalValue); }
                                         </td>
                                         <td>Nos.</td>
-
+                                    </tr>
+                                    <tr>
                                         <td>Rs. 1000 x </td>
                                         <td>
                                             @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().NumberOfPackets)
+                                            @{ finalNumberOfPackets += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().NumberOfPackets); }
                                         </td>
                                         <td>
-                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().TotalValue)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().TotalValue)
+                                            @{ finalTotalValue += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().TotalValue); }
                                         </td>
                                         <td>Nos.</td>
-
+                                    </tr>
+                                    <tr>
                                         <td>Rs. 500 x </td>
                                         <td>
                                             @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().NumberOfPackets)
+                                            @{ finalNumberOfPackets += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().NumberOfPackets); }
                                         </td>
                                         <td>
-                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().NumberOfPackets)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().TotalValue)
+                                            @{ finalTotalValue += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().TotalValue); }
                                         </td>
                                         <td>Nos.</td>
                                     </tr>
@@ -361,26 +375,35 @@
                                         <td>Rs. 100 x </td>
                                         <td>
                                             @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().NumberOfPackets)
+                                            @{ finalNumberOfPackets += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().NumberOfPackets); }
                                         </td>
                                         <td>
-                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().NumberOfPackets)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().TotalValue)
+                                            @{ finalTotalValue += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().TotalValue); }
                                         </td>
                                         <td>Nos.</td>
-
+                                    </tr>
+                                    <tr>
                                         <td>Rs. 50 x </td>
                                         <td>
                                             @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().NumberOfPackets)
+                                            @{ finalNumberOfPackets += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().NumberOfPackets); }
                                         </td>
                                         <td>
-                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().NumberOfPackets)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().TotalValue)
+                                            @{ finalTotalValue += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().TotalValue); }
                                         </td>
                                         <td>Nos.</td>
+                                    </tr>
+                                    <tr>
                                         <td>Rs. 20 x </td>
                                         <td>
                                             @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().NumberOfPackets)
+                                            @{ finalNumberOfPackets += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().NumberOfPackets); }
                                         </td>
                                         <td>
-                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().NumberOfPackets)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().TotalValue)
+                                            @{ finalTotalValue += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().TotalValue); }
                                         </td>
                                         <td>Nos.</td>
                                     </tr>
@@ -388,25 +411,35 @@
                                         <td>Rs. 10 x </td>
                                         <td>
                                             @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().NumberOfPackets)
+                                            @{ finalNumberOfPackets += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().NumberOfPackets); }
                                         </td>
                                         <td>
-                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().NumberOfPackets)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().TotalValue)
+                                            @{ finalTotalValue += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().TotalValue); }
                                         </td>
                                         <td>Nos.</td>
+                                    </tr>
+                                    <tr>
                                         <td>Rs. 5 x </td>
                                         <td>
                                             @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().NumberOfPackets)
+                                            @{ finalNumberOfPackets += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().NumberOfPackets); }
                                         </td>
                                         <td>
-                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().NumberOfPackets)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().TotalValue)
+                                            @{ finalTotalValue += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().TotalValue); }
                                         </td>
                                         <td>Nos.</td>
+                                    </tr>
+                                    <tr>
                                         <td>Rs. 2 x </td>
                                         <td>
                                             @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().NumberOfPackets)
+                                            @{ finalNumberOfPackets += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().NumberOfPackets); }
                                         </td>
                                         <td>
-                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().NumberOfPackets)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().TotalValue)
+                                            @{ finalTotalValue += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().TotalValue); }
                                         </td>
                                         <td>Nos.</td>
                                     </tr>
@@ -414,11 +447,19 @@
                                         <td>Rs. 1 x </td>
                                         <td>
                                             @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().NumberOfPackets)
+                                            @{ finalNumberOfPackets += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().NumberOfPackets); }
                                         </td>
                                         <td>
-                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().NumberOfPackets)
+                                            @(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().TotalValue)
+                                            @{ finalTotalValue += Convert.ToInt32(detailsDenom.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().TotalValue); }
                                         </td>
                                         <td>Nos.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Total</b></td>
+                                        <td>@finalNumberOfPackets</td>
+                                        <td>@finalTotalValue</td>
+                                        <td></td>
                                     </tr>
                                 </tbody>
                             </table>

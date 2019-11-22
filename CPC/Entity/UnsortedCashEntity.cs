@@ -19,8 +19,10 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
+                    return context.CPCUnsortedCashes.Include(x => x.CPCUnsortedCashDetails).Include(x => x.CPCProjectBranch).OrderBy(x => x.Id).ToList();
                     //return context.CPCUnsortedCashs.OrderBy(x => x.Date).ToList();
-                    return context.CPCUnsortedCashes.Where(x => x.IsActive).OrderBy(x => x.Id).ToList();
+                    //return context.CPCUnsortedCashes.Where(x => x.IsActive).OrderBy(x => x.Id).ToList();
+                    //return context.CPCAnnexureIIs.Include(x => x.CPCAnnexureIIDetails).Include(x => x.CPCProjectBranch).OrderBy(x => x.Id).ToList();
                 }
             }
             catch (Exception ex)

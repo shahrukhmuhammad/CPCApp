@@ -58,8 +58,7 @@
                                 <tr>
                                     <td>Client:</td>
                                     <td>
-                                        @Html.TextBoxFor(x => x.Client, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
-                                        @Html.ValidationMessageFor(m => m.Client)
+                                        @Html.DropDownListFor(x => x.ProjectBranchId, (SelectList)ViewBag.BrachList, " Select Branch ", new { @class = "form-control input-sm select2" })
                                     </td>
                                     <td></td>
                                 </tr>
@@ -75,7 +74,7 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[0].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 1).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="1">
-                                        <input id="numberOfPacketsZero" type="number" value="0" name="CPCUnsortedCashDetail[0].NumberOfBundles" class="form-control input-sm inp" />
+                                        <input id="numberOfPacketsZero" type="number" value="0" name="CPCUnsortedCashDetail[0].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
                                     </td>
                                     <td>
                                         <input id="totalValueZero" value="0" name="CPCUnsortedCashDetail[0].TotalValue" class="form-control input-sm" />
@@ -87,7 +86,7 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[1].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 2).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="2">
-                                        <input id="numberOfPacketsOne" type="number" value="0" name="CPCUnsortedCashDetail[1].NumberOfBundles" class="form-control input-sm inp" />
+                                        <input id="numberOfPacketsOne" type="number" value="0" name="CPCUnsortedCashDetail[1].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
                                     </td>
                                     <td>
                                         <input id="totalValueOne" type="number" value="0" name="CPCUnsortedCashDetail[1].TotalValue" class="form-control input-sm" />
@@ -99,7 +98,7 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[2].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 5).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="5">
-                                        <input id="numberOfPacketsTwo" type="number" value="0" name="CPCUnsortedCashDetail[2].NumberOfBundles" class="form-control input-sm inp" />
+                                        <input id="numberOfPacketsTwo" type="number" value="0" name="CPCUnsortedCashDetail[2].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
                                     </td>
                                     <td>
                                         <input id="totalValueTwo" type="number" value="0" name="CPCUnsortedCashDetail[2].TotalValue" class="form-control input-sm" />
@@ -111,7 +110,7 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[3].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 10).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="10">
-                                        <input id="numberOfPacketsThree" type="number" value="0" name="CPCUnsortedCashDetail[3].NumberOfBundles" class="form-control input-sm inp" />
+                                        <input id="numberOfPacketsThree" type="number" value="0" name="CPCUnsortedCashDetail[3].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
                                     </td>
                                     <td>
                                         <input id="totalValueThree" type="number" value="0" name="CPCUnsortedCashDetail[3].TotalValue" class="form-control input-sm" />
@@ -123,7 +122,7 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[4].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 20).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="20">
-                                        <input id="numberOfPacketsFour" type="number" value="0" name="CPCUnsortedCashDetail[4].NumberOfBundles" class="form-control input-sm inp" />
+                                        <input id="numberOfPacketsFour" type="number" value="0" name="CPCUnsortedCashDetail[4].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
                                     </td>
                                     <td>
                                         <input id="totalValueFour" type="number" value="0" name="CPCUnsortedCashDetail[4].TotalValue" class="form-control input-sm" />
@@ -135,7 +134,7 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[5].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 50).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="50">
-                                        <input id="numberOfPacketsFive" type="number" value="0" name="CPCUnsortedCashDetail[5].NumberOfBundles" class="form-control input-sm inp" />
+                                        <input id="numberOfPacketsFive" type="number" value="0" name="CPCUnsortedCashDetail[5].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
                                     </td>
                                     <td>
                                         <input id="totalValueFive" type="number" value="0" name="CPCUnsortedCashDetail[5].TotalValue" class="form-control input-sm" />
@@ -147,7 +146,7 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[6].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 100).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="100">
-                                        <input id="numberOfPacketsSix" type="number" value="0" name="CPCUnsortedCashDetail[6].NumberOfBundles" class="form-control input-sm inp" />
+                                        <input id="numberOfPacketsSix" type="number" value="0" name="CPCUnsortedCashDetail[6].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
                                     </td>
                                     <td>
                                         <input id="totalValueSix" type="number" value="0" name="CPCUnsortedCashDetail[6].TotalValue" class="form-control input-sm" />
@@ -159,7 +158,7 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[7].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 500).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="500">
-                                        <input id="numberOfPacketsSeven" type="number" value="0" name="CPCUnsortedCashDetail[7].NumberOfBundles" class="form-control input-sm inp" />
+                                        <input id="numberOfPacketsSeven" type="number" value="0" name="CPCUnsortedCashDetail[7].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
                                     </td>
                                     <td>
                                         <input id="totalValueSeven" type="number" value="0" name="CPCUnsortedCashDetail[7].TotalValue" class="form-control input-sm" />
@@ -171,7 +170,7 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[8].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 1000).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="1000">
-                                        <input id="numberOfPacketsEight" type="number" value="0" name="CPCUnsortedCashDetail[8].NumberOfBundles" class="form-control input-sm inp" />
+                                        <input id="numberOfPacketsEight" type="number" value="0" name="CPCUnsortedCashDetail[8].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
                                     </td>
                                     <td>
                                         <input id="totalValueEight" type="number" value="0" name="CPCUnsortedCashDetail[8].TotalValue" class="form-control input-sm" />
@@ -183,7 +182,7 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[9].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 5000).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="5000">
-                                        <input id="numberOfPacketsNine" type="number" value="0" name="CPCUnsortedCashDetail[9].NumberOfBundles" class="form-control input-sm inp" />
+                                        <input id="numberOfPacketsNine" type="number" value="0" name="CPCUnsortedCashDetail[9].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
                                     </td>
                                     <td>
                                         <input id="totalValueNine" type="number" value="0" name="CPCUnsortedCashDetail[9].TotalValue" class="form-control input-sm" />
@@ -195,7 +194,7 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"> Total </td>
+                                    <td> Total </td>
                                     <td><input id="finalTotalNumber" type="number" value="" class="form-control input-sm" readonly="readonly" /> </td>
                                     <td><input id="finalTotalValue" type="number" value="" class="form-control input-sm" readonly="readonly" /> </td>
                                 </tr>

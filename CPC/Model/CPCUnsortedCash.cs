@@ -24,7 +24,7 @@ namespace CPC.Model
         public long SerialNumber { get; set; }
         public System.DateTime Date { get; set; }
         public string Station { get; set; }
-        public string Client { get; set; }
+        public System.Guid ProjectBranchId { get; set; }
         public Nullable<int> TotalNumberBundles { get; set; }
         public long TotalBalance { get; set; }
         public System.DateTime CreatedOn { get; set; }
@@ -34,6 +34,7 @@ namespace CPC.Model
         public Nullable<byte> Status { get; set; }
         public bool IsActive { get; set; }
     
+        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCUnsortedCashDetail> CPCUnsortedCashDetails { get; set; }
     }
