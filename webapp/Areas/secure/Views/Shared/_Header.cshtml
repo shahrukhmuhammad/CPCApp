@@ -68,16 +68,22 @@
                 </div>
             </div>
             @*<a href="javascript://" class="list-group-item" data-toggle="modal" data-target="#comingSoon-Modal"><i class="fa fa-briefcase"></i> My Account</a>*@
-            <a href="~/Secure/Account" class="list-group-item @SetActiveAction("Account", "Index") @SetActiveAction("Account", "Edit")"><i class="fa fa-user-secret"></i> My Profile</a>
+            
+
+            @*<a href="~/Secure/Account" class="list-group-item @SetActiveAction("Account", "Index") @SetActiveAction("Account", "Edit")"><i class="fa fa-user-secret"></i> My Profile</a>
             <a href="~/Secure/Company" class="list-group-item visible-xs @SetActiveAction("Company", "Index")">
                 <i class="fa fa-gears"></i> Company Profile
             </a>
             <a href="~/Secure/AppLog" class="list-group-item @SetActiveAction("AppLog", "Index")">
                 <i class="fa fa-exchange"></i> My Activity
-            </a>
-            <a href="javascript://" class="list-group-item" data-toggle="modal" data-target="#themes-Modal"><i class="fa fa-paint-brush"></i> Theme</a>
+            </a>*@
+
+
+            @*<a href="javascript://" class="list-group-item" data-toggle="modal" data-target="#themes-Modal"><i class="fa fa-paint-brush"></i> Theme</a>
             <a href="~/Secure/Account/Security" class="list-group-item @SetActiveAction("Account", "Security")"><i class="fa fa-lock"></i> Security Settings</a>
-            <a href="javascript://" class="list-group-item" data-toggle="modal" data-target="#comingSoon-Modal"><i class="fa fa-cog"></i> Notifications & Preferences</a>
+            <a href="javascript://" class="list-group-item" data-toggle="modal" data-target="#comingSoon-Modal"><i class="fa fa-cog"></i> Notifications & Preferences</a>*@
+
+
             @*@if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.LogsManagement))
             {
                 <a href="~/Secure/AppLog/General" class="list-group-item @SetActiveAction("AppLog", "General")"><i class="fa fa-exchange"></i> Logs</a>
@@ -97,8 +103,8 @@
             <div id="mobile-upcomming-event-reader" class="btn-group btn-group-xs" role="group"></div>
             @*<div id="mobile-notification-reader" class="btn-group btn-group-xs" role="group"></div>
             <div id="mobile-notification-warning-reader" class="btn-group btn-group-xs" role="group"></div>*@
-            <a href="~/Secure/AppLog/General" class="btn-group btn-group-xs"><i class="fa fa-exchange"></i></a>
-            <a href="~/Secure/Config" class="btn-group btn-group-xs"><i class="fa fa-wrench"></i></a>
+            @*<a href="~/Secure/AppLog/General" class="btn-group btn-group-xs"><i class="fa fa-exchange"></i></a>
+            <a href="~/Secure/Config" class="btn-group btn-group-xs"><i class="fa fa-wrench"></i></a>*@
         </div>
     </div>
     <!-- End Top Menu Mobile View -->
@@ -157,8 +163,10 @@ else
                     <li id="upcomming-event-reader" class="dropdown"></li>
                     <li id="message-reader" class="dropdown"></li>
                     <li id="notification-reader" class="dropdown"></li>
+
                     @*<li id="notification-warning-reader" class="dropdown"></li>*@
-                    <li class="@SetActiveAction("AppLog","General")">
+
+                    @*<li class="@SetActiveAction("AppLog","General")">
                         <a href="~/Secure/AppLog/General" class="hidden-xs" title="Logs" data-placement="bottom"><i class="fa fa-exchange" style="font-size:21px;"></i></a>
                     </li>
                     <li class="@SetActiveAction("QuickSetup","Index")">
@@ -167,7 +175,8 @@ else
                     <li class="@SetActiveAction("Config","Index")">
                         <a href="~/Secure/Config" class="hidden-xs" title="Configurations" data-placement="bottom"><i class="fa fa-wrench fa-2x" style="font-size:21px;"></i></a>
                     </li>
-                    <li class="visible-lg visible-md"><a href="~/Secure/Company" title="Company Profile" data-placement="bottom"><i class="fa fa-gears fa-2x" style="font-size:21px;"></i></a></li>
+                    <li class="visible-lg visible-md"><a href="~/Secure/Company" title="Company Profile" data-placement="bottom"><i class="fa fa-gears fa-2x" style="font-size:21px;"></i></a></li>*@
+
                     @*<li class="@SetActiveAction("Support","Index")">
                         <a href="javascript://" class="hidden-xs" data-toggle="modal" data-target="#comingSoon-Modal" title="Support Center" data-placement="bottom"><i class="fa fa-life-ring"></i></a>
                         <a href="javascript://" class="visible-xs" data-toggle="modal" data-target="#comingSoon-Modal"><i class="fa fa-life-ring"></i> Support Center</a>
@@ -201,15 +210,15 @@ else
                                 <a href="~/Secure/Account" class="list-group-item @SetActiveAction("Account", "Index") @SetActiveAction("Account", "Edit")">
                                     <i class="fa fa-user-secret"></i> My Profile
                                 </a>
-                                <a href="~/Secure/Company" class="list-group-item hidden-md hidden-lg @SetActiveAction("Company", "Index")">
+                                @*<a href="~/Secure/Company" class="list-group-item hidden-md hidden-lg @SetActiveAction("Company", "Index")">
                                     <i class="fa fa-gears"></i> Company Profile
-                                </a>
+                                </a>*@
                                 <a href="~/Secure/AppLog" class="list-group-item @SetActiveAction("AppLog", "Index")">
                                     <i class="fa fa-exchange"></i> My Activity
                                 </a>
-                                <a href="javascript://" data-toggle="modal" data-target="#themes-Modal" class="list-group-item"><i class="fa fa-paint-brush"></i> Theme</a>
+                                @*<a href="javascript://" data-toggle="modal" data-target="#themes-Modal" class="list-group-item"><i class="fa fa-paint-brush"></i> Theme</a>
                                 <a href="~/Secure/Account/Security" class="list-group-item @SetActiveAction("Account", "Security")"><i class="fa fa-lock"></i> Security Settings</a>
-                                <a href="javascript://" data-toggle="modal" data-target="#comingSoon-Modal" class="list-group-item"><i class="fa fa-cog"></i> Notifications & Preferences</a>
+                                <a href="javascript://" data-toggle="modal" data-target="#comingSoon-Modal" class="list-group-item"><i class="fa fa-cog"></i> Notifications & Preferences</a>*@
                                 <a href="~/Secure/Account/Logout" class="list-group-item"><i class="fa fa-sign-out"></i> Logout</a>
                             </div>
                             <!-- End User Account Menu Regular View-->
@@ -247,13 +256,13 @@ else
                                 <div class="tile-Title">CPC</div>
                             </a>
                         }
-                        @if (AppModule.GetById("CRM").Status && CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All))
+                        @*@if (AppModule.GetById("CRM").Status && CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All))
                         {
                             <a class="btn btn-primary tile @SetActiveArea("CRM")" href="~/CRM">
                                 <div class="tile-Icon"><span class="fa fa-2x fa-user"></span></div>
                                 <div class="tile-Title">Users</div>
                             </a>
-                        }
+                        }*@
 
                     </div>
                 </div>

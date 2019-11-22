@@ -2,7 +2,7 @@
 @model CPCCashInTransit
 @{
     var queryId = ViewContext.RouteData.Values["Id"];
-    ViewBag.Title = (queryId == null ? "Add New Cash In Transit" : "Edit Cash In Transit");
+    ViewBag.Title = (queryId == null ? "Add New CIT Shipment" : "Edit Cash CIT Shipment");
     var denomList = ViewBag.DenominationList as List<CPCDenomination>;
 }
 
@@ -25,7 +25,7 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h4> Cash In Transit </h4>
+                    <h4> @ViewBag.Title </h4>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">

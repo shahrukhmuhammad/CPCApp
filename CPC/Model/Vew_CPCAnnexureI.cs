@@ -29,7 +29,7 @@ namespace CPC.Model
         public Nullable<System.Guid> UpdatedBy { get; set; }
         public System.Guid CPCAnnexureIDetailsId { get; set; }
         public Nullable<System.Guid> CashProcessingCellId { get; set; }
-        public string Title { get; set; }
+        public string CashProcessingCellTitle { get; set; }
         public Nullable<System.Guid> ProjectBranchId { get; set; }
         public string BranchCode { get; set; }
         public string BranchName { get; set; }
