@@ -1,0 +1,204 @@
+﻿
+
+@model CPCSortedCash
+@{
+    ViewBag.Title = "Details";
+    var sortedCashdetails = Model.CPCSortedCashDetails;
+    var denomList = ViewBag.DenominationList as List<CPCDenomination>;
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4> Sorted Cash </h4>
+                <div class="row tb-padding">
+                    <table id="mytable" class="table table-striped table-bordered table-hover">
+                        <thead>
+                        </thead>
+                        @{
+                            var finalNumberOfPackets = 0;
+                            var finalTotalValue = 0;
+                        }
+                        <tbody>
+                            <tr>
+                                <td><b>Date:</b></td>
+                                <td>
+                                    <div class="input-group input-group-sm">
+                                        <input name="Date" id="Date" class="form-control input-sm datePicker" type="text" value="@Model.Date.ToString(Constants.DATE_FORMAT_CLIENT_SIDE)" required autocomplete="off">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar"></span>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td><b>Consignment Number</b></td>
+                                <td>
+                                    <label class="label label-default">@Model.SerialNumber</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Station:</b></td>
+                                <td>
+                                    <label class="label label-default">@Model.Station</label>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><b>Client:</b></td>
+                                <td>
+                                    <label class="label label-default">@ViewData["BranchName"]</label>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr><td></td><td></td><td></td></tr>
+                            <tr>
+                                <td><b>Denomination</b></td>
+                                <td><b>Volume in Bundles</b></td>
+                                <td><b>Amount</b></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Rs.1/-
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().NumberOfBundles)
+                                    @{ finalNumberOfPackets += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().NumberOfBundles); }
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().TotalValue)
+                                    @{ finalTotalValue += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().TotalValue); }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Rs.2/-
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().NumberOfBundles)
+                                    @{ finalNumberOfPackets += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().NumberOfBundles); }
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().TotalValue)
+                                    @{ finalTotalValue += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().TotalValue); }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Rs.5/-
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().NumberOfBundles)
+                                    @{ finalNumberOfPackets += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().NumberOfBundles); }
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().TotalValue)
+                                    @{ finalTotalValue += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().TotalValue); }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Rs.10/-
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().NumberOfBundles)
+                                    @{ finalNumberOfPackets += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().NumberOfBundles); }
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().TotalValue)
+                                    @{ finalTotalValue += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().TotalValue); }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Rs.20/-
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().NumberOfBundles)
+                                    @{ finalNumberOfPackets += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().NumberOfBundles); }
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().TotalValue)
+                                    @{ finalTotalValue += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().TotalValue); }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Rs.50/-
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().NumberOfBundles)
+                                    @{ finalNumberOfPackets += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().NumberOfBundles); }
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().TotalValue)
+                                    @{ finalTotalValue += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().TotalValue); }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Rs.100/-
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().NumberOfBundles)
+                                    @{ finalNumberOfPackets += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().NumberOfBundles); }
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().TotalValue)
+                                    @{ finalTotalValue += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().TotalValue); }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Rs.500/-
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().NumberOfBundles)
+                                    @{ finalNumberOfPackets += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().NumberOfBundles); }
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().TotalValue)
+                                    @{ finalTotalValue += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().TotalValue); }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Rs.1000/-
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().NumberOfBundles)
+                                    @{ finalNumberOfPackets += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().NumberOfBundles); }
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().TotalValue)
+                                    @{ finalTotalValue += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().TotalValue); }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Rs.5000/-</td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().NumberOfBundles)
+                                    @{ finalNumberOfPackets += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().NumberOfBundles); }
+                                </td>
+                                <td>
+                                    @(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().TotalValue)
+                                    @{ finalTotalValue += Convert.ToInt32(sortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().TotalValue); }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><b>Total</b></td>
+                                <td>@finalNumberOfPackets</td>
+                                <td>@finalTotalValue</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
