@@ -472,6 +472,8 @@
             $("#CollectionDateTime").data("DateTimePicker").date(moment('@Model.CollectionDateTime.ToShortDateString()'));
             $("#DeliveryDateTime").data("DateTimePicker").date(moment('@Model.DeliveryDateTime.ToShortDateString()'));
 
+            $(".select2").select2();
+
             //input fields leave event
             $(document).on('focusout', '.inp', function (e) {
                 e.preventDefault();
