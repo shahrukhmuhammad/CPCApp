@@ -65,15 +65,12 @@
                                     <th style="width:15% !important">Branch</th>
                                     <th>Denomination</th>
                                     <th style="width:10% !important">No. Of Bundles</th>
-                                    <th>Total Amount</th>
-                                    <th>Seal No.</th>
-                                    <th>Shipment Receipt</th>
+                                    <th>Total Amount</th>                                    
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
-
                         <div class="col-sm-1">
                             <label>&nbsp; &nbsp;</label> <br />
                             <button class="btn btn-primary btn-sm btn-custom" type="button" id="AddNewRow" title="Add New Row"><i class="fa fa-plus"></i> Add New Row</button>
@@ -93,10 +90,10 @@
         </div>
     </div>
 
-    @*<select id="listBranches" style="display:none;"></select>*@
-    <select id="listProjects" style="display:none;">
+    <select id="listBranches" style="display:none;"></select>
+    @*<select id="listProjects" style="display:none;">
         <option> - Select - </option>
-    </select>
+    </select>*@
     <select id="listDenomination" style="display:none;"></select>
     <select id="listCPH" style="display:none;">
         <option> - Select - </option>
@@ -108,14 +105,14 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#DateOfCollection").data("DateTimePicker").date(moment('@Model.Date.ToShortDateString()'));
+            $("#Date").data("DateTimePicker").date(moment('@Model.Date.ToShortDateString()'));
            
             //Project ddl change event
-            $(document).on('change', '.project', function (e) {
-                e.preventDefault();
-                var dataa = $(this).select2('data');
-                filterCpcHouses(dataa[0].id, $(this).closest('tr').attr("data-id"));
-            });
+            //$(document).on('change', '.project', function (e) {
+            //    e.preventDefault();
+            //    var dataa = $(this).select2('data');
+            //    filterCpcHouses(dataa[0].id, $(this).closest('tr').attr("data-id"));
+            //});
 
             //cph ddl change event
             $(document).on('change', '.cpc', function (e) {
@@ -132,10 +129,10 @@
                 //$(this).closest('td').next('td').find('input').val(totalValue);
             });
 
-            //generateBranchDDL(branchArray);
-            generateProjectDDL(projectArray);
+            //generateProjectDDL(projectArray);
             generateDenomDDL(denomArray);
             generateCPHDDL(cphArray);
+            generateBranchDDL(branchArray);
 
             //$("#txtVoucherDate").mask("99-99-9999");
             var accountGridRowIndex;
@@ -147,13 +144,13 @@
                 //bindBranchDDL(0);
                 bindDenomDDL(0);
                 bindCphDDL(0);
-                bindProjectDDL(0);
+                //bindProjectDDL(0);
                 for (var i = 2; i <= 5; i++) {
                     AddNewRow(i);
                     //bindBranchDDL(i - 1);
                     bindDenomDDL(i - 1);
                     bindCphDDL(i - 1);
-                    bindProjectDDL(i - 1);
+                    //bindProjectDDL(i - 1);
                 }
             }
 
@@ -189,7 +186,7 @@
                 //bindBranchDDL(rownum - 1);
                 bindDenomDDL(rownum - 1);
                 bindCphDDL(rownum - 1);
-                bindProjectDDL(rownum - 1);
+                //bindProjectDDL(rownum - 1);
                 $(".select2").select2();
             });
 
@@ -209,7 +206,7 @@
             //});
         });
 
-        function filterCpcHouses(Id, counter) {
+        @*function filterCpcHouses(Id, counter) {
             var cphtoAppend = $('#ddlCph' + (parseInt(counter) - 1));
             var url = '@Url.Action("FetchCashProcessingHouses", "Orderbooking")';
             $.getJSON(url,
@@ -223,7 +220,7 @@
                             cphtoAppend.append(newItem);
                         });
                 });
-        }
+        }*@
 
         function filterBranches(Id, counter) {
             var branchtoAppend = $('#ddlBranch' + (parseInt(counter) - 1));
@@ -245,10 +242,7 @@
         //Functions
         function generateHtml(row) {
             var _html = '<tr class="rows" data-id="' + row + '">'
-            //_html += '<td class="text-center" > ' + row + '</td>'
-            _html += '<td><select class="form-control input-sm select2 project" id="ddlProject' + (row - 1) + '" name="CPCAnnexureIDetail[' + (row - 1) + '].ProjectId">   </select></td>'
-
-            //_html += '<td><input type="text" class="form-control input-sm" name="CPCAnnexureIDetail[' + (row - 1) + '].CashProcessingCell"></td>'
+            _html += '<td class="text-center" > ' + row + '</td>'
             _html += '<td><select class="form-control input-sm select2 cpc" id="ddlCph' + (row - 1) + '" name="CPCAnnexureIDetail[' + (row - 1) + '].CashProcessingCellId">   </select></td>'
 
             _html += '<td><select class="form-control input-sm select2" id="ddlBranch' + (row - 1) + '" name="CPCAnnexureIDetail[' + (row - 1) + '].ProjectBranchId">   </select></td>'
@@ -266,9 +260,9 @@
 
         @*var branchArray = @Html.Raw(Json.Encode(ViewBag.BrachList));*@
 
-        var projectArray = @Html.Raw(Json.Encode(ViewBag.ProjectList));
+        //var projectArray = @*@Html.Raw(Json.Encode(ViewBag.ProjectList));*@
         var denomArray = @Html.Raw(Json.Encode(ViewBag.DenominationList));
-        var cphArray = ''; @*@Html.Raw(Json.Encode(ViewBag.CPHList));*@
+        var cphArray = @Html.Raw(Json.Encode(ViewBag.CPHList));
         //console.log(array);
 
 
@@ -278,11 +272,11 @@
         //    $("#Orderbooking > tbody > tr #ddlBranch" + row + "").append(options);
         //}
 
-        function bindProjectDDL(row) {
-            //debugger
-            var options = $("#listProjects > option").clone();
-            $("#orderbooking-datatable > tbody > tr #ddlProject" + row + "").append(options);
-        }
+        //function bindProjectDDL(row) {
+        //    //debugger
+        //    var options = $("#listProjects > option").clone();
+        //    $("#orderbooking-datatable > tbody > tr #ddlProject" + row + "").append(options);
+        //}
         function bindDenomDDL(row) {
             //debugger
             var options = $("#listDenomination > option").clone();
@@ -300,12 +294,12 @@
         //        $("#listBranches").append($("<option /> ").val(array[i].Value).text(array[i].Text));
         //    }
         //}
-        function generateProjectDDL(array) {
-            //debugger
-            for (var i = 0; i < array.length; i++) {
-                $("#listProjects").append($("<option /> ").val(array[i].Value).text(array[i].Text));
-            }
-        }
+        //function generateProjectDDL(array) {
+        //    //debugger
+        //    for (var i = 0; i < array.length; i++) {
+        //        $("#listProjects").append($("<option /> ").val(array[i].Value).text(array[i].Text));
+        //    }
+        //}
         function generateDenomDDL(array) {
             //debugger
             for (var i = 0; i < array.length; i++) {
