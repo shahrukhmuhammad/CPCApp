@@ -33,6 +33,7 @@ namespace WebApp.Controllers
         public PartialViewResult _AllOrderbookings()
         {
             var model = orderbookingRepo.GetAll();
+            ViewBag.DetailsList = orderbookingRepo.GetAllDetails();
             return PartialView(model);
         }
 
