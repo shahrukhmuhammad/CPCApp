@@ -430,7 +430,7 @@
         });
 
         function GetTotalVal(sortedValue, denomVal) {
-            const totalVal = parseInt(sortedValue) * parseInt(denomVal) * 1000;
+            const totalVal = parseInt(sortedValue) * parseInt(denomVal);
             return isNaN(totalVal) ? '0' : totalVal;
         }
 
