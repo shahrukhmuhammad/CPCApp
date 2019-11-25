@@ -45,6 +45,7 @@ namespace BaseApp.Entity
         public const string ViewCRM = "ViewCRM";
         public const string ViewHRMS = "ViewHRMS";
         public const string ViewCPC = "ViewCPC";
+        public const string ViewBank = "ViewBank";
         #endregion
 
         #region Control Permissions
@@ -57,6 +58,7 @@ namespace BaseApp.Entity
         public const string CRM = "CRM";
         public const string HRMS = "HRMS";
         public const string CPC = "CPC";
+        public const string Bank = "Bank";
         #endregion
 
 

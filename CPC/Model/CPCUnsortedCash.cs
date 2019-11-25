@@ -34,8 +34,8 @@ namespace CPC.Model
         public Nullable<byte> Status { get; set; }
         public bool IsActive { get; set; }
     
-        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCUnsortedCashDetail> CPCUnsortedCashDetails { get; set; }
+        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
     }
 }

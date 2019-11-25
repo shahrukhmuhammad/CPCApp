@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\OrderbookingEntity.cs" />
     <Compile Include="Entity\AnnexureIIIEntity.cs" />
     <Compile Include="Entity\CPHEntity.cs" />
     <Compile Include="Entity\BranchEntity.cs" />
@@ -121,6 +122,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CPCModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\CPCOrderBooking.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CPCOrderBookingDetail.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\CPCProject.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
@@ -134,6 +141,9 @@
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Vew_CPCAnnexureI.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Vew_Orderbookings.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

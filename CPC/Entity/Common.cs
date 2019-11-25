@@ -53,7 +53,6 @@ namespace CPC
             }
             catch (Exception ex)
             {
-                //throw ex;
                 return null;
             }
         }
@@ -95,6 +94,23 @@ namespace CPC
             }
         }
 
+        public List<CustomSelectList> GetAllProjectsDropdown()
+        {
+            try
+            {
+                using (var context = new SOSTechCPCEntities())
+                {
+                    var ls = context.CPCProjects.OrderBy(x => x.Name).ToList();
+                    return ls.Select(x => new CustomSelectList { Value = x.Id.ToString(), Text = x.Name.ToString() }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                return null;
+            }
+        }
+
     }
 
 
@@ -109,6 +125,14 @@ namespace CPC
     public enum AnnexureStatus
     {
         Inprocess = 1,
-        Completed = 2
+        Completed = 2,
+        Approved = 3,
     }
+
+    //public enum BankStatus
+    //{
+    //    Inprocess = 1,
+    //    Approved = 2,
+    //    Completed = 3
+    //}
 }

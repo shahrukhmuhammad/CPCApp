@@ -1,11 +1,5 @@
 ﻿@functions{
     #region Current Location Check
-    bool IsCurrentArea(string a)
-    {
-
-        var area = ViewContext.RouteData.DataTokens["area"].ToString();
-        return string.Compare(a, area, true) == 0;
-    }
     bool IsCurrentController(string c)
     {
         var controller = ViewContext.RouteData.GetRequiredString("controller");
@@ -19,11 +13,6 @@
     #endregion
 
     #region Set Location
-    string SetActiveArea(string area)
-    {
-        var res = IsCurrentArea(area);
-        return res ? "active-tile active" : null;
-    }
     string SetActiveController(string controller)
     {
         var res = IsCurrentController(controller);
@@ -68,29 +57,6 @@
                     </div>
                 </div>
             </div>
-            @*<a href="javascript://" class="list-group-item" data-toggle="modal" data-target="#comingSoon-Modal"><i class="fa fa-briefcase"></i> My Account</a>*@
-
-
-            @*<a href="~/Secure/Account" class="list-group-item @SetActiveAction("Account", "Index") @SetActiveAction("Account", "Edit")"><i class="fa fa-user-secret"></i> My Profile</a>
-                <a href="~/Secure/Company" class="list-group-item visible-xs @SetActiveAction("Company", "Index")">
-                    <i class="fa fa-gears"></i> Company Profile
-                </a>
-                <a href="~/Secure/AppLog" class="list-group-item @SetActiveAction("AppLog", "Index")">
-                    <i class="fa fa-exchange"></i> My Activity
-                </a>*@
-
-
-            @*<a href="javascript://" class="list-group-item" data-toggle="modal" data-target="#themes-Modal"><i class="fa fa-paint-brush"></i> Theme</a>
-                <a href="~/Secure/Account/Security" class="list-group-item @SetActiveAction("Account", "Security")"><i class="fa fa-lock"></i> Security Settings</a>
-                <a href="javascript://" class="list-group-item" data-toggle="modal" data-target="#comingSoon-Modal"><i class="fa fa-cog"></i> Notifications & Preferences</a>*@
-
-
-            @*@if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.LogsManagement))
-                {
-                    <a href="~/Secure/AppLog/General" class="list-group-item @SetActiveAction("AppLog", "General")"><i class="fa fa-exchange"></i> Logs</a>
-                }*@
-            @*<a href="javascript://" class="list-group-item" data-toggle="modal" data-target="#comingSoon-Modal"><i class="fa fa-life-ring"></i> Support Center</a>*@
-            @*<a href="~/Secure/Config" class="list-group-item"><i class="fa fa-wrench"></i> Configurations</a>*@
             <a href="~/Secure/Account/Logout" class="list-group-item"><i class="fa fa-sign-out"></i> Logout</a>
         </div>
     </nav>
@@ -99,13 +65,9 @@
     <!-- Top Menu Mobile View -->
     <div id="mobile-Top-Menu" class="navbar navbar-default navbar-fixed-top text-center">
         <div class="btn-group btn-group-sm" role="group">
-            @*<a href="javascript://" class="btn-group btn-group-xs"><i class="fa fa-tasks"></i></a>*@
             <div id="mobile-message-reader" class="btn-group btn-group-xs" role="group"></div>
             <div id="mobile-upcomming-event-reader" class="btn-group btn-group-xs" role="group"></div>
-            @*<div id="mobile-notification-reader" class="btn-group btn-group-xs" role="group"></div>
-                <div id="mobile-notification-warning-reader" class="btn-group btn-group-xs" role="group"></div>*@
-            @*<a href="~/Secure/AppLog/General" class="btn-group btn-group-xs"><i class="fa fa-exchange"></i></a>
-                <a href="~/Secure/Config" class="btn-group btn-group-xs"><i class="fa fa-wrench"></i></a>*@
+
         </div>
     </div>
     <!-- End Top Menu Mobile View -->
@@ -128,7 +90,7 @@ else
         <div class="navbar-header">
             <div class="row no-margin visible-xs">
                 <div class="col-xs-3">
-                    @if (!IsCurrentArea("Dashboard"))
+                    @if (!IsCurrentController("Dashboard"))
                     {
                         <button type="button" class="navbar-toggle pull-left" data-toggle="sidebar" data-target="#mobile-Module-Menu" data-canvas="body" data-autohide="true" style="margin-right:0;">
                             <span class="icon-bar"></span>
@@ -159,33 +121,10 @@ else
             else
             {
                 <ul class="nav navbar-nav navbar-right">
-                    @*<li><a href="javascript://" onclick="$('#loading-mask').show(); window.location.reload(true);" title="Refresh" data-placement="bottom"><i class="fa fa-refresh"></i></a></li>*@
-                    @*<li><a href="javascript://" title="Scheduled Tasks" data-placement="bottom"><i class="fa fa-tasks"></i></a></li>*@
                     <li id="upcomming-event-reader" class="dropdown"></li>
-
-                    @*<li id="message-reader" class="dropdown"></li>*@
                     <li class="dropdown"></li>
-
                     <li id="notification-reader" class="dropdown"></li>
                     <li class="dropdown"></li>
-
-                    @*<li id="notification-warning-reader" class="dropdown"></li>*@
-
-                    @*<li class="@SetActiveAction("AppLog","General")">
-            <a href="~/Secure/AppLog/General" class="hidden-xs" title="Logs" data-placement="bottom"><i class="fa fa-exchange" style="font-size:21px;"></i></a>
-        </li>
-        <li class="@SetActiveAction("QuickSetup","Index")">
-            <a href="javascript://" class="hidden-xs" title="Quick Setup" data-placement="bottom"><i class="fa fa-anchor fa-2x" style="font-size:21px;"></i></a>
-        </li>
-        <li class="@SetActiveAction("Config","Index")">
-            <a href="~/Secure/Config" class="hidden-xs" title="Configurations" data-placement="bottom"><i class="fa fa-wrench fa-2x" style="font-size:21px;"></i></a>
-        </li>
-        <li class="visible-lg visible-md"><a href="~/Secure/Company" title="Company Profile" data-placement="bottom"><i class="fa fa-gears fa-2x" style="font-size:21px;"></i></a></li>*@
-
-                    @*<li class="@SetActiveAction("Support","Index")">
-            <a href="javascript://" class="hidden-xs" data-toggle="modal" data-target="#comingSoon-Modal" title="Support Center" data-placement="bottom"><i class="fa fa-life-ring"></i></a>
-            <a href="javascript://" class="visible-xs" data-toggle="modal" data-target="#comingSoon-Modal"><i class="fa fa-life-ring"></i> Support Center</a>
-        </li>*@
 
                     <li class="@SetTopActiveController("Account") dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -211,20 +150,12 @@ else
                             </div>
                             <!-- User Account Menu Regular View -->
                             <div class="list-group no-margin">
-                                @*<a href="javascript://" data-toggle="modal" data-target="#comingSoon-Modal" class="list-group-item"><i class="fa fa-briefcase"></i> My Account</a>*@
                                 <a href="~/Secure/Account" class="list-group-item @SetActiveAction("Account", "Index") @SetActiveAction("Account", "Edit")">
                                     <i class="fa fa-user-secret"></i> My Profile
                                 </a>
-                                @*<a href="~/Secure/Company" class="list-group-item hidden-md hidden-lg @SetActiveAction("Company", "Index")">
-                        <i class="fa fa-gears"></i> Company Profile
-                    </a>*@
-
                                 <a href="~/Secure/AppLog" class="list-group-item @SetActiveAction("AppLog", "Index")">
                                     <i class="fa fa-exchange"></i> My Activity
                                 </a>
-                                @*<a href="javascript://" data-toggle="modal" data-target="#themes-Modal" class="list-group-item"><i class="fa fa-paint-brush"></i> Theme</a>
-                    <a href="~/Secure/Account/Security" class="list-group-item @SetActiveAction("Account", "Security")"><i class="fa fa-lock"></i> Security Settings</a>
-                    <a href="javascript://" data-toggle="modal" data-target="#comingSoon-Modal" class="list-group-item"><i class="fa fa-cog"></i> Notifications & Preferences</a>*@
                                 <a href="~/Secure/Account/Logout" class="list-group-item"><i class="fa fa-sign-out"></i> Logout</a>
                             </div>
                             <!-- End User Account Menu Regular View-->
@@ -244,32 +175,15 @@ else
             <div id="Module-Nav">
                 <div class="container">
                     <div class="module-nav-wrapper">
-                        <a class="btn btn-primary tile @SetActiveArea("Dashboard")" href="~/Dashboard">
-                            <div class="tile-Icon"><span class="fa fa-2x fa-dashboard"></span></div>
-                            <div class="tile-Title">Insights</div>
-                        </a>
-                        @*@if (AppModule.GetById("HRMS").Status && CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All))
-                            {
-                                <a class="btn btn-primary tile @SetActiveArea("HRMS")" href="~/HRMS/Dashboard/">
-                                    <div class="tile-Icon"><span class="fa fa-2x fa-users"></span></div>
-                                    <div class="tile-Title">HRMS</div>
-                                </a>
-                            }*@
-                        @if (AppModule.GetById("CPC").Status && (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All) || CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.ViewCPC)))
-                        {
-                            <a class="btn btn-primary tile @SetActiveArea("CPC")" href="~/CPC">
-                                <div class="tile-Icon"><span class="fa fa-2x fa-building"></span></div>
-                                <div class="tile-Title">CPC</div>
-                            </a>
-                        }
-                        @if (CurrentUser.IsSuperAdmin() && CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All))
-                        {
-                            <a class="btn btn-primary tile @SetActiveController("AccessControl")" href="~/Secure/AccessControl">
-                                <div class="tile-Icon"><span class="fa fa-2x fa-user"></span></div>
-                                <div class="tile-Title">Users</div>
-                            </a>
-                        }
 
+
+                        @if ((CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All) || CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.ViewBank, BaseApp.Entity.AppPermission.Bank)))
+                        {
+                            <a class="btn btn-primary tile @SetActiveController("Orderbooking")" href="~/Orderbooking/Orderbookings">
+                                <div class="tile-Icon"><span class="fa fa-2x fa-building"></span></div>
+                                <div class="tile-Title">Bank</div>
+                            </a>
+                        }
                     </div>
                 </div>
             </div>

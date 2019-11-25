@@ -10,6 +10,13 @@ namespace WebApp
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapMvcAttributeRoutes();
 
+            routes.MapRoute(
+             name: "Default",
+             url: "{controller}/{action}/{id}",
+             defaults: new { controller = "Orderbooking", action = "Record", id = UrlParameter.Optional },
+             namespaces: new[] { "WebApp.Controllers" }
+            );
+
             //routes.MapRoute(
             // name: "Default",
             // url: "Secure/{action}/{id}",
@@ -37,11 +44,11 @@ namespace WebApp
             //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             //);
 
-            routes.MapRoute(
-                name: "Default",
-                url: "HRMS/{controller}/{action}/{id}",
-                defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
-            );
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: "HRMS/{controller}/{action}/{id}",
+            //    defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
+            //);
         }
     }
 }

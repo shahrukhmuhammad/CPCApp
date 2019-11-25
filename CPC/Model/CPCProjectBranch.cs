@@ -21,12 +21,12 @@ namespace CPC.Model
             this.CPCAnnexureIIs = new HashSet<CPCAnnexureII>();
             this.CPCAnnexureIIIs = new HashSet<CPCAnnexureIII>();
             this.CPCUnsortedCashes = new HashSet<CPCUnsortedCash>();
+            this.CPCOrderBookingDetails = new HashSet<CPCOrderBookingDetail>();
         }
     
         public System.Guid Id { get; set; }
         public string BranchName { get; set; }
         public string BranchCode { get; set; }
-        public Nullable<System.Guid> ProjectId { get; set; }
         public string Address { get; set; }
         public Nullable<System.Guid> CityId { get; set; }
         public Nullable<System.Guid> RegionId { get; set; }
@@ -44,5 +44,7 @@ namespace CPC.Model
         public virtual CPCCashProcessingHouse CPCCashProcessingHouse { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCOrderBookingDetail> CPCOrderBookingDetails { get; set; }
     }
 }

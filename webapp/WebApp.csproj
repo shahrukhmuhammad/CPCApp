@@ -264,6 +264,8 @@
     <Compile Include="Areas\Secure\Controllers\NotificationController.cs" />
     <Compile Include="Areas\Secure\Controllers\SettingController.cs" />
     <Compile Include="Areas\Secure\SecureAreaRegistration.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderbookingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -788,13 +790,8 @@
     <Content Include="Areas\CPC\Views\UnsortedCash\_AllUnsortedCashs.cshtml" />
     <Content Include="Areas\CPC\Views\UnsortedCash\Details.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureI\Details.cshtml" />
-    <None Include="Properties\PublishProfiles\BaseApp %28Published%29.pubxml" />
-    <None Include="Properties\PublishProfiles\BaseApp - A - CMS - V2.0 %28Published%29.pubxml" />
-    <None Include="Properties\PublishProfiles\BaseApp - A - V3.0 %28Published%29.pubxml" />
-    <None Include="Properties\PublishProfiles\Clinicul %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
-    <None Include="Properties\PublishProfiles\Tenders Africa %28Published%29.pubxml" />
     <Content Include="Scripts\FusionChart\fusioncharts.powercharts.js" />
     <Content Include="Scripts\Input Mask\amazonawsjQuery.inputmask.js" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
@@ -866,6 +863,13 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_NewLayout.cshtml" />
+    <Content Include="Views\Orderbooking\Orderbookings.cshtml" />
+    <Content Include="Views\Orderbooking\_AllOrderbookings.cshtml" />
+    <Content Include="Views\Orderbooking\Details.cshtml" />
+    <Content Include="Views\Orderbooking\Record.cshtml" />
+    <Content Include="Views\Shared\_NewSidebar.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_NewHeader.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -890,7 +894,6 @@
     <Folder Include="Content\Uploads\HRMS\EmployeeDocs\" />
     <Folder Include="Content\Uploads\HRMS\FingerPrints\" />
     <Folder Include="Content\Uploads\Message\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

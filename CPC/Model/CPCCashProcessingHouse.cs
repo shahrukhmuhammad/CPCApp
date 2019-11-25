@@ -26,7 +26,10 @@ namespace CPC.Model
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
         public bool IsActive { get; set; }
+        public Nullable<System.Guid> ProjectId { get; set; }
+        public string CityName { get; set; }
     
+        public virtual CPCProject CPCProject { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCProjectBranch> CPCProjectBranches { get; set; }
     }

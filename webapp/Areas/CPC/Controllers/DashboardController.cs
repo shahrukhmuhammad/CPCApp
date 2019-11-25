@@ -15,7 +15,6 @@ namespace WebApp.Areas.CPC.Controllers
         }
         public ActionResult Index()
         {
-            
             return View();
         }
     }

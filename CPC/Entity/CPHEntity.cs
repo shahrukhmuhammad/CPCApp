@@ -42,13 +42,27 @@ namespace CPC
             }
         }
 
+
+        //
+        // Summary:
+        //     Represents a strongly typed list of Cash Processing House List
+        //
+        // Type parameters:
+        //   The type of element is ProjectId.
         public List<CustomSelectList> GetDropdown(Guid? Id = null)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    var ls = context.CPCCashProcessingHouses.Where(x => x.IsActive).ToList();
+                    var ls = new List<CPCCashProcessingHouse>();
+                    if (Id.HasValue)
+                    {
+                        ls = context.CPCCashProcessingHouses.Where(x => x.IsActive && x.ProjectId == Id).ToList();
+                    }
+                    else {
+                        ls = context.CPCCashProcessingHouses.Where(x => x.IsActive).ToList();
+                    }
                     return ls.Select(x => new CustomSelectList { Value = x.Id.ToString(), Text = x.Title }).ToList();
                 }
             }

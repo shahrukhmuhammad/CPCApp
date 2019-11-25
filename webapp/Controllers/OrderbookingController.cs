@@ -2,51 +2,45 @@
 using BaseApp.System;
 using CPC;
 using CPC.Model;
-using ImageResizer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-
-namespace WebApp.Areas.CPC.Controllers
+namespace WebApp.Controllers
 {
-    [AppAuthorize(AppPermission.All, AppPermission.ViewCPC, AppPermission.CPC)]
-    public class AnnexureIController : AppController
+    [AppAuthorize(AppPermission.All)] //AppPermission.ViewCPC, AppPermission.CPC
+    
+    public class OrderbookingController : AppController
     {
-        private AnnexureIEntity annexureIRepo;
-        private EmployeeEntity employeeRepo;
+        private OrderbookingEntity orderbookingRepo;
         private BranchEntity branchRepo;
         private Common commonRepo;
         private CPHEntity cashpPocessinHousegRepo;
 
-        public AnnexureIController()
+        public OrderbookingController()
         {
-            annexureIRepo = new AnnexureIEntity();
-            employeeRepo = new EmployeeEntity();
+            orderbookingRepo = new OrderbookingEntity();
             branchRepo = new BranchEntity();
             commonRepo = new Common();
             cashpPocessinHousegRepo = new CPHEntity();
         }
-        public ActionResult AnnexureIs()
+        public ActionResult Orderbookings()
         {
             return View();
         }
-        public PartialViewResult _AllAnnexureI()
+        public PartialViewResult _AllOrderbookings()
         {
-            var model = annexureIRepo.GetAll();
-            ViewBag.EmployeeList = employeeRepo.GetAll();
-            ViewBag.DenomList = commonRepo.GetAllDenominationDropdown();
+            var model = orderbookingRepo.GetAll();
             return PartialView(model);
         }
 
         #region Details
         public ActionResult Details(Guid Id)
         {
-            var model = annexureIRepo.GetById(Id);
-            //ViewBag.Employees = employeeRepo.GetAll();
-            ViewBag.Details = annexureIRepo.GetAllDetailsById(Id);
+            var model = orderbookingRepo.GetById(Id);
+            ViewBag.Details = orderbookingRepo.GetAllDetailsById(Id);
             return View(model);
         }
         #endregion
@@ -54,26 +48,24 @@ namespace WebApp.Areas.CPC.Controllers
         public ActionResult Record(Guid? Id)
         {
             ViewData["IsView"] = Convert.ToString(TempData["IsView"]);
-            var model = new CPCAnnexureI();
+            var model = new CPCOrderBooking();
             if (Id.HasValue)
             {
-                model = annexureIRepo.GetById(Id.Value);
+                model = orderbookingRepo.GetById(Id.Value);
             }
             else
             {
-                model.DateOfCollection = DateTime.Now;
-                model.SrNo = annexureIRepo.GetNextSrNo();
-                //model.IsActive = true;
+                model.Date = DateTime.Now;
+                model.OrderNo = orderbookingRepo.GetNextSrNo();
             }
-            ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             ViewBag.BrachList = new SelectList(branchRepo.GetDropdown(), "Value", "Text");
-            ViewBag.DenominationList = new SelectList(commonRepo.GetAllDenominationDropdown().Where(x=> x.Text != Convert.ToString(1) && x.Text != Convert.ToString(2) && x.Text != Convert.ToString(5)), "Value", "Text");
+            ViewBag.DenominationList = new SelectList(commonRepo.GetAllDenominationDropdown().Where(x => x.Text != Convert.ToString(1) && x.Text != Convert.ToString(2) && x.Text != Convert.ToString(5)), "Value", "Text");
             ViewBag.CPHList = new SelectList(cashpPocessinHousegRepo.GetDropdown(), "Value", "Text");
-            ViewBag.ProjectList = new SelectList(commonRepo.GetAllProjectsDropdown(), "Value", "Text");
+            //ViewBag.ProjectList = new SelectList(commonRepo.GetAllProjectsDropdown(), "Value", "Text");
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Record(CPCAnnexureI model, List<CPCAnnexureIDetail> CPCAnnexureIDetail, string DateOfCollection)
+        public ActionResult Record(CPCOrderBooking model, List<CPCOrderBookingDetail> CPCOrderBookingDetail, string Date)
         {
             try
             {
@@ -84,17 +76,17 @@ namespace WebApp.Areas.CPC.Controllers
                     model.IsActive = true;
                     model.Status = (int)AnnexureStatus.Inprocess;
                     model.Id = Guid.NewGuid();
-                    model.DateOfCollection = Utils.SetDateFormate(DateOfCollection);
+                    model.Date = Utils.SetDateFormate(Date);
+                    model.OrderNo = orderbookingRepo.GetNextSrNo();
 
-                    var res = annexureIRepo.Create(model);
+                    var res = orderbookingRepo.Create(model);
                     if (res.HasValue)
                     {
-                        var lsToSave = CPCAnnexureIDetail.Where(x => x.CashProcessingCellId.HasValue && x.NoOfBundles > 0).ToList();
-                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.AnnexureIId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
+                        var lsToSave = CPCOrderBookingDetail.Where(x => x.CashProcessingCellId.HasValue && x.NoOfBundles > 0).ToList();
+                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.OrderbookingId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
                         #region Save Details
-                        annexureIRepo.Create(lsToSave);
+                        orderbookingRepo.Create(lsToSave);
                         #endregion
-
                         model.Id = res.Value;
                     }
 
@@ -122,23 +114,23 @@ namespace WebApp.Areas.CPC.Controllers
                     //realtime.UpdateMessages(null);
                     #endregion
 
-                    TempData["SuccessMsg"] = model.SrNo + " has been created successfully.";
+                    TempData["SuccessMsg"] = "Order No " + model.OrderNo + " has been booked successfully.";
                 }
                 else
                 {
-                    model.UpdatedBy = CurrentUser.Id;
-                    model.UpdatedOn = DateTime.Now;
-                    bool res = annexureIRepo.Update(model);
+                    //model.UpdatedBy = CurrentUser.Id;
+                    //model.UpdatedOn = DateTime.Now;
+                    //bool res = orderbookingRepo.Update(model);
 
 
-                    if (res)
-                    {
-                        TempData["SuccessMsg"] = model.SrNo + " has been updated successfully.";
-                    }
-                    else
-                    {
-                        TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
-                    }
+                    //if (res)
+                    //{
+                    //    TempData["SuccessMsg"] = model.SrNo + " has been updated successfully.";
+                    //}
+                    //else
+                    //{
+                    //    TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
+                    //}
                     #region Activity Log
                     //appLog.Create(CurrentUser.OfficeId, model.Id, CurrentUser.Id, AppLogType.Activity, "CRM - Lead", model.FullName + " lead updated", "~/CRM/Contact/LeadRecord > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td><strong>" + model.FullName + "</strong> lead updated by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
                     #endregion
@@ -159,7 +151,7 @@ namespace WebApp.Areas.CPC.Controllers
             //}
             //else
             //{
-            return RedirectToAction("AnnexureIs");
+            return RedirectToAction("Orderbookings");
         }
         #endregion
 
@@ -168,30 +160,31 @@ namespace WebApp.Areas.CPC.Controllers
         [HttpGet]
         public JsonResult GetAnnexureI(Guid Id, string date)
         {
-            var ls = annexureIRepo.GetByDateBranchId(Id, Utils.SetDateFormate(date));
-            if (ls != null && ls.Count > 0)
-            {
-                return Json(new
-                {
-                    ShipmentReciptNo = ls.FirstOrDefault().ShipmentReciptNo,
-                    SealNo = ls.FirstOrDefault().SealNo,
-                    Id = ls.FirstOrDefault().Id,
-                    details = ls.Select(x => new { x.DenominationId, x.DenominationTitle, }).OrderBy(x => x.DenominationTitle)
-                }, JsonRequestBehavior.AllowGet);
-            }
+            //var ls = orderbookingRepo.GetByDateBranchId(Id, Utils.SetDateFormate(date));
+            //if (ls != null && ls.Count > 0)
+            //{
+            //    return Json(new
+            //    {
+            //        ShipmentReciptNo = ls.FirstOrDefault().ShipmentReciptNo,
+            //        SealNo = ls.FirstOrDefault().SealNo,
+            //        Id = ls.FirstOrDefault().Id,
+            //        details = ls.Select(x => new { x.DenominationId, x.DenominationTitle, }).OrderBy(x => x.DenominationTitle)
+            //    }, JsonRequestBehavior.AllowGet);
+            //}
             return Json(null, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public JsonResult DuplicationCheck(int SrNo)
         {
-            return Json(annexureIRepo.IsDuplicate(SrNo), JsonRequestBehavior.AllowGet);
+            return Json("", JsonRequestBehavior.AllowGet);
+            //return Json(orderbookingRepo.IsDuplicate(SrNo), JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public JsonResult FetchCashProcessingHouses(Guid Id)
         {
             try
             {
-                //var List = branchRepo.GetDropdown(id);
+                var List = branchRepo.GetDropdown(Id);
                 return Json(cashpPocessinHousegRepo.GetDropdown(Id), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -205,7 +198,7 @@ namespace WebApp.Areas.CPC.Controllers
         {
             try
             {
-                //var List = branchRepo.GetDropdown(id);
+                var List = branchRepo.GetDropdown(id);
                 return Json(branchRepo.GetDropdown(id), JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -222,10 +215,9 @@ namespace WebApp.Areas.CPC.Controllers
             try
             {
                 #region Activity Log
-                //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
+               //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
                 #endregion
-                annexureIRepo.InActiveRecord(Id);
-
+                orderbookingRepo.InActiveRecord(Id);
                 TempData["SuccessMsg"] = "AnnexureII has been deleted successfully.";
             }
             catch (Exception ex)
@@ -246,7 +238,7 @@ namespace WebApp.Areas.CPC.Controllers
         //        #region Activity Log
         //        //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
         //        #endregion
-        //        annexureIRepo.Delete(Id);
+        //        orderbookingRepo.Delete(Id);
 
         //        TempData["SuccessMsg"] = "Department has been deleted successfully.";
         //    }
@@ -274,7 +266,7 @@ namespace WebApp.Areas.CPC.Controllers
         //            {
         //                lsIds.Add(new Guid(x));
         //            }
-        //            annexureIRepo.DeleteMultiple(lsIds);
+        //            orderbookingRepo.DeleteMultiple(lsIds);
         //        }
 
         //        #region Activity Log

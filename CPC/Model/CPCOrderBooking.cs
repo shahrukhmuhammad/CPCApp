@@ -12,20 +12,25 @@ namespace CPC.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CPCProject
+    public partial class CPCOrderBooking
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CPCProject()
+        public CPCOrderBooking()
         {
-            this.CPCCashProcessingHouses = new HashSet<CPCCashProcessingHouse>();
+            this.CPCOrderBookingDetails = new HashSet<CPCOrderBookingDetail>();
         }
     
         public System.Guid Id { get; set; }
-        public string Name { get; set; }
-        public string ContactPersonPhone { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public int OrderNo { get; set; }
+        public System.DateTime Date { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public System.Guid CreatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedOn { get; set; }
+        public Nullable<System.Guid> UpdatedBy { get; set; }
+        public byte Status { get; set; }
+        public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CPCCashProcessingHouse> CPCCashProcessingHouses { get; set; }
+        public virtual ICollection<CPCOrderBookingDetail> CPCOrderBookingDetails { get; set; }
     }
 }

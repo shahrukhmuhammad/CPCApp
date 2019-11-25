@@ -1,12 +1,12 @@
 ﻿
-@model CPCAnnexureI
+@model CPCOrderBooking
 @{
     var queryId = ViewContext.RouteData.Values["Id"];
-    ViewBag.Title = (queryId == null ? "Add New Cash Receiving" : "Edit Cash Receiving");
+    ViewBag.Title = (queryId == null ? "Add New Order Booking" : "Edit Order Booking");
 }
 
 <style>
-    #annexureI th {
+    #orderbooking-datatable th {
         text-align: center !important;
     }
 
@@ -17,14 +17,11 @@
 <form id="lead-frm" class="user-Profile" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
 
-    @Html.HiddenFor(x => x.Id)
-
     <div class="row">
         <div class="col-sm-12 text-right">
             <div class="btn-group" role="group">
                 <a href="javascript://" onclick="window.history.back()" class="btn btn-default"><i class="fa fa-close"></i> Cancel / Back</a>
-                <button type="submit" id="submit" class="btn btn-success hidden"><i class="fa fa-check"></i> Submit</button>
-                <button type="button" onclick="checkValidation()" id="btnValidate" class="btn btn-success"><i class="fa fa-check"></i> Submit</button>
+                <button type="submit" id="submit" class="btn btn-success"><i class="fa fa-check"></i> Submit</button>
             </div>
         </div>
     </div>
@@ -34,7 +31,7 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h4> Cash Receiving </h4>
+                    <h4> Order Booking </h4>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">
@@ -42,9 +39,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 text-left horizontal-label">Sr. Number</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBoxFor(x => x.SrNo, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
-                                            <span class="duplicate text-danger"></span>
-                                            @Html.ValidationMessageFor(m => m.SrNo)
+                                            @Html.TextBoxFor(x => x.OrderNo, new { @class = "form-control input-sm", @autofocus = "true", @readonly = "readonly" })
                                         </div>
                                     </div>
                                 </div>
@@ -52,8 +47,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-3 horizontal-label">Collection Date</label>
                                         <div class="col-sm-9">
-                                            <input name="DateOfCollection" id="DateOfCollection" class="form-control input-sm datePicker" type="text" value="@Model.DateOfCollection.ToShortDateString()" required autocomplete="off">
-                                            @Html.ValidationMessageFor(m => m.DateOfCollection)
+                                            <input name="Date" id="Date" class="form-control input-sm datePicker" type="text" value="@Model.Date.ToShortDateString()" required autocomplete="off" readonly />
+                                            @Html.ValidationMessageFor(m => m.Date)
                                         </div>
                                     </div>
                                 </div>
@@ -62,7 +57,7 @@
                     </div>
 
                     <div class="row tb-padding">
-                        <table id="annexureI" class="table table-striped table-bordered table-hover">
+                        <table id="orderbooking-datatable" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th style="width:5% !important">Project</th>
@@ -84,69 +79,6 @@
                             <button class="btn btn-primary btn-sm btn-custom" type="button" id="AddNewRow" title="Add New Row"><i class="fa fa-plus"></i> Add New Row</button>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CPC</b> Staff First Person</label>
-                                        <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCPCStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
-                                            @Html.ValidationMessageFor(m => m.CashHandedOverCPCStaffAId)
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CPC</b> Staff Second Person</label>
-                                        <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCPCStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
-                                            @Html.ValidationMessageFor(m => m.CashHandedOverCPCStaffBId)
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> First Person</label>
-                                        <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
-                                            @Html.ValidationMessageFor(m => m.CashHandedOverCITStaffAId)
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Second Person</label>
-                                        <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label"> <b>CPC</b> Staff Handing Over Cash and Verifying First Person</label>
-                                        <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label"><b>CPC</b> Staff Handing Over Cash and Verifying Second Person</label>
-                                        <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -156,8 +88,7 @@
         <div class="col-sm-12 text-right">
             <div class="btn-group" role="group">
                 <a href="javascript://" onclick="window.history.back()" class="btn btn-default"><i class="fa fa-close"></i> Cancel / Back</a>
-                <button type="submit" id="submit" class="btn btn-success hidden"><i class="fa fa-check"></i> Submit</button>
-                <button type="button" onclick="checkValidation()" id="btnValidate" class="btn btn-success"><i class="fa fa-check"></i> Submit</button>
+                <button type="submit" id="submit" class="btn btn-success"><i class="fa fa-check"></i> Submit</button>
             </div>
         </div>
     </div>
@@ -177,16 +108,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            //-- Read Only Mode Trigger -//
-            @*if ('@ViewData["IsView"]' != '') {
-                $("input").attr("readonly", true);
-                $("#IsActive").attr("disabled", true);
-                $("#submit").hide();
-            }*@
-            $("#DateOfCollection").data("DateTimePicker").date(moment('@Model.DateOfCollection.ToShortDateString()'));
-            var isSubmit = true;
-
-
+            $("#DateOfCollection").data("DateTimePicker").date(moment('@Model.Date.ToShortDateString()'));
+           
             //Project ddl change event
             $(document).on('change', '.project', function (e) {
                 e.preventDefault();
@@ -218,7 +141,7 @@
             var accountGridRowIndex;
 
             //Page Load
-            var rowCount = $('#annexureI tbody tr').length;
+            var rowCount = $('#orderbooking-datatable tbody tr').length;
             if (rowCount == 0) {
                 AddFirstRow(1);
                 //bindBranchDDL(0);
@@ -237,7 +160,7 @@
             //btn-remove Click
             $(document).on('click', '.btn-removeRow', function (e) {
                 e.preventDefault();
-                if ($('#annexureI tbody tr').length > 1) {
+                if ($('#orderbooking-datatable tbody tr').length > 1) {
                     $(this).closest('tr').remove();
                 }
                 else {
@@ -260,7 +183,7 @@
 
             $('#AddNewRow').click(function () {
                 //debugger
-                var rownum = $("#annexureI tr:last").attr("data-id");
+                var rownum = $("#orderbooking-datatable tr:last").attr("data-id");
                 rownum = parseInt(rownum) + 1;
                 AddNewRow(rownum);
                 //bindBranchDDL(rownum - 1);
@@ -288,7 +211,7 @@
 
         function filterCpcHouses(Id, counter) {
             var cphtoAppend = $('#ddlCph' + (parseInt(counter) - 1));
-            var url = '@Url.Action("FetchCashProcessingHouses", "AnnexureI")';
+            var url = '@Url.Action("FetchCashProcessingHouses", "Orderbooking")';
             $.getJSON(url,
                 { Id: Id },
                 function (response) {
@@ -304,7 +227,7 @@
 
         function filterBranches(Id, counter) {
             var branchtoAppend = $('#ddlBranch' + (parseInt(counter) - 1));
-            var url = '@Url.Action("FetchHirerachy", "AnnexureI")';
+            var url = '@Url.Action("FetchHirerachy", "Orderbooking")';
 
             $.getJSON(url,
                 { Id: Id },
@@ -352,23 +275,23 @@
         //function bindBranchDDL(row) {
         //    //debugger
         //    var options = $("#listBranches > option").clone();
-        //    $("#annexureI > tbody > tr #ddlBranch" + row + "").append(options);
+        //    $("#Orderbooking > tbody > tr #ddlBranch" + row + "").append(options);
         //}
 
         function bindProjectDDL(row) {
             //debugger
             var options = $("#listProjects > option").clone();
-            $("#annexureI > tbody > tr #ddlProject" + row + "").append(options);
+            $("#orderbooking-datatable > tbody > tr #ddlProject" + row + "").append(options);
         }
         function bindDenomDDL(row) {
             //debugger
             var options = $("#listDenomination > option").clone();
-            $("#annexureI > tbody > tr #ddlDenomination" + row + "").append(options);
+            $("#orderbooking-datatable > tbody > tr #ddlDenomination" + row + "").append(options);
         }
         function bindCphDDL(row) {
             //debugger
             var options = $("#listCPH > option").clone();
-            $("#annexureI > tbody > tr #ddlCph" + row + "").append(options);
+            $("#orderbooking-datatable > tbody > tr #ddlCph" + row + "").append(options);
         }
 
         //function generateBranchDDL(array) {
@@ -398,17 +321,17 @@
 
         function AddFirstRow(row) {
             if (isEmptyLastRow()) {
-                $('#annexureI tbody').append(generateHtml(row));
+                $('#orderbooking-datatable tbody').append(generateHtml(row));
             }
         }
 
         function AddNewRow(row) {
-            $('#annexureI tr:last').after(generateHtml(row));
+            $('#orderbooking-datatable tr:last').after(generateHtml(row));
         }
 
         function isEmptyLastRow() {
-            var test = $("#annexureI tr:last td:eq(1)").find("input");
-            return "" !== $("#annexureI tr:last td:eq(1)").find("input").val() && "" !== $("#annexureI tr:last td:eq(2)").find("input").val();
+            var test = $("#orderbooking-datatable tr:last td:eq(1)").find("input");
+            return "" !== $("#orderbooking-datatable tr:last td:eq(1)").find("input").val() && "" !== $("#orderbooking-datatable tr:last td:eq(2)").find("input").val();
         }
 
         function GetTotalVal(unsortedValue, denomVal) {
@@ -416,25 +339,11 @@
             return isNaN(totalVal) ? '0' : totalVal;
         }
 
-        function checkValidation() {
-            //debugger
-            checkSrDuplication($('#SrNo').val())
-            if (isSubmit) {
-                //$('#lead-frm').submit();
-                $('#submit').click();
-                //console.log('submitted');
-            }
-
-            //if ($('#SrNo').val()) {
-            //    //duplication check
-            //    checkSrDuplication($('#SrNo').val());
-            //}
-        }
 
         function checkSrDuplication(srNumber) {
             //debugger
             if (srNumber) {
-                $.get('/CPC/AnnexureI/DuplicationCheck?SrNo=' + srNumber, function (response) {
+                $.get('/CPC/Orderbooking/DuplicationCheck?SrNo=' + srNumber, function (response) {
                     if (response) {
                         //console.log(response);
                         $('.duplicate').html('Sr No. ' + srNumber + ' already exists.');
