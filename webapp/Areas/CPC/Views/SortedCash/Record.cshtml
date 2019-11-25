@@ -1,0 +1,439 @@
+﻿
+@model CPCSortedCash
+@{
+    var queryId = ViewContext.RouteData.Values["Id"];
+    ViewBag.Title = (queryId == null ? "Add New Sorted Cash" : "Edit Sorted Cash");
+    var denomList = ViewBag.DenominationList as List<CPCDenomination>;
+}
+
+<form id="lead-frm" class="user-Profile" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x => x.Id)
+
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <div class="btn-group" role="group">
+                <a href="javascript://" onclick="window.history.back()" class="btn btn-default"><i class="fa fa-close"></i> Cancel / Back</a>
+                <button type="submit" id="submit" class="btn btn-success"><i class="fa fa-check"></i> Submit</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4> Sorted Cash </h4>
+                    <div class="row tb-padding">
+                        <table id="mytable" class="table table-striped table-bordered table-hover">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>Date:</b></td>
+                                    <td>
+                                        <div class="input-group input-group-sm">
+                                            <input name="Date" id="Date" class="form-control input-sm datePicker" type="text" value="@Model.Date.ToString(Constants.DATE_FORMAT_CLIENT_SIDE)" required autocomplete="off">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><b>Consignment Number</b></td>
+                                    <td>
+                                        @Html.TextBoxFor(x => x.ConsignmentNumber, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
+                                        @Html.ValidationMessageFor(m => m.ConsignmentNumber)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Station:</b></td>
+                                    <td>
+                                        @Html.TextBoxFor(x => x.Station, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
+                                        @Html.ValidationMessageFor(m => m.Station)
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><b>Client:</b></td>
+                                    <td>
+                                        @Html.DropDownListFor(x => x.ProjectBranchId, (SelectList)ViewBag.BrachList, " Select Branch ", new { @class = "form-control input-sm select2" })
+                                    </td>
+                                </tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                            </tbody>
+                        </table>
+                        <table id="mytableA" class="table table-striped table-bordered table-hover">
+                            <tbody>
+                                <tr>
+                                    <td><b>Denomination</b></td>
+                                    <td><b>Re-Issuable</b></td>
+                                    <td><b>Soiled</b></td>
+                                    <td><b>Machine Rejected</b></td>
+                                    <td><b>Counterfeit</b></td>
+                                    <td><b>Mismatch</b></td>
+                                    <td><b>Amount</b></td>
+                                </tr>
+                                <tr data-id="1">
+                                    <td>
+                                        Rs.1/-
+                                        <input type="hidden" name="CPCSortedCashDetail[0].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 1).FirstOrDefault().Id)" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsZeroOne" type="number" value="0" name="CPCSortedCashDetail[0].NumberOfBundlesReIssuable" class="form-control input-sm inp totalfinalNumberReIssuable" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsZeroTwo" type="number" value="0" name="CPCSortedCashDetail[0].NumberOfBundlesSoiled" class="form-control input-sm inp totalfinalNumberSoiled" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsZeroThree" type="number" value="0" name="CPCSortedCashDetail[0].NumberOfBundlesMachineRejected" class="form-control input-sm inp totalfinalNumberMachineRejected" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsZeroFour" type="number" value="0" name="CPCSortedCashDetail[0].NumberOfBundlesCounterFeit" class="form-control input-sm inp totalfinalNumberCounterFeit" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsZeroFive" type="number" value="0" name="CPCSortedCashDetail[0].NumberOfBundlesMismatch" class="form-control input-sm inp totalfinalNumberMismatch" />
+                                    </td>
+                                    <td>
+                                        <input id="totalValueZero" value="0" name="CPCSortedCashDetail[0].TotalValue" class="form-control finalAmount input-sm" />
+                                    </td>
+                                </tr>
+                                <tr data-id="2">
+                                    <td>
+                                        Rs.2/-
+                                        <input type="hidden" name="CPCSortedCashDetail[1].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 2).FirstOrDefault().Id)" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsOneOne" type="number" value="0" name="CPCSortedCashDetail[1].NumberOfBundlesReIssuable" class="form-control input-sm inp totalfinalNumberReIssuable" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsOneTwo" type="number" value="0" name="CPCSortedCashDetail[1].NumberOfBundlesSoiled" class="form-control input-sm inp totalfinalNumberSoiled" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsOneThree" type="number" value="0" name="CPCSortedCashDetail[1].NumberOfBundlesMachineRejected" class="form-control input-sm inp totalfinalNumberMachineRejected" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsOneFour" type="number" value="0" name="CPCSortedCashDetail[1].NumberOfBundlesCounterFeit" class="form-control input-sm inp totalfinalNumberCounterFeit" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsOneFive" type="number" value="0" name="CPCSortedCashDetail[1].NumberOfBundlesMismatch" class="form-control input-sm inp totalfinalNumberMismatch" />
+                                    </td>
+                                    <td>
+                                        <input id="totalValueOne" type="number" value="0" name="CPCSortedCashDetail[1].TotalValue" class="form-control finalAmount input-sm" />
+                                    </td>
+                                </tr>
+                                <tr data-id="5">
+                                    <td>
+                                        Rs.5/-
+                                        <input type="hidden" name="CPCSortedCashDetail[2].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 5).FirstOrDefault().Id)" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsTwoOne" type="number" value="0" name="CPCSortedCashDetail[2].NumberOfBundlesReIssuable" class="form-control input-sm inp totalfinalNumberReIssuable" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsTwoTwo" type="number" value="0" name="CPCSortedCashDetail[2].NumberOfBundlesSoiled" class="form-control input-sm inp totalfinalNumberSoiled" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsTwoThree" type="number" value="0" name="CPCSortedCashDetail[2].NumberOfBundlesMachineRejected" class="form-control input-sm inp totalfinalNumberMachineRejected" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsTwoFour" type="number" value="0" name="CPCSortedCashDetail[2].NumberOfBundlesCounterFeit" class="form-control input-sm inp totalfinalNumberCounterFeit" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsTwoFive" type="number" value="0" name="CPCSortedCashDetail[2].NumberOfBundlesMismatch" class="form-control input-sm inp totalfinalNumberMismatch" />
+                                    </td>
+                                    <td>
+                                        <input id="totalValueTwo" type="number" value="0" name="CPCSortedCashDetail[2].TotalValue" class="form-control finalAmount input-sm" />
+                                    </td>
+                                </tr>
+                                <tr data-id="10">
+                                    <td>
+                                        Rs.10/-
+                                        <input type="hidden" name="CPCSortedCashDetail[3].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 10).FirstOrDefault().Id)" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsThreeOne" type="number" value="0" name="CPCSortedCashDetail[3].NumberOfBundlesReIssuable" class="form-control input-sm inp totalfinalNumberReIssuable" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsThreeTwo" type="number" value="0" name="CPCSortedCashDetail[3].NumberOfBundlesSoiled" class="form-control input-sm inp totalfinalNumberSoiled" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsThreeThree" type="number" value="0" name="CPCSortedCashDetail[3].NumberOfBundlesMachineRejected" class="form-control input-sm inp totalfinalNumberMachineRejected" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsThreeFour" type="number" value="0" name="CPCSortedCashDetail[3].NumberOfBundlesCounterFeit" class="form-control input-sm inp totalfinalNumberCounterFeit" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsThreeFive" type="number" value="0" name="CPCSortedCashDetail[3].NumberOfBundlesMismatch" class="form-control input-sm inp totalfinalNumberMismatch" />
+                                    </td>
+                                    <td>
+                                        <input id="totalValueThree" type="number" value="0" name="CPCSortedCashDetail[3].TotalValue" class="form-control finalAmount input-sm" />
+                                    </td>
+                                </tr>
+                                <tr data-id="20">
+                                    <td>
+                                        Rs.20/-
+                                        <input type="hidden" name="CPCSortedCashDetail[4].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 20).FirstOrDefault().Id)" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsFourOne" type="number" value="0" name="CPCSortedCashDetail[4].NumberOfBundlesReIssuable" class="form-control input-sm inp totalfinalNumberReIssuable" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsFourTwo" type="number" value="0" name="CPCSortedCashDetail[4].NumberOfBundlesSoiled" class="form-control input-sm inp totalfinalNumberSoiled" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsFourThree" type="number" value="0" name="CPCSortedCashDetail[4].NumberOfBundlesMachineRejected" class="form-control input-sm inp totalfinalNumberMachineRejected" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsFourFour" type="number" value="0" name="CPCSortedCashDetail[4].NumberOfBundlesCounterFeit" class="form-control input-sm inp totalfinalNumberCounterFeit" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsFourFive" type="number" value="0" name="CPCSortedCashDetail[4].NumberOfBundlesMismatch" class="form-control input-sm inp totalfinalNumberMismatch" />
+                                    </td>
+                                    <td>
+                                        <input id="totalValueFour" type="number" value="0" name="CPCSortedCashDetail[4].TotalValue" class="form-control finalAmount input-sm" />
+                                    </td>
+                                </tr>
+                                <tr data-id="50">
+                                    <td>
+                                        Rs.50/-
+                                        <input type="hidden" name="CPCSortedCashDetail[5].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 50).FirstOrDefault().Id)" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsFiveOne" type="number" value="0" name="CPCSortedCashDetail[5].NumberOfBundlesReIssuable" class="form-control input-sm inp totalfinalNumberReIssuable" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsFiveTwo" type="number" value="0" name="CPCSortedCashDetail[5].NumberOfBundlesSoiled" class="form-control input-sm inp totalfinalNumberSoiled" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsFiveThree" type="number" value="0" name="CPCSortedCashDetail[5].NumberOfBundlesMachineRejected" class="form-control input-sm inp totalfinalNumberMachineRejected" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsFiveFour" type="number" value="0" name="CPCSortedCashDetail[5].NumberOfBundlesCounterFeit" class="form-control input-sm inp totalfinalNumberCounterFeit" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsFiveFive" type="number" value="0" name="CPCSortedCashDetail[5].NumberOfBundlesMismatch" class="form-control input-sm inp totalfinalNumberMismatch" />
+                                    </td>
+                                    <td>
+                                        <input id="totalValueFive" type="number" value="0" name="CPCSortedCashDetail[5].TotalValue" class="form-control finalAmount input-sm" />
+                                    </td>
+                                </tr>
+                                <tr data-id="100">
+                                    <td>
+                                        Rs.100/-
+                                        <input type="hidden" name="CPCSortedCashDetail[6].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 100).FirstOrDefault().Id)" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsSixOne" type="number" value="0" name="CPCSortedCashDetail[6].NumberOfBundlesReIssuable" class="form-control input-sm inp totalfinalNumberReIssuable" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsSixTwo" type="number" value="0" name="CPCSortedCashDetail[6].NumberOfBundlesSoiled" class="form-control input-sm inp totalfinalNumberSoiled" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsSixThree" type="number" value="0" name="CPCSortedCashDetail[6].NumberOfBundlesMachineRejected" class="form-control input-sm inp totalfinalNumberMachineRejected" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsSixFour" type="number" value="0" name="CPCSortedCashDetail[6].NumberOfBundlesCounterFeit" class="form-control input-sm inp totalfinalNumberCounterFeit" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsSixFive" type="number" value="0" name="CPCSortedCashDetail[6].NumberOfBundlesMismatch" class="form-control input-sm inp totalfinalNumberMismatch" />
+                                    </td>
+                                    <td>
+                                        <input id="totalValueSix" type="number" value="0" name="CPCSortedCashDetail[6].TotalValue" class="form-control finalAmount input-sm" />
+                                    </td>
+                                </tr>
+                                <tr data-id="500">
+                                    <td>
+                                        Rs.500/-
+                                        <input type="hidden" name="CPCSortedCashDetail[7].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 500).FirstOrDefault().Id)" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsSevenOne" type="number" value="0" name="CPCSortedCashDetail[7].NumberOfBundlesReIssuable" class="form-control input-sm inp totalfinalNumberReIssuable" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsSevenTwo" type="number" value="0" name="CPCSortedCashDetail[7].NumberOfBundlesSoiled" class="form-control input-sm inp totalfinalNumberSoiled" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsSevenThree" type="number" value="0" name="CPCSortedCashDetail[7].NumberOfBundlesMachineRejected" class="form-control input-sm inp totalfinalNumberMachineRejected" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsSevenFour" type="number" value="0" name="CPCSortedCashDetail[7].NumberOfBundlesCounterFeit" class="form-control input-sm inp totalfinalNumberCounterFeit" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsSevenFive" type="number" value="0" name="CPCSortedCashDetail[7].NumberOfBundlesMismatch" class="form-control input-sm inp totalfinalNumberMismatch" />
+                                    </td>
+                                    <td>
+                                        <input id="totalValueSeven" type="number" value="0" name="CPCSortedCashDetail[7].TotalValue" class="form-control finalAmount input-sm" />
+                                    </td>
+                                </tr>
+                                <tr data-id="1000">
+                                    <td>
+                                        Rs.1000/-
+                                        <input type="hidden" name="CPCSortedCashDetail[8].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 1000).FirstOrDefault().Id)" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsEightOne" type="number" value="0" name="CPCSortedCashDetail[8].NumberOfBundlesReIssuable" class="form-control input-sm inp totalfinalNumberReIssuable" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsEightTwo" type="number" value="0" name="CPCSortedCashDetail[8].NumberOfBundlesSoiled" class="form-control input-sm inp totalfinalNumberSoiled" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsEightThree" type="number" value="0" name="CPCSortedCashDetail[8].NumberOfBundlesMachineRejected" class="form-control input-sm inp totalfinalNumberMachineRejected" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsEightFour" type="number" value="0" name="CPCSortedCashDetail[8].NumberOfBundlesCounterFeit" class="form-control input-sm inp totalfinalNumberCounterFeit" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsEightFive" type="number" value="0" name="CPCSortedCashDetail[8].NumberOfBundlesMismatch" class="form-control input-sm inp totalfinalNumberMismatch" />
+                                    </td>
+                                    <td>
+                                        <input id="totalValueEight" type="number" value="0" name="CPCSortedCashDetail[8].TotalValue" class="form-control finalAmount input-sm" />
+                                    </td>
+                                </tr>
+                                <tr data-id="5000">
+                                    <td>
+                                        Rs.5000/-
+                                        <input type="hidden" name="CPCSortedCashDetail[9].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 5000).FirstOrDefault().Id)" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsNineOne" type="number" value="0" name="CPCSortedCashDetail[9].NumberOfBundlesReIssuable" class="form-control input-sm inp totalfinalNumberReIssuable" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsNineTwo" type="number" value="0" name="CPCSortedCashDetail[9].NumberOfBundlesSoiled" class="form-control input-sm inp totalfinalNumberSoiled" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsNineThree" type="number" value="0" name="CPCSortedCashDetail[9].NumberOfBundlesMachineRejected" class="form-control input-sm inp totalfinalNumberMachineRejected" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsNineFour" type="number" value="0" name="CPCSortedCashDetail[9].NumberOfBundlesCounterFeit" class="form-control input-sm inp totalfinalNumberCounterFeit" />
+                                    </td>
+                                    <td>
+                                        <input id="numberOfPacketsNineFive" type="number" value="0" name="CPCSortedCashDetail[9].NumberOfBundlesMismatch" class="form-control input-sm inp totalfinalNumberMismatch" />
+                                    </td>
+                                    <td>
+                                        <input id="totalValueNine" type="number" value="0" name="CPCSortedCashDetail[9].TotalValue" class="form-control finalAmount input-sm" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td> Total </td>
+                                    <td><input id="finalTotalNumberReIssuable" type="number" value="" class="form-control input-sm" readonly="readonly" /></td>
+                                    <td><input id="finalTotalNumberSoiled" type="number" value="" class="form-control input-sm" readonly="readonly" /> </td>
+                                    <td><input id="finalTotalNumberMachineRejected" type="number" value="" class="form-control input-sm" readonly="readonly" /> </td>
+                                    <td><input id="finalTotalNumberCounterFeit" type="number" value="" class="form-control input-sm" readonly="readonly" /> </td>
+                                    <td><input id="finalTotalNumberMismatch" type="number" value="" class="form-control input-sm" readonly="readonly" /> </td>
+                                    <td><input id="finalTotalValue" type="number" value="" class="form-control input-sm" readonly="readonly" /> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <div class="btn-group" role="group">
+                <a href="javascript://" onclick="window.history.back()" class="btn btn-default"><i class="fa fa-close"></i> Cancel / Back</a>
+                <button type="submit" id="submit" class="btn btn-success"><i class="fa fa-check"></i> Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //"#DateOfCashReturn"
+            $("#Date").data("DateTimePicker").date(moment('@Model.Date.ToShortDateString()'));
+
+            $(".select2").select2();
+
+            //input fields leave event
+            $(document).on('focusout', '.inp', function (e) {
+                e.preventDefault();
+                accountGridRowIndex = $(this).closest('tr').attr("data-id");
+
+                var totalValue = 0;
+                $($(this).closest('tr')).find('td').each(function () {
+                    if ($(this).find('input').hasClass('inp')) {
+                        var cellVal = $(this).find('input').val();
+                        totalValue += GetTotalVal(cellVal, accountGridRowIndex);
+                    }
+
+                });
+                //totalValue in
+                $($(this).closest('tr')).find("td:last").find('input').val(totalValue);
+
+                //FinalTotal
+                var finalTotalAmount = 0;
+                $('table#mytableA tr').each(function () {
+                    if ($(this).find('input').hasClass('finalAmount')) {
+                        finalTotalAmount += parseInt($(this).find("td:last").find('input').val());
+                    }
+                });
+                $("#finalTotalValue").val(finalTotalAmount);
+
+                //FinalReissuable
+                var finalTotalNumberReIssuable = 0;
+                $('table#mytableA tr').each(function () {
+                    if ($(this).find('input').hasClass('totalfinalNumberReIssuable')) {
+                        finalTotalNumberReIssuable += parseInt($(this).find("td:nth-child(2)").find('input').val());
+                    }
+                });
+                $("#finalTotalNumberReIssuable").val(finalTotalNumberReIssuable);
+
+                //FinalReissuable
+                var finalTotalNumberSoiled = 0;
+                $('table#mytableA tr').each(function () {
+                    if ($(this).find('input').hasClass('totalfinalNumberSoiled')) {
+                        finalTotalNumberSoiled += parseInt($(this).find("td:nth-child(3)").find('input').val());
+                    }
+                });
+                $("#finalTotalNumberSoiled").val(finalTotalNumberSoiled);
+
+                //FinalMachineRejected
+                var finalTotalNumberMachineRejected = 0;
+                $('table#mytableA tr').each(function () {
+                    if ($(this).find('input').hasClass('totalfinalNumberMachineRejected')) {
+                        finalTotalNumberMachineRejected += parseInt($(this).find("td:nth-child(4)").find('input').val());
+                    }
+                });
+                $("#finalTotalNumberMachineRejected").val(finalTotalNumberMachineRejected);
+                //FinalCounterFeit
+                var finalTotalNumberCounterFeit = 0;
+                $('table#mytableA tr').each(function () {
+                    if ($(this).find('input').hasClass('totalfinalNumberCounterFeit')) {
+                        finalTotalNumberCounterFeit += parseInt($(this).find("td:nth-child(5)").find('input').val());
+                    }
+                });
+                $("#finalTotalNumberCounterFeit").val(finalTotalNumberCounterFeit);
+                //FinalCounterFeit
+                var finalTotalNumberMismatch = 0;
+                $('table#mytableA tr').each(function () {
+                    if ($(this).find('input').hasClass('totalfinalNumberMismatch')) {
+                        finalTotalNumberMismatch += parseInt($(this).find("td:nth-child(6)").find('input').val());
+                    }
+                });
+                $("#finalTotalNumberMismatch").val(finalTotalNumberMismatch);
+            });
+        });
+
+        function GetTotalVal(sortedValue, denomVal) {
+            const totalVal = parseInt(sortedValue) * parseInt(denomVal) * 1000;
+            return isNaN(totalVal) ? '0' : totalVal;
+        }
+
+    </script>
+}
+

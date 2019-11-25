@@ -19,10 +19,7 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCUnsortedCashes.Include(x => x.CPCUnsortedCashDetails).Include(x => x.CPCProjectBranch).OrderBy(x => x.Id).ToList();
-                    //return context.CPCUnsortedCashs.OrderBy(x => x.Date).ToList();
-                    //return context.CPCUnsortedCashes.Where(x => x.IsActive).OrderBy(x => x.Id).ToList();
-                    //return context.CPCAnnexureIIs.Include(x => x.CPCAnnexureIIDetails).Include(x => x.CPCProjectBranch).OrderBy(x => x.Id).ToList();
+                    return context.CPCUnsortedCashes.Include(x => x.CPCUnsortedCashDetails).Include(x => x.CPCProjectBranch).Where(x => x.IsActive).OrderBy(x => x.Id).ToList();
                 }
             }
             catch (Exception ex)
@@ -105,10 +102,13 @@ namespace CPC
         {
             try
             {
+              
                 using (context = new SOSTechCPCEntities())
                 {
+                    int ConNumber = context.CPCUnsortedCashes.Max(x => x.SerialNumber) <= 0 ? 1 : (int)context.CPCUnsortedCashes.Max(x => x.SerialNumber) + 1;
                     #region Save Department
                     model.Status = 1;
+                    model.SerialNumber = ConNumber;
                     model.CreatedOn = DateTime.Now;
                     context.CPCUnsortedCashes.Add(model);
                     context.SaveChanges();

@@ -41,7 +41,7 @@
                                             </span>
                                         </div>
                                     </td>
-                                    <td>Serial Number</td>
+                                    <td>Consignment Number</td>
                                     <td>
                                         @Html.TextBoxFor(x => x.SerialNumber, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
                                         @Html.ValidationMessageFor(m => m.SerialNumber)
@@ -225,6 +225,8 @@
 
             //"#DateOfCashReturn"
             $("#Date").data("DateTimePicker").date(moment('@Model.Date.ToShortDateString()'));
+
+            $(".select2").select2();
 
             //input fields leave event
             $(document).on('focusout', '.inp', function (e) {
