@@ -105,6 +105,8 @@ namespace CPC
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Save Department
+                    int shipmentNumber =  context.CPCCashInTransits.Max(x => x.ShipmentReceiptNumber) <= 0 ? 1 : (int)context.CPCCashInTransits.Max(x => x.ShipmentReceiptNumber) + 1;
+                    model.ShipmentReceiptNumber = shipmentNumber;
                     model.Status = 1;
                     context.CPCCashInTransits.Add(model);
                     context.SaveChanges();

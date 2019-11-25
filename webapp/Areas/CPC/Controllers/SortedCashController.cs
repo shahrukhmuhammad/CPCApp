@@ -85,7 +85,8 @@ namespace WebApp.Areas.CPC.Controllers
                     var res = sortedCashRepo.Create(model);
                     if (res.HasValue)
                     {
-                        var lsToSave = CPCSortedCashDetail.Where(x => x.NumberOfBundles > 0 && (x.TotalValue != 0)).ToList();
+                        var lsToSave = CPCSortedCashDetail.Where(x => (x.NumberOfBundlesReIssuable > 0 || x.NumberOfBundlesSoiled > 0 || x.NumberOfBundlesMachineRejected > 0 ||
+                        x.NumberOfBundlesCounterFeit > 0 || x.NumberOfBundlesMismatch > 0) && (x.TotalValue != 0)).ToList();
                         lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.SortedCashId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
                         #region Save Details
                         sortedCashRepo.Create(lsToSave);

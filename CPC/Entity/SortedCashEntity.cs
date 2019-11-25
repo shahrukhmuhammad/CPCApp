@@ -19,7 +19,7 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCSortedCashes.Include(x => x.CPCSortedCashDetails).Include(x => x.CPCProjectBranch).OrderBy(x => x.Id).ToList();
+                    return context.CPCSortedCashes.Include(x => x.CPCSortedCashDetails).Include(x => x.CPCProjectBranch).Where(x => x.IsActive).OrderBy(x => x.Id).ToList();
                 }
             }
             catch (Exception ex)
@@ -105,6 +105,8 @@ namespace CPC
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Save Department
+                    int consNumber = context.CPCSortedCashes.Max(x => x.ConsignmentNumber) <= 0 ? 1 : (int)context.CPCSortedCashes.Max(x => x.ConsignmentNumber) + 1;
+                    model.ConsignmentNumber = consNumber;
                     model.Status = 1;
                     model.CreatedOn = DateTime.Now;
                     context.CPCSortedCashes.Add(model);

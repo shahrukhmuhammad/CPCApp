@@ -250,6 +250,7 @@
     <Compile Include="Areas\CPC\Controllers\AnnexureIIIController.cs" />
     <Compile Include="Areas\CPC\Controllers\DashboardController.cs" />
     <Compile Include="Areas\CPC\Controllers\AnnexureIController.cs" />
+    <Compile Include="Areas\CPC\Controllers\SortedCashController.cs" />
     <Compile Include="Areas\CPC\Controllers\UnsortedCashController.cs" />
     <Compile Include="Areas\CPC\CPCAreaRegistration.cs" />
     <Compile Include="Areas\Dashboard\Controllers\DashboardController.cs" />
@@ -788,6 +789,10 @@
     <Content Include="Areas\CPC\Views\UnsortedCash\_AllUnsortedCashs.cshtml" />
     <Content Include="Areas\CPC\Views\UnsortedCash\Details.cshtml" />
     <Content Include="Areas\CPC\Views\AnnexureI\Details.cshtml" />
+    <Content Include="Areas\CPC\Views\SortedCash\_AllSortedCashs.cshtml" />
+    <Content Include="Areas\CPC\Views\SortedCash\Details.cshtml" />
+    <Content Include="Areas\CPC\Views\SortedCash\Record.cshtml" />
+    <Content Include="Areas\CPC\Views\SortedCash\SortedCashs.cshtml" />
     <None Include="Properties\PublishProfiles\BaseApp %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - CMS - V2.0 %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - V3.0 %28Published%29.pubxml" />

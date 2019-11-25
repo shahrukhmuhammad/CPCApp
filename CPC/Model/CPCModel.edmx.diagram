@@ -20,8 +20,6 @@
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCEmployee" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCProject" Width="1.5" PointX="0.75" PointY="7.75" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCProjectBranch" Width="1.5" PointX="3" PointY="12.625" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCSortedCash" Width="1.5" PointX="5.25" PointY="4.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCSortedCashDetail" Width="1.5" PointX="7.5" PointY="5.375" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCUnsortedCash" Width="1.5" PointX="5.25" PointY="25.375" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCUnsortedCashDetail" Width="1.5" PointX="7.5" PointY="25.875" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__2022C2A6" />
@@ -36,12 +34,15 @@
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCCashIn__CashI__02FC7413" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCCashIn__Denom__04E4BC85" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCProjec__CPHId__05D8E0BE" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Denom__6BAEFA67" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Denom__07C12930" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Proje__69C6B1F5" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Proje__06CD04F7" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Sorte__6ABAD62E" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Unsor__66B53B20" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCSortedCash" Width="1.5" PointX="5.25" PointY="12.125" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCSortedCashDetail" Width="1.5" PointX="7.5" PointY="0.75" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Denom__6BAEFA67" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Proje__69C6B1F5" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Sorte__6ABAD62E" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -17,7 +17,11 @@ namespace CPC.Model
         public System.Guid Id { get; set; }
         public System.Guid DenominationId { get; set; }
         public System.Guid SortedCashId { get; set; }
-        public int NumberOfBundles { get; set; }
+        public int NumberOfBundlesReIssuable { get; set; }
+        public int NumberOfBundlesSoiled { get; set; }
+        public int NumberOfBundlesMachineRejected { get; set; }
+        public int NumberOfBundlesCounterFeit { get; set; }
+        public int NumberOfBundlesMismatch { get; set; }
         public int TotalValue { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }

@@ -58,7 +58,7 @@
                                         <input type="checkbox" class="checkIt" value="@x.Id" />
                                     }
                                 </td>
-                                <td><a href="@Url.Action("Details","SortedCash",new { Id = x.Id })">@x.SerialNumber</a></td>
+                                <td><a href="@Url.Action("Details","SortedCash",new { Id = x.Id })">@x.ConsignmentNumber</a></td>
                                 <td>@x.Date</td>
                                 <td>@x.Station</td>
                                 <td> @($"{x.CPCProjectBranch.BranchCode} - {x.CPCProjectBranch.BranchName}")</td>
