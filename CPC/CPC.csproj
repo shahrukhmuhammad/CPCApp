@@ -61,6 +61,7 @@
     <Compile Include="Entity\AnnexureIIEntity.cs" />
     <Compile Include="Entity\Common.cs" />
     <Compile Include="Entity\AnnexureIEntity.cs" />
+    <Compile Include="Entity\VaultConsolidatedEntity.cs" />
     <Compile Include="Entity\SortedCashEntity.cs" />
     <Compile Include="Entity\UnsortedCashEntity.cs" />
     <Compile Include="Entity\Utils.cs" />

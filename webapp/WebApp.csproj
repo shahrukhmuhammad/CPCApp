@@ -250,6 +250,7 @@
     <Compile Include="Areas\CPC\Controllers\AnnexureIIIController.cs" />
     <Compile Include="Areas\CPC\Controllers\DashboardController.cs" />
     <Compile Include="Areas\CPC\Controllers\AnnexureIController.cs" />
+    <Compile Include="Areas\CPC\Controllers\VaultConsolidated.cs" />
     <Compile Include="Areas\CPC\Controllers\OrderApprovalController.cs" />
     <Compile Include="Areas\CPC\Controllers\SortedCashController.cs" />
     <Compile Include="Areas\CPC\Controllers\UnsortedCashController.cs" />
@@ -796,6 +797,10 @@
     <Content Include="Areas\CPC\Views\SortedCash\Details.cshtml" />
     <Content Include="Areas\CPC\Views\SortedCash\Record.cshtml" />
     <Content Include="Areas\CPC\Views\SortedCash\SortedCashs.cshtml" />
+    <Content Include="Areas\CPC\Views\VaultConsolidated\_AllVaultConsolidateds.cshtml" />
+    <Content Include="Areas\CPC\Views\VaultConsolidated\Details.cshtml" />
+    <Content Include="Areas\CPC\Views\VaultConsolidated\Record.cshtml" />
+    <Content Include="Areas\CPC\Views\VaultConsolidated\VaultConsolidateds.cshtml" />
     <Content Include="Areas\CPC\Views\OrderApproval\Index.cshtml" />
     <Content Include="Areas\CPC\Views\OrderApproval\_AllOrders.cshtml" />
     <Content Include="Areas\CPC\Views\OrderApproval\Details.cshtml" />
