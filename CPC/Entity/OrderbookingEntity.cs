@@ -208,6 +208,32 @@ namespace CPC
         }
         #endregion
 
+        #region Request Approve
+        public bool ApproveRequest(Guid Id, Guid UserId)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Update Status
+                    var res = context.CPCOrderBookings.Where(x => x.Id == Id).FirstOrDefault();
+                    if (res != null)
+                    {
+                        res.ApprovedById = UserId;
+                        res.ApprovedOn = DateTime.Now;
+                        res.Status = (int)AnnexureStatus.Approved;
+                        context.SaveChanges();
+                    }
+                    #endregion
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
         #region Delete
         public bool InActiveRecord(Guid Id)
         {

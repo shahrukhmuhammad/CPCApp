@@ -209,53 +209,59 @@
             <div class="panel panel-default">
                 <div class="panel-heading no-padding" role="tab">
                     <h4 class="panel-title">
-                        <a class="list-group-item @SetActiveAction("Dashboard", "Index")" href="@Url.Action("Index","Dashboard")"><i class="fa fa-dashboard clr-green"></i> Dashboard</a>
+                        <a class="list-group-item @SetActiveAction("Dashboard", "Index")" href="@Url.Action("Index", "Dashboard")"><i class="fa fa-dashboard clr-green"></i> Dashboard</a>
                     </h4>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading no-padding" role="tab">
                     <h4 class="panel-title">
-                        <a class="list-group-item @SetActiveController("AnnexureI")" href="@Url.Action("AnnexureIs","AnnexureI")"><i class="fa fa-list-alt clr-green"></i> Cash Receiving</a>
+                        <a class="list-group-item @SetActiveController("AnnexureI")" href="@Url.Action("AnnexureIs", "AnnexureI")"><i class="fa fa-list-alt clr-green"></i> Cash Receiving</a>
                     </h4>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading no-padding" role="tab">
                     <h4 class="panel-title">
-                        <a class="list-group-item @SetActiveController("UnsortedCash")" href="@Url.Action("UnsortedCashs","UnsortedCash")"><i class="fa fa-list-alt clr-green"></i>Unsorted Cash Detail</a>
+                        <a class="list-group-item @SetActiveController("UnsortedCash")" href="@Url.Action("UnsortedCashs", "UnsortedCash")"><i class="fa fa-list-alt clr-green"></i>Unsorted Cash Detail</a>
                     </h4>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading no-padding" role="tab">
                     <h4 class="panel-title">
-                        <a class="list-group-item @SetActiveController("SortedCash")" href="@Url.Action("SortedCashs","SortedCash")"><i class="fa fa-list-alt clr-green"></i>Sorted Cash Detail</a>
+                        <a class="list-group-item @SetActiveController("SortedCash")" href="@Url.Action("SortedCashs", "SortedCash")"><i class="fa fa-list-alt clr-green"></i>Sorted Cash Detail</a>
                     </h4>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading no-padding" role="tab">
                     <h4 class="panel-title">
-                        <a class="list-group-item @SetActiveController("AnnexureII")" href="@Url.Action("AnnexureIIs","AnnexureII")"><i class="fa fa-list-alt clr-green"></i> Branch Cash Receipt</a>
+                        <a class="list-group-item @SetActiveController("AnnexureII")" href="@Url.Action("AnnexureIIs", "AnnexureII")"><i class="fa fa-list-alt clr-green"></i> Branch Cash Receipt</a>
                     </h4>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading no-padding" role="tab">
                     <h4 class="panel-title">
-                        <a class="list-group-item @SetActiveController("AnnexureIII")" href="@Url.Action("AnnexureIIIs","AnnexureIII")"><i class="fa fa-list-alt clr-green"></i> Cash Reconciliation</a>
+                        <a class="list-group-item @SetActiveController("AnnexureIII")" href="@Url.Action("AnnexureIIIs", "AnnexureIII")"><i class="fa fa-list-alt clr-green"></i> Cash Reconciliation</a>
                     </h4>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading no-padding" role="tab">
                     <h4 class="panel-title">
-                        <a class="list-group-item @SetActiveController("CashInTransit")" href="@Url.Action("CashInTransits","CashInTransit")"><i class="fa fa-list-alt clr-green"></i> CIT Shipment</a>
+                        <a class="list-group-item @SetActiveController("CashInTransit")" href="@Url.Action("CashInTransits", "CashInTransit")"><i class="fa fa-list-alt clr-green"></i> CIT Shipment</a>
                     </h4>
                 </div>
             </div>
-
+            <div class="panel panel-default">
+                <div class="panel-heading no-padding" role="tab">
+                    <h4 class="panel-title">
+                        <a class="list-group-item @SetActiveController("OrderApproval")" href="@Url.Action("Index","OrderApproval")"><i class="fa fa-list-alt clr-blue"></i> Order Requests</a>
+                    </h4>
+                </div>
+            </div>
 
             @*<div class="panel panel-default">
             <div class="panel-heading no-padding" role="tab" id="heading-employeeConfigurations">
@@ -301,6 +307,23 @@
             </div>
         </div>
     }
+    else
+    {
+        @*if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.CPC))
+        {
+            <div>
+                
+                <div class="panel panel-default">
+                    <div class="panel-heading no-padding" role="tab">
+                        <h4 class="panel-title">
+                            <a class="list-group-item @SetActiveController("OrderApproval")" href="@Url.Action("Index","OrderApproval")"><i class="fa fa-list-alt clr-blue"></i> Order Requests</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        }*@
+    }
+
 
     @if (IsCurrentController("Account"))
     {
@@ -320,73 +343,73 @@
                 </div>
             </div>
             @*<div class="panel panel-default">
-            <div class="panel-heading no-padding" role="tab">
-                <h4 class="panel-title">
-                    <a href="javascript://" data-toggle="modal" data-target="#comingSoon-Modal" class="list-group-item"><i class="fa fa-cog"></i> Notifications & Preferences</a>
-                </h4>
-            </div>
+                    <div class="panel-heading no-padding" role="tab">
+                        <h4 class="panel-title">
+                            <a href="javascript://" data-toggle="modal" data-target="#comingSoon-Modal" class="list-group-item"><i class="fa fa-cog"></i> Notifications & Preferences</a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading no-padding" role="tab">
+                        <h4 class="panel-title">
+                            <a href="javascript://" data-toggle="modal" data-target="#themes-Modal" class="list-group-item"><i class="fa fa-paint-brush"></i> Theme</a>
+                        </h4>
+                    </div>
+                </div>*@
+
+            @*<div class="panel panel-default">
+                        <div class="panel-heading no-padding" role="tab">
+                            <h4 class="panel-title">
+                                <a class="list-group-item" href="javascript://" data-toggle="modal" data-target="#comingSoon-Modal"><i class="fa fa-briefcase"></i> My Account</a>
+                            </h4>
+                        </div>
+                    </div>
+                <div class="panel panel-default">
+                        <div class="panel-heading no-padding" role="tab">
+                            <h4 class="panel-title">
+                                <a class="list-group-item" href="~/Secure/Config"><i class="fa fa-wrench"></i> Configurations</a>
+                            </h4>
+                        </div>
+                    </div>
+                <div class="panel panel-default">
+                        <div class="panel-heading no-padding" role="tab">
+                            <h4 class="panel-title">
+                                <a class="list-group-item" href="javascript://" data-toggle="modal" data-target="#comingSoon-Modal"><i class="fa fa-puzzle-piece"></i> Integrations</a>
+                            </h4>
+                        </div>
+                    </div>
+                <div class="panel panel-default">
+                        <div class="panel-heading no-padding" role="tab">
+                            <h4 class="panel-title">
+                                <a class="list-group-item" href="~/Secure/Settings"><i class="fa fa-cogs"></i> Settings</a>
+                            </h4>
+                        </div>
+                    </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading no-padding" role="tab">
+                        <h4 class="panel-title">
+                            <a class="list-group-item" href="javascript://" data-toggle="modal" data-target="#comingSoon-Modal"><i class="fa fa-support"></i> Support Center</a>
+                        </h4>
+                    </div>
+                </div>*@
+
+
+            @*<div class="panel panel-default">
+                    <div class="panel-heading no-padding" role="tab">
+                        <h4 class="panel-title">
+                            <a class="list-group-item @SetActiveAction("Account", "Security")" href="~/Secure/Account/Security"><i class="fa fa-lock"></i> Security Settings</a>
+                        </h4>
+                    </div>
+                </div>*@
+            @*<div class="panel panel-default">
+                    <div class="panel-heading no-padding" role="tab">
+                        <h4 class="panel-title">
+                            <a class="list-group-item" href="~/Secure/Account/Logout"><i class="fa fa-sign-out"></i> Logout</a>
+                        </h4>
+                    </div>
+                </div>*@
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading no-padding" role="tab">
-                <h4 class="panel-title">
-                    <a href="javascript://" data-toggle="modal" data-target="#themes-Modal" class="list-group-item"><i class="fa fa-paint-brush"></i> Theme</a>
-                </h4>
-            </div>
-        </div>*@
-
-            @*<div class="panel panel-default">
-                <div class="panel-heading no-padding" role="tab">
-                    <h4 class="panel-title">
-                        <a class="list-group-item" href="javascript://" data-toggle="modal" data-target="#comingSoon-Modal"><i class="fa fa-briefcase"></i> My Account</a>
-                    </h4>
-                </div>
-            </div>
-        <div class="panel panel-default">
-                <div class="panel-heading no-padding" role="tab">
-                    <h4 class="panel-title">
-                        <a class="list-group-item" href="~/Secure/Config"><i class="fa fa-wrench"></i> Configurations</a>
-                    </h4>
-                </div>
-            </div>
-        <div class="panel panel-default">
-                <div class="panel-heading no-padding" role="tab">
-                    <h4 class="panel-title">
-                        <a class="list-group-item" href="javascript://" data-toggle="modal" data-target="#comingSoon-Modal"><i class="fa fa-puzzle-piece"></i> Integrations</a>
-                    </h4>
-                </div>
-            </div>
-        <div class="panel panel-default">
-                <div class="panel-heading no-padding" role="tab">
-                    <h4 class="panel-title">
-                        <a class="list-group-item" href="~/Secure/Settings"><i class="fa fa-cogs"></i> Settings</a>
-                    </h4>
-                </div>
-            </div>
-        <div class="panel panel-default">
-            <div class="panel-heading no-padding" role="tab">
-                <h4 class="panel-title">
-                    <a class="list-group-item" href="javascript://" data-toggle="modal" data-target="#comingSoon-Modal"><i class="fa fa-support"></i> Support Center</a>
-                </h4>
-            </div>
-        </div>*@
-
-
-            @*<div class="panel panel-default">
-            <div class="panel-heading no-padding" role="tab">
-                <h4 class="panel-title">
-                    <a class="list-group-item @SetActiveAction("Account", "Security")" href="~/Secure/Account/Security"><i class="fa fa-lock"></i> Security Settings</a>
-                </h4>
-            </div>
-        </div>*@
-            @*<div class="panel panel-default">
-            <div class="panel-heading no-padding" role="tab">
-                <h4 class="panel-title">
-                    <a class="list-group-item" href="~/Secure/Account/Logout"><i class="fa fa-sign-out"></i> Logout</a>
-                </h4>
-            </div>
-        </div>*@
-        </div>
-       }
+    }
 
     @*@if (IsCurrentController("AccessControl") && CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.ViewContact, BaseApp.Entity.AppPermission.Contact))
         {

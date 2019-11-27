@@ -30,13 +30,13 @@ $(function () {
 
 // Upcoming Events
 
-var getUpcomingEvents = function () {
-    $.get('/Secure/Schedular/Reader').done(function (html) {
-        $('#mobile-upcomming-event-reader').html(html);
-        $('#upcomming-event-reader').html(html);
-        setTimeout(getUpcomingEvents, 15000);
-    });
-};
+//var getUpcomingEvents = function () {
+//    $.get('/Secure/Schedular/Reader').done(function (html) {
+//        $('#mobile-upcomming-event-reader').html(html);
+//        $('#upcomming-event-reader').html(html);
+//        setTimeout(getUpcomingEvents, 15000);
+//    });
+//};
 
 // End Upcoming Events
 
@@ -59,7 +59,7 @@ var getNotificationWarnings = function () {
 $(function () {
     getNotifications();
     getNotificationWarnings();
-    getUpcomingEvents();
+    //getUpcomingEvents();
 
     $(document).on("click", ".notification-item", function (e) {
         e.preventDefault();
@@ -778,6 +778,39 @@ function deleteMultipleRecords(targetUrl, recordsClass, returnUrl) {
             }
         });
     }
+};
+
+function approveRecord(targetUrl, recordId, returnUrl) {
+    bootbox.dialog({
+        message: "Are you sure you want to Approve this record ?",
+        title: "Approve Order Request",
+        buttons: {
+            main: {
+                label: "Cancel",
+                className: "btn-default",
+                callback: function () {
+                    show: false;
+                }
+            },
+            danger: {
+                label: "Approve",
+                className: "btn-success",
+                callback: function () {
+                    $.ajax({
+                        url: targetUrl + '/' + recordId,
+                        type: 'POST'
+                    }).always(function () {
+                        if (returnUrl == null) {
+                            window.location.reload(true);
+                        }
+                        else {
+                            window.location.replace(returnUrl);
+                        }
+                    });
+                }
+            }
+        }
+    });
 };
 function deleteRecord(targetUrl, recordId, returnUrl) {
     bootbox.dialog({

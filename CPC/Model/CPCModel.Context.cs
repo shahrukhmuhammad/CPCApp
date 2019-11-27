@@ -39,7 +39,6 @@ namespace CPC.Model
         public virtual DbSet<CPCDepartment> CPCDepartments { get; set; }
         public virtual DbSet<CPCEmployee> CPCEmployees { get; set; }
         public virtual DbSet<CPCOrderBookingDetail> CPCOrderBookingDetails { get; set; }
-        public virtual DbSet<CPCOrderBooking> CPCOrderBookings { get; set; }
         public virtual DbSet<CPCProject> CPCProjects { get; set; }
         public virtual DbSet<CPCProjectBranch> CPCProjectBranches { get; set; }
         public virtual DbSet<CPCSortedCash> CPCSortedCashes { get; set; }
@@ -47,6 +46,7 @@ namespace CPC.Model
         public virtual DbSet<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
         public virtual DbSet<CPCUnsortedCashDetail> CPCUnsortedCashDetails { get; set; }
         public virtual DbSet<Vew_CPCAnnexureI> Vew_CPCAnnexureI { get; set; }
+        public virtual DbSet<CPCOrderBooking> CPCOrderBookings { get; set; }
         public virtual DbSet<Vew_Orderbookings> Vew_Orderbookings { get; set; }
     }
 }

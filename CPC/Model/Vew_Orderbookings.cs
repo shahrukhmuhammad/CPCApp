@@ -16,7 +16,7 @@ namespace CPC.Model
     {
         public System.Guid Id { get; set; }
         public int OrderNo { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public System.DateTime Date { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
@@ -34,5 +34,8 @@ namespace CPC.Model
         public Nullable<int> NoOfBundles { get; set; }
         public Nullable<int> TotalAmount { get; set; }
         public bool IsActive { get; set; }
+        public Nullable<System.Guid> ApprovedById { get; set; }
+        public string ApprovedByName { get; set; }
+        public Nullable<System.DateTime> ApprovedOn { get; set; }
     }
 }

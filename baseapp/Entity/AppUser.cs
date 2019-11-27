@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CPC.Model;
+using System;
 using System.Collections.Generic;
 
 namespace BaseApp.Entity
@@ -46,9 +47,13 @@ namespace BaseApp.Entity
 
         public DateTime UpdatedOn { get; set; }
         public DateTime CreatedOn { get; set; }
+        public Guid? EmployeeId { get; set; }
+
 
         public virtual Office Office { get; set; }
         public virtual AppRole Role { get; set; }
+        public virtual CPCEmployee Employee { get; set; }
+
 
         public virtual List<AppUserExtra> Extras { get; set; }
         public virtual AppUserEmployment Employment { get; set; }
