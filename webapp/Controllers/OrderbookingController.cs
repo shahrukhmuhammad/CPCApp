@@ -18,6 +18,7 @@ namespace WebApp.Controllers
         private BranchEntity branchRepo;
         private Common commonRepo;
         private CPHEntity cashpPocessinHousegRepo;
+        private EmployeeEntity employeeRepo;
 
         public OrderbookingController()
         {
@@ -25,6 +26,7 @@ namespace WebApp.Controllers
             branchRepo = new BranchEntity();
             commonRepo = new Common();
             cashpPocessinHousegRepo = new CPHEntity();
+            employeeRepo = new EmployeeEntity();
         }
         public ActionResult Orderbookings()
         {
@@ -34,6 +36,7 @@ namespace WebApp.Controllers
         {
             var model = orderbookingRepo.GetAll();
             ViewBag.DetailsList = orderbookingRepo.GetAllDetails();
+            ViewBag.EmployeeList = employeeRepo.GetAll();
             return PartialView(model);
         }
 

@@ -32,7 +32,6 @@ namespace CPC.Model
         public Nullable<System.Guid> ApprovedById { get; set; }
         public Nullable<System.DateTime> ApprovedOn { get; set; }
     
-        public virtual CPCEmployee CPCEmployee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCOrderBookingDetail> CPCOrderBookingDetails { get; set; }
     }

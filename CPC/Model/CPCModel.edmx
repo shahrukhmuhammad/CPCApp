@@ -5,6 +5,46 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SOSTechCPCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" />
+          <Property Name="OfficeId" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastLogin" Type="datetime" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="256" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="256" />
+          <Property Name="Theme" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="tinyint" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="HomePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="WorkPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddressLine1" Type="nvarchar(max)" />
+          <Property Name="AddressLine2" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar" MaxLength="256" />
+          <Property Name="State" Type="nvarchar" MaxLength="256" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="256" />
+          <Property Name="Question1" Type="nvarchar(max)" />
+          <Property Name="Answer1" Type="nvarchar(max)" />
+          <Property Name="Question2" Type="nvarchar(max)" />
+          <Property Name="Answer2" Type="nvarchar(max)" />
+          <Property Name="UpdatedByUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreatedByUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="Type" Type="tinyint" />
+          <Property Name="EmploymentStatus" Type="tinyint" />
+          <Property Name="PageLength" Type="varchar" MaxLength="50" />
+          <Property Name="EmployeeId" Type="uniqueidentifier" />
+        </EntityType>
         <EntityType Name="CPCAnnexureI">
           <Key>
             <PropertyRef Name="Id" />
@@ -588,18 +628,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CPCOrderB__Appro__062DE679">
-          <End Role="CPCEmployees" Type="Self.CPCEmployees" Multiplicity="0..1" />
-          <End Role="CPCOrderBookings" Type="Self.CPCOrderBookings" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CPCEmployees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CPCOrderBookings">
-              <PropertyRef Name="ApprovedById" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__CPCOrderB__Order__79C80F94">
           <End Role="CPCOrderBookings" Type="Self.CPCOrderBookings" Multiplicity="1" />
           <End Role="CPCOrderBookingDetails" Type="Self.CPCOrderBookingDetails" Multiplicity="*" />
@@ -709,6 +737,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SOSTechCPCModelStoreContainer">
+          <EntitySet Name="AppUsers" EntityType="Self.AppUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CPCAnnexureI" EntityType="Self.CPCAnnexureI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CPCAnnexureIDetails" EntityType="Self.CPCAnnexureIDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CPCAnnexureII" EntityType="Self.CPCAnnexureII" Schema="dbo" store:Type="Tables" />
@@ -840,10 +869,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <AssociationSet Name="FK__CPCCashPr__Proje__731B1205" Association="Self.FK__CPCCashPr__Proje__731B1205">
             <End Role="CPCProject" EntitySet="CPCProject" />
             <End Role="CPCCashProcessingHouse" EntitySet="CPCCashProcessingHouse" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CPCOrderB__Appro__062DE679" Association="Self.FK__CPCOrderB__Appro__062DE679">
-            <End Role="CPCEmployees" EntitySet="CPCEmployees" />
-            <End Role="CPCOrderBookings" EntitySet="CPCOrderBookings" />
           </AssociationSet>
           <AssociationSet Name="FK__CPCOrderB__Order__79C80F94" Association="Self.FK__CPCOrderB__Order__79C80F94">
             <End Role="CPCOrderBookings" EntitySet="CPCOrderBookings" />
@@ -988,12 +1013,9 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             <End Role="CPCUnsortedCash" EntitySet="CPCUnsortedCashes" />
             <End Role="CPCUnsortedCashDetail" EntitySet="CPCUnsortedCashDetails" />
           </AssociationSet>
-          <EntitySet Name="CPCOrderBookings" EntityType="SOSTechCPCModel.CPCOrderBooking" />
           <EntitySet Name="Vew_Orderbookings" EntityType="SOSTechCPCModel.Vew_Orderbookings" />
-          <AssociationSet Name="FK__CPCOrderB__Appro__062DE679" Association="SOSTechCPCModel.FK__CPCOrderB__Appro__062DE679">
-            <End Role="CPCEmployee" EntitySet="CPCEmployees" />
-            <End Role="CPCOrderBooking" EntitySet="CPCOrderBookings" />
-          </AssociationSet>
+          <EntitySet Name="AppUsers" EntityType="SOSTechCPCModel.AppUser" />
+          <EntitySet Name="CPCOrderBookings" EntityType="SOSTechCPCModel.CPCOrderBooking" />
           <AssociationSet Name="FK__CPCOrderB__Order__79C80F94" Association="SOSTechCPCModel.FK__CPCOrderB__Order__79C80F94">
             <End Role="CPCOrderBooking" EntitySet="CPCOrderBookings" />
             <End Role="CPCOrderBookingDetail" EntitySet="CPCOrderBookingDetails" />
@@ -1256,7 +1278,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Guid" />
           <Property Name="Status" Type="Byte" />
-          <NavigationProperty Name="CPCOrderBookings" Relationship="SOSTechCPCModel.FK__CPCOrderB__Appro__062DE679" FromRole="CPCEmployee" ToRole="CPCOrderBooking" />
         </EntityType>
         <EntityType Name="CPCOrderBookingDetail">
           <Key>
@@ -1666,24 +1687,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CPCOrderBooking">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="OrderNo" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Guid" />
-          <Property Name="Status" Type="Byte" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="ApprovedById" Type="Guid" />
-          <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CPCEmployee" Relationship="SOSTechCPCModel.FK__CPCOrderB__Appro__062DE679" FromRole="CPCOrderBooking" ToRole="CPCEmployee" />
-          <NavigationProperty Name="CPCOrderBookingDetails" Relationship="SOSTechCPCModel.FK__CPCOrderB__Order__79C80F94" FromRole="CPCOrderBooking" ToRole="CPCOrderBookingDetail" />
-        </EntityType>
         <EntityType Name="Vew_Orderbookings">
           <Key>
             <PropertyRef Name="Id" />
@@ -1718,18 +1721,63 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <Property Name="ApprovedByName" Type="String" MaxLength="223" FixedLength="false" Unicode="true" />
           <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
         </EntityType>
-        <Association Name="FK__CPCOrderB__Appro__062DE679">
-          <End Type="SOSTechCPCModel.CPCEmployee" Role="CPCEmployee" Multiplicity="0..1" />
-          <End Type="SOSTechCPCModel.CPCOrderBooking" Role="CPCOrderBooking" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CPCEmployee">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CPCOrderBooking">
-              <PropertyRef Name="ApprovedById" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" />
+          <Property Name="OfficeId" Type="Guid" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastLogin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Theme" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Byte" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HomePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WorkPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Question1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Answer1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Question2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Answer2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedByUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreatedByUserId" Type="Guid" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Type" Type="Byte" />
+          <Property Name="EmploymentStatus" Type="Byte" />
+          <Property Name="PageLength" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeId" Type="Guid" />
+        </EntityType>
+        <EntityType Name="CPCOrderBooking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="OrderNo" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ApprovedById" Type="Guid" />
+          <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CPCOrderBookingDetails" Relationship="SOSTechCPCModel.FK__CPCOrderB__Order__79C80F94" FromRole="CPCOrderBooking" ToRole="CPCOrderBookingDetail" />
+        </EntityType>
         <Association Name="FK__CPCOrderB__Order__79C80F94">
           <End Type="SOSTechCPCModel.CPCOrderBooking" Role="CPCOrderBooking" Multiplicity="1" />
           <End Type="SOSTechCPCModel.CPCOrderBookingDetail" Role="CPCOrderBookingDetail" Multiplicity="*" />
@@ -2143,23 +2191,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CPCOrderBookings">
-            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCOrderBooking">
-              <MappingFragment StoreEntitySet="CPCOrderBookings">
-                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
-                <ScalarProperty Name="ApprovedById" ColumnName="ApprovedById" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Vew_Orderbookings">
             <EntityTypeMapping TypeName="SOSTechCPCModel.Vew_Orderbookings">
               <MappingFragment StoreEntitySet="Vew_Orderbookings">
@@ -2179,6 +2210,64 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
                 <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
                 <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
                 <ScalarProperty Name="CPCOrderBookingDetailsId" ColumnName="CPCOrderBookingDetailsId" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppUsers">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.AppUser">
+              <MappingFragment StoreEntitySet="AppUsers">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="PageLength" ColumnName="PageLength" />
+                <ScalarProperty Name="EmploymentStatus" ColumnName="EmploymentStatus" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+                <ScalarProperty Name="UpdatedByUserId" ColumnName="UpdatedByUserId" />
+                <ScalarProperty Name="Answer2" ColumnName="Answer2" />
+                <ScalarProperty Name="Question2" ColumnName="Question2" />
+                <ScalarProperty Name="Answer1" ColumnName="Answer1" />
+                <ScalarProperty Name="Question1" ColumnName="Question1" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="WorkPhone" ColumnName="WorkPhone" />
+                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Theme" ColumnName="Theme" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CPCOrderBookings">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCOrderBooking">
+              <MappingFragment StoreEntitySet="CPCOrderBookings">
+                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
+                <ScalarProperty Name="ApprovedById" ColumnName="ApprovedById" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />

@@ -27,18 +27,22 @@ namespace CPC
                 throw ex;
             }
         }
-        public CPCEmployee GetByUserId(Guid Id)
+        public Guid? GetByUserId(Guid Id)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCEmployees.Where(x => x.Id == Id).FirstOrDefault();
+                    var res = context.AppUsers.Where(x => x.Id == Id).FirstOrDefault();
+                    if (res != null)
+                        return res.EmployeeId;
+                    else
+                        return null;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                return null;
             }
         }
         public CPCEmployee GetById(Guid Id)

@@ -46,7 +46,8 @@ namespace CPC.Model
         public virtual DbSet<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
         public virtual DbSet<CPCUnsortedCashDetail> CPCUnsortedCashDetails { get; set; }
         public virtual DbSet<Vew_CPCAnnexureI> Vew_CPCAnnexureI { get; set; }
-        public virtual DbSet<CPCOrderBooking> CPCOrderBookings { get; set; }
         public virtual DbSet<Vew_Orderbookings> Vew_Orderbookings { get; set; }
+        public virtual DbSet<AppUser> AppUsers { get; set; }
+        public virtual DbSet<CPCOrderBooking> CPCOrderBookings { get; set; }
     }
 }

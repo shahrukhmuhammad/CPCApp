@@ -809,6 +809,7 @@
     <None Include="Properties\PublishProfiles\BaseApp - A - CMS - V2.0 %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - V3.0 %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\Clinicul %28Published%29.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\Tenders Africa %28Published%29.pubxml" />
     <Content Include="Scripts\FusionChart\fusioncharts.powercharts.js" />

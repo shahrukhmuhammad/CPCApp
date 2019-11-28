@@ -46,9 +46,9 @@
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Proje__703EA55A" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Sorte__6ABAD62E" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Unsor__66B53B20" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCOrderBooking" Width="1.5" PointX="5.125" PointY="20.375" />
         <EntityTypeShape EntityType="SOSTechCPCModel.Vew_Orderbookings" Width="1.5" PointX="0.75" PointY="4.75" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCOrderB__Appro__062DE679" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.AppUser" Width="1.5" PointX="9.375" PointY="10.75" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCOrderBooking" Width="1.5" PointX="11.375" PointY="11" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCOrderB__Order__79C80F94" />
       </Diagram>
     </edmx:Diagrams>
