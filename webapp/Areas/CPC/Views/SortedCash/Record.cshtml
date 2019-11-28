@@ -50,14 +50,14 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><b>Station:</b></td>
+                                    <td><b>Station/City:</b></td>
                                     <td>
                                         @Html.TextBoxFor(x => x.Station, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
                                         @Html.ValidationMessageFor(m => m.Station)
                                     </td>
                                     <td></td>
                                     <td></td>
-                                    <td><b>Client:</b></td>
+                                    <td><b>Client/Branch:</b></td>
                                     <td>
                                         @Html.DropDownListFor(x => x.ProjectBranchId, (SelectList)ViewBag.BrachList, " Select Branch ", new { @class = "form-control input-sm select2" })
                                     </td>
