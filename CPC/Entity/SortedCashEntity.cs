@@ -105,7 +105,7 @@ namespace CPC
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Save Department
-                    int consNumber = context.CPCSortedCashes.Max(x => x.ConsignmentNumber) <= 0 ? 1 : (int)context.CPCSortedCashes.Max(x => x.ConsignmentNumber) + 1;
+                    int consNumber = GetNextConsignmentNumber();
                     model.ConsignmentNumber = consNumber;
                     model.Status = 1;
                     model.CreatedOn = DateTime.Now;

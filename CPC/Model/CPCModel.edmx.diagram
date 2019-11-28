@@ -25,7 +25,6 @@
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCSortedCash" Width="1.5" PointX="7.25" PointY="31.25" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCSortedCashDetail" Width="1.5" PointX="9.5" PointY="31.375" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCUnsortedCash" Width="1.5" PointX="7.25" PointY="26.625" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCUnsortedCashDetail" Width="1.5" PointX="9.5" PointY="27.125" />
         <EntityTypeShape EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" Width="1.5" PointX="4.5" PointY="0.625" />
         <EntityTypeShape EntityType="SOSTechCPCModel.Vew_Orderbookings" Width="1.5" PointX="0.5" PointY="4.625" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__2022C2A6" />
@@ -42,12 +41,13 @@
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCCashPr__Proje__731B1205" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCProjec__CPHId__24E777C3" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Denom__6BAEFA67" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Denom__6C6E1476" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCOrderB__Order__79C80F94" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCOrderB__Proje__7ABC33CD" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Proje__69C6B1F5" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Proje__703EA55A" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Sorte__6ABAD62E" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCUnsortedCashDetail" Width="1.5" PointX="12.5" PointY="15.375" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Denom__2A164134" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Unsor__66B53B20" />
       </Diagram>
     </edmx:Diagrams>

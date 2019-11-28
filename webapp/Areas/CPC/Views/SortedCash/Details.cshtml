@@ -31,7 +31,7 @@
                                 <td><b>Date:</b></td>
                                 <td>
                                     <div class="input-group input-group-sm">
-                                        <input name="Date" id="Date" class="form-control input-sm datePicker" type="text" value="@Model.Date.ToString(Constants.DATE_FORMAT_CLIENT_SIDE)" required autocomplete="off">
+                                        <input name="Date" id="Date" class="form-control input-sm datePicker" type="text" value="@Model.Date.ToString(Constants.DATE_FORMAT_CLIENT_SIDE)" required autocomplete="off"  readonly="readonly">
                                         <span class="input-group-addon">
                                             <span class="fa fa-calendar"></span>
                                         </span>
@@ -41,19 +41,19 @@
                                 <td></td>
                                 <td><b>Consignment Number</b></td>
                                 <td>
-                                    <label class="label label-default">@Model.ConsignmentNumber</label>
+                                    <label>@Model.ConsignmentNumber</label>
                                 </td>
                             </tr>
                             <tr>
-                                <td><b>Station:</b></td>
+                                <td><b>Station/City:</b></td>
                                 <td>
-                                    <label class="label label-default">@Model.Station</label>
+                                    <label>@Model.Station</label>
                                 </td>
                                 <td></td>
                                 <td></td>
-                                <td><b>Client:</b></td>
+                                <td><b>Client/Branch:</b></td>
                                 <td>
-                                    <label class="label label-default">@ViewData["BranchName"]</label>
+                                    <label>@ViewData["BranchName"]</label>
                                 </td>
                             </tr>
                             <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
