@@ -251,6 +251,7 @@
     <Compile Include="Areas\CPC\Controllers\DashboardController.cs" />
     <Compile Include="Areas\CPC\Controllers\AnnexureIController.cs" />
     <Compile Include="Areas\CPC\Controllers\VaultConsolidated.cs" />
+    <Compile Include="Areas\CPC\Controllers\OrderApprovalController.cs" />
     <Compile Include="Areas\CPC\Controllers\SortedCashController.cs" />
     <Compile Include="Areas\CPC\Controllers\UnsortedCashController.cs" />
     <Compile Include="Areas\CPC\CPCAreaRegistration.cs" />
@@ -800,10 +801,15 @@
     <Content Include="Areas\CPC\Views\VaultConsolidated\Details.cshtml" />
     <Content Include="Areas\CPC\Views\VaultConsolidated\Record.cshtml" />
     <Content Include="Areas\CPC\Views\VaultConsolidated\VaultConsolidateds.cshtml" />
+    <Content Include="Areas\CPC\Views\OrderApproval\Index.cshtml" />
+    <Content Include="Areas\CPC\Views\OrderApproval\_AllOrders.cshtml" />
+    <Content Include="Areas\CPC\Views\OrderApproval\Details.cshtml" />
+    <Content Include="libman.json" />
     <None Include="Properties\PublishProfiles\BaseApp %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - CMS - V2.0 %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - V3.0 %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\Clinicul %28Published%29.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\Tenders Africa %28Published%29.pubxml" />
     <Content Include="Scripts\FusionChart\fusioncharts.powercharts.js" />

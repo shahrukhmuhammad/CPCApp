@@ -19,7 +19,7 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCOrderBookings.Where(x=> x.IsActive).OrderBy(x => x.CreatedOn).ToList();
+                    return context.CPCOrderBookings.Where(x => x.IsActive).OrderBy(x => x.CreatedOn).ToList();
                 }
             }
             catch (Exception ex)
@@ -35,6 +35,21 @@ namespace CPC
                 using (context = new SOSTechCPCEntities())
                 {
                     return context.Vew_Orderbookings.Where(x => x.IsActive).ToList();
+
+                    //from m in context.Vew_Orderbookings
+                    //where m.IsActive == true
+                    //group m by m.OrderNo into g
+                    //let TotalPoints = g.Sum(m => m.NoOfBundles)
+                    //let TotalAmount = g.Sum(m => m.TotalAmount)
+                    //orderby TotalPoints descending
+                    //select new {  = g.Key, Username = g.Key.Username, TotalPoints };
+
+                    //var query = context.Vew_Orderbookings.Select(u => new Vew_Orderbookings
+                    //{
+                    //    OrderNo = u.OrderNo,
+                    //    TotalAmount = Convert.ToInt32(u.TotalAmount);
+                    //}).ToList().OrderByDescending(u => u.MovementCount).Select(u => u.Cat).ToList();
+
                 }
             }
             catch (Exception ex)
@@ -42,6 +57,7 @@ namespace CPC
                 return null;
             }
         }
+
         public List<Vew_Orderbookings> GetAllDetailsById(Guid Id)
         {
             try
@@ -157,7 +173,7 @@ namespace CPC
             }
             catch (Exception ex)
             {
-                    return false;
+                return false;
             }
         }
 
@@ -192,6 +208,32 @@ namespace CPC
         }
         #endregion
 
+        #region Request Approve
+        public bool ApproveRequest(Guid Id, Guid UserId)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Update Status
+                    var res = context.CPCOrderBookings.Where(x => x.Id == Id).FirstOrDefault();
+                    if (res != null)
+                    {
+                        res.ApprovedById = UserId;
+                        res.ApprovedOn = DateTime.Now;
+                        res.Status = (int)AnnexureStatus.Approved;
+                        context.SaveChanges();
+                    }
+                    #endregion
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        #endregion
         #region Delete
         public bool InActiveRecord(Guid Id)
         {
@@ -292,12 +334,17 @@ namespace CPC
             {
                 using (var context = new SOSTechCPCEntities())
                 {
-                    int? res = context.CPCOrderBookings.Max(x => x.OrderNo);
+                    //int? res = context.CPCOrderBookings.Max(x => x.OrderNo);
+                    int? res = context.CPCOrderBookings.Max(u => (int?)u.OrderNo);
+
                     if (res.HasValue)
                     {
                         return Convert.ToInt32(res) + 1;
                     }
-                    return 0;
+                    else
+                    {
+                        return 1;
+                    }
                 }
             }
             catch (Exception ex)

@@ -14,6 +14,12 @@ namespace CPC.Model
     
     public partial class CPCEmployee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CPCEmployee()
+        {
+            this.CPCOrderBookings = new HashSet<CPCOrderBooking>();
+        }
+    
         public System.Guid Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
@@ -23,5 +29,8 @@ namespace CPC.Model
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public Nullable<System.Guid> UpdatedBy { get; set; }
         public Nullable<byte> Status { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCOrderBooking> CPCOrderBookings { get; set; }
     }
 }

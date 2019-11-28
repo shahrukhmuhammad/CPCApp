@@ -33,6 +33,7 @@ namespace WebApp.Controllers
         public PartialViewResult _AllOrderbookings()
         {
             var model = orderbookingRepo.GetAll();
+            ViewBag.DetailsList = orderbookingRepo.GetAllDetails();
             return PartialView(model);
         }
 
@@ -218,7 +219,7 @@ namespace WebApp.Controllers
                //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
                 #endregion
                 orderbookingRepo.InActiveRecord(Id);
-                TempData["SuccessMsg"] = "AnnexureII has been deleted successfully.";
+                TempData["SuccessMsg"] = "Order has been deleted successfully.";
             }
             catch (Exception ex)
             {

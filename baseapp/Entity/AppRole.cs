@@ -59,6 +59,7 @@ namespace BaseApp.Entity
         public const string HRMS = "HRMS";
         public const string CPC = "CPC";
         public const string Bank = "Bank";
+        public const string CPC_RGM = "CPC_RGM";
         #endregion
 
 

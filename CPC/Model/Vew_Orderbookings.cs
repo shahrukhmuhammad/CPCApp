@@ -34,5 +34,8 @@ namespace CPC.Model
         public Nullable<int> NoOfBundles { get; set; }
         public Nullable<int> TotalAmount { get; set; }
         public bool IsActive { get; set; }
+        public Nullable<System.Guid> ApprovedById { get; set; }
+        public string ApprovedByName { get; set; }
+        public Nullable<System.DateTime> ApprovedOn { get; set; }
     }
 }

@@ -1,18 +1,18 @@
 ﻿
 @{
-    ViewBag.Title = "Order Booking List";
+    ViewBag.Title = "Order  Requests List";
 }
 
 <div class="user-Profile" style="min-height:430px;">
     <div id="employees-Container">
-        @{ Html.RenderAction("_AllOrderbookings", "Orderbooking"); }
+        @{ Html.RenderAction("_AllOrders", "OrderApproval"); }
     </div>
 </div>
 
 @section scripts{
     <script>
         $(function () {
-            filterDataTable("#Orderbooking-dataTable", [1, 2, 3,4,5], [0, 6],10);
+            filterDataTable("#Orderbooking-dataTable", [0, 1, 2, 3,4], [5],10);
         });
     </script>
 }
