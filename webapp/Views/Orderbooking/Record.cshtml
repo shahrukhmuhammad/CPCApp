@@ -196,6 +196,7 @@
             $(document).on('focusout', '.inp', function (e) {
                 e.preventDefault();
                 accountGridRowIndex = $(this).closest('tr').attr("data-id");
+                accountGridRowIndex = parseInt(accountGridRowIndex) - parseInt(1);
                 var data = $('#ddlDenomination' + accountGridRowIndex).select2('data');
                 const totalValue = GetTotalVal($(this).val(), data[0].text);
                 $(this).closest('td').next('td').find('input').val(totalValue);
