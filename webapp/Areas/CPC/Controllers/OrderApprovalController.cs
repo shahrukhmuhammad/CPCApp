@@ -19,6 +19,7 @@ namespace WebApp.Areas.CPC.Controllers
         private BranchEntity branchRepo;
         private Common commonRepo;
         private CPHEntity cashpPocessinHousegRepo;
+        private EmployeeEntity employeeRepo;
 
         public OrderApprovalController()
         {
@@ -26,6 +27,7 @@ namespace WebApp.Areas.CPC.Controllers
             branchRepo = new BranchEntity();
             commonRepo = new Common();
             cashpPocessinHousegRepo = new CPHEntity();
+            employeeRepo = new EmployeeEntity();
         }
 
         public ActionResult Index()
@@ -48,7 +50,7 @@ namespace WebApp.Areas.CPC.Controllers
         }
         #endregion
 
-        #region Delete
+        #region Inactive
         [HttpPost]
         public JsonResult Approve(Guid Id)
         {
@@ -57,11 +59,19 @@ namespace WebApp.Areas.CPC.Controllers
                 #region Activity Log
                 //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
                 #endregion
-                var res = orderbookingRepo.ApproveRequest(Id, CurrentUser.Id);
-                if (res) {
-                    TempData["SuccessMsg"] = "Order has been Approved successfully.";
+                Guid? empId = employeeRepo.GetByUserId(CurrentUser.Id);
+                if (empId.HasValue)
+                {
+                    var res = orderbookingRepo.ApproveRequest(Id, empId.Value,CurrentUser.Id);
+                    if (res)
+                    {
+                        TempData["SuccessMsg"] = "Order has been Approved successfully.";
+                    }
+                    else
+                        TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
                 }
-                TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
+                else
+                    TempData["ErrorMsg"] = "You don't have permission to approve this request.";
             }
             catch (Exception ex)
             {

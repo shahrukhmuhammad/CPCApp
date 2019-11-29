@@ -27,6 +27,20 @@ namespace CPC
                 throw ex;
             }
         }
+        public List<CPCOrderBooking> GetAllApproved()
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.CPCOrderBookings.Where(x => x.IsActive && x.Status == (int)AnnexureStatus.Approved).OrderBy(x => x.CreatedOn).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public List<Vew_Orderbookings> GetAllDetails()
         {
@@ -209,7 +223,7 @@ namespace CPC
         #endregion
 
         #region Request Approve
-        public bool ApproveRequest(Guid Id, Guid UserId)
+        public bool ApproveRequest(Guid Id, Guid EmployeeId, Guid UserId)
         {
             try
             {
@@ -219,8 +233,10 @@ namespace CPC
                     var res = context.CPCOrderBookings.Where(x => x.Id == Id).FirstOrDefault();
                     if (res != null)
                     {
-                        res.ApprovedById = UserId;
+                        res.ApprovedById = EmployeeId;
                         res.ApprovedOn = DateTime.Now;
+                        res.UpdatedBy = UserId;
+                        res.UpdatedOn = DateTime.Now;
                         res.Status = (int)AnnexureStatus.Approved;
                         context.SaveChanges();
                     }

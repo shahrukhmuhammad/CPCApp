@@ -46,5 +46,7 @@ namespace CPC.Model
         public string SignatureCPCHandingOverCashAName { get; set; }
         public string SignatureCPCHandingOverCashBName { get; set; }
         public bool IsActive { get; set; }
+        public System.Guid ProjectId { get; set; }
+        public System.Guid ProjectTitle { get; set; }
     }
 }

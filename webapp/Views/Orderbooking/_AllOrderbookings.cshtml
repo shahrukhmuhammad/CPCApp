@@ -1,6 +1,7 @@
 ﻿@model List<CPCOrderBooking>
 @{
     var detailsList = ViewBag.DetailsList as List<Vew_Orderbookings>;
+    var empList = ViewBag.EmployeeList as List<CPCEmployee>;
 }
 
 <style>
@@ -39,6 +40,7 @@
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="No Of Bundles" id="Orderbooking-dataTable_2" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Total Amount" id="Orderbooking-dataTable_3" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Status" id="Orderbooking-dataTable_4" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Approved By/On" id="Orderbooking-dataTable_5" /></th>
                             <th class="text-center" width="100px">Action</th>
                         </tr>
                     </thead>
@@ -77,13 +79,20 @@
                                     <label class="label label-warning">Completed</label>
                                 }
                             </td>
+                            <td>
+                                @if (x.ApprovedById.HasValue)
+                                {
+                                    var emp = empList.Where(y => y.Id == x.ApprovedById.Value).FirstOrDefault();
+                                    <text> @emp.Code - @emp.Name <br /><b>On</b> @x.ApprovedOn </text>
+                                }
+                            </td>
                             <td class="text-center">
                                 <div class="btn-group btn-group-xs" role="group">
-                                    <a href="@Url.Action("Details","Orderbooking")/@x.Id" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
-                                    @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.Bank))
+                                    <a href="@Url.Action("Details","Orderbooking")/@x.Id" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i> View </a>
+                                    @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.CPC))
                                     {
                                         @*<a href="@Url.Action("Record","Orderbooking")/@x.Id" class="btn btn-info" title="Edit"><i class="fa fa-edit"></i></a>*@
-                                        <a href="javascript://" onclick="deleteRecord('@Url.Action("Delete")', '@x.Id')" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
+                                        @*<a href="javascript://" onclick="deleteRecord('@Url.Action("Delete")', '@x.Id')" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>*@
                                     }
                                 </div>
                             </td>

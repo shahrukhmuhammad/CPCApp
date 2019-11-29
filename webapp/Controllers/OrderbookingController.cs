@@ -18,6 +18,7 @@ namespace WebApp.Controllers
         private BranchEntity branchRepo;
         private Common commonRepo;
         private CPHEntity cashpPocessinHousegRepo;
+        private EmployeeEntity employeeRepo;
 
         public OrderbookingController()
         {
@@ -25,6 +26,7 @@ namespace WebApp.Controllers
             branchRepo = new BranchEntity();
             commonRepo = new Common();
             cashpPocessinHousegRepo = new CPHEntity();
+            employeeRepo = new EmployeeEntity();
         }
         public ActionResult Orderbookings()
         {
@@ -34,6 +36,7 @@ namespace WebApp.Controllers
         {
             var model = orderbookingRepo.GetAll();
             ViewBag.DetailsList = orderbookingRepo.GetAllDetails();
+            ViewBag.EmployeeList = employeeRepo.GetAll();
             return PartialView(model);
         }
 
@@ -207,8 +210,51 @@ namespace WebApp.Controllers
                 throw ex;
             }
         }
+
+        #region Orderbooking Popup
+        public ActionResult _OrdersList()
+        {
+            var model = orderbookingRepo.GetAllApproved();
+            ViewBag.DetailsList = orderbookingRepo.GetAllDetails();
+            return PartialView(model);
+        }
+        #endregion
         #endregion
 
+        #region Remote function
+        [HttpGet]
+        public JsonResult GetOrderBookingData(Guid id)
+        {
+            try
+            {
+                var List = orderbookingRepo.GetAllDetailsById(id);
+                return Json(new
+                {
+                    List.FirstOrDefault().OrderNo,
+                    List.FirstOrDefault().Id,
+                    Details = List.Select(x => new {
+                        x.ProjectId,
+                        x.CPCProjectName,
+                        x.CashProcessingCellId,
+                        x.CashProcessingCellTitle,
+                        x.ProjectBranchId,
+                        x.BranchCode,
+                        x.BranchName,
+                        x.DenominationId,
+                        x.DenominationTitle,
+                        x.NoOfBundles,
+                        x.TotalAmount
+                    }).ToList(),
+
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
         #region Delete
         [HttpPost]
         public JsonResult Delete(Guid Id)

@@ -65,6 +65,9 @@
     <Compile Include="Entity\SortedCashEntity.cs" />
     <Compile Include="Entity\UnsortedCashEntity.cs" />
     <Compile Include="Entity\Utils.cs" />
+    <Compile Include="Model\AppUser.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\CPCAnnexureI.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
