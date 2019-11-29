@@ -306,5 +306,20 @@ namespace CPC
                 return 0;
             }
         }
+
+        public List<CPCAnnexureI> GetAllApproved()
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.CPCAnnexureIs.Where(x => x.IsActive && x.Status == (int)AnnexureStatus.Inprocess).OrderBy(x => x.CreatedOn).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

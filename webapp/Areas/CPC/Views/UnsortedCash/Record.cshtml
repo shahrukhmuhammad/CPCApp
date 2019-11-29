@@ -52,7 +52,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-3 horizontal-label">Date</label>
                                         <div class="col-sm-9">
-                                            <input name="DateOfCollection" id="DateOfCollection" class="form-control input-sm datePicker" type="text" value="@Model.Date.ToShortDateString()" required autocomplete="off">
+                                            <input name="Date" id="Date" class="form-control input-sm datePicker" type="text" value="@Model.Date.ToShortDateString()" required autocomplete="off">
                                             @Html.ValidationMessageFor(m => m.Date)
                                         </div>
                                     </div>
@@ -63,22 +63,23 @@
 
 
                     <div class="row tb-padding">
-                        <table id="mytable" class="table table-striped table-bordered table-hover">
+                        <table id="mytableUnsorted" class="table table-striped table-bordered table-hover">
                             <thead>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>Client/Branch:</td>
+                                    <td>
+                                        @*@Html.DropDownListFor(x => x.ProjectBranchId, (SelectList)ViewBag.BrachList, " Select Branch ", new { @class = "form-control input-sm select2" })*@
+                                        <select id="ProjectBranchId" name="ProjectBranchId" class="form-control input-sm select2 ProjectBranchId">
+                                            <option> - Select - </option>
+                                        </select>
+                                    </td>
+                                    <td></td>
                                     <td>Station/City:</td>
                                     <td>
                                         @Html.TextBoxFor(x => x.Station, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
                                         @Html.ValidationMessageFor(m => m.Station)
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Client/Branch:</td>
-                                    <td>
-                                        @Html.DropDownListFor(x => x.ProjectBranchId, (SelectList)ViewBag.BrachList, " Select Branch ", new { @class = "form-control input-sm select2" })
                                     </td>
                                     <td></td>
                                 </tr>
@@ -235,6 +236,7 @@
             </div>
         </div>
     </div>
+    @Html.HiddenFor(x => x.OrderBookingId)
 </form>
 <div class="modal fade" id="addNewCompany-Modal" tabindex="-1" role="dialog" aria-labelledby="addNewCompany-Modal" data-backdrop="static">
     <div class="modal-dialog" role="document">
@@ -244,79 +246,68 @@
 @section scripts{
 
     <script type="text/javascript">
+
+        var orderId
+        function getOrderId(Id) {
+            alert(Id);
+            debugger;
+            $('#OrderId').val(Id);
+            loadOrderData(Id);
+            $('#addNewCompany-Modal').modal('toggle');
+        }
+        function loadOrderData(Id) {
+            debugger;
+            var branchtoAppend = $('#ProjectBranchId');
+            //branchtoAppend.html("");
+            if (Id) {
+                $.get('/CPC/AnnexureI/GetAnnxureIBranchData?Id=' + Id, function (response) {
+                    debugger;
+                    if (response) {
+                        console.log(response);
+                        $('#OrderNumber').val(response.OrderNumber);
+                        $('#OrderBookingId').val(response.OrderBookingId);
+
+                        //Details
+                        $.each(response.Details,
+                            function (index, item) {
+                                debugger;
+                                var branch = new Option(item.BranchCode + " - " + item.BranchName , item.ProjectBranchId);
+                                branchtoAppend.append(branch);
+                            });
+                    }
+                    else {
+                        //$('.duplicate').html('');
+                        //isSubmit = true;
+                    }
+                });
+            }
+        }
+
+        $('.ProjectBranchId').change(function (e) {
+            if ($(this.ProjectBranchId.val())) {
+                var OrderBookingId = $("#OrderBookingId").val();
+                const ProjectBranchId = $('#ProjectBranchId option:selected').attr('value');
+                $.get('/CPC/AnnexureI/GetAnnxureIBookingData?Id=' + OrderBookingId + '$PriojId=' + ProjectBranchId, function (response) {
+
+                });
+            }
+        });
+
+
         $(document).ready(function () {
 
             //Add Shipping Company
             $('.addNewCompany').on('click', function () {
                 $('#loading-mask').show();
                 var target = "";
-                target = "/Orderbooking/_OrdersList";
+                target = "/CPC/AnnexureI/_AnnexureIList";
                 // load the url and show modal on success
                 $("#addNewCompany-Modal .modal-dialog").load(target, function () {
                     $("#addNewCompany-Modal").modal("show");
-                    filterDataTable("#Orderbooking-dataTable", [0, 1, 2, 3, 4], [5]);
+                    filterDataTable("#AnnexureIBooking-dataTable", [0, 1, 2, 3, 4], [5]);
                     $('#loading-mask').hide();
                 });
             });
-
-            var orderId
-            function getOrderId(Id) {
-                $('#OrderId').val(Id);
-                loadOrderData(Id);
-                $('#addNewCompany-Modal').modal('toggle');
-            }
-            function loadOrderData(Id) {
-                //debugger;
-                if (Id) {
-                    $.get('/Orderbooking/GetOrderBookingData?Id=' + Id, function (response) {
-                        if (response) {
-                            console.log(response);
-                            $('#OrderNumber').val(response.OrderNo);
-                            $('#OrderBookingId').val(response.Id);
-
-                            //Details
-                            $.each(response.Details,
-                                function (index, item) {
-
-                                    console.log(item);
-                                    $('#annexureI tbody').append(generateHtmlWithData(index + 1, item));
-                                    // branchtoAppend.append(branch);
-                                });
-
-                        }
-                        else {
-                            //$('.duplicate').html('');
-                            //isSubmit = true;
-                        }
-                    });
-                }
-            }
-
-            function generateHtmlWithData(row, item) {
-                debugger
-                var _html = '<tr class="rows" data-id="' + row + '">'
-                //_html += '<td class="text-center" > ' + row + '</td>'
-                _html += '<td><input type="hidden" id="ddlProject' + (row - 1) + '" name="CPCAnnexureIDetail[' + (row - 1) + '].ProjectId" value="' + item.ProjectId + '"/>' + item.CPCProjectName + '</td>'
-
-                _html += '<td><input type="hidden" id="ddlCph' + (row - 1) + '" name="CPCAnnexureIDetail[' + (row - 1) + '].CashProcessingCellId" value="' + item.CashProcessingCellId + '"> ' + item.CashProcessingCellTitle + ' </td>'
-
-                _html += '<td><input type="hidden" id="ddlCph' + (row - 1) + '" name="CPCAnnexureIDetail[' + (row - 1) + '].ProjectBranchId" value="' + item.ProjectBranchId + '">  ' + item.BranchCode + ' - ' + item.BranchName + '</td>'
-
-                _html += '<td><input type="hidden" id="ddlDenomination' + (row - 1) + '" name="CPCAnnexureIDetail[' + (row - 1) + '].DenominationId" value="' + item.DenominationId + '"/> ' + item.DenominationTitle + ' </td>'
-
-                _html += '<td><input type="hidden" class="form-control input-sm inp" name="CPCAnnexureIDetail[' + (row - 1) + '].NoOfBundles" value="' + item.NoOfBundles + '" /> ' + item.NoOfBundles + '</td>'
-
-                _html += '<td><input type="hidden" class="form-control input-sm" name="CPCAnnexureIDetail[' + (row - 1) + '].TotalAmount" value="' + item.TotalAmount + '" /> ' + item.TotalAmount + '</td>'
-
-                _html += '<td><input type="number" class="form-control input-sm" name="CPCAnnexureIDetail[' + (row - 1) + '].SealNo" pattern="[0-9]"></td>'
-
-                _html += '<td><input type="number" class="form-control input-sm" name="CPCAnnexureIDetail[' + (row - 1) + '].ShipmentReciptNo" pattern="[0-9]"></td>'
-
-                _html += '<td> <a href="javascript://" class="btn btn-xs btn-danger btn-removeRow" data-original-title="Delete"><i class="fa fa-trash"></i> Delete</a> </td></tr>';
-
-                return _html;
-            }
-
             //"#DateOfCashReturn"
             $("#Date").data("DateTimePicker").date(moment('@Model.Date.ToShortDateString()'));
 

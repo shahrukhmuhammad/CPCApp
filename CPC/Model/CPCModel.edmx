@@ -446,6 +446,8 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <Property Name="TotalAmount" Type="int" />
           <Property Name="SealNo" Type="nvarchar" MaxLength="20" />
           <Property Name="ShipmentReciptNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="OrderNumber" Type="int" />
+          <Property Name="OrderBookingId" Type="uniqueidentifier" />
           <Property Name="CashHandedOverCPCStaffAName" Type="nvarchar" MaxLength="223" Nullable="false" />
           <Property Name="CashHandedOverCPCStaffBName" Type="nvarchar" MaxLength="223" Nullable="false" />
           <Property Name="CashHandedOverCITStaffAName" Type="nvarchar" MaxLength="223" Nullable="false" />
@@ -818,6 +820,8 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
     [Vew_CPCAnnexureI].[TotalAmount] AS [TotalAmount], 
     [Vew_CPCAnnexureI].[SealNo] AS [SealNo], 
     [Vew_CPCAnnexureI].[ShipmentReciptNo] AS [ShipmentReciptNo], 
+    [Vew_CPCAnnexureI].[OrderNumber] AS [OrderNumber], 
+    [Vew_CPCAnnexureI].[OrderBookingId] AS [OrderBookingId], 
     [Vew_CPCAnnexureI].[CashHandedOverCPCStaffAName] AS [CashHandedOverCPCStaffAName], 
     [Vew_CPCAnnexureI].[CashHandedOverCPCStaffBName] AS [CashHandedOverCPCStaffBName], 
     [Vew_CPCAnnexureI].[CashHandedOverCITStaffAName] AS [CashHandedOverCITStaffAName], 
@@ -1056,7 +1060,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             <End Role="CPCAnnexureI" EntitySet="CPCAnnexureIs" />
           </AssociationSet>
           <EntitySet Name="Vew_Orderbookings" EntityType="SOSTechCPCModel.Vew_Orderbookings" />
-          <EntitySet Name="Vew_CPCAnnexureI" EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" />
           <EntitySet Name="CPCUnsortedCashes" EntityType="SOSTechCPCModel.CPCUnsortedCash" />
           <AssociationSet Name="FK__CPCUnsort__Order__2F9A1060" Association="SOSTechCPCModel.FK__CPCUnsort__Order__2F9A1060">
             <End Role="CPCOrderBooking" EntitySet="CPCOrderBookings" />
@@ -1070,6 +1073,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             <End Role="CPCUnsortedCash" EntitySet="CPCUnsortedCashes" />
             <End Role="CPCUnsortedCashDetail" EntitySet="CPCUnsortedCashDetails" />
           </AssociationSet>
+          <EntitySet Name="Vew_CPCAnnexureI" EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" />
         </EntityContainer>
         <EntityType Name="CPCAnnexureIDetail">
           <Key>
@@ -1765,58 +1769,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <Property Name="ApprovedByName" Type="String" MaxLength="223" FixedLength="false" Unicode="true" />
           <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="Vew_CPCAnnexureI">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="DateOfCollection" />
-            <PropertyRef Name="CreatedOn" />
-            <PropertyRef Name="CreatedBy" />
-            <PropertyRef Name="CPCAnnexureIDetailsId" />
-            <PropertyRef Name="CashHandedOverCPCStaffAName" />
-            <PropertyRef Name="CashHandedOverCPCStaffBName" />
-            <PropertyRef Name="CashHandedOverCITStaffAName" />
-            <PropertyRef Name="CashHandedOverCITStaffBName" />
-            <PropertyRef Name="SignatureCPCHandingOverCashAName" />
-            <PropertyRef Name="SignatureCPCHandingOverCashBName" />
-            <PropertyRef Name="IsActive" />
-            <PropertyRef Name="ProjectId" />
-            <PropertyRef Name="ProjectTitle" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="SrNo" Type="Int32" />
-          <Property Name="DateOfCollection" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CashHandedOverCPCStaffAId" Type="Guid" />
-          <Property Name="CashHandedOverCPCStaffBId" Type="Guid" />
-          <Property Name="CashHandedOverCITStaffAId" Type="Guid" />
-          <Property Name="CashHandedOverCITStaffBId" Type="Guid" />
-          <Property Name="SignatureCPCHandingOverCashAId" Type="Guid" />
-          <Property Name="SignatureCPCHandingOverCashBId" Type="Guid" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Guid" />
-          <Property Name="CPCAnnexureIDetailsId" Type="Guid" Nullable="false" />
-          <Property Name="CashProcessingCellId" Type="Guid" />
-          <Property Name="CashProcessingCellTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectBranchId" Type="Guid" />
-          <Property Name="BranchCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="BranchName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="DenominationId" Type="Guid" />
-          <Property Name="DenominationTitle" Type="Int32" />
-          <Property Name="NoOfBundles" Type="Int32" />
-          <Property Name="TotalAmount" Type="Int32" />
-          <Property Name="SealNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ShipmentReciptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CashHandedOverCPCStaffAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-          <Property Name="CashHandedOverCPCStaffBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-          <Property Name="CashHandedOverCITStaffAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-          <Property Name="CashHandedOverCITStaffBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-          <Property Name="SignatureCPCHandingOverCashAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-          <Property Name="SignatureCPCHandingOverCashBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="ProjectId" Type="Guid" Nullable="false" />
-          <Property Name="ProjectTitle" Type="Guid" Nullable="false" />
-        </EntityType>
         <EntityType Name="CPCUnsortedCash">
           <Key>
             <PropertyRef Name="Id" />
@@ -1876,6 +1828,60 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Vew_CPCAnnexureI">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DateOfCollection" />
+            <PropertyRef Name="CreatedOn" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="CPCAnnexureIDetailsId" />
+            <PropertyRef Name="CashHandedOverCPCStaffAName" />
+            <PropertyRef Name="CashHandedOverCPCStaffBName" />
+            <PropertyRef Name="CashHandedOverCITStaffAName" />
+            <PropertyRef Name="CashHandedOverCITStaffBName" />
+            <PropertyRef Name="SignatureCPCHandingOverCashAName" />
+            <PropertyRef Name="SignatureCPCHandingOverCashBName" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="ProjectTitle" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SrNo" Type="Int32" />
+          <Property Name="DateOfCollection" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CashHandedOverCPCStaffAId" Type="Guid" />
+          <Property Name="CashHandedOverCPCStaffBId" Type="Guid" />
+          <Property Name="CashHandedOverCITStaffAId" Type="Guid" />
+          <Property Name="CashHandedOverCITStaffBId" Type="Guid" />
+          <Property Name="SignatureCPCHandingOverCashAId" Type="Guid" />
+          <Property Name="SignatureCPCHandingOverCashBId" Type="Guid" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="CPCAnnexureIDetailsId" Type="Guid" Nullable="false" />
+          <Property Name="CashProcessingCellId" Type="Guid" />
+          <Property Name="CashProcessingCellTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectBranchId" Type="Guid" />
+          <Property Name="BranchCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BranchName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DenominationId" Type="Guid" />
+          <Property Name="DenominationTitle" Type="Int32" />
+          <Property Name="NoOfBundles" Type="Int32" />
+          <Property Name="TotalAmount" Type="Int32" />
+          <Property Name="SealNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ShipmentReciptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNumber" Type="Int32" />
+          <Property Name="OrderBookingId" Type="Guid" />
+          <Property Name="CashHandedOverCPCStaffAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
+          <Property Name="CashHandedOverCPCStaffBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
+          <Property Name="CashHandedOverCITStaffAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
+          <Property Name="CashHandedOverCITStaffBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
+          <Property Name="SignatureCPCHandingOverCashAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
+          <Property Name="SignatureCPCHandingOverCashBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ProjectId" Type="Guid" Nullable="false" />
+          <Property Name="ProjectTitle" Type="Guid" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2309,6 +2315,27 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CPCUnsortedCashes">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCUnsortedCash">
+              <MappingFragment StoreEntitySet="CPCUnsortedCash">
+                <ScalarProperty Name="OrderBookingId" ColumnName="OrderBookingId" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="TotalBalance" ColumnName="TotalBalance" />
+                <ScalarProperty Name="TotalNumberBundles" ColumnName="TotalNumberBundles" />
+                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
+                <ScalarProperty Name="Station" ColumnName="Station" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Vew_CPCAnnexureI">
             <EntityTypeMapping TypeName="SOSTechCPCModel.Vew_CPCAnnexureI">
               <MappingFragment StoreEntitySet="Vew_CPCAnnexureI">
@@ -2321,6 +2348,8 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
                 <ScalarProperty Name="CashHandedOverCITStaffAName" ColumnName="CashHandedOverCITStaffAName" />
                 <ScalarProperty Name="CashHandedOverCPCStaffBName" ColumnName="CashHandedOverCPCStaffBName" />
                 <ScalarProperty Name="CashHandedOverCPCStaffAName" ColumnName="CashHandedOverCPCStaffAName" />
+                <ScalarProperty Name="OrderBookingId" ColumnName="OrderBookingId" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
                 <ScalarProperty Name="ShipmentReciptNo" ColumnName="ShipmentReciptNo" />
                 <ScalarProperty Name="SealNo" ColumnName="SealNo" />
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
@@ -2345,27 +2374,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
                 <ScalarProperty Name="CashHandedOverCPCStaffAId" ColumnName="CashHandedOverCPCStaffAId" />
                 <ScalarProperty Name="DateOfCollection" ColumnName="DateOfCollection" />
                 <ScalarProperty Name="SrNo" ColumnName="SrNo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CPCUnsortedCashes">
-            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCUnsortedCash">
-              <MappingFragment StoreEntitySet="CPCUnsortedCash">
-                <ScalarProperty Name="OrderBookingId" ColumnName="OrderBookingId" />
-                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="TotalBalance" ColumnName="TotalBalance" />
-                <ScalarProperty Name="TotalNumberBundles" ColumnName="TotalNumberBundles" />
-                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
-                <ScalarProperty Name="Station" ColumnName="Station" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

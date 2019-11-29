@@ -63,7 +63,6 @@ namespace WebApp.Areas.CPC.Controllers
                 //model.IsActive = true;
             }
             //ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
-            ViewBag.BrachList = new SelectList(branchRepo.GetDropdown(), "Value", "Text");
             //ViewBag.DenominationList = new SelectList(commonRepo.GetAllDenominationDropdown(), "Value", "Text");
             ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             ViewBag.DenominationList = commonRepo.GetAllDenomination();

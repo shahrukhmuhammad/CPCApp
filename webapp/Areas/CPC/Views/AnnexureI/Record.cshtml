@@ -198,9 +198,10 @@
             //debugger;
             if (Id) {
                 $.get('/Orderbooking/GetOrderBookingData?Id=' + Id, function (response) {
+                    console.log(response);
                     if (response) {
                         //console.log(response);
-                        $('#OrderNumber').val(response.OrderNo);
+                        $('#OrderNumber').val(response.OrderNumber);
                         $('#OrderBookingId').val(response.Id);
                         //Details
                         $.each(response.Details,

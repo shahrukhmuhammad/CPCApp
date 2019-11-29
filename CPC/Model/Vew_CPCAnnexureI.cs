@@ -39,6 +39,8 @@ namespace CPC.Model
         public Nullable<int> TotalAmount { get; set; }
         public string SealNo { get; set; }
         public string ShipmentReciptNo { get; set; }
+        public Nullable<int> OrderNumber { get; set; }
+        public Nullable<System.Guid> OrderBookingId { get; set; }
         public string CashHandedOverCPCStaffAName { get; set; }
         public string CashHandedOverCPCStaffBName { get; set; }
         public string CashHandedOverCITStaffAName { get; set; }
