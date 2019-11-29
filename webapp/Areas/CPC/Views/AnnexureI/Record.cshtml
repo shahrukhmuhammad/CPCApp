@@ -199,17 +199,14 @@
             if (Id) {
                 $.get('/Orderbooking/GetOrderBookingData?Id=' + Id, function (response) {
                     if (response) {
-                        console.log(response);
+                        //console.log(response);
                         $('#OrderNumber').val(response.OrderNo);
                         $('#OrderBookingId').val(response.Id);
-
                         //Details
                         $.each(response.Details,
                             function (index, item) {
-
-                                console.log(item);
+                                //console.log(item);
                                 $('#annexureI tbody').append(generateHtmlWithData(index + 1, item));
-                               // branchtoAppend.append(branch);
                             });
 
                     }

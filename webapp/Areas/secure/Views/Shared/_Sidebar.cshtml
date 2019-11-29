@@ -272,23 +272,23 @@
             </div>
 
             @*<div class="panel panel-default">
-            <div class="panel-heading no-padding" role="tab" id="heading-employeeConfigurations">
-                <h4 class="panel-title">
-                    <a class="list-group-item @SetActiveController("Region") @SetActiveController("Department")" role="button" data-toggle="collapse" data-parent="#sideBar-accordion" href="#collapse-employeeConfigurations" aria-expanded="false" aria-controls="collapse-employeeConfigurations">
-                        <i class="fa fa-gears clr-blue"></i> Configurations <span class="badge"><i class="fa fa-angle-down"></i></span>
-                    </a>
-                </h4>
-            </div>
-            <div id="collapse-employeeConfigurations" class="panel-collapse collapse @SetActiveController("Department") @SetActiveController("Region")" role="tabpanel" aria-labelledby="heading-employeeConfigurations">
-                <div class="list-group">
-                    <a class="list-group-item @SetActiveController("Department")" href="@Url.Action("Departments","Department")"><i class="fa fa-building clr-blue"></i> Department</a>
-                    <a class="list-group-item @SetActiveController("Designation")" href="@Url.Action("Designations","Designation")"><i class="fa fa-angle-up clr-blue"></i> Designation</a>
-                    <a class="list-group-item @SetActiveController("Region")" href="@Url.Action("Regions","Region")"><i class="fa fa-cube clr-blue"></i> Region</a>
-                    <a class="list-group-item @SetActiveController("Center")" href="@Url.Action("Centers","Center")"><i class="fa fa-gear clr-blue"></i> Center</a>
-                    <a class="list-group-item @SetActiveController("City")" href="@Url.Action("Cites","City")"><i class="fa fa-tree clr-blue"></i> City</a>
-                </div>
-            </div>
-        </div>*@
+                    <div class="panel-heading no-padding" role="tab" id="heading-employeeConfigurations">
+                        <h4 class="panel-title">
+                            <a class="list-group-item @SetActiveController("Region") @SetActiveController("Department")" role="button" data-toggle="collapse" data-parent="#sideBar-accordion" href="#collapse-employeeConfigurations" aria-expanded="false" aria-controls="collapse-employeeConfigurations">
+                                <i class="fa fa-gears clr-blue"></i> Configurations <span class="badge"><i class="fa fa-angle-down"></i></span>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse-employeeConfigurations" class="panel-collapse collapse @SetActiveController("Department") @SetActiveController("Region")" role="tabpanel" aria-labelledby="heading-employeeConfigurations">
+                        <div class="list-group">
+                            <a class="list-group-item @SetActiveController("Department")" href="@Url.Action("Departments","Department")"><i class="fa fa-building clr-blue"></i> Department</a>
+                            <a class="list-group-item @SetActiveController("Designation")" href="@Url.Action("Designations","Designation")"><i class="fa fa-angle-up clr-blue"></i> Designation</a>
+                            <a class="list-group-item @SetActiveController("Region")" href="@Url.Action("Regions","Region")"><i class="fa fa-cube clr-blue"></i> Region</a>
+                            <a class="list-group-item @SetActiveController("Center")" href="@Url.Action("Centers","Center")"><i class="fa fa-gear clr-blue"></i> Center</a>
+                            <a class="list-group-item @SetActiveController("City")" href="@Url.Action("Cites","City")"><i class="fa fa-tree clr-blue"></i> City</a>
+                        </div>
+                    </div>
+                </div>*@
 
 
 
@@ -308,8 +308,8 @@
 
 
                         @*<a class="list-group-item @SetActiveAction("Employee", "Settings")" href="~/Secure/Employee/Settings"><i class="fa fa-gear clr-yellow"></i> Manage Employee Data Fields</a>
-                    <a class="list-group-item @SetActiveAction("Employee", "PayrollSettings")" href="~/Secure/Employee/PayrollSettings"><i class="fa fa-gear clr-yellow"></i> Payroll Settings</a>
-                    <a class="list-group-item @SetActiveAction("Employee", "TimesheetSettings")" href="~/Secure/Employee/TimesheetSettings"><i class="fa fa-gear clr-yellow"></i> Timesheet Settings</a>*@
+                            <a class="list-group-item @SetActiveAction("Employee", "PayrollSettings")" href="~/Secure/Employee/PayrollSettings"><i class="fa fa-gear clr-yellow"></i> Payroll Settings</a>
+                            <a class="list-group-item @SetActiveAction("Employee", "TimesheetSettings")" href="~/Secure/Employee/TimesheetSettings"><i class="fa fa-gear clr-yellow"></i> Timesheet Settings</a>*@
                     </div>
                 </div>
             </div>
@@ -318,18 +318,18 @@
     else
     {
         @*if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.CPC))
-        {
-            <div>
-                
-                <div class="panel panel-default">
-                    <div class="panel-heading no-padding" role="tab">
-                        <h4 class="panel-title">
-                            <a class="list-group-item @SetActiveController("OrderApproval")" href="@Url.Action("Index","OrderApproval")"><i class="fa fa-list-alt clr-blue"></i> Order Requests</a>
-                        </h4>
+            {
+                <div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-padding" role="tab">
+                            <h4 class="panel-title">
+                                <a class="list-group-item @SetActiveController("OrderApproval")" href="@Url.Action("Index","OrderApproval")"><i class="fa fa-list-alt clr-blue"></i> Order Requests</a>
+                            </h4>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }*@
+            }*@
     }
 
 
@@ -419,34 +419,16 @@
         </div>
     }
 
-    @*@if (IsCurrentController("AccessControl") && CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.ViewContact, BaseApp.Entity.AppPermission.Contact))
-        {
-            if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.Contact))
-            {
-                <div class="panel panel-default">
-                    <div class="panel-heading no-padding" role="tab">
-                        <h4 class="panel-title">
-                            <a href="javascript://" class="list-group-item @SetActiveAction("AccessControl", "Record") dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-user-plus"></i> Add New Contact <span class="badge"><i class="fa fa-angle-right"></i></span>
-                            </a>
-                            <ul class="dropdown-menu" style="top:0; left:320px;">
-                                @foreach (var x in allOffices)
-                                {
-                                    <li><a href="~/Secure/AccessControl/Record?o=@x.Id">@x.Code - @x.Title</a></li>
-                                }
-                            </ul>
-                        </h4>
-                    </div>
-                </div>
-            }
-            <div class="panel panel-default">
-                <div class="panel-heading no-padding" role="tab">
-                    <h4 class="panel-title">
-                        <a class="list-group-item @SetActiveAction("AccessControl", "Index")" href="~/Secure/AccessControl"><i class="fa fa-users"></i> All Contacts</a>
-                    </h4>
-                </div>
+    @if (IsCurrentController("AccessControl") && CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.ViewContact, BaseApp.Entity.AppPermission.Contact))
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading no-padding" role="tab">
+                <h4 class="panel-title">
+                    <a class="list-group-item @SetActiveAction("AccessControl", "Index")" href="~/Secure/AccessControl"><i class="fa fa-users"></i> All Users</a>
+                </h4>
             </div>
-        }*@
+        </div>
+    }
 
     @if ((IsCurrentController("Setting") && CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All)) || (IsCurrentController("Config") && CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All))
                                 || (IsCurrentController("Notification") && CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All)) || (IsCurrentController("Company") && CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All)) || (IsCurrentController("Office") && CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All))

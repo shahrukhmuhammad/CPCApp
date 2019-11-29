@@ -70,6 +70,16 @@
                                     <div class="btn-group btn-group-xs" role="group">
                                         <a href="@Url.Action("Details","OrderApproval")/@x.Id" class="btn btn-primary mg-r" title="Details"><i class="fa fa-eye fa-2x"></i> </a>
                                     </div>
+                                    @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All))
+                                    {
+                                        if (x.Status == (int)AnnexureStatus.Approved)
+                                        {
+                                        }
+                                        else
+                                        {
+                                            <a href="javascript://" onclick="approveRecord('@Url.Action("Approve")', '@x.Id')" class="btn btn-success" title="Approve"><i class="fa fa-check fa-2x"></i> </a>
+                                        }
+                                    }
                                 </td>
                             </tr>
                         }
