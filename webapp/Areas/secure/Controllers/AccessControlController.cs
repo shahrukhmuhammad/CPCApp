@@ -9,7 +9,7 @@ using BaseApp.System;
 using BaseApp.Logic;
 using WebApp.Hubs;
 
-namespace WebApp.Areas.CRM.Controllers
+namespace WebApp.Areas.Secure.Controllers
 {
     [AppAuthorize(AppPermission.All)]
     public class AccessControlController : AppController
