@@ -18,6 +18,7 @@ namespace CPC.Model
         public CPCOrderBooking()
         {
             this.CPCOrderBookingDetails = new HashSet<CPCOrderBookingDetail>();
+            this.CPCAnnexureIs = new HashSet<CPCAnnexureI>();
         }
     
         public System.Guid Id { get; set; }
@@ -34,5 +35,7 @@ namespace CPC.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCOrderBookingDetail> CPCOrderBookingDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCAnnexureI> CPCAnnexureIs { get; set; }
     }
 }

@@ -6,9 +6,9 @@
 }
 
 <style>
-    #annexureI th {
+    /*#annexureI th {
         text-align: center !important;
-    }
+    }*/
 
     .field-validation-error {
         color: red;
@@ -29,7 +29,6 @@
         </div>
     </div>
 
-
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-default">
@@ -38,6 +37,15 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="row form-group">
+                                        <label class="col-sm-4 text-left horizontal-label">Order Number</label>
+                                        <div class="col-sm-8">
+                                            @Html.TextBoxFor(x => x.OrderNumber, new { @class = "form-control input-sm", })
+                                            <a href="javascript://" class="btn btn-sm btn-primary addNewCompany"><i class="fa fa-plus"></i> Select Order</a>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-4">
                                     <div class="row form-group">
                                         <label class="col-sm-4 text-left horizontal-label">Sr. Number</label>
@@ -79,10 +87,10 @@
                             <tbody></tbody>
                         </table>
 
-                        <div class="col-sm-1">
+                        @*<div class="col-sm-1">
                             <label>&nbsp; &nbsp;</label> <br />
                             <button class="btn btn-primary btn-sm btn-custom" type="button" id="AddNewRow" title="Add New Row"><i class="fa fa-plus"></i> Add New Row</button>
-                        </div>
+                        </div>*@
                     </div>
 
                     <div class="row">
@@ -170,22 +178,96 @@
     <select id="listCPH" style="display:none;">
         <option> - Select - </option>
     </select>
+    @Html.HiddenFor(x=> x.OrderBookingId)
 </form>
-
+<div class="modal fade" id="addNewCompany-Modal" tabindex="-1" role="dialog" aria-labelledby="addNewCompany-Modal" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+    </div>
+</div>
 
 @section scripts{
 
     <script type="text/javascript">
+        var orderId
+        function getOrderId(Id) {
+            $('#OrderId').val(Id);
+            loadOrderData(Id);
+            $('#addNewCompany-Modal').modal('toggle'); 
+        }
+        function loadOrderData(Id) {
+            //debugger;
+            if (Id) {
+                $.get('/Orderbooking/GetOrderBookingData?Id=' + Id, function (response) {
+                    if (response) {
+                        console.log(response);
+                        $('#OrderNumber').val(response.OrderNo);
+                        $('#OrderBookingId').val(response.Id);
+
+                        //Details
+                        $.each(response.Details,
+                            function (index, item) {
+
+                                console.log(item);
+                                $('#annexureI tbody').append(generateHtmlWithData(index + 1, item));
+                               // branchtoAppend.append(branch);
+                            });
+
+                    }
+                    else {
+                        //$('.duplicate').html('');
+                        //isSubmit = true;
+                    }
+                });
+            }
+        }
+
+        function generateHtmlWithData(row, item) {
+            debugger
+            var _html = '<tr class="rows" data-id="' + row + '">'
+            //_html += '<td class="text-center" > ' + row + '</td>'
+            _html += '<td><input type="hidden" id="ddlProject' + (row - 1) + '" name="CPCAnnexureIDetail[' + (row - 1) + '].ProjectId" value="' + item.ProjectId + '"/>' + item.CPCProjectName + '</td>'
+
+            _html += '<td><input type="hidden" id="ddlCph' + (row - 1) + '" name="CPCAnnexureIDetail[' + (row - 1) + '].CashProcessingCellId" value="' + item.CashProcessingCellId + '"> ' + item.CashProcessingCellTitle + ' </td>'
+
+            _html += '<td><input type="hidden" id="ddlCph' + (row - 1) + '" name="CPCAnnexureIDetail[' + (row - 1) + '].ProjectBranchId" value="' + item.ProjectBranchId + '">  ' + item.BranchCode + ' - ' + item.BranchName + '</td>'
+
+            _html += '<td><input type="hidden" id="ddlDenomination' + (row - 1) + '" name="CPCAnnexureIDetail[' + (row - 1) + '].DenominationId" value="' + item.DenominationId + '"/> ' + item.DenominationTitle + ' </td>'
+
+            _html += '<td><input type="hidden" class="form-control input-sm inp" name="CPCAnnexureIDetail[' + (row - 1) + '].NoOfBundles" value="' + item.NoOfBundles + '" /> ' + item.NoOfBundles + '</td>'
+
+            _html += '<td><input type="hidden" class="form-control input-sm" name="CPCAnnexureIDetail[' + (row - 1) + '].TotalAmount" value="' + item.TotalAmount + '" /> ' + item.TotalAmount + '</td>'
+
+            _html += '<td><input type="number" class="form-control input-sm" name="CPCAnnexureIDetail[' + (row - 1) + '].SealNo" pattern="[0-9]"></td>'
+
+            _html += '<td><input type="number" class="form-control input-sm" name="CPCAnnexureIDetail[' + (row - 1) + '].ShipmentReciptNo" pattern="[0-9]"></td>'
+
+            _html += '<td> <a href="javascript://" class="btn btn-xs btn-danger btn-removeRow" data-original-title="Delete"><i class="fa fa-trash"></i> Delete</a> </td></tr>';
+
+            return _html;
+        }
+
         $(document).ready(function () {
-            //-- Read Only Mode Trigger -//
-            @*if ('@ViewData["IsView"]' != '') {
-                $("input").attr("readonly", true);
-                $("#IsActive").attr("disabled", true);
-                $("#submit").hide();
-            }*@
+            //Add Shipping Company
+            $('.addNewCompany').on('click', function () {
+                $('#loading-mask').show();
+                var target = "";
+                target = "/Orderbooking/_OrdersList";
+                // load the url and show modal on success
+                $("#addNewCompany-Modal .modal-dialog").load(target, function () {
+                    $("#addNewCompany-Modal").modal("show");
+                    filterDataTable("#Orderbooking-dataTable", [0, 1, 2, 3, 4 ], [5]);
+                    $('#loading-mask').hide();
+                });
+            });
+
             $("#DateOfCollection").data("DateTimePicker").date(moment('@Model.DateOfCollection.ToShortDateString()'));
             var isSubmit = true;
 
+            $('#btn_Select1').on('click', function () {
+                
+                debugger;
+                alert($(this).attr('data-id'));
+            });
 
             //Project ddl change event
             $(document).on('change', '.project', function (e) {
@@ -218,21 +300,21 @@
             var accountGridRowIndex;
 
             //Page Load
-            var rowCount = $('#annexureI tbody tr').length;
-            if (rowCount == 0) {
-                AddFirstRow(1);
-                //bindBranchDDL(0);
-                bindDenomDDL(0);
-                bindCphDDL(0);
-                bindProjectDDL(0);
-                for (var i = 2; i <= 5; i++) {
-                    AddNewRow(i);
-                    //bindBranchDDL(i - 1);
-                    bindDenomDDL(i - 1);
-                    bindCphDDL(i - 1);
-                    bindProjectDDL(i - 1);
-                }
-            }
+            //var rowCount = $('#annexureI tbody tr').length;
+            //if (rowCount == 0) {
+            //    AddFirstRow(1);
+            //    //bindBranchDDL(0);
+            //    bindDenomDDL(0);
+            //    bindCphDDL(0);
+            //    bindProjectDDL(0);
+            //    for (var i = 2; i <= 5; i++) {
+            //        AddNewRow(i);
+            //        //bindBranchDDL(i - 1);
+            //        bindDenomDDL(i - 1);
+            //        bindCphDDL(i - 1);
+            //        bindProjectDDL(i - 1);
+            //    }
+            //}
 
             //btn-remove Click
             $(document).on('click', '.btn-removeRow', function (e) {

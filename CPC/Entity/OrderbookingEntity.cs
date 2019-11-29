@@ -27,6 +27,20 @@ namespace CPC
                 throw ex;
             }
         }
+        public List<CPCOrderBooking> GetAllApproved()
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.CPCOrderBookings.Where(x => x.IsActive && x.Status == (int)AnnexureStatus.Approved).OrderBy(x => x.CreatedOn).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public List<Vew_Orderbookings> GetAllDetails()
         {
