@@ -47,7 +47,7 @@ namespace WebApp.Controllers
         {
             var model = orderbookingRepo.GetById(Id);
             ViewBag.Details = orderbookingRepo.GetAllDetailsById(Id);
-            //ViewBag.AnnexureIDetails = annexureIRepo.GetAllDetailsById(model.OrderNo);
+            ViewBag.AnnexureIDetails = annexureIRepo.GetAllDetailsByOrderNo(model.OrderNo);
             return View(model);
         }
         #endregion
