@@ -56,6 +56,20 @@ namespace CPC
                 return null;
             }
         }
+        //public List<Vew_CPCAnnexureI> GetAllDetailsByOrderNo(int Id)
+        //{
+        //    try
+        //    {
+        //        using (context = new SOSTechCPCEntities())
+        //        {
+        //            return context.Vew_CPCAnnexureI.Where(x => x.O == Id).ToList();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //}
         public bool IsDuplicate(int SrNo)
         {
             try

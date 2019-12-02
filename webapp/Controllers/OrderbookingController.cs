@@ -14,6 +14,7 @@ namespace WebApp.Controllers
     
     public class OrderbookingController : AppController
     {
+        private AnnexureIEntity annexureIRepo;
         private OrderbookingEntity orderbookingRepo;
         private BranchEntity branchRepo;
         private Common commonRepo;
@@ -27,6 +28,7 @@ namespace WebApp.Controllers
             commonRepo = new Common();
             cashpPocessinHousegRepo = new CPHEntity();
             employeeRepo = new EmployeeEntity();
+            annexureIRepo = new AnnexureIEntity();
         }
         public ActionResult Orderbookings()
         {
@@ -45,6 +47,7 @@ namespace WebApp.Controllers
         {
             var model = orderbookingRepo.GetById(Id);
             ViewBag.Details = orderbookingRepo.GetAllDetailsById(Id);
+            //ViewBag.AnnexureIDetails = annexureIRepo.GetAllDetailsById(model.OrderNo);
             return View(model);
         }
         #endregion
