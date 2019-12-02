@@ -295,6 +295,76 @@ namespace WebApp.Areas.CPC.Controllers
         //}
         #endregion
 
+        #region Annexure Popup
+        public ActionResult _AnnexureIList()
+        {
+            var model = annexureIRepo.GetAllApproved();
+            ViewBag.DetailsList = annexureIRepo.GetAllDetails();
+            return PartialView(model);
+        }
+        #endregion
 
+        #region Remote function
+        [HttpGet]
+        public JsonResult GetAnnxureIBookingData(Guid id, Guid PriojId)
+        {
+            try
+            {
+                var List = annexureIRepo.GetAllDetailsById(id, PriojId);
+                return Json(new
+                {
+                    List.FirstOrDefault().OrderNumber,
+                    List.FirstOrDefault().Id,
+                    Details = List.Select(x => new {
+                        x.ProjectId,
+                        x.ProjectTitle,
+                        x.CashProcessingCellId,
+                        x.CashProcessingCellTitle,
+                        x.ProjectBranchId,
+                        x.BranchCode,
+                        x.BranchName,
+                        x.DenominationId,
+                        x.DenominationTitle,
+                        x.NoOfBundles,
+                        x.TotalAmount,
+                        x.CityName,
+                        x.CityId
+                    }).ToList(),
+
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region Remote function
+        [HttpGet]
+        public JsonResult GetAnnxureIBranchData(Guid id)
+        {
+            try
+            {
+                var List = annexureIRepo.GetAllDetailsById(id);
+                return Json(new
+                {
+                    List.FirstOrDefault().OrderNumber,
+                    List.FirstOrDefault().OrderBookingId,
+                    Details = List.Select(x => new {
+                        x.ProjectBranchId,
+                        x.BranchCode,
+                        x.BranchName,
+                    }).ToList().Distinct(),
+
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
     }
 }

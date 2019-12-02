@@ -23,7 +23,7 @@ namespace CPC.Model
         public System.Guid Id { get; set; }
         public long SerialNumber { get; set; }
         public System.DateTime Date { get; set; }
-        public string Station { get; set; }
+        public System.Guid CityId { get; set; }
         public System.Guid ProjectBranchId { get; set; }
         public Nullable<int> TotalNumberBundles { get; set; }
         public long TotalBalance { get; set; }
@@ -36,6 +36,7 @@ namespace CPC.Model
         public Nullable<int> OrderNumber { get; set; }
         public Nullable<System.Guid> OrderBookingId { get; set; }
     
+        public virtual CPCCity CPCCity { get; set; }
         public virtual CPCOrderBooking CPCOrderBooking { get; set; }
         public virtual CPCProjectBranch CPCProjectBranch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

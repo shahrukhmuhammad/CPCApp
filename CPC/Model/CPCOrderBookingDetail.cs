@@ -24,7 +24,7 @@ namespace CPC.Model
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.Guid> CashProcessingCellId { get; set; }
     
-        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
         public virtual CPCOrderBooking CPCOrderBooking { get; set; }
+        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
     }
 }

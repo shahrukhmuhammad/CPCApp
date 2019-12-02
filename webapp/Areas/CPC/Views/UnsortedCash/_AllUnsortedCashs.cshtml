@@ -42,7 +42,7 @@
                             <th><input type="checkbox" onchange="checkAll(this, 'checkIt');" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Consignment No." id="UnsortedCash-dataTable_0" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Date" id="UnsortedCash-dataTable_1" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Station" id="UnsortedCash-dataTable_2" /></th>
+                            @*<th><input class="form-control input-sm input-tbl" type="text" placeholder="City" id="UnsortedCash-dataTable_2" /></th>*@
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Client" id="UnsortedCash-dataTable_3" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Status" id="UnsortedCash-dataTable_4" /></th>
                             <th class="text-center" width="100px">Action</th>
@@ -60,7 +60,7 @@
                                 </td>
                                 <td><a href="@Url.Action("Details","UnsortedCash",new { Id = x.Id })">@x.SerialNumber</a></td>
                                 <td>@x.Date</td>
-                                <td>@x.Station</td>
+                                @*<td>@x.CityId</td>*@
                                 <td> @($"{x.CPCProjectBranch.BranchCode} - {x.CPCProjectBranch.BranchName}")</td>
                                 @if (x.Status == 1)
                                 {

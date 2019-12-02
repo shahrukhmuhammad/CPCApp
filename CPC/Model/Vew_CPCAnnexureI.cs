@@ -39,6 +39,8 @@ namespace CPC.Model
         public Nullable<int> TotalAmount { get; set; }
         public string SealNo { get; set; }
         public string ShipmentReciptNo { get; set; }
+        public Nullable<int> OrderNumber { get; set; }
+        public Nullable<System.Guid> OrderBookingId { get; set; }
         public string CashHandedOverCPCStaffAName { get; set; }
         public string CashHandedOverCPCStaffBName { get; set; }
         public string CashHandedOverCITStaffAName { get; set; }
@@ -48,5 +50,7 @@ namespace CPC.Model
         public bool IsActive { get; set; }
         public System.Guid ProjectId { get; set; }
         public System.Guid ProjectTitle { get; set; }
+        public string CityName { get; set; }
+        public Nullable<System.Guid> CityId { get; set; }
     }
 }
