@@ -310,7 +310,7 @@ namespace WebApp.Areas.CPC.Controllers
         {
             try
             {
-                var List = annexureIRepo.GetAllDetailsById(id);
+                var List = annexureIRepo.GetAllDetailsById(id, PriojId);
                 return Json(new
                 {
                     List.FirstOrDefault().OrderNumber,
@@ -326,8 +326,10 @@ namespace WebApp.Areas.CPC.Controllers
                         x.DenominationId,
                         x.DenominationTitle,
                         x.NoOfBundles,
-                        x.TotalAmount
-                    }).Where(x => x.ProjectBranchId == PriojId).ToList(),
+                        x.TotalAmount,
+                        x.CityName,
+                        x.CityId
+                    }).ToList(),
 
                 }, JsonRequestBehavior.AllowGet);
             }

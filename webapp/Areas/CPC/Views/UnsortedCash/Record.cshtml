@@ -78,8 +78,9 @@
                                     <td></td>
                                     <td>Station/City:</td>
                                     <td>
-                                        @Html.TextBoxFor(x => x.Station, new { @class = "form-control input-sm", @required = "required", @autofocus = "true" })
-                                        @Html.ValidationMessageFor(m => m.Station)
+                                        <input type="text" class ="form-control input-sm" id="CityName"/>
+                                        @Html.HiddenFor(x => x.CityId)
+                                        
                                     </td>
                                     <td></td>
                                 </tr>
@@ -95,10 +96,10 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[0].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 1).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="1">
-                                        <input id="numberOfPacketsZero" type="number" value="0" name="CPCUnsortedCashDetail[0].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
+                                        <input id="numberOfPacketsZero" type="number" value="0" name="CPCUnsortedCashDetail[0].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueZero" value="0" name="CPCUnsortedCashDetail[0].TotalValue" class="form-control input-sm" />
+                                        <input id="totalValueZero" value="0" name="CPCUnsortedCashDetail[0].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -107,10 +108,10 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[1].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 2).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="2">
-                                        <input id="numberOfPacketsOne" type="number" value="0" name="CPCUnsortedCashDetail[1].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
+                                        <input id="numberOfPacketsOne" type="number" value="0" name="CPCUnsortedCashDetail[1].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueOne" type="number" value="0" name="CPCUnsortedCashDetail[1].TotalValue" class="form-control input-sm" />
+                                        <input id="totalValueOne" type="number" value="0" name="CPCUnsortedCashDetail[1].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -119,10 +120,10 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[2].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 5).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="5">
-                                        <input id="numberOfPacketsTwo" type="number" value="0" name="CPCUnsortedCashDetail[2].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
+                                        <input id="numberOfPacketsTwo" type="number" value="0" name="CPCUnsortedCashDetail[2].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueTwo" type="number" value="0" name="CPCUnsortedCashDetail[2].TotalValue" class="form-control input-sm" />
+                                        <input id="totalValueTwo" type="number" value="0" name="CPCUnsortedCashDetail[2].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -131,10 +132,10 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[3].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 10).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="10">
-                                        <input id="numberOfPacketsThree" type="number" value="0" name="CPCUnsortedCashDetail[3].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
+                                        <input id="numberOfPacketsThree" type="number" value="0" name="CPCUnsortedCashDetail[3].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueThree" type="number" value="0" name="CPCUnsortedCashDetail[3].TotalValue" class="form-control input-sm" />
+                                        <input id="totalValueThree" type="number" value="0" name="CPCUnsortedCashDetail[3].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -143,10 +144,10 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[4].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 20).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="20">
-                                        <input id="numberOfPacketsFour" type="number" value="0" name="CPCUnsortedCashDetail[4].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
+                                        <input id="numberOfPacketsFour" type="number" value="0" name="CPCUnsortedCashDetail[4].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueFour" type="number" value="0" name="CPCUnsortedCashDetail[4].TotalValue" class="form-control input-sm" />
+                                        <input id="totalValueFour" type="number" value="0" name="CPCUnsortedCashDetail[4].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -155,10 +156,10 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[5].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 50).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="50">
-                                        <input id="numberOfPacketsFive" type="number" value="0" name="CPCUnsortedCashDetail[5].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
+                                        <input id="numberOfPacketsFive" type="number" value="0" name="CPCUnsortedCashDetail[5].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueFive" type="number" value="0" name="CPCUnsortedCashDetail[5].TotalValue" class="form-control input-sm" />
+                                        <input id="totalValueFive" type="number" value="0" name="CPCUnsortedCashDetail[5].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -167,10 +168,10 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[6].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 100).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="100">
-                                        <input id="numberOfPacketsSix" type="number" value="0" name="CPCUnsortedCashDetail[6].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
+                                        <input id="numberOfPacketsSix" type="number" value="0" name="CPCUnsortedCashDetail[6].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueSix" type="number" value="0" name="CPCUnsortedCashDetail[6].TotalValue" class="form-control input-sm" />
+                                        <input id="totalValueSix" type="number" value="0" name="CPCUnsortedCashDetail[6].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -179,10 +180,10 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[7].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 500).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="500">
-                                        <input id="numberOfPacketsSeven" type="number" value="0" name="CPCUnsortedCashDetail[7].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
+                                        <input id="numberOfPacketsSeven" type="number" value="0" name="CPCUnsortedCashDetail[7].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueSeven" type="number" value="0" name="CPCUnsortedCashDetail[7].TotalValue" class="form-control input-sm" />
+                                        <input id="totalValueSeven" type="number" value="0" name="CPCUnsortedCashDetail[7].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -191,10 +192,10 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[8].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 1000).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="1000">
-                                        <input id="numberOfPacketsEight" type="number" value="0" name="CPCUnsortedCashDetail[8].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
+                                        <input id="numberOfPacketsEight" type="number" value="0" name="CPCUnsortedCashDetail[8].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueEight" type="number" value="0" name="CPCUnsortedCashDetail[8].TotalValue" class="form-control input-sm" />
+                                        <input id="totalValueEight" type="number" value="0" name="CPCUnsortedCashDetail[8].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -203,10 +204,10 @@
                                         <input type="hidden" name="CPCUnsortedCashDetail[9].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 5000).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="5000">
-                                        <input id="numberOfPacketsNine" type="number" value="0" name="CPCUnsortedCashDetail[9].NumberOfBundles" class="form-control input-sm inp totalfinalNumber" />
+                                        <input id="numberOfPacketsNine" type="number" value="0" name="CPCUnsortedCashDetail[9].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueNine" type="number" value="0" name="CPCUnsortedCashDetail[9].TotalValue" class="form-control input-sm" />
+                                        <input id="totalValueNine" type="number" value="0" name="CPCUnsortedCashDetail[9].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -216,8 +217,8 @@
                                 </tr>
                                 <tr>
                                     <td> Total </td>
-                                    <td><input id="finalTotalNumber" type="number" value="" class="form-control input-sm" readonly="readonly" /> </td>
-                                    <td><input id="finalTotalValue" type="number" value="" class="form-control input-sm" readonly="readonly" /> </td>
+                                    <td><input id="finalTotalNumber" type="number" value="" class="form-control input-sm clearField" readonly="readonly" /> </td>
+                                    <td><input id="finalTotalValue" type="number" value="" class="form-control input-sm clearField" readonly="readonly" /> </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -249,28 +250,22 @@
 
         var orderId
         function getOrderId(Id) {
-            alert(Id);
-            debugger;
             $('#OrderId').val(Id);
             loadOrderData(Id);
             $('#addNewCompany-Modal').modal('toggle');
         }
         function loadOrderData(Id) {
-            debugger;
             var branchtoAppend = $('#ProjectBranchId');
             //branchtoAppend.html("");
             if (Id) {
                 $.get('/CPC/AnnexureI/GetAnnxureIBranchData?Id=' + Id, function (response) {
-                    debugger;
                     if (response) {
-                        console.log(response);
                         $('#OrderNumber').val(response.OrderNumber);
                         $('#OrderBookingId').val(response.OrderBookingId);
 
                         //Details
                         $.each(response.Details,
                             function (index, item) {
-                                debugger;
                                 var branch = new Option(item.BranchCode + " - " + item.BranchName , item.ProjectBranchId);
                                 branchtoAppend.append(branch);
                             });
@@ -284,13 +279,76 @@
         }
 
         $('.ProjectBranchId').change(function (e) {
-            if ($(this.ProjectBranchId.val())) {
-                var OrderBookingId = $("#OrderBookingId").val();
-                const ProjectBranchId = $('#ProjectBranchId option:selected').attr('value');
-                $.get('/CPC/AnnexureI/GetAnnxureIBookingData?Id=' + OrderBookingId + '$PriojId=' + ProjectBranchId, function (response) {
-
-                });
-            }
+            $(".clearField").val("0");
+            var finalTotalAmount = 0;
+            var finalTotalBundles = 0;
+            var OrderBookingId = $("#OrderBookingId").val();
+            const ProjectBranchId = $('#ProjectBranchId option:selected').attr('value');
+            $.get('/CPC/AnnexureI/GetAnnxureIBookingData?Id=' + OrderBookingId + '&PriojId=' + ProjectBranchId, function (response) {
+                if (response) {
+                    $.each(response.Details,
+                        function (index, item) {
+                            $('#CityName').val(item.CityName);
+                            $('#CityId').val(item.CityId);
+                        if (item.DenominationTitle == '1') {
+                            $("#numberOfPacketsZero").val(item.NoOfBundles);
+                            $("#totalValueZero").val(item.TotalAmount);
+                            finalTotalBundles += parseInt(item.NoOfBundles);
+                            finalTotalAmount += parseInt(item.TotalAmount);
+                        }
+                        else if (item.DenominationTitle == '2') {
+                            $("#numberOfPacketsOne").val(item.NoOfBundles);
+                            $("#totalValueOne").val(item.TotalAmount);
+                            finalTotalBundles += parseInt(item.NoOfBundles);
+                            finalTotalAmount += parseInt(item.TotalAmount);
+                        }
+                        else if (item.DenominationTitle == '5') {
+                            $("#numberOfPacketsTwo").val(item.NoOfBundles);
+                            $("#totalValueTwo").val(item.TotalAmount);
+                            finalTotalBundles += parseInt(item.NoOfBundles);
+                            finalTotalAmount += parseInt(item.TotalAmount);
+                        }
+                        else if (item.DenominationTitle == '10') {
+                            $("#numberOfPacketsThree").val(item.NoOfBundles);
+                            $("#totalValueThree").val(item.TotalAmount);
+                            finalTotalBundles += parseInt(item.NoOfBundles);
+                            finalTotalAmount += parseInt(item.TotalAmount);
+                        }
+                        else if (item.DenominationTitle == '50') {
+                            $("#numberOfPacketsFive").val(item.NoOfBundles);
+                            $("#totalValueFive").val(item.TotalAmount);
+                            finalTotalBundles += parseInt(item.NoOfBundles);
+                            finalTotalAmount += parseInt(item.TotalAmount);
+                        }
+                        else if (item.DenominationTitle == '100') {
+                            $("#numberOfPacketsSix").val(item.NoOfBundles);
+                            $("#totalValueSix").val(item.TotalAmount);
+                            finalTotalBundles += parseInt(item.NoOfBundles);
+                            finalTotalAmount += parseInt(item.TotalAmount);
+                        }
+                        else if (item.DenominationTitle == '500') {
+                            $("#numberOfPacketsSeven").val(item.NoOfBundles);
+                            $("#totalValueSeven").val(item.TotalAmount);
+                            finalTotalBundles += parseInt(item.NoOfBundles);
+                            finalTotalAmount += parseInt(item.TotalAmount);
+                        }
+                        else if (item.DenominationTitle == '1000') {
+                            $("#numberOfPacketsEight").val(item.NoOfBundles);
+                            $("#totalValueEight").val(item.TotalAmount);
+                            finalTotalBundles += parseInt(item.NoOfBundles);
+                            finalTotalAmount += parseInt(item.TotalAmount);
+                        }
+                        else if (item.DenominationTitle == '5000') {
+                            $("#numberOfPacketsNine").val(item.NoOfBundles);
+                            $("#totalValueNine").val(item.TotalAmount);
+                            finalTotalBundles += parseInt(item.NoOfBundles);
+                            finalTotalAmount += parseInt(item.TotalAmount);
+                        }
+                        $("#finalTotalNumber").val(finalTotalBundles);
+                        $("#finalTotalValue").val(finalTotalAmount);
+                    });
+                }
+            });
         });
 
 

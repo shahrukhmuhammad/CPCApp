@@ -98,6 +98,9 @@
     <Compile Include="Model\CPCCashProcessingHouse.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CPCCity.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\CPCDenomination.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>

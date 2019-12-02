@@ -48,7 +48,21 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.Vew_CPCAnnexureI.Where(x=> x.Id == Id).ToList();
+                    return context.Vew_CPCAnnexureI.Where(x => x.Id == Id).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public List<Vew_CPCAnnexureI> GetAllDetailsById(Guid Id, Guid PriojId)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.Vew_CPCAnnexureI.Where(x=> x.OrderBookingId == Id && x.ProjectBranchId == PriojId).ToList();
                 }
             }
             catch (Exception ex)
