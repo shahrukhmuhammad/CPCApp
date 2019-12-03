@@ -35,7 +35,6 @@ namespace CPC.Model
         public bool IsActive { get; set; }
         public Nullable<int> OrderNumber { get; set; }
         public Nullable<System.Guid> OrderBookingId { get; set; }
-        public string SealNo { get; set; }
     
         public virtual CPCCity CPCCity { get; set; }
         public virtual CPCOrderBooking CPCOrderBooking { get; set; }

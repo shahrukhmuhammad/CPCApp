@@ -127,6 +127,7 @@ namespace CPC
         Inprocess = 1,
         Completed = 2,
         Approved = 3,
+        proceeded = 4,
     }
 
     //public enum BankStatus

@@ -21,6 +21,7 @@ namespace CPC.Model
         public int TotalValue { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
+        public string SealNo { get; set; }
     
         public virtual CPCDenomination CPCDenomination { get; set; }
         public virtual CPCUnsortedCash CPCUnsortedCash { get; set; }

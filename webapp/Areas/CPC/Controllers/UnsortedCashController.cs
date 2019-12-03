@@ -18,10 +18,12 @@ namespace WebApp.Areas.CPC.Controllers
         private EmployeeEntity employeeRepo;
         private BranchEntity branchRepo;
         private Common commonRepo;
+        private AnnexureIEntity annexureIrepo;
 
         public UnsortedCashController()
         {
             unsortedCashRepo = new UnsortedCashEntity();
+            annexureIrepo = new AnnexureIEntity();
             employeeRepo = new EmployeeEntity();
             branchRepo = new BranchEntity();
             commonRepo = new Common();
@@ -90,6 +92,7 @@ namespace WebApp.Areas.CPC.Controllers
                         unsortedCashRepo.Create(lsToSave);
                         #endregion
 
+                        annexureIrepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id);
                         model.Id = res.Value;
                     }
 

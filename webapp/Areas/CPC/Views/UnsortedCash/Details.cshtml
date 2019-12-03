@@ -43,6 +43,7 @@
                                     <label>@Model.CPCCity.CityName</label>
                                 </td>
                                 <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td><b>Client/Branch:</b></td>
@@ -50,12 +51,14 @@
                                     <label>@ViewData["BranchName"]</label>
                                 </td>
                                 <td></td>
+                                <td></td>
                             </tr>
                             <tr><td></td><td></td><td></td></tr>
                             <tr>
                                 <td><b>Denomination</b></td>
                                 <td><b>Volume in Bundles</b></td>
                                 <td><b>Amount</b></td>
+                                <td><b>Seal No</b></td>
                             </tr>
                             <tr>
                                 <td>
@@ -78,6 +81,9 @@
                                         }
                                         else { finalTotalValue += 0; }
                                     }
+                                </td>
+                                <td>
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().SealNo : "0")
                                 </td>
                             </tr>
                             <tr>
@@ -102,6 +108,9 @@
                                         else { finalTotalValue += 0; }
                                     }
                                 </td>
+                                <td>
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().SealNo : "0")
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -124,6 +133,9 @@
                                         }
                                         else { finalTotalValue += 0; }
                                     }
+                                </td>
+                                <td>
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().SealNo : "0")
                                 </td>
                             </tr>
                             <tr>
@@ -148,6 +160,9 @@
                                         else { finalTotalValue += 0; }
                                     }
                                 </td>
+                                <td>
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().SealNo : "0")
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -170,6 +185,9 @@
                                         }
                                         else { finalTotalValue += 0; }
                                     }
+                                </td>
+                                <td>
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().SealNo : "0")
                                 </td>
                             </tr>
                             <tr>
@@ -194,6 +212,9 @@
                                         else { finalTotalValue += 0; }
                                     }
                                 </td>
+                                <td>
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().SealNo : "0")
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -216,6 +237,9 @@
                                         }
                                         else { finalTotalValue += 0; }
                                     }
+                                </td>
+                                <td>
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().SealNo : "0")
                                 </td>
                             </tr>
                             <tr>
@@ -240,6 +264,9 @@
                                         else { finalTotalValue += 0; }
                                     }
                                 </td>
+                                <td>
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().SealNo : "0")
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -263,6 +290,9 @@
                                         else { finalTotalValue += 0; }
                                     }
                                 </td>
+                                <td>
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().SealNo : "0")
+                                </td>
                             </tr>
                             <tr>
                                 <td>Rs.5000/-</td>
@@ -284,6 +314,9 @@
                                         else { finalTotalValue += 0; }
                                     }
                                 </td>
+                                <td>
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().SealNo : "0")
+                                </td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -294,6 +327,7 @@
                                 <td><b>Total</b></td>
                                 <td>@finalNumberOfPackets</td>
                                 <td>@finalTotalValue</td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>
