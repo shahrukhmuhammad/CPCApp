@@ -53,5 +53,6 @@ namespace CPC.Model
         public string CityName { get; set; }
         public Nullable<System.Guid> CityId { get; set; }
         public byte Status { get; set; }
+        public Nullable<byte> DetailStatus { get; set; }
     }
 }

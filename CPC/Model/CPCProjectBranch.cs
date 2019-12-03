@@ -17,12 +17,12 @@ namespace CPC.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CPCProjectBranch()
         {
-            this.CPCAnnexureIDetails = new HashSet<CPCAnnexureIDetail>();
             this.CPCAnnexureIIs = new HashSet<CPCAnnexureII>();
             this.CPCAnnexureIIIs = new HashSet<CPCAnnexureIII>();
             this.CPCOrderBookingDetails = new HashSet<CPCOrderBookingDetail>();
             this.CPCSortedCashes = new HashSet<CPCSortedCash>();
             this.CPCUnsortedCashes = new HashSet<CPCUnsortedCash>();
+            this.CPCAnnexureIDetails = new HashSet<CPCAnnexureIDetail>();
             this.CPCVaultCustodians = new HashSet<CPCVaultCustodian>();
         }
     
@@ -38,8 +38,6 @@ namespace CPC.Model
         public Nullable<System.Guid> CPHId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCAnnexureII> CPCAnnexureIIs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCAnnexureIII> CPCAnnexureIIIs { get; set; }
@@ -51,6 +49,8 @@ namespace CPC.Model
         public virtual ICollection<CPCSortedCash> CPCSortedCashes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCVaultCustodian> CPCVaultCustodians { get; set; }
     }

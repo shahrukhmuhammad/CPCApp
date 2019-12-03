@@ -7,7 +7,6 @@
       <Diagram DiagramId="42eae355de1748a3ac5ef07d44027e91" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="SOSTechCPCModel.AppUser" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureI" Width="1.5" PointX="6" PointY="1" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIDetail" Width="1.5" PointX="8.25" PointY="18.5" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureII" Width="1.5" PointX="5.25" PointY="38" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIIDetail" Width="1.5" PointX="7.5" PointY="37.625" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIII" Width="1.5" PointX="5.25" PointY="26.5" />
@@ -28,13 +27,8 @@
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCSortedCashDetail" Width="1.5" PointX="7.5" PointY="44.5" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCUnsortedCash" Width="1.5" PointX="8.25" PointY="13" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCUnsortedCashDetail" Width="1.5" PointX="10.5" PointY="14" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCVaultCustodian" Width="1.5" PointX="15.625" PointY="12.375" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" Width="1.5" PointX="12.75" PointY="0.75" />
         <EntityTypeShape EntityType="SOSTechCPCModel.Vew_Orderbookings" Width="1.5" PointX="12.75" PointY="10.75" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__2022C2A6" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Order__090A5324" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Denom__220B0B18" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Proje__2116E6DF" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__0C1BC9F9" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Proje__0B27A5C0" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Denom__1F2E9E6D" />
@@ -47,21 +41,29 @@
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCProjec__CPHId__25518C17" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCProjec__CityI__40C49C62" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__CityI__51EF2864" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultCustodian__CityI__51EF2864" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Denom__6BAEFA67" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Denom__6C6E1476" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCOrderB__Order__79C80F94" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCOrderB__Proje__7ABC33CD" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Order__2F9A1060" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultCustodian__Order__2F9A1060" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Proje__69C6B1F5" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Proje__29221CFB" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultCustodian__Proje__29221CFB" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Sorte__6ABAD62E" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Unsor__66B53B20" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCVaultCustodianDetail" Width="1.5" PointX="17.875" PointY="11.75" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCAnnexureIDetail" Width="1.5" PointX="13.5" PointY="6" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__2022C2A6" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Denom__220B0B18" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Proje__2116E6DF" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" Width="1.5" PointX="16.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCVaultCustodian" Width="1.5" PointX="13.25" PointY="17.5" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCVaultCustodianDetail" Width="1.5" PointX="15.5" PointY="14.25" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultCustodian__CityI__51EF2864" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Denom__1758727B" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Denom__6CA31EA0" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultCustodian__Order__2F9A1060" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultCustodian__Proje__29221CFB" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Vault__1940BAED" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Vault__6D9742D9" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

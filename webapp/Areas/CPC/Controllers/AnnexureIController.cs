@@ -310,7 +310,7 @@ namespace WebApp.Areas.CPC.Controllers
         {
             try
             {
-                var List = annexureIRepo.GetAllDetailsById(id, PriojId);
+                var List = annexureIRepo.GetAllDetailsById(id, PriojId).Where(x => x.DetailStatus == (int)AnnexureStatus.Inprocess);
                 return Json(new
                 {
                     List.FirstOrDefault().OrderNumber,
@@ -347,7 +347,7 @@ namespace WebApp.Areas.CPC.Controllers
         {
             try
             {
-                var List = annexureIRepo.GetAllDetailsById(id).Where(x => x.Status == (int)AnnexureStatus.Inprocess);
+                var List = annexureIRepo.GetAllDetailsById(id);
                 return Json(new
                 {
                     List.FirstOrDefault().OrderNumber,

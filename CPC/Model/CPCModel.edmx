@@ -82,6 +82,7 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CashProcessingCellId" Type="uniqueidentifier" />
+          <Property Name="DetailStatus" Type="tinyint" />
         </EntityType>
         <EntityType Name="CPCAnnexureII">
           <Key>
@@ -384,6 +385,7 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SerialNumber" Type="bigint" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="CityId" Type="uniqueidentifier" />
           <Property Name="ProjectBranchId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TotalNumberBundles" Type="int" />
           <Property Name="TotalBalance" Type="bigint" Nullable="false" />
@@ -393,7 +395,6 @@
           <Property Name="UpdatedBy" Type="uniqueidentifier" />
           <Property Name="Status" Type="tinyint" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CityId" Type="uniqueidentifier" />
           <Property Name="OrderNumber" Type="int" />
           <Property Name="OrderBookingId" Type="uniqueidentifier" />
         </EntityType>
@@ -408,6 +409,7 @@
           <Property Name="TotalValue" Type="int" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SealNo" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="CPCVaultCustodian">
           <Key>
@@ -460,6 +462,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
             <PropertyRef Name="IsActive" />
             <PropertyRef Name="ProjectId" />
             <PropertyRef Name="ProjectTitle" />
+            <PropertyRef Name="Status" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SrNo" Type="int" />
@@ -499,6 +502,8 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a p
           <Property Name="ProjectTitle" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CityName" Type="nvarchar" MaxLength="50" />
           <Property Name="CityId" Type="uniqueidentifier" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="DetailStatus" Type="tinyint" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -596,7 +601,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CPCAnnexu__Denom__1F2E9E6D">
+        <Association Name="FK__CPCAnnexu__Denom__1CBC4616">
           <End Role="CPCDenominations" Type="Self.CPCDenominations" Multiplicity="1" />
           <End Role="CPCAnnexureIIDetails" Type="Self.CPCAnnexureIIDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -656,7 +661,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CPCCashIn__CashI__60FC61CA">
+        <Association Name="FK__CPCCashIn__CashI__1F98B2C1">
           <End Role="CPCCashInTransit" Type="Self.CPCCashInTransit" Multiplicity="1" />
           <End Role="CPCCashInTransitChild" Type="Self.CPCCashInTransitChild" Multiplicity="*" />
           <ReferentialConstraint>
@@ -668,7 +673,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CPCCashIn__Denom__6991A7CB">
+        <Association Name="FK__CPCCashIn__Denom__2180FB33">
           <End Role="CPCDenominations" Type="Self.CPCDenominations" Multiplicity="1" />
           <End Role="CPCCashInTransitDenomination" Type="Self.CPCCashInTransitDenomination" Multiplicity="*" />
           <ReferentialConstraint>
@@ -680,7 +685,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CPCCashPr__Proje__731B1205">
+        <Association Name="FK__CPCCashPr__Proje__22751F6C">
           <End Role="CPCProject" Type="Self.CPCProject" Multiplicity="0..1" />
           <End Role="CPCCashProcessingHouse" Type="Self.CPCCashProcessingHouse" Multiplicity="*" />
           <ReferentialConstraint>
@@ -704,7 +709,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CPCOrderB__Proje__7ABC33CD">
+        <Association Name="FK__CPCOrderB__Proje__245D67DE">
           <End Role="CPCProjectBranch" Type="Self.CPCProjectBranch" Multiplicity="0..1" />
           <End Role="CPCOrderBookingDetails" Type="Self.CPCOrderBookingDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -788,7 +793,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CPCUnsort__Denom__6C6E1476">
+        <Association Name="FK__CPCUnsort__Denom__2A164134">
           <End Role="CPCDenominations" Type="Self.CPCDenominations" Multiplicity="1" />
           <End Role="CPCUnsortedCashDetails" Type="Self.CPCUnsortedCashDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -848,7 +853,31 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__CPCVaultC__Denom__6CA31EA0">
+          <End Role="CPCDenominations" Type="Self.CPCDenominations" Multiplicity="1" />
+          <End Role="CPCVaultCustodianDetails" Type="Self.CPCVaultCustodianDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCDenominations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCVaultCustodianDetails">
+              <PropertyRef Name="DenominationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__CPCVaultC__Vault__1940BAED">
+          <End Role="CPCVaultCustodian" Type="Self.CPCVaultCustodian" Multiplicity="1" />
+          <End Role="CPCVaultCustodianDetails" Type="Self.CPCVaultCustodianDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCVaultCustodian">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCVaultCustodianDetails">
+              <PropertyRef Name="VaultCustodianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CPCVaultC__Vault__6D9742D9">
           <End Role="CPCVaultCustodian" Type="Self.CPCVaultCustodian" Multiplicity="1" />
           <End Role="CPCVaultCustodianDetails" Type="Self.CPCVaultCustodianDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -961,7 +990,9 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
     [Vew_CPCAnnexureI].[ProjectId] AS [ProjectId], 
     [Vew_CPCAnnexureI].[ProjectTitle] AS [ProjectTitle], 
     [Vew_CPCAnnexureI].[CityName] AS [CityName], 
-    [Vew_CPCAnnexureI].[CityId] AS [CityId]
+    [Vew_CPCAnnexureI].[CityId] AS [CityId], 
+    [Vew_CPCAnnexureI].[Status] AS [Status], 
+    [Vew_CPCAnnexureI].[DetailStatus] AS [DetailStatus]
     FROM [dbo].[Vew_CPCAnnexureI] AS [Vew_CPCAnnexureI]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Vew_Orderbookings" EntityType="Self.Vew_Orderbookings" store:Type="Views" store:Schema="dbo">
@@ -1011,7 +1042,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             <End Role="CPCProjectBranch" EntitySet="CPCProjectBranch" />
             <End Role="CPCAnnexureIII" EntitySet="CPCAnnexureIII" />
           </AssociationSet>
-          <AssociationSet Name="FK__CPCAnnexu__Denom__1F2E9E6D" Association="Self.FK__CPCAnnexu__Denom__1F2E9E6D">
+          <AssociationSet Name="FK__CPCAnnexu__Denom__1CBC4616" Association="Self.FK__CPCAnnexu__Denom__1CBC4616">
             <End Role="CPCDenominations" EntitySet="CPCDenominations" />
             <End Role="CPCAnnexureIIDetails" EntitySet="CPCAnnexureIIDetails" />
           </AssociationSet>
@@ -1031,15 +1062,15 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             <End Role="CPCProjectBranch" EntitySet="CPCProjectBranch" />
             <End Role="CPCAnnexureIDetails" EntitySet="CPCAnnexureIDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__CPCCashIn__CashI__60FC61CA" Association="Self.FK__CPCCashIn__CashI__60FC61CA">
+          <AssociationSet Name="FK__CPCCashIn__CashI__1F98B2C1" Association="Self.FK__CPCCashIn__CashI__1F98B2C1">
             <End Role="CPCCashInTransit" EntitySet="CPCCashInTransit" />
             <End Role="CPCCashInTransitChild" EntitySet="CPCCashInTransitChild" />
           </AssociationSet>
-          <AssociationSet Name="FK__CPCCashIn__Denom__6991A7CB" Association="Self.FK__CPCCashIn__Denom__6991A7CB">
+          <AssociationSet Name="FK__CPCCashIn__Denom__2180FB33" Association="Self.FK__CPCCashIn__Denom__2180FB33">
             <End Role="CPCDenominations" EntitySet="CPCDenominations" />
             <End Role="CPCCashInTransitDenomination" EntitySet="CPCCashInTransitDenomination" />
           </AssociationSet>
-          <AssociationSet Name="FK__CPCCashPr__Proje__731B1205" Association="Self.FK__CPCCashPr__Proje__731B1205">
+          <AssociationSet Name="FK__CPCCashPr__Proje__22751F6C" Association="Self.FK__CPCCashPr__Proje__22751F6C">
             <End Role="CPCProject" EntitySet="CPCProject" />
             <End Role="CPCCashProcessingHouse" EntitySet="CPCCashProcessingHouse" />
           </AssociationSet>
@@ -1047,7 +1078,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             <End Role="CPCOrderBookings" EntitySet="CPCOrderBookings" />
             <End Role="CPCOrderBookingDetails" EntitySet="CPCOrderBookingDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__CPCOrderB__Proje__7ABC33CD" Association="Self.FK__CPCOrderB__Proje__7ABC33CD">
+          <AssociationSet Name="FK__CPCOrderB__Proje__245D67DE" Association="Self.FK__CPCOrderB__Proje__245D67DE">
             <End Role="CPCProjectBranch" EntitySet="CPCProjectBranch" />
             <End Role="CPCOrderBookingDetails" EntitySet="CPCOrderBookingDetails" />
           </AssociationSet>
@@ -1075,7 +1106,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             <End Role="CPCCity" EntitySet="CPCCity" />
             <End Role="CPCUnsortedCash" EntitySet="CPCUnsortedCash" />
           </AssociationSet>
-          <AssociationSet Name="FK__CPCUnsort__Denom__6C6E1476" Association="Self.FK__CPCUnsort__Denom__6C6E1476">
+          <AssociationSet Name="FK__CPCUnsort__Denom__2A164134" Association="Self.FK__CPCUnsort__Denom__2A164134">
             <End Role="CPCDenominations" EntitySet="CPCDenominations" />
             <End Role="CPCUnsortedCashDetails" EntitySet="CPCUnsortedCashDetails" />
           </AssociationSet>
@@ -1095,7 +1126,15 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             <End Role="CPCDenominations" EntitySet="CPCDenominations" />
             <End Role="CPCVaultCustodianDetails" EntitySet="CPCVaultCustodianDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK__CPCVaultC__Denom__6CA31EA0" Association="Self.FK__CPCVaultC__Denom__6CA31EA0">
+            <End Role="CPCDenominations" EntitySet="CPCDenominations" />
+            <End Role="CPCVaultCustodianDetails" EntitySet="CPCVaultCustodianDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK__CPCVaultC__Vault__1940BAED" Association="Self.FK__CPCVaultC__Vault__1940BAED">
+            <End Role="CPCVaultCustodian" EntitySet="CPCVaultCustodian" />
+            <End Role="CPCVaultCustodianDetails" EntitySet="CPCVaultCustodianDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CPCVaultC__Vault__6D9742D9" Association="Self.FK__CPCVaultC__Vault__6D9742D9">
             <End Role="CPCVaultCustodian" EntitySet="CPCVaultCustodian" />
             <End Role="CPCVaultCustodianDetails" EntitySet="CPCVaultCustodianDetails" />
           </AssociationSet>
@@ -1119,7 +1158,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
         <EntityContainer Name="SOSTechCPCEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AppUsers" EntityType="SOSTechCPCModel.AppUser" />
           <EntitySet Name="CPCAnnexureIs" EntityType="SOSTechCPCModel.CPCAnnexureI" />
-          <EntitySet Name="CPCAnnexureIDetails" EntityType="SOSTechCPCModel.CPCAnnexureIDetail" />
           <EntitySet Name="CPCAnnexureIIs" EntityType="SOSTechCPCModel.CPCAnnexureII" />
           <EntitySet Name="CPCAnnexureIIDetails" EntityType="SOSTechCPCModel.CPCAnnexureIIDetail" />
           <EntitySet Name="CPCAnnexureIIIs" EntityType="SOSTechCPCModel.CPCAnnexureIII" />
@@ -1140,24 +1178,10 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <EntitySet Name="CPCSortedCashDetails" EntityType="SOSTechCPCModel.CPCSortedCashDetail" />
           <EntitySet Name="CPCUnsortedCashes" EntityType="SOSTechCPCModel.CPCUnsortedCash" />
           <EntitySet Name="CPCUnsortedCashDetails" EntityType="SOSTechCPCModel.CPCUnsortedCashDetail" />
-          <EntitySet Name="CPCVaultCustodians" EntityType="SOSTechCPCModel.CPCVaultCustodian" />
-          <EntitySet Name="Vew_CPCAnnexureI" EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" />
           <EntitySet Name="Vew_Orderbookings" EntityType="SOSTechCPCModel.Vew_Orderbookings" />
-          <AssociationSet Name="FK__CPCAnnexu__Annex__2022C2A6" Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__2022C2A6">
-            <End Role="CPCAnnexureI" EntitySet="CPCAnnexureIs" />
-            <End Role="CPCAnnexureIDetail" EntitySet="CPCAnnexureIDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK__CPCAnnexu__Order__090A5324" Association="SOSTechCPCModel.FK__CPCAnnexu__Order__090A5324">
             <End Role="CPCOrderBooking" EntitySet="CPCOrderBookings" />
             <End Role="CPCAnnexureI" EntitySet="CPCAnnexureIs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CPCAnnexu__Denom__220B0B18" Association="SOSTechCPCModel.FK__CPCAnnexu__Denom__220B0B18">
-            <End Role="CPCDenomination" EntitySet="CPCDenominations" />
-            <End Role="CPCAnnexureIDetail" EntitySet="CPCAnnexureIDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CPCAnnexu__Proje__2116E6DF" Association="SOSTechCPCModel.FK__CPCAnnexu__Proje__2116E6DF">
-            <End Role="CPCProjectBranch" EntitySet="CPCProjectBranches" />
-            <End Role="CPCAnnexureIDetail" EntitySet="CPCAnnexureIDetails" />
           </AssociationSet>
           <AssociationSet Name="FK__CPCAnnexu__Annex__0C1BC9F9" Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__0C1BC9F9">
             <End Role="CPCAnnexureII" EntitySet="CPCAnnexureIIs" />
@@ -1207,10 +1231,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             <End Role="CPCCity" EntitySet="CPCCities" />
             <End Role="CPCUnsortedCash" EntitySet="CPCUnsortedCashes" />
           </AssociationSet>
-          <AssociationSet Name="FK__CPCVaultCustodian__CityI__51EF2864" Association="SOSTechCPCModel.FK__CPCVaultCustodian__CityI__51EF2864">
-            <End Role="CPCCity" EntitySet="CPCCities" />
-            <End Role="CPCVaultCustodian" EntitySet="CPCVaultCustodians" />
-          </AssociationSet>
           <AssociationSet Name="FK__CPCSorted__Denom__6BAEFA67" Association="SOSTechCPCModel.FK__CPCSorted__Denom__6BAEFA67">
             <End Role="CPCDenomination" EntitySet="CPCDenominations" />
             <End Role="CPCSortedCashDetail" EntitySet="CPCSortedCashDetails" />
@@ -1231,10 +1251,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             <End Role="CPCOrderBooking" EntitySet="CPCOrderBookings" />
             <End Role="CPCUnsortedCash" EntitySet="CPCUnsortedCashes" />
           </AssociationSet>
-          <AssociationSet Name="FK__CPCVaultCustodian__Order__2F9A1060" Association="SOSTechCPCModel.FK__CPCVaultCustodian__Order__2F9A1060">
-            <End Role="CPCOrderBooking" EntitySet="CPCOrderBookings" />
-            <End Role="CPCVaultCustodian" EntitySet="CPCVaultCustodians" />
-          </AssociationSet>
           <AssociationSet Name="FK__CPCSorted__Proje__69C6B1F5" Association="SOSTechCPCModel.FK__CPCSorted__Proje__69C6B1F5">
             <End Role="CPCProjectBranch" EntitySet="CPCProjectBranches" />
             <End Role="CPCSortedCash" EntitySet="CPCSortedCashes" />
@@ -1242,10 +1258,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <AssociationSet Name="FK__CPCUnsort__Proje__29221CFB" Association="SOSTechCPCModel.FK__CPCUnsort__Proje__29221CFB">
             <End Role="CPCProjectBranch" EntitySet="CPCProjectBranches" />
             <End Role="CPCUnsortedCash" EntitySet="CPCUnsortedCashes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CPCVaultCustodian__Proje__29221CFB" Association="SOSTechCPCModel.FK__CPCVaultCustodian__Proje__29221CFB">
-            <End Role="CPCProjectBranch" EntitySet="CPCProjectBranches" />
-            <End Role="CPCVaultCustodian" EntitySet="CPCVaultCustodians" />
           </AssociationSet>
           <AssociationSet Name="FK__CPCSorted__Sorte__6ABAD62E" Association="SOSTechCPCModel.FK__CPCSorted__Sorte__6ABAD62E">
             <End Role="CPCSortedCash" EntitySet="CPCSortedCashes" />
@@ -1255,16 +1267,51 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             <End Role="CPCUnsortedCash" EntitySet="CPCUnsortedCashes" />
             <End Role="CPCUnsortedCashDetail" EntitySet="CPCUnsortedCashDetails" />
           </AssociationSet>
+          <EntitySet Name="CPCAnnexureIDetails" EntityType="SOSTechCPCModel.CPCAnnexureIDetail" />
+          <AssociationSet Name="FK__CPCAnnexu__Annex__2022C2A6" Association="SOSTechCPCModel.FK__CPCAnnexu__Annex__2022C2A6">
+            <End Role="CPCAnnexureI" EntitySet="CPCAnnexureIs" />
+            <End Role="CPCAnnexureIDetail" EntitySet="CPCAnnexureIDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CPCAnnexu__Denom__220B0B18" Association="SOSTechCPCModel.FK__CPCAnnexu__Denom__220B0B18">
+            <End Role="CPCDenomination" EntitySet="CPCDenominations" />
+            <End Role="CPCAnnexureIDetail" EntitySet="CPCAnnexureIDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CPCAnnexu__Proje__2116E6DF" Association="SOSTechCPCModel.FK__CPCAnnexu__Proje__2116E6DF">
+            <End Role="CPCProjectBranch" EntitySet="CPCProjectBranches" />
+            <End Role="CPCAnnexureIDetail" EntitySet="CPCAnnexureIDetails" />
+          </AssociationSet>
+          <EntitySet Name="Vew_CPCAnnexureI" EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" />
+          <EntitySet Name="CPCVaultCustodians" EntityType="SOSTechCPCModel.CPCVaultCustodian" />
           <EntitySet Name="CPCVaultCustodianDetails" EntityType="SOSTechCPCModel.CPCVaultCustodianDetail" />
+          <AssociationSet Name="FK__CPCVaultCustodian__CityI__51EF2864" Association="SOSTechCPCModel.FK__CPCVaultCustodian__CityI__51EF2864">
+            <End Role="CPCCity" EntitySet="CPCCities" />
+            <End Role="CPCVaultCustodian" EntitySet="CPCVaultCustodians" />
+          </AssociationSet>
           <AssociationSet Name="FK__CPCVaultC__Denom__1758727B" Association="SOSTechCPCModel.FK__CPCVaultC__Denom__1758727B">
             <End Role="CPCDenomination" EntitySet="CPCDenominations" />
             <End Role="CPCVaultCustodianDetail" EntitySet="CPCVaultCustodianDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CPCVaultC__Denom__6CA31EA0" Association="SOSTechCPCModel.FK__CPCVaultC__Denom__6CA31EA0">
+            <End Role="CPCDenomination" EntitySet="CPCDenominations" />
+            <End Role="CPCVaultCustodianDetail" EntitySet="CPCVaultCustodianDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CPCVaultCustodian__Order__2F9A1060" Association="SOSTechCPCModel.FK__CPCVaultCustodian__Order__2F9A1060">
+            <End Role="CPCOrderBooking" EntitySet="CPCOrderBookings" />
+            <End Role="CPCVaultCustodian" EntitySet="CPCVaultCustodians" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CPCVaultCustodian__Proje__29221CFB" Association="SOSTechCPCModel.FK__CPCVaultCustodian__Proje__29221CFB">
+            <End Role="CPCProjectBranch" EntitySet="CPCProjectBranches" />
+            <End Role="CPCVaultCustodian" EntitySet="CPCVaultCustodians" />
           </AssociationSet>
           <AssociationSet Name="FK__CPCVaultC__Vault__1940BAED" Association="SOSTechCPCModel.FK__CPCVaultC__Vault__1940BAED">
             <End Role="CPCVaultCustodian" EntitySet="CPCVaultCustodians" />
             <End Role="CPCVaultCustodianDetail" EntitySet="CPCVaultCustodianDetails" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="FK__CPCVaultC__Vault__6D9742D9" Association="SOSTechCPCModel.FK__CPCVaultC__Vault__6D9742D9">
+            <End Role="CPCVaultCustodian" EntitySet="CPCVaultCustodians" />
+            <End Role="CPCVaultCustodianDetail" EntitySet="CPCVaultCustodianDetails" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="AppUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -1326,27 +1373,8 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="OrderNumber" Type="Int32" />
           <Property Name="OrderBookingId" Type="Guid" />
-          <NavigationProperty Name="CPCAnnexureIDetails" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Annex__2022C2A6" FromRole="CPCAnnexureI" ToRole="CPCAnnexureIDetail" />
           <NavigationProperty Name="CPCOrderBooking" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Order__090A5324" FromRole="CPCAnnexureI" ToRole="CPCOrderBooking" />
-        </EntityType>
-        <EntityType Name="CPCAnnexureIDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="AnnexureIId" Type="Guid" Nullable="false" />
-          <Property Name="ProjectBranchId" Type="Guid" />
-          <Property Name="DenominationId" Type="Guid" />
-          <Property Name="NoOfBundles" Type="Int32" />
-          <Property Name="TotalAmount" Type="Int32" />
-          <Property Name="SealNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ShipmentReciptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="CashProcessingCellId" Type="Guid" />
-          <NavigationProperty Name="CPCAnnexureI" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Annex__2022C2A6" FromRole="CPCAnnexureIDetail" ToRole="CPCAnnexureI" />
-          <NavigationProperty Name="CPCDenomination" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Denom__220B0B18" FromRole="CPCAnnexureIDetail" ToRole="CPCDenomination" />
-          <NavigationProperty Name="CPCProjectBranch" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Proje__2116E6DF" FromRole="CPCAnnexureIDetail" ToRole="CPCProjectBranch" />
+          <NavigationProperty Name="CPCAnnexureIDetails" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Annex__2022C2A6" FromRole="CPCAnnexureI" ToRole="CPCAnnexureIDetail" />
         </EntityType>
         <EntityType Name="CPCAnnexureII">
           <Key>
@@ -1548,12 +1576,13 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="DenominationTitle" Type="Int32" />
-          <NavigationProperty Name="CPCAnnexureIDetails" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Denom__220B0B18" FromRole="CPCDenomination" ToRole="CPCAnnexureIDetail" />
           <NavigationProperty Name="CPCAnnexureIIDetails" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Denom__1F2E9E6D" FromRole="CPCDenomination" ToRole="CPCAnnexureIIDetail" />
           <NavigationProperty Name="CPCCashInTransitDenominations" Relationship="SOSTechCPCModel.FK__CPCCashIn__Denom__6991A7CB" FromRole="CPCDenomination" ToRole="CPCCashInTransitDenomination" />
           <NavigationProperty Name="CPCSortedCashDetails" Relationship="SOSTechCPCModel.FK__CPCSorted__Denom__6BAEFA67" FromRole="CPCDenomination" ToRole="CPCSortedCashDetail" />
           <NavigationProperty Name="CPCUnsortedCashDetails" Relationship="SOSTechCPCModel.FK__CPCUnsort__Denom__6C6E1476" FromRole="CPCDenomination" ToRole="CPCUnsortedCashDetail" />
+          <NavigationProperty Name="CPCAnnexureIDetails" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Denom__220B0B18" FromRole="CPCDenomination" ToRole="CPCAnnexureIDetail" />
           <NavigationProperty Name="CPCVaultCustodianDetails" Relationship="SOSTechCPCModel.FK__CPCVaultC__Denom__1758727B" FromRole="CPCDenomination" ToRole="CPCVaultCustodianDetail" />
+          <NavigationProperty Name="CPCVaultCustodianDetails1" Relationship="SOSTechCPCModel.FK__CPCVaultC__Denom__6CA31EA0" FromRole="CPCDenomination" ToRole="CPCVaultCustodianDetail" />
         </EntityType>
         <EntityType Name="CPCDepartment">
           <Key>
@@ -1637,7 +1666,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ContactPerson" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="CPHId" Type="Guid" />
-          <NavigationProperty Name="CPCAnnexureIDetails" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Proje__2116E6DF" FromRole="CPCProjectBranch" ToRole="CPCAnnexureIDetail" />
           <NavigationProperty Name="CPCAnnexureIIs" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Proje__0B27A5C0" FromRole="CPCProjectBranch" ToRole="CPCAnnexureII" />
           <NavigationProperty Name="CPCAnnexureIIIs" Relationship="SOSTechCPCModel.FK__CPCAnnexu__CashC__02925FBF" FromRole="CPCProjectBranch" ToRole="CPCAnnexureIII" />
           <NavigationProperty Name="CPCCashProcessingHouse" Relationship="SOSTechCPCModel.FK__CPCProjec__CPHId__25518C17" FromRole="CPCProjectBranch" ToRole="CPCCashProcessingHouse" />
@@ -1645,6 +1673,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <NavigationProperty Name="CPCOrderBookingDetails" Relationship="SOSTechCPCModel.FK__CPCOrderB__Proje__7ABC33CD" FromRole="CPCProjectBranch" ToRole="CPCOrderBookingDetail" />
           <NavigationProperty Name="CPCSortedCashes" Relationship="SOSTechCPCModel.FK__CPCSorted__Proje__69C6B1F5" FromRole="CPCProjectBranch" ToRole="CPCSortedCash" />
           <NavigationProperty Name="CPCUnsortedCashes" Relationship="SOSTechCPCModel.FK__CPCUnsort__Proje__29221CFB" FromRole="CPCProjectBranch" ToRole="CPCUnsortedCash" />
+          <NavigationProperty Name="CPCAnnexureIDetails" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Proje__2116E6DF" FromRole="CPCProjectBranch" ToRole="CPCAnnexureIDetail" />
           <NavigationProperty Name="CPCVaultCustodians" Relationship="SOSTechCPCModel.FK__CPCVaultCustodian__Proje__29221CFB" FromRole="CPCProjectBranch" ToRole="CPCVaultCustodian" />
         </EntityType>
         <EntityType Name="CPCSortedCash">
@@ -1722,87 +1751,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
           <NavigationProperty Name="CPCDenomination" Relationship="SOSTechCPCModel.FK__CPCUnsort__Denom__6C6E1476" FromRole="CPCUnsortedCashDetail" ToRole="CPCDenomination" />
           <NavigationProperty Name="CPCUnsortedCash" Relationship="SOSTechCPCModel.FK__CPCUnsort__Unsor__66B53B20" FromRole="CPCUnsortedCashDetail" ToRole="CPCUnsortedCash" />
-        </EntityType>
-        <EntityType Name="CPCVaultCustodian">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="SerialNumber" Type="Int64" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ProjectBranchId" Type="Guid" Nullable="false" />
-          <Property Name="TotalNumberBundles" Type="Int32" />
-          <Property Name="TotalBalance" Type="Int64" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Guid" />
-          <Property Name="Status" Type="Byte" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CityId" Type="Guid" />
-          <Property Name="OrderNumber" Type="Int32" />
-          <Property Name="OrderBookingId" Type="Guid" />
-          <Property Name="SupervisorId" Type="Guid" />
-          <NavigationProperty Name="CPCCity" Relationship="SOSTechCPCModel.FK__CPCVaultCustodian__CityI__51EF2864" FromRole="CPCVaultCustodian" ToRole="CPCCity" />
-          <NavigationProperty Name="CPCOrderBooking" Relationship="SOSTechCPCModel.FK__CPCVaultCustodian__Order__2F9A1060" FromRole="CPCVaultCustodian" ToRole="CPCOrderBooking" />
-          <NavigationProperty Name="CPCProjectBranch" Relationship="SOSTechCPCModel.FK__CPCVaultCustodian__Proje__29221CFB" FromRole="CPCVaultCustodian" ToRole="CPCProjectBranch" />
-          <NavigationProperty Name="CPCVaultCustodianDetails" Relationship="SOSTechCPCModel.FK__CPCVaultC__Vault__1940BAED" FromRole="CPCVaultCustodian" ToRole="CPCVaultCustodianDetail" />
-        </EntityType>
-        <EntityType Name="Vew_CPCAnnexureI">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="DateOfCollection" />
-            <PropertyRef Name="CreatedOn" />
-            <PropertyRef Name="CreatedBy" />
-            <PropertyRef Name="CPCAnnexureIDetailsId" />
-            <PropertyRef Name="CashHandedOverCPCStaffAName" />
-            <PropertyRef Name="CashHandedOverCPCStaffBName" />
-            <PropertyRef Name="CashHandedOverCITStaffAName" />
-            <PropertyRef Name="CashHandedOverCITStaffBName" />
-            <PropertyRef Name="SignatureCPCHandingOverCashAName" />
-            <PropertyRef Name="SignatureCPCHandingOverCashBName" />
-            <PropertyRef Name="IsActive" />
-            <PropertyRef Name="ProjectId" />
-            <PropertyRef Name="ProjectTitle" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="SrNo" Type="Int32" />
-          <Property Name="DateOfCollection" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CashHandedOverCPCStaffAId" Type="Guid" />
-          <Property Name="CashHandedOverCPCStaffBId" Type="Guid" />
-          <Property Name="CashHandedOverCITStaffAId" Type="Guid" />
-          <Property Name="CashHandedOverCITStaffBId" Type="Guid" />
-          <Property Name="SignatureCPCHandingOverCashAId" Type="Guid" />
-          <Property Name="SignatureCPCHandingOverCashBId" Type="Guid" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Guid" />
-          <Property Name="CPCAnnexureIDetailsId" Type="Guid" Nullable="false" />
-          <Property Name="CashProcessingCellId" Type="Guid" />
-          <Property Name="CashProcessingCellTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ProjectBranchId" Type="Guid" />
-          <Property Name="BranchCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="BranchName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="DenominationId" Type="Guid" />
-          <Property Name="DenominationTitle" Type="Int32" />
-          <Property Name="NoOfBundles" Type="Int32" />
-          <Property Name="TotalAmount" Type="Int32" />
-          <Property Name="SealNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ShipmentReciptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="OrderNumber" Type="Int32" />
-          <Property Name="OrderBookingId" Type="Guid" />
-          <Property Name="CashHandedOverCPCStaffAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-          <Property Name="CashHandedOverCPCStaffBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-          <Property Name="CashHandedOverCITStaffAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-          <Property Name="CashHandedOverCITStaffBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-          <Property Name="SignatureCPCHandingOverCashAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-          <Property Name="SignatureCPCHandingOverCashBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="ProjectId" Type="Guid" Nullable="false" />
-          <Property Name="ProjectTitle" Type="Guid" Nullable="false" />
-          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CityId" Type="Guid" />
+          <Property Name="SealNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Vew_Orderbookings">
           <Key>
@@ -1838,18 +1787,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <Property Name="ApprovedByName" Type="String" MaxLength="223" FixedLength="false" Unicode="true" />
           <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
         </EntityType>
-        <Association Name="FK__CPCAnnexu__Annex__2022C2A6">
-          <End Type="SOSTechCPCModel.CPCAnnexureI" Role="CPCAnnexureI" Multiplicity="1" />
-          <End Type="SOSTechCPCModel.CPCAnnexureIDetail" Role="CPCAnnexureIDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CPCAnnexureI">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CPCAnnexureIDetail">
-              <PropertyRef Name="AnnexureIId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__CPCAnnexu__Order__090A5324">
           <End Type="SOSTechCPCModel.CPCOrderBooking" Role="CPCOrderBooking" Multiplicity="0..1" />
           <End Type="SOSTechCPCModel.CPCAnnexureI" Role="CPCAnnexureI" Multiplicity="*" />
@@ -1859,30 +1796,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Principal>
             <Dependent Role="CPCAnnexureI">
               <PropertyRef Name="OrderBookingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CPCAnnexu__Denom__220B0B18">
-          <End Type="SOSTechCPCModel.CPCDenomination" Role="CPCDenomination" Multiplicity="0..1" />
-          <End Type="SOSTechCPCModel.CPCAnnexureIDetail" Role="CPCAnnexureIDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CPCDenomination">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CPCAnnexureIDetail">
-              <PropertyRef Name="DenominationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CPCAnnexu__Proje__2116E6DF">
-          <End Type="SOSTechCPCModel.CPCProjectBranch" Role="CPCProjectBranch" Multiplicity="0..1" />
-          <End Type="SOSTechCPCModel.CPCAnnexureIDetail" Role="CPCAnnexureIDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CPCProjectBranch">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CPCAnnexureIDetail">
-              <PropertyRef Name="ProjectBranchId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2030,18 +1943,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CPCVaultCustodian__CityI__51EF2864">
-          <End Type="SOSTechCPCModel.CPCCity" Role="CPCCity" Multiplicity="0..1" />
-          <End Type="SOSTechCPCModel.CPCVaultCustodian" Role="CPCVaultCustodian" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CPCCity">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CPCVaultCustodian">
-              <PropertyRef Name="CityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__CPCSorted__Denom__6BAEFA67">
           <End Type="SOSTechCPCModel.CPCDenomination" Role="CPCDenomination" Multiplicity="1" />
           <End Type="SOSTechCPCModel.CPCSortedCashDetail" Role="CPCSortedCashDetail" Multiplicity="*" />
@@ -2102,18 +2003,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CPCVaultCustodian__Order__2F9A1060">
-          <End Type="SOSTechCPCModel.CPCOrderBooking" Role="CPCOrderBooking" Multiplicity="0..1" />
-          <End Type="SOSTechCPCModel.CPCVaultCustodian" Role="CPCVaultCustodian" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CPCOrderBooking">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CPCVaultCustodian">
-              <PropertyRef Name="OrderBookingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__CPCSorted__Proje__69C6B1F5">
           <End Type="SOSTechCPCModel.CPCProjectBranch" Role="CPCProjectBranch" Multiplicity="1" />
           <End Type="SOSTechCPCModel.CPCSortedCash" Role="CPCSortedCash" Multiplicity="*" />
@@ -2134,18 +2023,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CPCUnsortedCash">
-              <PropertyRef Name="ProjectBranchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CPCVaultCustodian__Proje__29221CFB">
-          <End Type="SOSTechCPCModel.CPCProjectBranch" Role="CPCProjectBranch" Multiplicity="1" />
-          <End Type="SOSTechCPCModel.CPCVaultCustodian" Role="CPCVaultCustodian" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CPCProjectBranch">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CPCVaultCustodian">
               <PropertyRef Name="ProjectBranchId" />
             </Dependent>
           </ReferentialConstraint>
@@ -2174,6 +2051,147 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CPCAnnexureIDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="AnnexureIId" Type="Guid" Nullable="false" />
+          <Property Name="ProjectBranchId" Type="Guid" />
+          <Property Name="DenominationId" Type="Guid" />
+          <Property Name="NoOfBundles" Type="Int32" />
+          <Property Name="TotalAmount" Type="Int32" />
+          <Property Name="SealNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ShipmentReciptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="CashProcessingCellId" Type="Guid" />
+          <Property Name="DetailStatus" Type="Byte" />
+          <NavigationProperty Name="CPCAnnexureI" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Annex__2022C2A6" FromRole="CPCAnnexureIDetail" ToRole="CPCAnnexureI" />
+          <NavigationProperty Name="CPCDenomination" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Denom__220B0B18" FromRole="CPCAnnexureIDetail" ToRole="CPCDenomination" />
+          <NavigationProperty Name="CPCProjectBranch" Relationship="SOSTechCPCModel.FK__CPCAnnexu__Proje__2116E6DF" FromRole="CPCAnnexureIDetail" ToRole="CPCProjectBranch" />
+        </EntityType>
+        <Association Name="FK__CPCAnnexu__Annex__2022C2A6">
+          <End Type="SOSTechCPCModel.CPCAnnexureI" Role="CPCAnnexureI" Multiplicity="1" />
+          <End Type="SOSTechCPCModel.CPCAnnexureIDetail" Role="CPCAnnexureIDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCAnnexureI">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCAnnexureIDetail">
+              <PropertyRef Name="AnnexureIId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CPCAnnexu__Denom__220B0B18">
+          <End Type="SOSTechCPCModel.CPCDenomination" Role="CPCDenomination" Multiplicity="0..1" />
+          <End Type="SOSTechCPCModel.CPCAnnexureIDetail" Role="CPCAnnexureIDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCDenomination">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCAnnexureIDetail">
+              <PropertyRef Name="DenominationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CPCAnnexu__Proje__2116E6DF">
+          <End Type="SOSTechCPCModel.CPCProjectBranch" Role="CPCProjectBranch" Multiplicity="0..1" />
+          <End Type="SOSTechCPCModel.CPCAnnexureIDetail" Role="CPCAnnexureIDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCProjectBranch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCAnnexureIDetail">
+              <PropertyRef Name="ProjectBranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Vew_CPCAnnexureI">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DateOfCollection" />
+            <PropertyRef Name="CreatedOn" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="CPCAnnexureIDetailsId" />
+            <PropertyRef Name="CashHandedOverCPCStaffAName" />
+            <PropertyRef Name="CashHandedOverCPCStaffBName" />
+            <PropertyRef Name="CashHandedOverCITStaffAName" />
+            <PropertyRef Name="CashHandedOverCITStaffBName" />
+            <PropertyRef Name="SignatureCPCHandingOverCashAName" />
+            <PropertyRef Name="SignatureCPCHandingOverCashBName" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="ProjectTitle" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SrNo" Type="Int32" />
+          <Property Name="DateOfCollection" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CashHandedOverCPCStaffAId" Type="Guid" />
+          <Property Name="CashHandedOverCPCStaffBId" Type="Guid" />
+          <Property Name="CashHandedOverCITStaffAId" Type="Guid" />
+          <Property Name="CashHandedOverCITStaffBId" Type="Guid" />
+          <Property Name="SignatureCPCHandingOverCashAId" Type="Guid" />
+          <Property Name="SignatureCPCHandingOverCashBId" Type="Guid" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="CPCAnnexureIDetailsId" Type="Guid" Nullable="false" />
+          <Property Name="CashProcessingCellId" Type="Guid" />
+          <Property Name="CashProcessingCellTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectBranchId" Type="Guid" />
+          <Property Name="BranchCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BranchName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DenominationId" Type="Guid" />
+          <Property Name="DenominationTitle" Type="Int32" />
+          <Property Name="NoOfBundles" Type="Int32" />
+          <Property Name="TotalAmount" Type="Int32" />
+          <Property Name="SealNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ShipmentReciptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNumber" Type="Int32" />
+          <Property Name="OrderBookingId" Type="Guid" />
+          <Property Name="CashHandedOverCPCStaffAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
+          <Property Name="CashHandedOverCPCStaffBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
+          <Property Name="CashHandedOverCITStaffAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
+          <Property Name="CashHandedOverCITStaffBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
+          <Property Name="SignatureCPCHandingOverCashAName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
+          <Property Name="SignatureCPCHandingOverCashBName" Type="String" Nullable="false" MaxLength="223" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ProjectId" Type="Guid" Nullable="false" />
+          <Property Name="ProjectTitle" Type="Guid" Nullable="false" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CityId" Type="Guid" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <Property Name="DetailStatus" Type="Byte" />
+        </EntityType>
+        <EntityType Name="CPCVaultCustodian">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SerialNumber" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProjectBranchId" Type="Guid" Nullable="false" />
+          <Property Name="TotalNumberBundles" Type="Int32" />
+          <Property Name="TotalBalance" Type="Int64" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="Status" Type="Byte" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CityId" Type="Guid" />
+          <Property Name="OrderNumber" Type="Int32" />
+          <Property Name="OrderBookingId" Type="Guid" />
+          <Property Name="SupervisorId" Type="Guid" />
+          <NavigationProperty Name="CPCCity" Relationship="SOSTechCPCModel.FK__CPCVaultCustodian__CityI__51EF2864" FromRole="CPCVaultCustodian" ToRole="CPCCity" />
+          <NavigationProperty Name="CPCOrderBooking" Relationship="SOSTechCPCModel.FK__CPCVaultCustodian__Order__2F9A1060" FromRole="CPCVaultCustodian" ToRole="CPCOrderBooking" />
+          <NavigationProperty Name="CPCProjectBranch" Relationship="SOSTechCPCModel.FK__CPCVaultCustodian__Proje__29221CFB" FromRole="CPCVaultCustodian" ToRole="CPCProjectBranch" />
+          <NavigationProperty Name="CPCVaultCustodianDetails" Relationship="SOSTechCPCModel.FK__CPCVaultC__Vault__1940BAED" FromRole="CPCVaultCustodian" ToRole="CPCVaultCustodianDetail" />
+          <NavigationProperty Name="CPCVaultCustodianDetails1" Relationship="SOSTechCPCModel.FK__CPCVaultC__Vault__6D9742D9" FromRole="CPCVaultCustodian" ToRole="CPCVaultCustodianDetail" />
+        </EntityType>
         <EntityType Name="CPCVaultCustodianDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -2186,8 +2204,22 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
           <NavigationProperty Name="CPCDenomination" Relationship="SOSTechCPCModel.FK__CPCVaultC__Denom__1758727B" FromRole="CPCVaultCustodianDetail" ToRole="CPCDenomination" />
+          <NavigationProperty Name="CPCDenomination1" Relationship="SOSTechCPCModel.FK__CPCVaultC__Denom__6CA31EA0" FromRole="CPCVaultCustodianDetail" ToRole="CPCDenomination" />
           <NavigationProperty Name="CPCVaultCustodian" Relationship="SOSTechCPCModel.FK__CPCVaultC__Vault__1940BAED" FromRole="CPCVaultCustodianDetail" ToRole="CPCVaultCustodian" />
+          <NavigationProperty Name="CPCVaultCustodian1" Relationship="SOSTechCPCModel.FK__CPCVaultC__Vault__6D9742D9" FromRole="CPCVaultCustodianDetail" ToRole="CPCVaultCustodian" />
         </EntityType>
+        <Association Name="FK__CPCVaultCustodian__CityI__51EF2864">
+          <End Type="SOSTechCPCModel.CPCCity" Role="CPCCity" Multiplicity="0..1" />
+          <End Type="SOSTechCPCModel.CPCVaultCustodian" Role="CPCVaultCustodian" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCCity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCVaultCustodian">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__CPCVaultC__Denom__1758727B">
           <End Type="SOSTechCPCModel.CPCDenomination" Role="CPCDenomination" Multiplicity="1" />
           <End Type="SOSTechCPCModel.CPCVaultCustodianDetail" Role="CPCVaultCustodianDetail" Multiplicity="*" />
@@ -2200,7 +2232,55 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__CPCVaultC__Denom__6CA31EA0">
+          <End Type="SOSTechCPCModel.CPCDenomination" Role="CPCDenomination" Multiplicity="1" />
+          <End Type="SOSTechCPCModel.CPCVaultCustodianDetail" Role="CPCVaultCustodianDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCDenomination">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCVaultCustodianDetail">
+              <PropertyRef Name="DenominationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CPCVaultCustodian__Order__2F9A1060">
+          <End Type="SOSTechCPCModel.CPCOrderBooking" Role="CPCOrderBooking" Multiplicity="0..1" />
+          <End Type="SOSTechCPCModel.CPCVaultCustodian" Role="CPCVaultCustodian" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCOrderBooking">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCVaultCustodian">
+              <PropertyRef Name="OrderBookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CPCVaultCustodian__Proje__29221CFB">
+          <End Type="SOSTechCPCModel.CPCProjectBranch" Role="CPCProjectBranch" Multiplicity="1" />
+          <End Type="SOSTechCPCModel.CPCVaultCustodian" Role="CPCVaultCustodian" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCProjectBranch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCVaultCustodian">
+              <PropertyRef Name="ProjectBranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__CPCVaultC__Vault__1940BAED">
+          <End Type="SOSTechCPCModel.CPCVaultCustodian" Role="CPCVaultCustodian" Multiplicity="1" />
+          <End Type="SOSTechCPCModel.CPCVaultCustodianDetail" Role="CPCVaultCustodianDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCVaultCustodian">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCVaultCustodianDetail">
+              <PropertyRef Name="VaultCustodianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CPCVaultC__Vault__6D9742D9">
           <End Type="SOSTechCPCModel.CPCVaultCustodian" Role="CPCVaultCustodian" Multiplicity="1" />
           <End Type="SOSTechCPCModel.CPCVaultCustodianDetail" Role="CPCVaultCustodianDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2278,23 +2358,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
                 <ScalarProperty Name="CashHandedOverCPCStaffBId" ColumnName="CashHandedOverCPCStaffBId" />
                 <ScalarProperty Name="CashHandedOverCPCStaffAId" ColumnName="CashHandedOverCPCStaffAId" />
                 <ScalarProperty Name="SrNo" ColumnName="SrNo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CPCAnnexureIDetails">
-            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureIDetail">
-              <MappingFragment StoreEntitySet="CPCAnnexureIDetails">
-                <ScalarProperty Name="CashProcessingCellId" ColumnName="CashProcessingCellId" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ShipmentReciptNo" ColumnName="ShipmentReciptNo" />
-                <ScalarProperty Name="SealNo" ColumnName="SealNo" />
-                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="NoOfBundles" ColumnName="NoOfBundles" />
-                <ScalarProperty Name="DenominationId" ColumnName="DenominationId" />
-                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
-                <ScalarProperty Name="AnnexureIId" ColumnName="AnnexureIId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2635,6 +2698,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <EntitySetMapping Name="CPCUnsortedCashDetails">
             <EntityTypeMapping TypeName="SOSTechCPCModel.CPCUnsortedCashDetail">
               <MappingFragment StoreEntitySet="CPCUnsortedCashDetails">
+                <ScalarProperty Name="SealNo" ColumnName="SealNo" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
@@ -2645,24 +2709,49 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CPCVaultCustodians">
-            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCVaultCustodian">
-              <MappingFragment StoreEntitySet="CPCVaultCustodian">
-                <ScalarProperty Name="SupervisorId" ColumnName="SupervisorId" />
-                <ScalarProperty Name="OrderBookingId" ColumnName="OrderBookingId" />
-                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <EntitySetMapping Name="Vew_Orderbookings">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.Vew_Orderbookings">
+              <MappingFragment StoreEntitySet="Vew_Orderbookings">
+                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
+                <ScalarProperty Name="ApprovedByName" ColumnName="ApprovedByName" />
+                <ScalarProperty Name="ApprovedById" ColumnName="ApprovedById" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="NoOfBundles" ColumnName="NoOfBundles" />
+                <ScalarProperty Name="CPCProjectName" ColumnName="CPCProjectName" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CashProcessingCellTitle" ColumnName="CashProcessingCellTitle" />
+                <ScalarProperty Name="CashProcessingCellId" ColumnName="CashProcessingCellId" />
+                <ScalarProperty Name="DenominationTitle" ColumnName="DenominationTitle" />
+                <ScalarProperty Name="DenominationId" ColumnName="DenominationId" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
+                <ScalarProperty Name="CPCOrderBookingDetailsId" ColumnName="CPCOrderBookingDetailsId" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="TotalBalance" ColumnName="TotalBalance" />
-                <ScalarProperty Name="TotalNumberBundles" ColumnName="TotalNumberBundles" />
-                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CPCAnnexureIDetails">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCAnnexureIDetail">
+              <MappingFragment StoreEntitySet="CPCAnnexureIDetails">
+                <ScalarProperty Name="DetailStatus" ColumnName="DetailStatus" />
+                <ScalarProperty Name="CashProcessingCellId" ColumnName="CashProcessingCellId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ShipmentReciptNo" ColumnName="ShipmentReciptNo" />
+                <ScalarProperty Name="SealNo" ColumnName="SealNo" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="NoOfBundles" ColumnName="NoOfBundles" />
+                <ScalarProperty Name="DenominationId" ColumnName="DenominationId" />
+                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
+                <ScalarProperty Name="AnnexureIId" ColumnName="AnnexureIId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2670,6 +2759,8 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <EntitySetMapping Name="Vew_CPCAnnexureI">
             <EntityTypeMapping TypeName="SOSTechCPCModel.Vew_CPCAnnexureI">
               <MappingFragment StoreEntitySet="Vew_CPCAnnexureI">
+                <ScalarProperty Name="DetailStatus" ColumnName="DetailStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CityId" ColumnName="CityId" />
                 <ScalarProperty Name="CityName" ColumnName="CityName" />
                 <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
@@ -2711,31 +2802,24 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Vew_Orderbookings">
-            <EntityTypeMapping TypeName="SOSTechCPCModel.Vew_Orderbookings">
-              <MappingFragment StoreEntitySet="Vew_Orderbookings">
-                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
-                <ScalarProperty Name="ApprovedByName" ColumnName="ApprovedByName" />
-                <ScalarProperty Name="ApprovedById" ColumnName="ApprovedById" />
+          <EntitySetMapping Name="CPCVaultCustodians">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCVaultCustodian">
+              <MappingFragment StoreEntitySet="CPCVaultCustodian">
+                <ScalarProperty Name="SupervisorId" ColumnName="SupervisorId" />
+                <ScalarProperty Name="OrderBookingId" ColumnName="OrderBookingId" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="NoOfBundles" ColumnName="NoOfBundles" />
-                <ScalarProperty Name="CPCProjectName" ColumnName="CPCProjectName" />
-                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-                <ScalarProperty Name="CashProcessingCellTitle" ColumnName="CashProcessingCellTitle" />
-                <ScalarProperty Name="CashProcessingCellId" ColumnName="CashProcessingCellId" />
-                <ScalarProperty Name="DenominationTitle" ColumnName="DenominationTitle" />
-                <ScalarProperty Name="DenominationId" ColumnName="DenominationId" />
-                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
-                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
-                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
-                <ScalarProperty Name="CPCOrderBookingDetailsId" ColumnName="CPCOrderBookingDetailsId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="TotalBalance" ColumnName="TotalBalance" />
+                <ScalarProperty Name="TotalNumberBundles" ColumnName="TotalNumberBundles" />
+                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
