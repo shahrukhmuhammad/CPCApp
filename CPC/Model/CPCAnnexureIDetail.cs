@@ -25,6 +25,7 @@ namespace CPC.Model
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.Guid> CashProcessingCellId { get; set; }
+        public Nullable<byte> DetailStatus { get; set; }
     
         public virtual CPCAnnexureI CPCAnnexureI { get; set; }
         public virtual CPCDenomination CPCDenomination { get; set; }

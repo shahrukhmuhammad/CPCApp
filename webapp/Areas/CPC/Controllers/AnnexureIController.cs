@@ -90,7 +90,7 @@ namespace WebApp.Areas.CPC.Controllers
                     if (res.HasValue)
                     {
                         var lsToSave = CPCAnnexureIDetail.Where(x => x.CashProcessingCellId.HasValue && x.NoOfBundles > 0).ToList();
-                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.AnnexureIId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
+                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.AnnexureIId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; x.DetailStatus = (int)AnnexureStatus.Inprocess; });
                         #region Save Details
                         annexureIRepo.Create(lsToSave);
                         #endregion
@@ -310,7 +310,7 @@ namespace WebApp.Areas.CPC.Controllers
         {
             try
             {
-                var List = annexureIRepo.GetAllDetailsById(id, PriojId);
+                var List = annexureIRepo.GetAllDetailsById(id, PriojId).Where(x => x.DetailStatus == (int)AnnexureStatus.Inprocess);
                 return Json(new
                 {
                     List.FirstOrDefault().OrderNumber,
@@ -347,7 +347,7 @@ namespace WebApp.Areas.CPC.Controllers
         {
             try
             {
-                var List = annexureIRepo.GetAllDetailsById(id).Where(x => x.Status == (int)AnnexureStatus.Inprocess);
+                var List = annexureIRepo.GetAllDetailsById(id);
                 return Json(new
                 {
                     List.FirstOrDefault().OrderNumber,

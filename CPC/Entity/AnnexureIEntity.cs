@@ -19,7 +19,7 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCAnnexureIs.Where(x=> x.IsActive).OrderBy(x => x.CreatedOn).ToList();
+                    return context.CPCAnnexureIs.Where(x => x.IsActive).OrderBy(x => x.CreatedOn).ToList();
                 }
             }
             catch (Exception ex)
@@ -62,7 +62,7 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.Vew_CPCAnnexureI.Where(x=> x.OrderBookingId == Id && x.ProjectBranchId == PriojId).ToList();
+                    return context.Vew_CPCAnnexureI.Where(x => x.OrderBookingId == Id && x.ProjectBranchId == PriojId).ToList();
                 }
             }
             catch (Exception ex)
@@ -185,7 +185,7 @@ namespace CPC
             }
             catch (Exception ex)
             {
-                    return false;
+                return false;
             }
         }
 
@@ -350,19 +350,50 @@ namespace CPC
             }
         }
 
-        public void ChangeStatus(Guid? bookingId, Guid userId) {
+        public void ChangeStatus(Guid? bookingId, Guid userId, Guid? ProjBranchId)
+        {
 
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Update Record
-                    var res = context.CPCAnnexureIs.Where(x => x.OrderBookingId == bookingId).FirstOrDefault();
+                    var res = context.CPCAnnexureIs.Include(x => x.CPCAnnexureIDetails).Where(x => x.OrderBookingId == bookingId).FirstOrDefault();
                     if (res != null)
                     {
-                        res.Status = (int)AnnexureStatus.proceeded;
-                        res.UpdatedOn = DateTime.Now;
-                        res.UpdatedBy = userId;
+                        var resDetail = res.CPCAnnexureIDetails.Where(x => x.ProjectBranchId == ProjBranchId).ToList();
+                        resDetail.ForEach(x => { x.DetailStatus = (int)AnnexureStatus.Proceeded; });
+                        //resDetail.UpdatedOn = DateTime.Now;
+                        //resDetail.UpdatedBy = userId;
+                        context.SaveChanges();
+                    }
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        public void ChangeMasterStatus(Guid? bookingId, Guid userId)
+        {
+
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Update Record
+                    var res = context.CPCAnnexureIs.Include(x => x.CPCAnnexureIDetails).Where(x => x.OrderBookingId == bookingId).FirstOrDefault();
+                    if (res != null)
+                    {
+                        var resDetail = res.CPCAnnexureIDetails.Select(x => x.ProjectBranchId).Distinct().ToList();
+
+                        if (resDetail.Count == res.CPCAnnexureIDetails.Where(x => x.DetailStatus == (int)AnnexureStatus.Proceeded).Count())
+                        {
+                            res.Status = (int)AnnexureStatus.Proceeded;
+                            res.UpdatedBy = userId;
+                            res.UpdatedOn = DateTime.Now;
+                        }
                         context.SaveChanges();
                     }
                     #endregion

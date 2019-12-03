@@ -18,6 +18,7 @@ namespace CPC.Model
         public CPCVaultCustodian()
         {
             this.CPCVaultCustodianDetails = new HashSet<CPCVaultCustodianDetail>();
+            this.CPCVaultCustodianDetails1 = new HashSet<CPCVaultCustodianDetail>();
         }
     
         public System.Guid Id { get; set; }
@@ -42,5 +43,7 @@ namespace CPC.Model
         public virtual CPCProjectBranch CPCProjectBranch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCVaultCustodianDetail> CPCVaultCustodianDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCVaultCustodianDetail> CPCVaultCustodianDetails1 { get; set; }
     }
 }
