@@ -65,7 +65,7 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCUnsortedCashes.Include(x => x.CPCUnsortedCashDetails.Select(y => y.CPCDenomination)).Where(x => x.Id == Id).FirstOrDefault();
+                    return context.CPCUnsortedCashes.Include(x => x.CPCCity).Include(x => x.CPCOrderBooking).Include(x => x.CPCProjectBranch).Include(x => x.CPCUnsortedCashDetails.Select(y => y.CPCDenomination)).Where(x => x.Id == Id).FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -102,7 +102,7 @@ namespace CPC
         {
             try
             {
-              
+
                 using (context = new SOSTechCPCEntities())
                 {
                     int ConNumber = GetNextSerialNumber();

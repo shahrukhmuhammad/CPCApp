@@ -349,5 +349,28 @@ namespace CPC
                 throw ex;
             }
         }
+
+        public void ChangeStatus(Guid? bookingId, Guid userId) {
+
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Update Record
+                    var res = context.CPCAnnexureIs.Where(x => x.OrderBookingId == bookingId).FirstOrDefault();
+                    if (res != null)
+                    {
+                        res.Status = (int)AnnexureStatus.proceeded;
+                        res.UpdatedOn = DateTime.Now;
+                        res.UpdatedBy = userId;
+                        context.SaveChanges();
+                    }
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
     }
 }

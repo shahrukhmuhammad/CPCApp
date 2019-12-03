@@ -52,5 +52,6 @@ namespace CPC.Model
         public System.Guid ProjectTitle { get; set; }
         public string CityName { get; set; }
         public Nullable<System.Guid> CityId { get; set; }
+        public byte Status { get; set; }
     }
 }

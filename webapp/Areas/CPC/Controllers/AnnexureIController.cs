@@ -328,7 +328,8 @@ namespace WebApp.Areas.CPC.Controllers
                         x.NoOfBundles,
                         x.TotalAmount,
                         x.CityName,
-                        x.CityId
+                        x.CityId,
+                        x.SealNo
                     }).ToList(),
 
                 }, JsonRequestBehavior.AllowGet);
@@ -346,7 +347,7 @@ namespace WebApp.Areas.CPC.Controllers
         {
             try
             {
-                var List = annexureIRepo.GetAllDetailsById(id);
+                var List = annexureIRepo.GetAllDetailsById(id).Where(x => x.Status == (int)AnnexureStatus.Inprocess);
                 return Json(new
                 {
                     List.FirstOrDefault().OrderNumber,
