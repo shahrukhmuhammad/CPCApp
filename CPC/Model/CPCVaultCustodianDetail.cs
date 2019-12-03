@@ -19,6 +19,7 @@ namespace CPC.Model
         public System.Guid VaultCustodianId { get; set; }
         public int NumberOfBundles { get; set; }
         public int TotalValue { get; set; }
+        public string SealNo { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
     
