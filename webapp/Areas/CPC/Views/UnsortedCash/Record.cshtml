@@ -78,9 +78,9 @@
                                     <td></td>
                                     <td>Station/City:</td>
                                     <td>
-                                        <input type="text" class ="form-control input-sm" id="CityName"/>
+                                        <input type="text" class="form-control input-sm clearField" id="CityName" />
                                         @Html.HiddenFor(x => x.CityId)
-                                        
+
                                     </td>
                                     <td></td>
                                 </tr>
@@ -89,6 +89,7 @@
                                     <td>Denomination</td>
                                     <td>Volume in Bundles</td>
                                     <td>Amount</td>
+                                    <td>Seal No.</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -100,6 +101,9 @@
                                     </td>
                                     <td>
                                         <input id="totalValueZero" value="0" name="CPCUnsortedCashDetail[0].TotalValue" class="form-control input-sm clearField" />
+                                    </td>
+                                    <td>
+                                        <input id="SealNoZero" type="text" value="0" name="CPCUnsortedCashDetail[0].SealNo" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -113,6 +117,9 @@
                                     <td>
                                         <input id="totalValueOne" type="number" value="0" name="CPCUnsortedCashDetail[1].TotalValue" class="form-control input-sm clearField" />
                                     </td>
+                                    <td>
+                                        <input id="SealNoOne" type="text" value="0" name="CPCUnsortedCashDetail[1].SealNo" class="form-control input-sm clearField" />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -124,6 +131,9 @@
                                     </td>
                                     <td>
                                         <input id="totalValueTwo" type="number" value="0" name="CPCUnsortedCashDetail[2].TotalValue" class="form-control input-sm clearField" />
+                                    </td>
+                                    <td>
+                                        <input id="SealNoTwo" type="text" value="0" name="CPCUnsortedCashDetail[2].SealNo" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -137,6 +147,9 @@
                                     <td>
                                         <input id="totalValueThree" type="number" value="0" name="CPCUnsortedCashDetail[3].TotalValue" class="form-control input-sm clearField" />
                                     </td>
+                                    <td>
+                                        <input id="SealNoThree" type="text" value="0" name="CPCUnsortedCashDetail[3].SealNo" class="form-control input-sm clearField" />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -148,6 +161,9 @@
                                     </td>
                                     <td>
                                         <input id="totalValueFour" type="number" value="0" name="CPCUnsortedCashDetail[4].TotalValue" class="form-control input-sm clearField" />
+                                    </td>
+                                    <td>
+                                        <input id="SealNoFour" type="text" value="0" name="CPCUnsortedCashDetail[4].SealNo" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -161,6 +177,9 @@
                                     <td>
                                         <input id="totalValueFive" type="number" value="0" name="CPCUnsortedCashDetail[5].TotalValue" class="form-control input-sm clearField" />
                                     </td>
+                                    <td>
+                                        <input id="SealNoFive" type="text" value="0" name="CPCUnsortedCashDetail[5].SealNo" class="form-control input-sm clearField" />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -172,6 +191,9 @@
                                     </td>
                                     <td>
                                         <input id="totalValueSix" type="number" value="0" name="CPCUnsortedCashDetail[6].TotalValue" class="form-control input-sm clearField" />
+                                    </td>
+                                    <td>
+                                        <input id="SealNoSix" type="text" value="0" name="CPCUnsortedCashDetail[6].SealNo" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -185,6 +207,9 @@
                                     <td>
                                         <input id="totalValueSeven" type="number" value="0" name="CPCUnsortedCashDetail[7].TotalValue" class="form-control input-sm clearField" />
                                     </td>
+                                    <td>
+                                        <input id="SealNoSeven" type="text" value="0" name="CPCUnsortedCashDetail[7].SealNo" class="form-control input-sm clearField" />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -197,6 +222,9 @@
                                     <td>
                                         <input id="totalValueEight" type="number" value="0" name="CPCUnsortedCashDetail[8].TotalValue" class="form-control input-sm clearField" />
                                     </td>
+                                    <td>
+                                        <input id="SealNoEight" type="text" value="0" name="CPCUnsortedCashDetail[8].SealNo" class="form-control input-sm clearField" />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -208,6 +236,9 @@
                                     </td>
                                     <td>
                                         <input id="totalValueNine" type="number" value="0" name="CPCUnsortedCashDetail[9].TotalValue" class="form-control input-sm clearField" />
+                                    </td>
+                                    <td>
+                                        <input id="SealNoNine" type="text" value="0" name="CPCUnsortedCashDetail[9].SealNo" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -255,14 +286,17 @@
             $('#addNewCompany-Modal').modal('toggle');
         }
         function loadOrderData(Id) {
+            $('#ProjectBranchId').val([]);
             var branchtoAppend = $('#ProjectBranchId');
-            //branchtoAppend.html("");
+            branchtoAppend.empty();
+            branchtoAppend.html("<option> - Select - </option>"); 
             if (Id) {
                 $.get('/CPC/AnnexureI/GetAnnxureIBranchData?Id=' + Id, function (response) {
+                    debugger;
                     if (response) {
                         $('#OrderNumber').val(response.OrderNumber);
                         $('#OrderBookingId').val(response.OrderBookingId);
-
+                        $('#SealNo').val(response.SealNo);
                         //Details
                         $.each(response.Details,
                             function (index, item) {
@@ -293,54 +327,70 @@
                         if (item.DenominationTitle == '1') {
                             $("#numberOfPacketsZero").val(item.NoOfBundles);
                             $("#totalValueZero").val(item.TotalAmount);
+                            $("#SealNoZero").val(item.SealNo);
                             finalTotalBundles += parseInt(item.NoOfBundles);
                             finalTotalAmount += parseInt(item.TotalAmount);
                         }
                         else if (item.DenominationTitle == '2') {
                             $("#numberOfPacketsOne").val(item.NoOfBundles);
                             $("#totalValueOne").val(item.TotalAmount);
+                            $("#SealNoOne").val(item.SealNo);
                             finalTotalBundles += parseInt(item.NoOfBundles);
                             finalTotalAmount += parseInt(item.TotalAmount);
                         }
                         else if (item.DenominationTitle == '5') {
                             $("#numberOfPacketsTwo").val(item.NoOfBundles);
                             $("#totalValueTwo").val(item.TotalAmount);
+                            $("#SealNoTwo").val(item.SealNo);
                             finalTotalBundles += parseInt(item.NoOfBundles);
                             finalTotalAmount += parseInt(item.TotalAmount);
                         }
                         else if (item.DenominationTitle == '10') {
                             $("#numberOfPacketsThree").val(item.NoOfBundles);
                             $("#totalValueThree").val(item.TotalAmount);
+                            $("#SealNoThree").val(item.SealNo);
+                            finalTotalBundles += parseInt(item.NoOfBundles);
+                            finalTotalAmount += parseInt(item.TotalAmount);
+                        }
+                        else if (item.DenominationTitle == '20') {
+                            $("#numberOfPacketsFour").val(item.NoOfBundles);
+                            $("#totalValueFour").val(item.TotalAmount);
+                            $("#SealNoFour").val(item.SealNo);
                             finalTotalBundles += parseInt(item.NoOfBundles);
                             finalTotalAmount += parseInt(item.TotalAmount);
                         }
                         else if (item.DenominationTitle == '50') {
                             $("#numberOfPacketsFive").val(item.NoOfBundles);
                             $("#totalValueFive").val(item.TotalAmount);
+                            $("#SealNoFive").val(item.SealNo);
                             finalTotalBundles += parseInt(item.NoOfBundles);
                             finalTotalAmount += parseInt(item.TotalAmount);
                         }
                         else if (item.DenominationTitle == '100') {
                             $("#numberOfPacketsSix").val(item.NoOfBundles);
                             $("#totalValueSix").val(item.TotalAmount);
+                            $("#SealNoSix").val(item.SealNo);
                             finalTotalBundles += parseInt(item.NoOfBundles);
                             finalTotalAmount += parseInt(item.TotalAmount);
                         }
                         else if (item.DenominationTitle == '500') {
                             $("#numberOfPacketsSeven").val(item.NoOfBundles);
                             $("#totalValueSeven").val(item.TotalAmount);
+                            $("#SealNoSeven").val(item.SealNo);
                             finalTotalBundles += parseInt(item.NoOfBundles);
                             finalTotalAmount += parseInt(item.TotalAmount);
                         }
                         else if (item.DenominationTitle == '1000') {
                             $("#numberOfPacketsEight").val(item.NoOfBundles);
                             $("#totalValueEight").val(item.TotalAmount);
+                            $("#SealNoEight").val(item.SealNo);
                             finalTotalBundles += parseInt(item.NoOfBundles);
                             finalTotalAmount += parseInt(item.TotalAmount);
                         }
                         else if (item.DenominationTitle == '5000') {
                             $("#numberOfPacketsNine").val(item.NoOfBundles);
                             $("#totalValueNine").val(item.TotalAmount);
+                            $("#SealNoNine").val(item.SealNo);
                             finalTotalBundles += parseInt(item.NoOfBundles);
                             finalTotalAmount += parseInt(item.TotalAmount);
                         }

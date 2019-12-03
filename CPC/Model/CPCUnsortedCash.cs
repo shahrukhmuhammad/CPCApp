@@ -23,7 +23,7 @@ namespace CPC.Model
         public System.Guid Id { get; set; }
         public long SerialNumber { get; set; }
         public System.DateTime Date { get; set; }
-        public System.Guid CityId { get; set; }
+        public Nullable<System.Guid> CityId { get; set; }
         public System.Guid ProjectBranchId { get; set; }
         public Nullable<int> TotalNumberBundles { get; set; }
         public long TotalBalance { get; set; }
@@ -35,6 +35,7 @@ namespace CPC.Model
         public bool IsActive { get; set; }
         public Nullable<int> OrderNumber { get; set; }
         public Nullable<System.Guid> OrderBookingId { get; set; }
+        public string SealNo { get; set; }
     
         public virtual CPCCity CPCCity { get; set; }
         public virtual CPCOrderBooking CPCOrderBooking { get; set; }

@@ -40,7 +40,7 @@
                             <tr>
                                 <td><b>Station/City:</b></td>
                                 <td>
-                                    <label>@Model.Station</label>
+                                    <label>@Model.CPCCity.CityName</label>
                                 </td>
                                 <td></td>
                             </tr>
@@ -62,12 +62,22 @@
                                     Rs.1/-
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().NumberOfBundles)
-                                    @{ finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().NumberOfBundles); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().NumberOfBundles : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault() != null)
+                                        {
+                                            finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().NumberOfBundles);
+                                        }
+                                        else { finalNumberOfPackets += 0; }
+                                    }
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().TotalValue)
-                                    @{ finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().TotalValue); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().TotalValue : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault() != null)
+                                        {
+                                            finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1).FirstOrDefault().TotalValue);
+                                        }
+                                        else { finalTotalValue += 0; }
+                                    }
                                 </td>
                             </tr>
                             <tr>
@@ -75,12 +85,22 @@
                                     Rs.2/-
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().NumberOfBundles)
-                                    @{ finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().NumberOfBundles); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().NumberOfBundles : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault() != null)
+                                        {
+                                            finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().NumberOfBundles);
+                                        }
+                                        else { finalNumberOfPackets += 0; }
+                                    }
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().TotalValue)
-                                    @{ finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().TotalValue); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().TotalValue : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault() != null)
+                                        {
+                                            finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 2).FirstOrDefault().TotalValue);
+                                        }
+                                        else { finalTotalValue += 0; }
+                                    }
                                 </td>
                             </tr>
                             <tr>
@@ -88,12 +108,22 @@
                                     Rs.5/-
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().NumberOfBundles)
-                                    @{ finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().NumberOfBundles); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().NumberOfBundles : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault() != null)
+                                        {
+                                            finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().NumberOfBundles);
+                                        }
+                                        else { finalNumberOfPackets += 0; }
+                                    }
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().TotalValue)
-                                    @{ finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().TotalValue); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().TotalValue : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault() != null)
+                                        {
+                                            finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().TotalValue);
+                                        }
+                                        else { finalTotalValue += 0; }
+                                    }
                                 </td>
                             </tr>
                             <tr>
@@ -101,12 +131,22 @@
                                     Rs.10/-
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().NumberOfBundles)
-                                    @{ finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().NumberOfBundles); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().NumberOfBundles : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault() != null)
+                                        {
+                                            finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().NumberOfBundles);
+                                        }
+                                        else { finalNumberOfPackets += 0; }
+                                    }
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().TotalValue)
-                                    @{ finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().TotalValue); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().TotalValue : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault() != null)
+                                        {
+                                            finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().TotalValue);
+                                        }
+                                        else { finalTotalValue += 0; }
+                                    }
                                 </td>
                             </tr>
                             <tr>
@@ -114,24 +154,45 @@
                                     Rs.20/-
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().NumberOfBundles)
-                                    @{ finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().NumberOfBundles); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().NumberOfBundles : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault() != null)
+                                        {
+                                            finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().NumberOfBundles);
+                                        }
+                                        else { finalNumberOfPackets += 0; }
+                                    }
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().TotalValue)
-                                    @{ finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().TotalValue); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().TotalValue : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault() != null)
+                                        {
+                                            finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 20).FirstOrDefault().TotalValue);
+                                        }
+                                        else { finalTotalValue += 0; }
+                                    }
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     Rs.50/-
-                                <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().NumberOfBundles)
-                                    @{ finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().NumberOfBundles); }
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().TotalValue)
-                                    @{ finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().TotalValue); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().NumberOfBundles : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault() != null)
+                                        {
+                                            finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().NumberOfBundles);
+                                        }
+                                        else { finalNumberOfPackets += 0; }
+                                    }
+                                </td>
+                                <td>
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().TotalValue : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault() != null)
+                                        {
+                                            finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 50).FirstOrDefault().TotalValue);
+                                        }
+                                        else { finalTotalValue += 0; }
+                                    }
                                 </td>
                             </tr>
                             <tr>
@@ -139,12 +200,22 @@
                                     Rs.100/-
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().NumberOfBundles)
-                                    @{ finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().NumberOfBundles); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().NumberOfBundles : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault() != null)
+                                        {
+                                            finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().NumberOfBundles);
+                                        }
+                                        else { finalNumberOfPackets += 0; }
+                                    }
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().TotalValue)
-                                    @{ finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().TotalValue); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().TotalValue : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault() != null)
+                                        {
+                                            finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 100).FirstOrDefault().TotalValue);
+                                        }
+                                        else { finalTotalValue += 0; }
+                                    }
                                 </td>
                             </tr>
                             <tr>
@@ -152,12 +223,22 @@
                                     Rs.500/-
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().NumberOfBundles)
-                                    @{ finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().NumberOfBundles); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().NumberOfBundles : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault() != null)
+                                        {
+                                            finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().NumberOfBundles);
+                                        }
+                                        else { finalNumberOfPackets += 0; }
+                                    }
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().TotalValue)
-                                    @{ finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().TotalValue); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().TotalValue : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault() != null)
+                                        {
+                                            finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 500).FirstOrDefault().TotalValue);
+                                        }
+                                        else { finalTotalValue += 0; }
+                                    }
                                 </td>
                             </tr>
                             <tr>
@@ -165,23 +246,43 @@
                                     Rs.1000/-
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().NumberOfBundles)
-                                    @{ finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().NumberOfBundles); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().NumberOfBundles : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault() != null)
+                                        {
+                                            finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().NumberOfBundles);
+                                        }
+                                        else { finalNumberOfPackets += 0; }
+                                    }
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().TotalValue)
-                                    @{ finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().TotalValue); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().TotalValue : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault() != null)
+                                        {
+                                            finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 1000).FirstOrDefault().TotalValue);
+                                        }
+                                        else { finalTotalValue += 0; }
+                                    }
                                 </td>
                             </tr>
                             <tr>
                                 <td>Rs.5000/-</td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().NumberOfBundles)
-                                    @{ finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().NumberOfBundles); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().NumberOfBundles : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault() != null)
+                                        {
+                                            finalNumberOfPackets += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().NumberOfBundles);
+                                        }
+                                        else { finalNumberOfPackets += 0; }
+                                    }
                                 </td>
                                 <td>
-                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().TotalValue)
-                                    @{ finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().TotalValue); }
+                                    @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().TotalValue : 0)
+                                    @{ if (unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault() != null)
+                                        {
+                                            finalTotalValue += Convert.ToInt32(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5000).FirstOrDefault().TotalValue);
+                                        }
+                                        else { finalTotalValue += 0; }
+                                    }
                                 </td>
                             </tr>
                             <tr>

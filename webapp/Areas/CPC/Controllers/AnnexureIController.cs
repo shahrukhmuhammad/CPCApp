@@ -328,7 +328,8 @@ namespace WebApp.Areas.CPC.Controllers
                         x.NoOfBundles,
                         x.TotalAmount,
                         x.CityName,
-                        x.CityId
+                        x.CityId,
+                        x.SealNo
                     }).ToList(),
 
                 }, JsonRequestBehavior.AllowGet);
