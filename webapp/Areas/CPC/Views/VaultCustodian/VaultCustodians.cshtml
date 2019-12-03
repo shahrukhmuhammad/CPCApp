@@ -1,19 +1,18 @@
 ﻿
 @{
-    ViewBag.Title = "Cash Receiving List";
+    ViewBag.Title = "Vault Custodian";
 }
 
 <div class="user-Profile" style="min-height:430px;">
     <div id="employees-Container">
-        @{ Html.RenderAction("_AllAnnexureI", "AnnexureI"); }
+        @{ Html.RenderAction("_VaultCustodians", "VaultCustodian"); }
     </div>
 </div>
 
 @section scripts{
     <script>
         $(function () {
-            filterDataTable("#AnnexureI-dataTable", [1, 2, 3, 4, 5, 6, 7], [0, 8], 10);
+            filterDataTable("#VaultCustodian-dataTable", [1, 2, 3, 4, 5], [0, 6],10);
         });
     </script>
 }
-

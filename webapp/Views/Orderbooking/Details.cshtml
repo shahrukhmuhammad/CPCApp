@@ -3,12 +3,13 @@
 @{
     ViewBag.Title = "Order Booking Details";
     var details = ViewBag.Details as List<Vew_Orderbookings>;
+    var annexureIDetails = ViewBag.AnnexureIDetails as List<Vew_CPCAnnexureI>;
 }
 
 <style>
-    #Orderbooking th {
+    /*#Orderbooking th {
         text-align: center !important;
-    }
+    }*/
 
     .field-validation-error {
         color: red;
@@ -63,6 +64,11 @@
                                     <th>Denomination</th>
                                     <th>No. Of Bundles</th>
                                     <th>Total Amount</th>
+                                    @if (annexureIDetails != null)
+                                    {
+                                        <th>Seal No</th>
+                                        <th>Shipment Receipt</th>
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,6 +85,12 @@
                                                 <td>@item.DenominationTitle</td>
                                                 <td>@item.NoOfBundles</td>
                                                 <td>@item.TotalAmount</td>
+                                                @if (annexureIDetails != null)
+                                                {
+                                                    <td>@(annexureIDetails.Where(y => y.ProjectBranchId == item.ProjectBranchId).FirstOrDefault().SealNo != null ? annexureIDetails.Where(y=> y.ProjectBranchId == item.ProjectBranchId).FirstOrDefault().SealNo : "")</td>
+                                                    <td>@(annexureIDetails.Where(y => y.ProjectBranchId == item.ProjectBranchId).FirstOrDefault().ShipmentReciptNo != null ? annexureIDetails.Where(y => y.ProjectBranchId == item.ProjectBranchId).FirstOrDefault().ShipmentReciptNo : "")</td>
+                                                }
+
                                             </tr>
                                             i++;
                                         }

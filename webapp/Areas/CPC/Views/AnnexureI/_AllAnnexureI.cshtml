@@ -45,6 +45,7 @@
                         <tr>
                             <th><input type="checkbox" onchange="checkAll(this, 'checkIt');" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Sr No" id="AnnexureI-dataTable_0" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Order No" id="AnnexureI-dataTable_0" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Date" id="AnnexureI-dataTable_1" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Cash Handed Over CPC" id="AnnexureI-dataTable_2" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Cash Handed Over CIT" id="AnnexureI-dataTable_3" /></th>
@@ -67,6 +68,9 @@
                                 <a href="@Url.Action("Details","AnnexureI",new { Id = x.Id })">
                                     @x.SrNo
                                 </a>
+                            </td>
+                            <td>
+                                @x.OrderNumber
                             </td>
                             <td>
                                 @x.DateOfCollection.ToString(Constants.DATE_FORMAT_CLIENT_SIDE)
