@@ -12,18 +12,17 @@ namespace CPC.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CPCSortedCash
+    public partial class CPCVaultCustodian
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CPCSortedCash()
+        public CPCVaultCustodian()
         {
-            this.CPCSortedCashDetails = new HashSet<CPCSortedCashDetail>();
+            this.CPCVaultCustodianDetails = new HashSet<CPCVaultCustodianDetail>();
         }
     
         public System.Guid Id { get; set; }
-        public long ConsignmentNumber { get; set; }
+        public long SerialNumber { get; set; }
         public System.DateTime Date { get; set; }
-        public string Station { get; set; }
         public System.Guid ProjectBranchId { get; set; }
         public Nullable<int> TotalNumberBundles { get; set; }
         public long TotalBalance { get; set; }
@@ -33,9 +32,15 @@ namespace CPC.Model
         public Nullable<System.Guid> UpdatedBy { get; set; }
         public Nullable<byte> Status { get; set; }
         public bool IsActive { get; set; }
+        public Nullable<System.Guid> CityId { get; set; }
+        public Nullable<int> OrderNumber { get; set; }
+        public Nullable<System.Guid> OrderBookingId { get; set; }
+        public Nullable<System.Guid> SupervisorId { get; set; }
     
+        public virtual CPCCity CPCCity { get; set; }
+        public virtual CPCOrderBooking CPCOrderBooking { get; set; }
         public virtual CPCProjectBranch CPCProjectBranch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CPCSortedCashDetail> CPCSortedCashDetails { get; set; }
+        public virtual ICollection<CPCVaultCustodianDetail> CPCVaultCustodianDetails { get; set; }
     }
 }

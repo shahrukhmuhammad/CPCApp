@@ -12,22 +12,17 @@ namespace CPC.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CPCAnnexureIDetail
+    public partial class CPCVaultCustodianDetail
     {
         public System.Guid Id { get; set; }
-        public System.Guid AnnexureIId { get; set; }
-        public Nullable<System.Guid> ProjectBranchId { get; set; }
-        public Nullable<System.Guid> DenominationId { get; set; }
-        public Nullable<int> NoOfBundles { get; set; }
-        public Nullable<int> TotalAmount { get; set; }
-        public string SealNo { get; set; }
-        public string ShipmentReciptNo { get; set; }
+        public System.Guid DenominationId { get; set; }
+        public System.Guid VaultCustodianId { get; set; }
+        public int NumberOfBundles { get; set; }
+        public int TotalValue { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
-        public Nullable<System.Guid> CashProcessingCellId { get; set; }
     
-        public virtual CPCAnnexureI CPCAnnexureI { get; set; }
         public virtual CPCDenomination CPCDenomination { get; set; }
-        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
+        public virtual CPCVaultCustodian CPCVaultCustodian { get; set; }
     }
 }

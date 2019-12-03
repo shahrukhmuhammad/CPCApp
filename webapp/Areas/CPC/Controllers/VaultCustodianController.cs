@@ -14,14 +14,14 @@ namespace WebApp.Areas.CPC.Controllers
     [AppAuthorize(AppPermission.All, AppPermission.ViewCPC, AppPermission.CPC)]
     public class VaultCustodianController : AppController
     {
-        private UnsortedCashEntity unsortedCashRepo;
+        private ValutCustodianEntity valutCustodianRepo;
         private EmployeeEntity employeeRepo;
         private BranchEntity branchRepo;
         private Common commonRepo;
 
         public VaultCustodianController()
         {
-            unsortedCashRepo = new UnsortedCashEntity();
+            valutCustodianRepo = new ValutCustodianEntity();
             employeeRepo = new EmployeeEntity();
             branchRepo = new BranchEntity();
             commonRepo = new Common();
@@ -32,7 +32,7 @@ namespace WebApp.Areas.CPC.Controllers
         }
         public PartialViewResult _VaultCustodians()
         {
-            var model = unsortedCashRepo.GetAll();
+            var model = valutCustodianRepo.GetAll();
             return PartialView(model);
         }
 
@@ -40,7 +40,7 @@ namespace WebApp.Areas.CPC.Controllers
 
         public ActionResult Details(Guid Id)
         {
-            var model = unsortedCashRepo.GetById(Id);
+            var model = valutCustodianRepo.GetById(Id);
             ViewBag.Employees = employeeRepo.GetAll();
             ViewBag.DenominationList = commonRepo.GetAllDenomination();
             var branchInfo = branchRepo.GetById(model.ProjectBranchId);
@@ -51,14 +51,14 @@ namespace WebApp.Areas.CPC.Controllers
         #region Record
         public ActionResult Record(Guid? Id)
         {
-            var model = new CPCUnsortedCash();
+            var model = new CPCVaultCustodian();
             if (Id.HasValue)
             {
-                model = unsortedCashRepo.GetById(Id.Value);
+                model = valutCustodianRepo.GetById(Id.Value);
             }
             else
             {
-                model.SerialNumber = unsortedCashRepo.GetNextSerialNumber();
+                model.SerialNumber = valutCustodianRepo.GetNextSerialNumber();
                 model.Date = DateTime.Now;
                 //model.IsActive = true;
             }
@@ -69,7 +69,7 @@ namespace WebApp.Areas.CPC.Controllers
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Record(CPCUnsortedCash model, List<CPCUnsortedCashDetail> CPCUnsortedCashDetail, string Date)
+        public ActionResult Record(CPCVaultCustodian model, List<CPCVaultCustodianDetail> CPCVaultCustodianDetail, string Date)
         {
             try
             {
@@ -81,13 +81,13 @@ namespace WebApp.Areas.CPC.Controllers
                     model.Status = 1;
                     model.Date = Utils.SetDateFormate(Date);
                     model.Id = Guid.NewGuid();
-                    var res = unsortedCashRepo.Create(model);
+                    var res = valutCustodianRepo.Create(model);
                     if (res.HasValue)
                     {
-                        var lsToSave = CPCUnsortedCashDetail.Where(x => x.NumberOfBundles > 0 && (x.TotalValue != 0)).ToList();
-                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.UnsortedCashId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
+                        var lsToSave = CPCVaultCustodianDetail.Where(x => x.NumberOfBundles > 0 && (x.TotalValue != 0)).ToList();
+                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.VaultCustodianId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
                         #region Save Details
-                        unsortedCashRepo.Create(lsToSave);
+                        valutCustodianRepo.Create(lsToSave);
                         #endregion
 
                         model.Id = res.Value;
@@ -181,9 +181,9 @@ namespace WebApp.Areas.CPC.Controllers
                 #region Activity Log
                 //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
                 #endregion
-                unsortedCashRepo.InActiveRecord(Id);
+                valutCustodianRepo.InActiveRecord(Id);
 
-                TempData["SuccessMsg"] = "Department has been deleted successfully.";
+                TempData["SuccessMsg"] = "Vault Custodian Entry has been deleted successfully.";
             }
             catch (Exception ex)
             {

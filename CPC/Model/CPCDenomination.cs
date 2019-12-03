@@ -22,6 +22,7 @@ namespace CPC.Model
             this.CPCCashInTransitDenominations = new HashSet<CPCCashInTransitDenomination>();
             this.CPCSortedCashDetails = new HashSet<CPCSortedCashDetail>();
             this.CPCUnsortedCashDetails = new HashSet<CPCUnsortedCashDetail>();
+            this.CPCVaultCustodianDetails = new HashSet<CPCVaultCustodianDetail>();
         }
     
         public System.Guid Id { get; set; }
@@ -37,5 +38,7 @@ namespace CPC.Model
         public virtual ICollection<CPCSortedCashDetail> CPCSortedCashDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCUnsortedCashDetail> CPCUnsortedCashDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCVaultCustodianDetail> CPCVaultCustodianDetails { get; set; }
     }
 }

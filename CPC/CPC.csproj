@@ -61,6 +61,7 @@
     <Compile Include="Entity\AnnexureIIEntity.cs" />
     <Compile Include="Entity\Common.cs" />
     <Compile Include="Entity\AnnexureIEntity.cs" />
+    <Compile Include="Entity\ValutCustodianEntity.cs" />
     <Compile Include="Entity\VaultConsolidatedEntity.cs" />
     <Compile Include="Entity\SortedCashEntity.cs" />
     <Compile Include="Entity\UnsortedCashEntity.cs" />
@@ -152,6 +153,12 @@
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CPCUnsortedCashDetail.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CPCVaultCustodian.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CPCVaultCustodianDetail.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Vew_CPCAnnexureI.cs">

@@ -19,6 +19,7 @@ namespace CPC.Model
         {
             this.CPCProjectBranches = new HashSet<CPCProjectBranch>();
             this.CPCUnsortedCashes = new HashSet<CPCUnsortedCash>();
+            this.CPCVaultCustodians = new HashSet<CPCVaultCustodian>();
         }
     
         public System.Guid Id { get; set; }
@@ -28,5 +29,7 @@ namespace CPC.Model
         public virtual ICollection<CPCProjectBranch> CPCProjectBranches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCVaultCustodian> CPCVaultCustodians { get; set; }
     }
 }
