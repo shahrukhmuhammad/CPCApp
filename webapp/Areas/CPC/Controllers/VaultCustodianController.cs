@@ -58,7 +58,7 @@ namespace WebApp.Areas.CPC.Controllers
             }
             else
             {
-                model.SerialNumber = valutCustodianRepo.GetNextSerialNumber();
+                model.SerialNumber = valutCustodianRepo.GetNextSrNo();
                 model.Date = DateTime.Now;
                 //model.IsActive = true;
             }
@@ -78,18 +78,20 @@ namespace WebApp.Areas.CPC.Controllers
                     model.CreatedBy = CurrentUser.Id;
                     model.CreatedOn = DateTime.Now;
                     model.IsActive = true;
-                    model.Status = 1;
+                    model.Status = (int)AnnexureStatus.Inprocess;
                     model.Date = Utils.SetDateFormate(Date);
                     model.Id = Guid.NewGuid();
                     var res = valutCustodianRepo.Create(model);
                     if (res.HasValue)
                     {
-                        var lsToSave = CPCVaultCustodianDetail.Where(x => x.NumberOfBundles > 0 && (x.TotalValue != 0)).ToList();
+                        var lsToSave = CPCVaultCustodianDetail.Where(x => x.NumberOfBundles > 0 && x.TotalValue > 0).ToList();
                         lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.VaultCustodianId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
                         #region Save Details
                         valutCustodianRepo.Create(lsToSave);
                         #endregion
 
+                        //Update Status
+                        valutCustodianRepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id);
                         model.Id = res.Value;
                     }
 

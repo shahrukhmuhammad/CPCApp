@@ -544,6 +544,44 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <Property Name="ApprovedOn" Type="datetime" />
           <Property Name="Status" Type="tinyint" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SOSTechCPC.dbo.Vew_UnsortedCash' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Vew_UnsortedCash">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="SerialNumber" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="ProjectBranchId" />
+            <PropertyRef Name="TotalBalance" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="CPCUnsortedCashDetailsId" />
+            <PropertyRef Name="DenominationId" />
+            <PropertyRef Name="UnsortedCashId" />
+            <PropertyRef Name="NumberOfBundles" />
+            <PropertyRef Name="TotalValue" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SerialNumber" Type="bigint" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="ProjectBranchId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TotalNumberBundles" Type="int" />
+          <Property Name="TotalBalance" Type="bigint" Nullable="false" />
+          <Property Name="Status" Type="tinyint" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CityId" Type="uniqueidentifier" />
+          <Property Name="OrderNumber" Type="int" />
+          <Property Name="OrderBookingId" Type="uniqueidentifier" />
+          <Property Name="CPCUnsortedCashDetailsId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DenominationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DenominationTitle" Type="int" />
+          <Property Name="UnsortedCashId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NumberOfBundles" Type="int" Nullable="false" />
+          <Property Name="TotalValue" Type="int" Nullable="false" />
+          <Property Name="SealNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="BranchName" Type="nvarchar" MaxLength="200" />
+          <Property Name="BranchCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <Association Name="FK__CashInTra__CashI__6ADAD1BF">
           <End Role="CPCCashInTransit" Type="Self.CPCCashInTransit" Multiplicity="1" />
           <End Role="CPCCashInTransitDenomination" Type="Self.CPCCashInTransitDenomination" Multiplicity="*" />
@@ -1002,6 +1040,31 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
     [Vew_Orderbookings].[Status] AS [Status]
     FROM [dbo].[Vew_Orderbookings] AS [Vew_Orderbookings]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="Vew_UnsortedCash" EntityType="Self.Vew_UnsortedCash" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vew_UnsortedCash].[Id] AS [Id], 
+    [Vew_UnsortedCash].[SerialNumber] AS [SerialNumber], 
+    [Vew_UnsortedCash].[Date] AS [Date], 
+    [Vew_UnsortedCash].[ProjectBranchId] AS [ProjectBranchId], 
+    [Vew_UnsortedCash].[TotalNumberBundles] AS [TotalNumberBundles], 
+    [Vew_UnsortedCash].[TotalBalance] AS [TotalBalance], 
+    [Vew_UnsortedCash].[Status] AS [Status], 
+    [Vew_UnsortedCash].[IsActive] AS [IsActive], 
+    [Vew_UnsortedCash].[CityId] AS [CityId], 
+    [Vew_UnsortedCash].[OrderNumber] AS [OrderNumber], 
+    [Vew_UnsortedCash].[OrderBookingId] AS [OrderBookingId], 
+    [Vew_UnsortedCash].[CPCUnsortedCashDetailsId] AS [CPCUnsortedCashDetailsId], 
+    [Vew_UnsortedCash].[DenominationId] AS [DenominationId], 
+    [Vew_UnsortedCash].[DenominationTitle] AS [DenominationTitle], 
+    [Vew_UnsortedCash].[UnsortedCashId] AS [UnsortedCashId], 
+    [Vew_UnsortedCash].[NumberOfBundles] AS [NumberOfBundles], 
+    [Vew_UnsortedCash].[TotalValue] AS [TotalValue], 
+    [Vew_UnsortedCash].[SealNo] AS [SealNo], 
+    [Vew_UnsortedCash].[BranchName] AS [BranchName], 
+    [Vew_UnsortedCash].[BranchCode] AS [BranchCode], 
+    [Vew_UnsortedCash].[CityName] AS [CityName]
+    FROM [dbo].[Vew_UnsortedCash] AS [Vew_UnsortedCash]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__CashInTra__CashI__6ADAD1BF" Association="Self.FK__CashInTra__CashI__6ADAD1BF">
             <End Role="CPCCashInTransit" EntitySet="CPCCashInTransit" />
             <End Role="CPCCashInTransitDenomination" EntitySet="CPCCashInTransitDenomination" />
@@ -1275,6 +1338,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
             <End Role="CPCAnnexureIDetail" EntitySet="CPCAnnexureIDetails" />
           </AssociationSet>
           <EntitySet Name="Vew_Orderbookings" EntityType="SOSTechCPCModel.Vew_Orderbookings" />
+          <EntitySet Name="Vew_UnsortedCash" EntityType="SOSTechCPCModel.Vew_UnsortedCash" />
         </EntityContainer>
         <EntityType Name="AppUser">
           <Key>
@@ -2231,6 +2295,42 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
           <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Byte" Nullable="false" />
         </EntityType>
+        <EntityType Name="Vew_UnsortedCash">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="SerialNumber" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="ProjectBranchId" />
+            <PropertyRef Name="TotalBalance" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="CPCUnsortedCashDetailsId" />
+            <PropertyRef Name="DenominationId" />
+            <PropertyRef Name="UnsortedCashId" />
+            <PropertyRef Name="NumberOfBundles" />
+            <PropertyRef Name="TotalValue" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SerialNumber" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProjectBranchId" Type="Guid" Nullable="false" />
+          <Property Name="TotalNumberBundles" Type="Int32" />
+          <Property Name="TotalBalance" Type="Int64" Nullable="false" />
+          <Property Name="Status" Type="Byte" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CityId" Type="Guid" />
+          <Property Name="OrderNumber" Type="Int32" />
+          <Property Name="OrderBookingId" Type="Guid" />
+          <Property Name="CPCUnsortedCashDetailsId" Type="Guid" Nullable="false" />
+          <Property Name="DenominationId" Type="Guid" Nullable="false" />
+          <Property Name="DenominationTitle" Type="Int32" />
+          <Property Name="UnsortedCashId" Type="Guid" Nullable="false" />
+          <Property Name="NumberOfBundles" Type="Int32" Nullable="false" />
+          <Property Name="TotalValue" Type="Int32" Nullable="false" />
+          <Property Name="SealNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BranchName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BranchCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2774,6 +2874,33 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_Orderbookings' does not have a 
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vew_UnsortedCash">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.Vew_UnsortedCash">
+              <MappingFragment StoreEntitySet="Vew_UnsortedCash">
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="SealNo" ColumnName="SealNo" />
+                <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+                <ScalarProperty Name="NumberOfBundles" ColumnName="NumberOfBundles" />
+                <ScalarProperty Name="UnsortedCashId" ColumnName="UnsortedCashId" />
+                <ScalarProperty Name="DenominationTitle" ColumnName="DenominationTitle" />
+                <ScalarProperty Name="DenominationId" ColumnName="DenominationId" />
+                <ScalarProperty Name="CPCUnsortedCashDetailsId" ColumnName="CPCUnsortedCashDetailsId" />
+                <ScalarProperty Name="OrderBookingId" ColumnName="OrderBookingId" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TotalBalance" ColumnName="TotalBalance" />
+                <ScalarProperty Name="TotalNumberBundles" ColumnName="TotalNumberBundles" />
+                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

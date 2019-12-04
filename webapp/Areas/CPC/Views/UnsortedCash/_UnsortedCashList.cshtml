@@ -1,6 +1,6 @@
 ﻿@model List<CPCUnsortedCash>
 @{
-    var detailsList = ViewBag.DetailsList as List<Vew_CPCAnnexureI>;
+    var detailsList = ViewBag.DetailsList as List<Vew_UnsortedCash>;
 }
 
 <form id="frm" class="form-Modal" method="post" action="~/" enctype="multipart/form-data">
@@ -11,7 +11,7 @@
         </div>
         <div class="modal-body">
             <div class="table-responsive">
-                <table id="AnnexureIBooking-dataTable" class="table table-hover table-striped table-condensed">
+                <table id="UnsortedCash-dataTable" class="table table-hover table-striped table-condensed">
                     <thead>
                         <tr>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Order No" id="AnnexureIBooking-dataTable_0" /></th>
@@ -31,14 +31,14 @@
                                 @x.OrderNumber
                             </td>
                             <td>
-                                @x.SrNo
+                                @x.SerialNumber
                             </td>
                             <td>
-                                @x.DateOfCollection.ToString(Constants.DATE_FORMAT_CLIENT_SIDE)
+                                @x.Date.ToString(Constants.DATE_FORMAT_CLIENT_SIDE)
                             </td>
 
-                            <td>@(detailsList.Where(ab => ab.Id == x.Id).ToList() != null ? detailsList.Where(ab => ab.Id == x.Id).Sum(y => y.NoOfBundles) : 0)</td>
-                            <td>@(detailsList.Where(ab => ab.Id == x.Id).ToList() != null ? detailsList.Where(ab => ab.Id == x.Id).Sum(y => y.TotalAmount) : 0)</td>
+                            <td>@(detailsList.Where(ab => ab.Id == x.Id).ToList() != null ? detailsList.Where(ab => ab.Id == x.Id).Sum(y => y.NumberOfBundles) : 0)</td>
+                            <td>@(detailsList.Where(ab => ab.Id == x.Id).ToList() != null ? detailsList.Where(ab => ab.Id == x.Id).Sum(y => y.TotalValue) : 0)</td>
                             <td>
                                 @if (x.Status == (int)AnnexureStatus.Approved)
                                 {
