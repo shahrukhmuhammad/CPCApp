@@ -230,7 +230,7 @@ namespace WebApp.Controllers
         {
             try
             {
-                var List = orderbookingRepo.GetAllDetailsById(id);
+                var List = orderbookingRepo.GetAllDetailsById(id).Where(x=> x.Status == (int)AnnexureStatus.Approved);
                 return Json(new
                 {
                     List.FirstOrDefault().OrderNo,

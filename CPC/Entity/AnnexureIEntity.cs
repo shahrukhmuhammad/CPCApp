@@ -320,12 +320,16 @@ namespace CPC
             {
                 using (var context = new SOSTechCPCEntities())
                 {
-                    int? res = context.CPCAnnexureIs.Max(x => x.SrNo);
+                    int? res = context.CPCAnnexureIs.Max(u => (int?)u.SrNo);
+
                     if (res.HasValue)
                     {
                         return Convert.ToInt32(res) + 1;
                     }
-                    return 0;
+                    else
+                    {
+                        return 1;
+                    }
                 }
             }
             catch (Exception ex)
@@ -352,7 +356,6 @@ namespace CPC
 
         public void ChangeStatus(Guid? bookingId, Guid userId, Guid? ProjBranchId)
         {
-
             try
             {
                 using (context = new SOSTechCPCEntities())

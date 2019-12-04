@@ -21,9 +21,8 @@ namespace CPC.Model
             this.CPCCashInTransitDenominations = new HashSet<CPCCashInTransitDenomination>();
             this.CPCSortedCashDetails = new HashSet<CPCSortedCashDetail>();
             this.CPCUnsortedCashDetails = new HashSet<CPCUnsortedCashDetail>();
-            this.CPCAnnexureIDetails = new HashSet<CPCAnnexureIDetail>();
             this.CPCVaultCustodianDetails = new HashSet<CPCVaultCustodianDetail>();
-            this.CPCVaultCustodianDetails1 = new HashSet<CPCVaultCustodianDetail>();
+            this.CPCAnnexureIDetails = new HashSet<CPCAnnexureIDetail>();
         }
     
         public System.Guid Id { get; set; }
@@ -38,10 +37,8 @@ namespace CPC.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCUnsortedCashDetail> CPCUnsortedCashDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCVaultCustodianDetail> CPCVaultCustodianDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CPCVaultCustodianDetail> CPCVaultCustodianDetails1 { get; set; }
+        public virtual ICollection<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
     }
 }

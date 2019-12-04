@@ -37,5 +37,6 @@ namespace CPC.Model
         public Nullable<System.Guid> ApprovedById { get; set; }
         public string ApprovedByName { get; set; }
         public Nullable<System.DateTime> ApprovedOn { get; set; }
+        public byte Status { get; set; }
     }
 }
