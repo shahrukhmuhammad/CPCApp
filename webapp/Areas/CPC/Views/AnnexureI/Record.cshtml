@@ -188,7 +188,8 @@
 @section scripts{
 
     <script type="text/javascript">
-        var orderId
+        var orderId;
+        var isSubmit = true;
         function getOrderId(Id) {
             $('#OrderId').val(Id);
             loadOrderData(Id);
@@ -259,7 +260,7 @@
             });
 
             $("#DateOfCollection").data("DateTimePicker").date(moment('@Model.DateOfCollection.ToShortDateString()'));
-            var isSubmit = true;
+            
 
             $('#btn_Select1').on('click', function () {
                 debugger;

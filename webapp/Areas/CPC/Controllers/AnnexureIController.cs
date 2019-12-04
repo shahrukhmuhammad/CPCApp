@@ -20,6 +20,7 @@ namespace WebApp.Areas.CPC.Controllers
         private BranchEntity branchRepo;
         private Common commonRepo;
         private CPHEntity cashpPocessinHousegRepo;
+        private OrderbookingEntity orderbookingRepo;
 
         public AnnexureIController()
         {
@@ -28,6 +29,7 @@ namespace WebApp.Areas.CPC.Controllers
             branchRepo = new BranchEntity();
             commonRepo = new Common();
             cashpPocessinHousegRepo = new CPHEntity();
+            orderbookingRepo = new OrderbookingEntity();
         }
         public ActionResult AnnexureIs()
         {
@@ -84,6 +86,7 @@ namespace WebApp.Areas.CPC.Controllers
                     model.IsActive = true;
                     model.Status = (int)AnnexureStatus.Inprocess;
                     model.Id = Guid.NewGuid();
+                    //model.SrNo = annexureIRepo.GetNextSrNo();
                     model.DateOfCollection = Utils.SetDateFormate(DateOfCollection);
 
                     var res = annexureIRepo.Create(model);
@@ -95,6 +98,8 @@ namespace WebApp.Areas.CPC.Controllers
                         annexureIRepo.Create(lsToSave);
                         #endregion
 
+                        //Update Orderbooking Status
+                        orderbookingRepo.ChangeStatus(model.OrderBookingId);
                         model.Id = res.Value;
                     }
 
@@ -336,7 +341,7 @@ namespace WebApp.Areas.CPC.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return Json(null, JsonRequestBehavior.AllowGet);
             }
         }
         #endregion

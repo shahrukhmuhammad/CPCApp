@@ -812,6 +812,7 @@
     <Content Include="Areas\CPC\Views\VaultCustodian\VaultCustodians.cshtml" />
     <Content Include="Areas\CPC\Views\VaultCustodian\_VaultCustodians.cshtml" />
     <Content Include="Areas\CPC\Views\VaultCustodian\Details.cshtml" />
+    <Content Include="Areas\CPC\Views\UnsortedCash\_UnsortedCashList.cshtml" />
     <None Include="Properties\PublishProfiles\BaseApp %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - CMS - V2.0 %28Published%29.pubxml" />
     <None Include="Properties\PublishProfiles\BaseApp - A - V3.0 %28Published%29.pubxml" />

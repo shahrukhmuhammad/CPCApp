@@ -145,7 +145,7 @@
                                                 <input id="totalValueFive" type="number" value="0" name="CPCVaultCustodianDetail[2].TotalValue" class="form-control input-sm clearField" />
                                             </td>
                                             <td>
-                                                <input id="SealNoFive" type="text" value="0" name="CPCVaultCustodianDetail[2].SealNo" class="form-control input-sm clearField" readonly/>
+                                                <input id="SealNoFive" type="text" value="0" name="CPCVaultCustodianDetail[2].SealNo" class="form-control input-sm clearField" readonly />
                                             </td>
                                         </tr>
                                         <tr>
@@ -205,7 +205,7 @@
                                                 <input id="totalValueNine" type="number" value="0" name="CPCVaultCustodianDetail[6].TotalValue" class="form-control input-sm clearField" />
                                             </td>
                                             <td>
-                                                <input id="SealNoNine" type="text" value="0" name="CPCVaultCustodianDetail[6].SealNo" class="form-control input-sm clearField" readonly/>
+                                                <input id="SealNoNine" type="text" value="0" name="CPCVaultCustodianDetail[6].SealNo" class="form-control input-sm clearField" readonly />
                                             </td>
                                         </tr>
                                         <tr>
@@ -225,10 +225,10 @@
                         </div>
                     </div>
 
-                    
+
                 </div>
-                    </div>
-                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row">
@@ -260,8 +260,10 @@
             var branchtoAppend = $('#ProjectBranchId');
             //branchtoAppend.html("");
             if (Id) {
-                $.get('/CPC/AnnexureI/GetAnnxureIBranchData?Id=' + Id, function (response) {
+                $.get('/CPC/AnnexureI/GetAnnxureIBranchData/' + Id, function (response) {
                     if (response) {
+                        branchtoAppend.empty();
+                        branchtoAppend.append(new Option(" - Select - ", "0"));
                         $('#OrderNumber').val(response.OrderNumber);
                         $('#OrderBookingId').val(response.OrderBookingId);
 
@@ -292,6 +294,8 @@
                         function (index, item) {
                             $('#CityName').val(item.CityName);
                             $('#CityId').val(item.CityId);
+                            branchtoAppend.empty();
+                            branchtoAppend.append(new Option(" - Select - ", "0"));
                             if (item.DenominationTitle == '10') {
                                 $("#numberOfPacketsThree").val(item.NoOfBundles);
                                 $("#totalValueThree").val(item.TotalAmount);
@@ -355,11 +359,11 @@
             $('.addNewCompany').on('click', function () {
                 $('#loading-mask').show();
                 var target = "";
-                target = "/CPC/AnnexureI/_AnnexureIList";
+                target = "/CPC/UnsortedCash/_UnsortedCashList";
                 // load the url and show modal on success
                 $("#addNewCompany-Modal .modal-dialog").load(target, function () {
                     $("#addNewCompany-Modal").modal("show");
-                    filterDataTable("#AnnexureIBooking-dataTable", [0, 1, 2, 3, 4], [5]);
+                    filterDataTable("#UnsortedCash-dataTable", [0, 1, 2, 3, 4], [5]);
                     $('#loading-mask').hide();
                 });
             });

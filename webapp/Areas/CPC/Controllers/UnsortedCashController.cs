@@ -163,7 +163,44 @@ namespace WebApp.Areas.CPC.Controllers
         #endregion
 
         #region Remote Functions
+        [HttpGet]
+        public JsonResult GetAnnxureIBookingData(Guid id, Guid PriojId)
+        {
+            try
+            {
+                //var List = unsortedCashRepo.GetA(id, PriojId).Where(x => x.DetailStatus == (int)AnnexureStatus.Inprocess);
+                //return Json(new
+                //{
+                //    List.FirstOrDefault().OrderNumber,
+                //    List.FirstOrDefault().Id,
+                //    Details = List.Select(x => new {
+                //        x.ProjectId,
+                //        x.ProjectTitle,
+                //        x.CashProcessingCellId,
+                //        x.CashProcessingCellTitle,
+                //        x.ProjectBranchId,
+                //        x.BranchCode,
+                //        x.BranchName,
+                //        x.DenominationId,
+                //        x.DenominationTitle,
+                //        x.NoOfBundles,
+                //        x.TotalAmount,
+                //        x.CityName,
+                //        x.CityId,
+                //        x.SealNo
+                //    }).ToList(),
 
+                //}, JsonRequestBehavior.AllowGet);
+                return Json(null, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
+        #region
         //[HttpPost]
         //public JsonResult GetCentersByRegionId(Guid Id)
         //{
