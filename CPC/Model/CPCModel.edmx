@@ -385,7 +385,6 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SerialNumber" Type="bigint" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="CityId" Type="uniqueidentifier" />
           <Property Name="ProjectBranchId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TotalNumberBundles" Type="int" />
           <Property Name="TotalBalance" Type="bigint" Nullable="false" />
@@ -395,6 +394,7 @@
           <Property Name="UpdatedBy" Type="uniqueidentifier" />
           <Property Name="Status" Type="tinyint" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CityId" Type="uniqueidentifier" />
           <Property Name="OrderNumber" Type="int" />
           <Property Name="OrderBookingId" Type="uniqueidentifier" />
         </EntityType>
@@ -476,9 +476,9 @@
           <Property Name="VaultCustodianId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="NumberOfBundles" Type="int" Nullable="false" />
           <Property Name="TotalValue" Type="int" Nullable="false" />
+          <Property Name="SealNo" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SealNo" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -616,6 +616,44 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_UnsortedCash' does not have a p
           <Property Name="BranchName" Type="nvarchar" MaxLength="200" />
           <Property Name="BranchCode" Type="nvarchar" MaxLength="20" />
           <Property Name="CityName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SOSTechCPC.dbo.Vew_VaultCustodian' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Vew_VaultCustodian">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="SerialNumber" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="ProjectBranchId" />
+            <PropertyRef Name="TotalBalance" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="CPCUnsortedCashDetailsId" />
+            <PropertyRef Name="DenominationId" />
+            <PropertyRef Name="NumberOfBundles" />
+            <PropertyRef Name="TotalValue" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SerialNumber" Type="bigint" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="ProjectBranchId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TotalNumberBundles" Type="int" />
+          <Property Name="TotalBalance" Type="bigint" Nullable="false" />
+          <Property Name="Status" Type="tinyint" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CityId" Type="uniqueidentifier" />
+          <Property Name="OrderNumber" Type="int" />
+          <Property Name="OrderBookingId" Type="uniqueidentifier" />
+          <Property Name="CPCUnsortedCashDetailsId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DenominationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DenominationTitle" Type="int" />
+          <Property Name="NumberOfBundles" Type="int" Nullable="false" />
+          <Property Name="TotalValue" Type="int" Nullable="false" />
+          <Property Name="SealNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="BranchName" Type="nvarchar" MaxLength="223" />
+          <Property Name="BranchCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SupervisorId" Type="uniqueidentifier" />
+          <Property Name="SupervisorName" Type="nvarchar" MaxLength="223" />
         </EntityType>
         <Association Name="FK__CashInTra__CashI__6ADAD1BF">
           <End Role="CPCCashInTransit" Type="Self.CPCCashInTransit" Multiplicity="1" />
@@ -1723,6 +1761,32 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_UnsortedCash' does not have a p
     [Vew_UnsortedCash].[CityName] AS [CityName]
     FROM [dbo].[Vew_UnsortedCash] AS [Vew_UnsortedCash]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="Vew_VaultCustodian" EntityType="Self.Vew_VaultCustodian" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vew_VaultCustodian].[Id] AS [Id], 
+    [Vew_VaultCustodian].[SerialNumber] AS [SerialNumber], 
+    [Vew_VaultCustodian].[Date] AS [Date], 
+    [Vew_VaultCustodian].[ProjectBranchId] AS [ProjectBranchId], 
+    [Vew_VaultCustodian].[TotalNumberBundles] AS [TotalNumberBundles], 
+    [Vew_VaultCustodian].[TotalBalance] AS [TotalBalance], 
+    [Vew_VaultCustodian].[Status] AS [Status], 
+    [Vew_VaultCustodian].[IsActive] AS [IsActive], 
+    [Vew_VaultCustodian].[CityId] AS [CityId], 
+    [Vew_VaultCustodian].[OrderNumber] AS [OrderNumber], 
+    [Vew_VaultCustodian].[OrderBookingId] AS [OrderBookingId], 
+    [Vew_VaultCustodian].[CPCUnsortedCashDetailsId] AS [CPCUnsortedCashDetailsId], 
+    [Vew_VaultCustodian].[DenominationId] AS [DenominationId], 
+    [Vew_VaultCustodian].[DenominationTitle] AS [DenominationTitle], 
+    [Vew_VaultCustodian].[NumberOfBundles] AS [NumberOfBundles], 
+    [Vew_VaultCustodian].[TotalValue] AS [TotalValue], 
+    [Vew_VaultCustodian].[SealNo] AS [SealNo], 
+    [Vew_VaultCustodian].[BranchName] AS [BranchName], 
+    [Vew_VaultCustodian].[BranchCode] AS [BranchCode], 
+    [Vew_VaultCustodian].[CityName] AS [CityName], 
+    [Vew_VaultCustodian].[SupervisorId] AS [SupervisorId], 
+    [Vew_VaultCustodian].[SupervisorName] AS [SupervisorName]
+    FROM [dbo].[Vew_VaultCustodian] AS [Vew_VaultCustodian]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__CashInTra__CashI__6ADAD1BF" Association="Self.FK__CashInTra__CashI__6ADAD1BF">
             <End Role="CPCCashInTransit" EntitySet="CPCCashInTransit" />
             <End Role="CPCCashInTransitDenomination" EntitySet="CPCCashInTransitDenomination" />
@@ -2600,6 +2664,7 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_UnsortedCash' does not have a p
           </FunctionImport>
           <FunctionImport Name="TaxTypes_SelectAll" ReturnType="Collection(SOSTechCPCModel.TaxTypes_SelectAll_Result)" />
           <EntitySet Name="AppUsers" EntityType="SOSTechCPCModel.AppUser" />
+          <EntitySet Name="Vew_VaultCustodian" EntityType="SOSTechCPCModel.Vew_VaultCustodian" />
         </EntityContainer>
         <EntityType Name="CPCAnnexureI">
           <Key>
@@ -4721,6 +4786,42 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_UnsortedCash' does not have a p
           <Property Name="PageLength" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EmployeeId" Type="Guid" />
         </EntityType>
+        <EntityType Name="Vew_VaultCustodian">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="SerialNumber" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="ProjectBranchId" />
+            <PropertyRef Name="TotalBalance" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="CPCUnsortedCashDetailsId" />
+            <PropertyRef Name="DenominationId" />
+            <PropertyRef Name="NumberOfBundles" />
+            <PropertyRef Name="TotalValue" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SerialNumber" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProjectBranchId" Type="Guid" Nullable="false" />
+          <Property Name="TotalNumberBundles" Type="Int32" />
+          <Property Name="TotalBalance" Type="Int64" Nullable="false" />
+          <Property Name="Status" Type="Byte" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CityId" Type="Guid" />
+          <Property Name="OrderNumber" Type="Int32" />
+          <Property Name="OrderBookingId" Type="Guid" />
+          <Property Name="CPCUnsortedCashDetailsId" Type="Guid" Nullable="false" />
+          <Property Name="DenominationId" Type="Guid" Nullable="false" />
+          <Property Name="DenominationTitle" Type="Int32" />
+          <Property Name="NumberOfBundles" Type="Int32" Nullable="false" />
+          <Property Name="TotalValue" Type="Int32" Nullable="false" />
+          <Property Name="SealNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BranchName" Type="String" MaxLength="223" FixedLength="false" Unicode="true" />
+          <Property Name="BranchCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupervisorId" Type="Guid" />
+          <Property Name="SupervisorName" Type="String" MaxLength="223" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6652,6 +6753,34 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_UnsortedCash' does not have a p
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vew_VaultCustodian">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.Vew_VaultCustodian">
+              <MappingFragment StoreEntitySet="Vew_VaultCustodian">
+                <ScalarProperty Name="SupervisorName" ColumnName="SupervisorName" />
+                <ScalarProperty Name="SupervisorId" ColumnName="SupervisorId" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="SealNo" ColumnName="SealNo" />
+                <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+                <ScalarProperty Name="NumberOfBundles" ColumnName="NumberOfBundles" />
+                <ScalarProperty Name="DenominationTitle" ColumnName="DenominationTitle" />
+                <ScalarProperty Name="DenominationId" ColumnName="DenominationId" />
+                <ScalarProperty Name="CPCUnsortedCashDetailsId" ColumnName="CPCUnsortedCashDetailsId" />
+                <ScalarProperty Name="OrderBookingId" ColumnName="OrderBookingId" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TotalBalance" ColumnName="TotalBalance" />
+                <ScalarProperty Name="TotalNumberBundles" ColumnName="TotalNumberBundles" />
+                <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

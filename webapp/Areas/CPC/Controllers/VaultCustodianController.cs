@@ -43,10 +43,12 @@ namespace WebApp.Areas.CPC.Controllers
         public ActionResult Details(Guid Id)
         {
             var model = valutCustodianRepo.GetById(Id);
-            ViewBag.Employees = employeeRepo.GetAll();
+            var emp = employeeRepo.GetById(model.SupervisorId.Value);
+            ViewData["Employee"] = $"{emp.Code} - {emp.Name}";
             ViewBag.DenominationList = commonRepo.GetAllDenomination();
             var branchInfo = branchRepo.GetById(model.ProjectBranchId);
             ViewData["BranchName"] = $"{branchInfo.BranchCode} - {branchInfo.BranchName}";
+            ViewData["CityName"] = branchInfo.CPCCity.CityName;
             return View(model);
         }
         #endregion
@@ -91,7 +93,6 @@ namespace WebApp.Areas.CPC.Controllers
                         #region Save Details
                         valutCustodianRepo.Create(lsToSave);
                         #endregion
-
                         //Update Status
                         unsortedCashRepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id);
                         model.Id = res.Value;

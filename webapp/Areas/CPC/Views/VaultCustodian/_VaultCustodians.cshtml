@@ -10,7 +10,7 @@
     <div class="modal-content bg-transparent">
         <div class="modal-header">
             <h3 class="modal-title">
-                Vauld Custodian Management
+                Vault Custodian Management
                 <span class="pull-right menu-links">
                     <a href="javascript://" class="text-muted" title="go to previous" style="margin:0 8px;" onclick="window.history.back()">
                         <i class="fa fa-angle-left"></i> <span class="grid-buttons"> Go Back</span>
@@ -63,7 +63,7 @@
                                 <td class="text-center">
                                     <div class="btn-group btn-group-xs" role="group">
                                         @*<a href="@Url.Action("Details","UnsortedCash")/@x.Id/1" class="btn btn-primary" title="Details">*@
-                                        <a href="@Url.Action("Details","UnsortedCash",new { Id = x.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
+                                        <a href="@Url.Action("Details","VaultCustodian",new { Id = x.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
                                         @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.CPC))
                                         {
                                             @*<a href="@Url.Action("Record","UnsortedCashDetail")/@x.Id" class="btn btn-info" title="Edit"><i class="fa fa-edit"></i></a>*@

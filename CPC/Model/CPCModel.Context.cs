@@ -57,6 +57,7 @@ namespace CPC.Model
         public virtual DbSet<Vew_Orderbookings> Vew_Orderbookings { get; set; }
         public virtual DbSet<Vew_UnsortedCash> Vew_UnsortedCash { get; set; }
         public virtual DbSet<AppUser> AppUsers { get; set; }
+        public virtual DbSet<Vew_VaultCustodian> Vew_VaultCustodian { get; set; }
     
         public virtual int f_TestMaxCode()
         {

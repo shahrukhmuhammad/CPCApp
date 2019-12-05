@@ -42,6 +42,20 @@ namespace CPC
                 throw ex;
             }
         }
+        public Vew_VaultCustodian GetDetailsById(Guid Id)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.Vew_VaultCustodian.Where(x => x.Id == Id).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         //public List<CustomSelectList> GetDepartmentDropdown(Guid? Id = null)
         //{
