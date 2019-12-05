@@ -14,14 +14,14 @@ namespace WebApp.Areas.CPC.Controllers
     [AppAuthorize(AppPermission.All, AppPermission.ViewCPC, AppPermission.CPC)]
     public class VaultConsolidatedController : AppController
     {
-        private SortedCashEntity sortedCashRepo;
+        private VaultConsolidatedEntity vaultConsolidatedRepo;
         private EmployeeEntity employeeRepo;
         private BranchEntity branchRepo;
         private Common commonRepo;
 
         public VaultConsolidatedController()
         {
-            sortedCashRepo = new SortedCashEntity();
+            vaultConsolidatedRepo = new VaultConsolidatedEntity();
             employeeRepo = new EmployeeEntity();
             branchRepo = new BranchEntity();
             commonRepo = new Common();
@@ -32,7 +32,7 @@ namespace WebApp.Areas.CPC.Controllers
         }
         public PartialViewResult _AllVaultConsolidateds()
         {
-            var model = sortedCashRepo.GetAll();
+            var model = vaultConsolidatedRepo.GetAll();
             return PartialView(model);
         }
 
@@ -40,7 +40,7 @@ namespace WebApp.Areas.CPC.Controllers
 
         public ActionResult Details(Guid Id)
         {
-            var model = sortedCashRepo.GetById(Id);
+            var model = vaultConsolidatedRepo.GetById(Id);
             ViewBag.Employees = employeeRepo.GetAll();
             ViewBag.DenominationList = commonRepo.GetAllDenomination();
             var branchInfo = branchRepo.GetById(model.ProjectBranchId);
@@ -51,14 +51,14 @@ namespace WebApp.Areas.CPC.Controllers
         #region Record
         public ActionResult Record(Guid? Id)
         {
-            var model = new CPCSortedCash();
+            var model = new CPCVaultConsolidated();
             if (Id.HasValue)
             {
-                model = sortedCashRepo.GetById(Id.Value);
+                model = vaultConsolidatedRepo.GetById(Id.Value);
             }
             else
             {
-                model.ConsignmentNumber = sortedCashRepo.GetNextConsignmentNumber();
+                model.SerialNumber = vaultConsolidatedRepo.GetNextSerialNumber();
                 model.Date = DateTime.Now;
                 //model.IsActive = true;
             }
@@ -70,7 +70,7 @@ namespace WebApp.Areas.CPC.Controllers
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Record(CPCSortedCash model, List<CPCSortedCashDetail> CPCSortedCashDetail, string Date)
+        public ActionResult Record(CPCVaultConsolidated model, List<CPCVaultConsolidatedDetail> CPCVaultConsolidatedDetail, string Date)
         {
             try
             {
@@ -82,14 +82,13 @@ namespace WebApp.Areas.CPC.Controllers
                     model.Status = 1;
                     model.Date = Utils.SetDateFormate(Date);
                     model.Id = Guid.NewGuid();
-                    var res = sortedCashRepo.Create(model);
+                    var res = vaultConsolidatedRepo.Create(model);
                     if (res.HasValue)
                     {
-                        var lsToSave = CPCSortedCashDetail.Where(x => (x.NumberOfBundlesReIssuable > 0 || x.NumberOfBundlesSoiled > 0 || x.NumberOfBundlesMachineRejected > 0 ||
-                        x.NumberOfBundlesCounterFeit > 0 || x.NumberOfBundlesMismatch > 0) && (x.TotalValue != 0)).ToList();
-                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.SortedCashId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
+                        var lsToSave = CPCVaultConsolidatedDetail.Where(x => x.NumberOfBundles > 0 && (x.TotalValue != 0)).ToList();
+                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.VaultConsolidatedId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
                         #region Save Details
-                        sortedCashRepo.Create(lsToSave);
+                        vaultConsolidatedRepo.Create(lsToSave);
                         #endregion
 
                         model.Id = res.Value;
@@ -119,7 +118,7 @@ namespace WebApp.Areas.CPC.Controllers
                     //realtime.UpdateMessages(null);
                     #endregion
 
-                    TempData["SuccessMsg"] = model.ConsignmentNumber + " has been created successfully.";
+                    TempData["SuccessMsg"] = model.SerialNumber  + " has been created successfully.";
                 }
                 else
                 {
@@ -156,7 +155,7 @@ namespace WebApp.Areas.CPC.Controllers
             //}
             //else
             //{
-            return RedirectToAction("SortedCashs");
+            return RedirectToAction("VaultConsolidateds");
         }
         #endregion
 
@@ -183,7 +182,7 @@ namespace WebApp.Areas.CPC.Controllers
                 #region Activity Log
                 //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
                 #endregion
-                sortedCashRepo.InActiveRecord(Id);
+                vaultConsolidatedRepo.InActiveRecord(Id);
 
                 TempData["SuccessMsg"] = "Department has been deleted successfully.";
             }

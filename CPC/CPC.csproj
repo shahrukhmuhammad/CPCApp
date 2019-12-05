@@ -155,6 +155,12 @@
     <Compile Include="Model\CPCUnsortedCashDetail.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CPCVaultConsolidated.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CPCVaultConsolidatedDetail.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\CPCVaultCustodian.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
