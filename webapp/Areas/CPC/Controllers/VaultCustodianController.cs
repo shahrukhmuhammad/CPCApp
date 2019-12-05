@@ -162,6 +162,47 @@ namespace WebApp.Areas.CPC.Controllers
         }
         #endregion
 
+        #region Custodian Popup
+        public ActionResult _VaultCustodianList()
+        {
+            var model = valutCustodianRepo.GetAllApproved();
+            ViewBag.DetailsList = valutCustodianRepo.GetAllDetails();
+            return PartialView(model);
+        }
+        #endregion
+
+        public JsonResult GetVaultCustodian(Guid id)
+        {
+            try
+            {
+                var List = valutCustodianRepo.GetAllDetailsById(id);
+                return Json(new
+                {
+                    List.FirstOrDefault().ProjectBranchId,
+                    List.FirstOrDefault().BranchName,
+                    List.FirstOrDefault().OrderNumber,
+                    List.FirstOrDefault().SerialNumber,
+                    List.FirstOrDefault().CityId,
+                    List.FirstOrDefault().CityName,
+                    List.FirstOrDefault().OrderBookingId,
+
+                    Details = List.Select(x => new {
+                        x.DenominationId,
+                        x.DenominationTitle,
+                        x.NumberOfBundles,
+                        x.TotalValue,
+                        x.SealNo
+                    }).ToList(),
+
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         #region Remote Functions
 
         //[HttpPost]

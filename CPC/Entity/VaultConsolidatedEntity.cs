@@ -249,7 +249,16 @@ namespace CPC
             {
                 using (var context = new SOSTechCPCEntities())
                 {
-                    return context.CPCVaultConsolidateds.Max(x => x.SerialNumber) <= 0 ? 1 : (int)context.CPCVaultConsolidateds.Max(x => x.SerialNumber) + 1;
+                    int? res = context.CPCVaultCustodians.Max(u => (int?)u.SerialNumber);
+
+                    if (res.HasValue)
+                    {
+                        return Convert.ToInt32(res) + 1;
+                    }
+                    else
+                    {
+                        return 1;
+                    }
                 }
             }
             catch (Exception ex)

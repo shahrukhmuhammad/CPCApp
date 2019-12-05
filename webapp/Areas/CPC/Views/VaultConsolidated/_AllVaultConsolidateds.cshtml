@@ -30,51 +30,49 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" onchange="checkAll(this, 'checkIt');" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Order #" id="VaultConsolidated-dataTable_0" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Date" id="VaultConsolidated-dataTable_1" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="CPH" id="VaultConsolidated-dataTable_2" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Branch" id="VaultConsolidated-dataTable_3" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="City" id="VaultConsolidated-dataTable_4" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Sorted" id="VaultConsolidated-dataTable_5" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Unsorted" id="VaultConsolidated-dataTable_6" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Total Amount" id="VaultConsolidated-dataTable_7" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Serial Number#" id="VaultConsolidated-dataTable_0" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Order Number#" id="VaultConsolidated-dataTable_1" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Date" id="VaultConsolidated-dataTable_2" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Client" id="VaultConsolidated-dataTable_3" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Status" id="VaultConsolidated-dataTable_4" /></th>
                             <th class="text-center" width="100px">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var x in Model)
                         {
-                            <tr>
-                                <td>
+                        <tr>
+                            <td>
+                                @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.CPC))
+                                {
+                                    <input type="checkbox" class="checkIt" value="@x.Id" />
+                                }
+                            </td>
+                            <td><a href="@Url.Action("Details","VaultConsolidated",new { Id = x.Id })">@x.SerialNumber</a></td>
+                            <td>@x.OrderNumber</td>
+                            <td>@x.Date</td>
+                            @*<td>@x.Station</td>*@
+                            <td> @($"{x.CPCProjectBranch.BranchCode} - {x.CPCProjectBranch.BranchName}")</td>
+                            @if (x.Status == 1)
+                            {
+                                <td> <label class="label label-warning">@AnnexureStatus.Inprocess</label></td>
+                            }
+                            else
+                            {
+                                <td> <label class="label label-warning">@AnnexureStatus.Completed</label></td>
+                            }
+                            <td class="text-center">
+                                <div class="btn-group btn-group-xs" role="group">
+                                    @*<a href="@Url.Action("Details","VaultConsolidated")/@x.Id/1" class="btn btn-primary" title="Details">*@
+                                    <a href="@Url.Action("Details","VaultConsolidated",new { Id = x.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
                                     @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.CPC))
                                     {
-                                        <input type="checkbox" class="checkIt" value="@x.Id" />
+                                        @*<a href="@Url.Action("Record","VaultConsolidatedDetail")/@x.Id" class="btn btn-info" title="Edit"><i class="fa fa-edit"></i></a>*@
+                                        <a href="javascript://" onclick="deleteRecord('@Url.Action("Delete")', '@x.Id')" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
                                     }
-                                </td>
-                                <td><a href="@Url.Action("Details","VaultConsolidated",new { Id = x.Id })">@x.SerialNumber</a></td>
-                                <td>@x.Date</td>
-                                @*<td>@x.Station</td>*@
-                                <td> @($"{x.CPCProjectBranch.BranchCode} - {x.CPCProjectBranch.BranchName}")</td>
-                                @if (x.Status == 1)
-                                {
-                                    <td> <label class="label label-warning">@AnnexureStatus.Inprocess</label></td>
-                                }
-                                else
-                                {
-                                    <td> <label class="label label-warning">@AnnexureStatus.Completed</label></td>
-                                }
-                                <td class="text-center">
-                                    <div class="btn-group btn-group-xs" role="group">
-                                        @*<a href="@Url.Action("Details","VaultConsolidated")/@x.Id/1" class="btn btn-primary" title="Details">*@
-                                        <a href="@Url.Action("Details","VaultConsolidated",new { Id = x.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
-                                        @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.CPC))
-                                        {
-                                            @*<a href="@Url.Action("Record","VaultConsolidatedDetail")/@x.Id" class="btn btn-info" title="Edit"><i class="fa fa-edit"></i></a>*@
-                                            <a href="javascript://" onclick="deleteRecord('@Url.Action("Delete")', '@x.Id')" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
-                                        }
-                                    </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

@@ -15,6 +15,7 @@ namespace WebApp.Areas.CPC.Controllers
     public class VaultConsolidatedController : AppController
     {
         private VaultConsolidatedEntity vaultConsolidatedRepo;
+        private ValutCustodianEntity valutCustodianRepo;
         private EmployeeEntity employeeRepo;
         private BranchEntity branchRepo;
         private Common commonRepo;
@@ -22,6 +23,7 @@ namespace WebApp.Areas.CPC.Controllers
         public VaultConsolidatedController()
         {
             vaultConsolidatedRepo = new VaultConsolidatedEntity();
+            valutCustodianRepo = new ValutCustodianEntity();
             employeeRepo = new EmployeeEntity();
             branchRepo = new BranchEntity();
             commonRepo = new Common();
@@ -90,6 +92,8 @@ namespace WebApp.Areas.CPC.Controllers
                         #region Save Details
                         vaultConsolidatedRepo.Create(lsToSave);
                         #endregion
+
+                        valutCustodianRepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id);
 
                         model.Id = res.Value;
                     }

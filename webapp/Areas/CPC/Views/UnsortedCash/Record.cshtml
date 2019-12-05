@@ -52,7 +52,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-3 horizontal-label">Date</label>
                                         <div class="col-sm-9">
-                                            <input name="Date" id="Date" class="form-control input-sm datePicker" type="text" value="@Model.Date.ToShortDateString()" required autocomplete="off">
+                                            <input name="Date" id="Date" class="form-control input-sm datePicker" type="text" value="@Model.Date.ToShortDateString()" readonly="readonly" required autocomplete="off">
                                             @Html.ValidationMessageFor(m => m.Date)
                                         </div>
                                     </div>

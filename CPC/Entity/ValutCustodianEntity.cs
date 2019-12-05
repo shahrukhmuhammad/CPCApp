@@ -280,5 +280,75 @@ namespace CPC
                 return false;
             }
         }
+
+        public List<CPCVaultCustodian> GetAllApproved()
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.CPCVaultCustodians.Where(x => x.IsActive && x.Status == (int)AnnexureStatus.Inprocess).OrderBy(x => x.CreatedOn).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<Vew_VaultCustodian> GetAllDetails()
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.Vew_VaultCustodian.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public List<Vew_VaultCustodian> GetAllDetailsById(Guid Id)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.Vew_VaultCustodian.Where(x => x.VaultCustodianId == Id).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        #region Update Status
+        public void ChangeStatus(Guid? bookingId, Guid UserId)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Update Status
+                    var res = context.CPCVaultCustodians.Where(x => x.OrderBookingId == bookingId).FirstOrDefault();
+                    if (res != null)
+                    {
+                        res.Status = (int)AnnexureStatus.Proceeded;
+                        res.UpdatedOn = DateTime.Now;
+                        res.UpdatedBy = UserId;
+                        context.SaveChanges();
+                    }
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        #endregion
     }
 }

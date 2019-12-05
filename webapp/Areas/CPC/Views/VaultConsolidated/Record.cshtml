@@ -2,8 +2,9 @@
 @model CPCVaultConsolidated
 @{
     var queryId = ViewContext.RouteData.Values["Id"];
-    ViewBag.Title = (queryId == null ? "Add New Sorted Cash" : "Edit Sorted Cash");
+    ViewBag.Title = (queryId == null ? "Add New Vault Record" : "Edit Vault Record");
     var denomList = ViewBag.DenominationList as List<CPCDenomination>;
+    var employeeList = ViewBag.EmployeeList as List<CPCEmployee>;
 }
 
 <form id="lead-frm" class="user-Profile" method="post" enctype="multipart/form-data">
@@ -20,12 +21,11 @@
         </div>
     </div>
 
-
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h4> Vault Consolidated </h4>
+                    <h4> Vault Consolidate </h4>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">
@@ -33,14 +33,16 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 text-left horizontal-label">Order Number</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBoxFor(x => x.OrderNumber, new { @class = "form-control input-sm", })
+                                            @Html.TextBoxFor(x => x.OrderNumber, new { @class = "form-control input-sm", @required = "required", @readonly = "readonly" })
+                                            @Html.ValidationMessageFor(m => m.OrderNumber)
+                                            @Html.HiddenFor(x => x.OrderBookingId)
                                             <a href="javascript://" class="btn btn-sm btn-primary addNewCompany"><i class="fa fa-plus"></i> Select Order</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="row form-group">
-                                        <label class="col-sm-4 text-left horizontal-label">Serial Number</label>
+                                        <label class="col-sm-4 text-left horizontal-label">Consignment Number</label>
                                         <div class="col-sm-8">
                                             @Html.TextBoxFor(x => x.SerialNumber, new { @class = "form-control input-sm", @type = "number", @required = "required", @autofocus = "true" })
                                             <span class="duplicate text-danger"></span>
@@ -52,11 +54,204 @@
                                     <div class="row form-group">
                                         <label class="col-sm-3 horizontal-label">Date</label>
                                         <div class="col-sm-9">
-                                            <input name="Date" id="Date" class="form-control input-sm datePicker" type="text" value="@Model.Date.ToShortDateString()" required autocomplete="off">
-                                            @Html.ValidationMessageFor(m => m.Date)
+                                            <input name="Date" id="Date" class="form-control input-sm datePicker" type="text" value="@Model.Date.ToShortDateString()" readonly="readonly" required autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="row form-group">
+                                        <label class="col-sm-4 text-left horizontal-label">Client/Branch</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control input-sm" id="ProjectBranch" readonly />
+                                            @Html.HiddenFor(x => x.ProjectBranchId)
+                                            @*<select id="ProjectBranchId" name="ProjectBranchId" class="form-control input-sm select2 ProjectBranchId">
+                                                    <option> - Select - </option>
+                                                </select>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="row form-group">
+                                        <label class="col-sm-4 text-left horizontal-label">City</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control input-sm" id="CityName" readonly />
+                                            @Html.HiddenFor(x => x.CityId)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row tb-padding">
+                                <table id="mytableConsolidated" class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    </thead>
+                                    <tr>
+                                        <th>Denomination</th>
+                                        <th>Volume in Bundles</th>
+                                        <th>Amount</th>
+                                        <th>Seal No.</th>
+                                        <th>Sorter</th>
+                                    </tr>
+                                    <tbody>
+
+                                        <tr>
+                                            <td>
+                                                Rs.10/-
+                                                <input type="hidden" name="CPCVaultConsolidatedDetail[0].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 10).FirstOrDefault().Id)" />
+                                            </td>
+                                            <td data-id="10">
+                                                <input id="numberOfPacketsThree" type="number" value="0" name="CPCVaultConsolidatedDetail[0].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
+                                            </td>
+                                            <td>
+                                                <input id="totalValueThree" type="number" value="0" name="CPCVaultConsolidatedDetail[0].TotalValue" class="form-control input-sm clearField" />
+                                            </td>
+                                            <td>
+                                                <input id="SealNoThree" type="text" value="0" name="CPCVaultConsolidatedDetail[0].SealNo" class="form-control input-sm clearField" readonly />
+                                            </td>
+                                            <td class="col-sm-4">
+                                                <select id="sorterEmployeeThree" name="CPCVaultConsolidatedDetail[0].SorterId" class="form-control input-sm select2 clearField">
+                                                    <option> - Select - </option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Rs.20/-
+                                                <input type="hidden" name="CPCVaultConsolidatedDetail[1].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 20).FirstOrDefault().Id)" />
+                                            </td>
+                                            <td data-id="20">
+                                                <input id="numberOfPacketsFour" type="number" value="0" name="CPCVaultConsolidatedDetail[1].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
+                                            </td>
+                                            <td>
+                                                <input id="totalValueFour" type="number" value="0" name="CPCVaultConsolidatedDetail[1].TotalValue" class="form-control input-sm clearField" />
+                                            </td>
+                                            <td>
+                                                <input id="SealNoFour" type="text" value="0" name="CPCVaultConsolidatedDetail[1].SealNo" class="form-control input-sm clearField" readonly />
+                                            </td>
+                                            <td class="col-sm-4">
+                                                <select id="sorterEmployeeFour" name="CPCVaultConsolidatedDetail[1].SorterId" class="form-control input-sm select2 clearField">
+                                                    <option> - Select - </option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Rs.50/-
+                                                <input type="hidden" name="CPCVaultConsolidatedDetail[2].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 50).FirstOrDefault().Id)" />
+                                            </td>
+                                            <td data-id="50">
+                                                <input id="numberOfPacketsFive" type="number" value="0" name="CPCVaultConsolidatedDetail[2].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
+                                            </td>
+                                            <td>
+                                                <input id="totalValueFive" type="number" value="0" name="CPCVaultConsolidatedDetail[2].TotalValue" class="form-control input-sm clearField" />
+                                            </td>
+                                            <td>
+                                                <input id="SealNoFive" type="text" value="0" name="CPCVaultConsolidatedDetail[2].SealNo" class="form-control input-sm clearField" readonly />
+                                            </td>
+                                            <td class="col-sm-4">
+                                                <select id="sorterEmployeeFive" name="CPCVaultConsolidatedDetail[2].SorterId" class="form-control input-sm select2 clearField">
+                                                    <option> - Select - </option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Rs.100/-
+                                                <input type="hidden" name="CPCVaultConsolidatedDetail[3].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 100).FirstOrDefault().Id)" />
+                                            </td>
+                                            <td data-id="100">
+                                                <input id="numberOfPacketsSix" type="number" value="0" name="CPCVaultConsolidatedDetail[3].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
+                                            </td>
+                                            <td>
+                                                <input id="totalValueSix" type="number" value="0" name="CPCVaultConsolidatedDetail[3].TotalValue" class="form-control input-sm clearField" />
+                                            </td>
+                                            <td>
+                                                <input id="SealNoSix" type="text" value="0" name="CPCVaultConsolidatedDetail[3].SealNo" class="form-control input-sm clearField" readonly />
+                                            </td>
+                                            <td class="col-sm-4">
+                                                <select id="sorterEmployeeSix" name="CPCVaultConsolidatedDetail[3].SorterId" class="form-control input-sm select2 clearField">
+                                                    <option> - Select - </option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Rs.500/-
+                                                <input type="hidden" name="CPCVaultConsolidatedDetail[4].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 500).FirstOrDefault().Id)" />
+                                            </td>
+                                            <td data-id="500">
+                                                <input id="numberOfPacketsSeven" type="number" value="0" name="CPCVaultConsolidatedDetail[4].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
+                                            </td>
+                                            <td>
+                                                <input id="totalValueSeven" type="number" value="0" name="CPCVaultConsolidatedDetail[4].TotalValue" class="form-control input-sm clearField" />
+                                            </td>
+                                            <td>
+                                                <input id="SealNoSeven" type="text" value="0" name="CPCVaultConsolidatedDetail[4].SealNo" class="form-control input-sm clearField" readonly />
+                                            </td>
+                                            <td class="col-sm-4">
+                                                <select id="sorterEmployeeSeven" name="CPCVaultConsolidatedDetail[4].SorterId" class="form-control input-sm select2 clearField">
+                                                    <option> - Select - </option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Rs.1000/-
+                                                <input type="hidden" name="CPCVaultConsolidatedDetail[5].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 1000).FirstOrDefault().Id)" />
+                                            </td>
+                                            <td data-id="1000">
+                                                <input id="numberOfPacketsEight" type="number" value="0" name="CPCVaultConsolidatedDetail[5].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
+                                            </td>
+                                            <td>
+                                                <input id="totalValueEight" type="number" value="0" name="CPCVaultConsolidatedDetail[5].TotalValue" class="form-control input-sm clearField" />
+                                            </td>
+                                            <td>
+                                                <input id="SealNoEight" type="text" value="0" name="CPCVaultConsolidatedDetail[5].SealNo" class="form-control input-sm clearField" readonly />
+                                            </td>
+                                            <td class="col-sm-4">
+                                                <select id="sorterEmployeeEight" name="CPCVaultConsolidatedDetail[5].SorterId" class="form-control input-sm select2 clearField">
+                                                    <option> - Select - </option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Rs.5000/-
+                                                <input type="hidden" name="CPCVaultConsolidatedDetail[6].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 5000).FirstOrDefault().Id)" />
+                                            </td>
+                                            <td data-id="5000">
+                                                <input id="numberOfPacketsNine" type="number" value="0" name="CPCVaultConsolidatedDetail[6].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
+                                            </td>
+                                            <td>
+                                                <input id="totalValueNine" type="number" value="0" name="CPCVaultConsolidatedDetail[6].TotalValue" class="form-control input-sm clearField" />
+                                            </td>
+                                            <td>
+                                                <input id="SealNoNine" type="text" value="0" name="CPCVaultConsolidatedDetail[6].SealNo" class="form-control input-sm clearField" readonly />
+                                            </td>
+                                            <td class="col-sm-4">
+                                                <select id="sorterEmployeeNine" name="CPCVaultConsolidatedDetail[6].SorterId" class="form-control input-sm select2 clearField">
+                                                    <option> - Select - </option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> Total </td>
+                                            <td><input id="finalTotalNumber" type="number" value="" class="form-control input-sm clearField" readonly="readonly" /> </td>
+                                            <td><input id="finalTotalValue" type="number" value="" class="form-control input-sm clearField" readonly="readonly" /> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
                     </div>
@@ -73,16 +268,288 @@
             </div>
         </div>
     </div>
+    <select id="listEmployee" style="display:none;"></select>
 </form>
+<div class="modal fade" id="addNewCompany-Modal" tabindex="-1" role="dialog" aria-labelledby="addNewCompany-Modal" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+    </div>
+</div>
 
 
 @section scripts{
 
     <script type="text/javascript">
+
+        var orderId
+        function getOrderId(Id) {
+            $('#OrderId').val(Id);
+            loadOrderData(Id);
+            $('#addNewCompany-Modal').modal('toggle');
+        }
+        function loadOrderData(Id) {
+            var finalTotalAmount = 0;
+            var finalTotalBundles = 0;
+            if (Id) {
+                $.get('/CPC/VaultCustodian/GetVaultCustodian/' + Id, function (response) {
+                    if (response) {
+                        $('#ProjectBranch').val(response.BranchName);
+                        $('#ProjectBranchId').val(response.ProjectBranchId);
+                        $('#CityId').val(response.CityId);
+                        $('#CityName').val(response.CityName);
+                        $('#OrderNumber').val(response.OrderNumber);
+                        $('#OrderBookingId').val(response.OrderBookingId);
+
+                        $.each(response.Details, function (index, item) {
+                            debugger;
+                            if (item.DenominationTitle == '10') {
+                                $("#numberOfPacketsThree").val(item.NumberOfBundles);
+                                $("#totalValueThree").val(item.TotalValue);
+                                $("#SealNoThree").val(item.SealNo);
+
+                                var options = $("#listEmployee > option").clone();
+                                $("#mytableConsolidated > tbody > tr #sorterEmployeeThree").append(options);
+
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
+                            }
+                            else if (item.DenominationTitle == '20') {
+                                $("#numberOfPacketsFour").val(item.NumberOfBundles);
+                                $("#totalValueFour").val(item.TotalValue);
+                                $("#SealNoFour").val(item.SealNo);
+
+                                var options = $("#listEmployee > option").clone();
+                                $("#mytableConsolidated > tbody > tr #sorterEmployeeFour").append(options);
+
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
+                            }
+                            else if (item.DenominationTitle == '50') {
+                                $("#numberOfPacketsFive").val(item.NumberOfBundles);
+                                $("#totalValueFive").val(item.TotalValue);
+                                $("#SealNoFive").val(item.SealNo);
+
+                                var options = $("#listEmployee > option").clone();
+                                $("#mytableConsolidated > tbody > tr #sorterEmployeeFive").append(options);
+
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
+                            }
+                            else if (item.DenominationTitle == '100') {
+                                $("#numberOfPacketsSix").val(item.NumberOfBundles);
+                                $("#totalValueSix").val(item.TotalValue);
+                                $("#SealNoSix").val(item.SealNo);
+
+                                var options = $("#listEmployee > option").clone();
+                                $("#mytableConsolidated > tbody > tr #sorterEmployeeSix").append(options);
+
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
+                            }
+                            else if (item.DenominationTitle == '500') {
+                                $("#numberOfPacketsSeven").val(item.NumberOfBundles);
+                                $("#totalValueSeven").val(item.TotalValue);
+                                $("#SealNoSeven").val(item.SealNo);
+
+                                var options = $("#listEmployee > option").clone();
+                                $("#mytableConsolidated > tbody > tr #sorterEmployeeSeven").append(options);
+
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
+                            }
+                            else if (item.DenominationTitle == '1000') {
+                                $("#numberOfPacketsEight").val(item.NumberOfBundles);
+                                $("#totalValueEight").val(item.TotalValue);
+                                $("#SealNoEight").val(item.SealNo);
+
+                                var options = $("#listEmployee > option").clone();
+                                $("#mytableConsolidated > tbody > tr #sorterEmployeeEight").append(options);
+
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
+                            }
+                            else if (item.DenominationTitle == '5000') {
+                                $("#numberOfPacketsNine").val(item.NumberOfBundles);
+                                $("#totalValueNine").val(item.TotalValue);
+                                $("#SealNoNine").val(item.SealNo);
+
+                                var options = $("#listEmployee > option").clone();
+                                $("#mytableConsolidated > tbody > tr #sorterEmployeeNine").append(options);
+
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
+                            }
+                            $("#finalTotalNumber").val(finalTotalBundles);
+                            $("#finalTotalValue").val(finalTotalAmount);
+                            });
+                    }
+                    else {
+                        //$('.duplicate').html('');
+                        //isSubmit = true;
+                    }
+                });
+            }
+        }
+
+        $('.ProjectBranchId').change(function (e) {
+            $(".clearField").val("0");
+            var finalTotalAmount = 0;
+            var finalTotalBundles = 0;
+            var OrderBookingId = $("#OrderBookingId").val();
+            const ProjectBranchId = $('#ProjectBranchId option:selected').attr('value');
+            $.get('/CPC/UnsortedCash/GetAnnxureIBookingData?Id=' + OrderBookingId, function (response) {
+                if (response) {
+                    $.each(response.Details,
+                        function (index, item) {
+                            $('#CityName').val(item.CityName);
+                            $('#CityId').val(item.CityId);
+                            branchtoAppend.empty();
+                            branchtoAppend.append(new Option(" - Select - ", "0"));
+                            if (item.DenominationTitle == '10') {
+                                $("#numberOfPacketsThree").val(item.NumberOfBundles);
+                                $("#totalValueThree").val(item.TotalValue);
+                                $("#SealNoThree").val(item.SealNo);
+
+                                var options = $("#listDenomination > option").clone();
+                                $("#mytableConsolidated > tbody > tr #sorterEmployeeThree" + row + "").append(options);
+
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
+                            }
+                            else if (item.DenominationTitle == '20') {
+                                $("#numberOfPacketsFour").val(item.NumberOfBundles);
+                                $("#totalValueFour").val(item.TotalValue);
+                                $("#SealNoFour").val(item.SealNo);
+
+                                var options = $("#listDenomination > option").clone();
+                                $("#mytableConsolidated > tbody > tr #sorterEmployeeFour" + row + "").append(options);
+
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
+                            }
+                            else if (item.DenominationTitle == '50') {
+                                $("#numberOfPacketsFive").val(item.NumberOfBundles);
+                                $("#totalValueFive").val(item.TotalValue);
+                                $("#SealNoFive").val(item.SealNo);
+
+                                var options = $("#listDenomination > option").clone();
+                                $("#mytableConsolidated > tbody > tr #sorterEmployeeFive" + row + "").append(options);
+
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
+                            }
+                            else if (item.DenominationTitle == '100') {
+                                $("#numberOfPacketsSix").val(item.NumberOfBundles);
+                                $("#totalValueSix").val(item.TotalValue);
+                                $("#SealNoSix").val(item.SealNo);
+
+                                var options = $("#listDenomination > option").clone();
+                                $("#mytableConsolidated > tbody > tr #sorterEmployeeSix" + row + "").append(options);
+
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
+                            }
+                            else if (item.DenominationTitle == '500') {
+                                $("#numberOfPacketsSeven").val(item.NumberOfBundles);
+                                $("#totalValueSeven").val(item.TotalValue);
+                                $("#SealNoSeven").val(item.SealNo);
+
+                                var options = $("#listDenomination > option").clone();
+                                $("#mytableConsolidated > tbody > tr #sorterEmployeeSeven" + row + "").append(options);
+
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
+                            }
+                            else if (item.DenominationTitle == '1000') {
+                                $("#numberOfPacketsEight").val(item.NumberOfBundles);
+                                $("#totalValueEight").val(item.TotalValue);
+                                $("#SealNoEight").val(item.SealNo);
+
+                                var options = $("#listDenomination > option").clone();
+                                $("#mytableConsolidated > tbody > tr #sorterEmployeeEight" + row + "").append(options);
+
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
+                            }
+                            else if (item.DenominationTitle == '5000') {
+                                $("#numberOfPacketsNine").val(item.NumberOfBundles);
+                                $("#totalValueNine").val(item.TotalValue);
+                                $("#SealNoNine").val(item.SealNo);
+
+                                var options = $("#listDenomination > option").clone();
+                                $("#mytableConsolidated > tbody > tr #sorterEmployeeNine" + row + "").append(options);
+
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
+                            }
+                            $("#finalTotalNumber").val(finalTotalBundles);
+                            $("#finalTotalValue").val(finalTotalAmount);
+                    });
+                }
+            });
+        });
+
+
         $(document).ready(function () {
+            var employeeArray = @Html.Raw(Json.Encode(ViewBag.EmployeeList));
+            generateEmployeeDDL(employeeArray);
+
+            function generateEmployeeDDL(array) {
+                //debugger
+                for (var i = 0; i < array.length; i++) {
+                    $("#listEmployee").append($("<option /> ").val(array[i].Value).text(array[i].Text));
+                }
+            }
+
+
+            //Add Shipping Company
+            $('.addNewCompany').on('click', function () {
+                $('#loading-mask').show();
+                var target = "";
+                target = "/CPC/VaultCustodian/_VaultCustodianList";
+                // load the url and show modal on success
+                $("#addNewCompany-Modal .modal-dialog").load(target, function () {
+                    $("#addNewCompany-Modal").modal("show");
+                    filterDataTable("#VaultCustodian-dataTable", [0, 1, 2, 3, 4], [5]);
+                    $('#loading-mask').hide();
+                });
+            });
+            //"#DateOfCashReturn"
+            $("#Date").data("DateTimePicker").date(moment('@Model.Date.ToShortDateString()'));
+
+            $(".select2").select2();
+
+            //input fields leave event
+            $(document).on('focusout', '.inp', function (e) {
+                e.preventDefault();
+                accountGridRowIndex = $(this).closest('td').attr("data-id");
+                const totalValue = GetTotalVal($(this).val(), accountGridRowIndex);
+                $(this).closest('td').next('td').find('input').val(totalValue);
+
+
+                var finalTotalValue = parseInt($("#totalValueZero").val()) + parseInt($("#totalValueOne").val()) + parseInt($("#totalValueTwo").val())
+                    + parseInt($("#totalValueThree").val()) + parseInt($("#totalValueFour").val()) + parseInt($("#totalValueFive").val())
+                    + parseInt($("#totalValueSix").val()) + parseInt($("#totalValueSeven").val()) + parseInt($("#totalValueEight").val())
+                    + parseInt($("#totalValueNine").val());
+                $("#finalTotalValue").val(finalTotalValue);
+
+            });
+
+
 
         });
 
+        function GetTotalVal(unsortedValue, denomVal) {
+            const totalVal = parseInt(unsortedValue) * parseInt(denomVal) * 1000;
+            return isNaN(totalVal) ? '0' : totalVal;
+        }
+
+        $(".totalfinalNumber").focusout(function () {
+            var finalTotalNumber = parseInt($("#numberOfPacketsZero").val()) + parseInt($("#numberOfPacketsOne").val()) + parseInt($("#numberOfPacketsTwo").val())
+                + parseInt($("#numberOfPacketsThree").val()) + parseInt($("#numberOfPacketsFour").val()) + parseInt($("#numberOfPacketsFive").val())
+                + parseInt($("#numberOfPacketsSix").val()) + parseInt($("#numberOfPacketsSeven").val()) + parseInt($("#numberOfPacketsEight").val())
+                + parseInt($("#numberOfPacketsNine").val());
+            $("#finalTotalNumber").val(finalTotalNumber);
+        });
     </script>
 }
 
