@@ -2312,3 +2312,6 @@ asd {
 }*/
 /*------------------#endregion HRMS*/
 
+.field-validation-error {
+    color: #ff4136 !important;
+}

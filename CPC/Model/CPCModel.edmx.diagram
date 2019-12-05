@@ -62,14 +62,8 @@
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Denom__220B0B18" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCAnnexu__Proje__2116E6DF" />
         <EntityTypeShape EntityType="SOSTechCPCModel.Vew_Orderbookings" Width="1.5" PointX="10.375" PointY="0.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCVaultConsolidatedDetail" Width="2.125" PointX="16.5" PointY="3.375" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Denom__7EC1CEDB" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCVaultConsolidated" Width="1.5" PointX="14.125" PointY="2.5" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__CityI__7FB5F314" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Order__00AA174D" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Proje__019E3B86" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Vault__7DCDAAA2" />
-        </Diagram>
+        <EntityTypeShape EntityType="SOSTechCPCModel.Vew_UnsortedCash" Width="1.5" PointX="12.375" PointY="0.75" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

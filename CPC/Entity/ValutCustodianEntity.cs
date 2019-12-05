@@ -74,11 +74,7 @@ namespace CPC
               
                 using (context = new SOSTechCPCEntities())
                 {
-                    int ConNumber = GetNextSerialNumber();
-                    #region Save Department
-                    model.Status = 1;
-                    model.SerialNumber = ConNumber;
-                    model.CreatedOn = DateTime.Now;
+                    #region Save
                     context.CPCVaultCustodians.Add(model);
                     context.SaveChanges();
                     #endregion
@@ -213,13 +209,46 @@ namespace CPC
 
         #endregion
 
-        public int GetNextSerialNumber()
+        //public void ChangeStatus(Guid Id, Guid UserId)
+        //{
+
+        //    try
+        //    {
+        //        using (context = new SOSTechCPCEntities())
+        //        {
+        //            #region Update Status
+        //            var res = context.CPCAnnexureIs.Include(x => x.CPCAnnexureIDetails).Where(x => x.OrderBookingId == bookingId).FirstOrDefault();
+        //            if (res != null)
+        //            {
+        //                var resDetail = res.CPCAnnexureIDetails.Where(x => x.ProjectBranchId == ProjBranchId).ToList();
+        //                resDetail.ForEach(x => { x.DetailStatus = (int)AnnexureStatus.Proceeded; });
+        //                //resDetail.UpdatedOn = DateTime.Now;
+        //                //resDetail.UpdatedBy = userId;
+        //                context.SaveChanges();
+        //            }
+        //            #endregion
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //    }
+        //}
+        public int GetNextSrNo()
         {
             try
             {
                 using (var context = new SOSTechCPCEntities())
                 {
-                    return context.CPCVaultCustodians.Max(x => x.SerialNumber) <= 0 ? 1 : (int)context.CPCVaultCustodians.Max(x => x.SerialNumber) + 1;
+                    int? res = context.CPCVaultCustodians.Max(u => (int?)u.SerialNumber);
+
+                    if (res.HasValue)
+                    {
+                        return Convert.ToInt32(res) + 1;
+                    }
+                    else
+                    {
+                        return 1;
+                    }
                 }
             }
             catch (Exception ex)

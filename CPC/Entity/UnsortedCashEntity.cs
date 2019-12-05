@@ -28,13 +28,13 @@ namespace CPC
             }
         }
 
-        public List<Vew_CPCAnnexureI> GetAllDetails()
+        public List<Vew_UnsortedCash> GetAllDetails()
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.Vew_CPCAnnexureI.ToList();
+                    return context.Vew_UnsortedCash.ToList();
                 }
             }
             catch (Exception ex)
@@ -74,6 +74,36 @@ namespace CPC
             }
         }
 
+        public List<Vew_UnsortedCash> GetAllDetailsById(Guid Id)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.Vew_UnsortedCash.Where(x => x.UnsortedCashId == Id).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public List<CPCUnsortedCash> GetAllApproved()
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.CPCUnsortedCashes.Where(x => x.IsActive && x.Status == (int)AnnexureStatus.Inprocess).OrderBy(x => x.CreatedOn).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         //public List<CustomSelectList> GetDepartmentDropdown(Guid? Id = null)
         //{
         //    try
@@ -96,8 +126,34 @@ namespace CPC
         //    }
         //}
 
+        #region Update Status
+        public void ChangeStatus(Guid Id, Guid UserId)
+        {
 
-        #region Add/Update Employee
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Update Status
+                    var res = context.CPCAnnexureIs.Include(x => x.CPCAnnexureIDetails).Where(x => x.OrderBookingId == bookingId).FirstOrDefault();
+                    if (res != null)
+                    {
+                        var resDetail = res.CPCAnnexureIDetails.Where(x => x.ProjectBranchId == ProjBranchId).ToList();
+                        resDetail.ForEach(x => { x.DetailStatus = (int)AnnexureStatus.Proceeded; });
+                        //resDetail.UpdatedOn = DateTime.Now;
+                        //resDetail.UpdatedBy = userId;
+                        context.SaveChanges();
+                    }
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        #endregion
+
+        #region Add/Update 
         public Guid? Create(CPCUnsortedCash model)
         {
             try
@@ -106,10 +162,7 @@ namespace CPC
                 using (context = new SOSTechCPCEntities())
                 {
                     int ConNumber = GetNextSerialNumber();
-                    #region Save Department
-                    model.Status = 1;
-                    model.SerialNumber = ConNumber;
-                    model.CreatedOn = DateTime.Now;
+                    #region Save
                     context.CPCUnsortedCashes.Add(model);
                     context.SaveChanges();
                     #endregion

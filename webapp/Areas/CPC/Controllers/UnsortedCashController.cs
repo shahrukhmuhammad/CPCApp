@@ -162,36 +162,41 @@ namespace WebApp.Areas.CPC.Controllers
         }
         #endregion
 
+        #region Annexure Popup
+        public ActionResult _UnsortedCashList()
+        {
+            var model = unsortedCashRepo.GetAllApproved();
+            ViewBag.DetailsList = unsortedCashRepo.GetAllDetails();
+            return PartialView(model);
+        }
+        #endregion
+
         #region Remote Functions
         [HttpGet]
-        public JsonResult GetAnnxureIBookingData(Guid id, Guid PriojId)
+        public JsonResult GetUnsortedCash(Guid id)
         {
             try
             {
-                //var List = unsortedCashRepo.GetA(id, PriojId).Where(x => x.DetailStatus == (int)AnnexureStatus.Inprocess);
-                //return Json(new
-                //{
-                //    List.FirstOrDefault().OrderNumber,
-                //    List.FirstOrDefault().Id,
-                //    Details = List.Select(x => new {
-                //        x.ProjectId,
-                //        x.ProjectTitle,
-                //        x.CashProcessingCellId,
-                //        x.CashProcessingCellTitle,
-                //        x.ProjectBranchId,
-                //        x.BranchCode,
-                //        x.BranchName,
-                //        x.DenominationId,
-                //        x.DenominationTitle,
-                //        x.NoOfBundles,
-                //        x.TotalAmount,
-                //        x.CityName,
-                //        x.CityId,
-                //        x.SealNo
-                //    }).ToList(),
+                //var List = unsortedCashRepo.GetAllDetailsById(id, BranchId).Where(x => x.Status == (int)AnnexureStatus.Inprocess);
+                var List = unsortedCashRepo.GetAllDetailsById(id);
+                return Json(new
+                {
+                    List.FirstOrDefault().ProjectBranchId,
+                    List.FirstOrDefault().BranchName,
+                    List.FirstOrDefault().OrderNumber,
+                    List.FirstOrDefault().SerialNumber,
+                    List.FirstOrDefault().CityId,
+                    List.FirstOrDefault().CityName,
 
-                //}, JsonRequestBehavior.AllowGet);
-                return Json(null, JsonRequestBehavior.AllowGet);
+                    Details = List.Select(x => new {
+                        x.DenominationId,
+                        x.DenominationTitle,
+                        x.NumberOfBundles,
+                        x.TotalValue,
+                        x.SealNo
+                    }).ToList(),
+
+                }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)

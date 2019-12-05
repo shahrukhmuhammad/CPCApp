@@ -173,6 +173,9 @@
     <Compile Include="Model\Vew_Orderbookings.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Vew_UnsortedCash.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

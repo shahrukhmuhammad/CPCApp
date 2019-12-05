@@ -5,7 +5,6 @@
     ViewBag.Title = (queryId == null ? "Add New Vault Custodian" : "Edit Vault Custodian");
     var denomList = ViewBag.DenominationList as List<CPCDenomination>;
 }
-
 <form id="lead-frm" class="user-Profile" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
 
@@ -33,7 +32,9 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 text-left horizontal-label">Order Number</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBoxFor(x => x.OrderNumber, new { @class = "form-control input-sm", })
+                                            @Html.TextBoxFor(x => x.OrderNumber, new { @class = "form-control input-sm", @required = "required", @readonly = "readonly" })
+                                            @Html.ValidationMessageFor(m => m.OrderNumber)
+
                                             <a href="javascript://" class="btn btn-sm btn-primary addNewCompany"><i class="fa fa-plus"></i> Select Order</a>
                                         </div>
                                     </div>
@@ -62,9 +63,11 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 text-left horizontal-label">Client/Branch</label>
                                         <div class="col-sm-8">
-                                            <select id="ProjectBranchId" name="ProjectBranchId" class="form-control input-sm select2 ProjectBranchId">
-                                                <option> - Select - </option>
-                                            </select>
+                                            <input type="text" class="form-control input-sm" id="ProjectBranch" readonly />
+                                            @Html.HiddenFor(x => x.ProjectBranchId)
+                                            @*<select id="ProjectBranchId" name="ProjectBranchId" class="form-control input-sm select2 ProjectBranchId">
+                                                    <option> - Select - </option>
+                                                </select>*@
                                         </div>
                                     </div>
                                 </div>
@@ -82,13 +85,13 @@
                                         <label class="col-sm-3 horizontal-label">Supervisor</label>
                                         <div class="col-sm-9">
                                             @Html.DropDownListFor(x => x.SupervisorId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2", @required = "required" })
+                                            @Html.ValidationMessageFor(m => m.SupervisorId)
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-sm-8">
                             <div class="row tb-padding">
@@ -224,8 +227,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -257,21 +258,71 @@
             $('#addNewCompany-Modal').modal('toggle');
         }
         function loadOrderData(Id) {
-            var branchtoAppend = $('#ProjectBranchId');
-            //branchtoAppend.html("");
+            var finalTotalAmount = 0;
+            var finalTotalBundles = 0;
             if (Id) {
-                $.get('/CPC/AnnexureI/GetAnnxureIBranchData/' + Id, function (response) {
+                $.get('/CPC/UnsortedCash/GetUnsortedCash/' + Id, function (response) {
                     if (response) {
-                        branchtoAppend.empty();
-                        branchtoAppend.append(new Option(" - Select - ", "0"));
+                        $('#ProjectBranch').val(response.BranchName);
+                        $('#ProjectBranchId').val(response.ProjectBranchId);
+                        $('#CityId').val(response.CityId);
+                        $('#CityName').val(response.CityName);
                         $('#OrderNumber').val(response.OrderNumber);
                         $('#OrderBookingId').val(response.OrderBookingId);
 
-                        //Details
-                        $.each(response.Details,
-                            function (index, item) {
-                                var branch = new Option(item.BranchCode + " - " + item.BranchName , item.ProjectBranchId);
-                                branchtoAppend.append(branch);
+                        $.each(response.Details, function (index, item) {
+                                
+                                if (item.DenominationTitle == '10') {
+                                    $("#numberOfPacketsThree").val(item.NumberOfBundles);
+                                    $("#totalValueThree").val(item.TotalValue);
+                                    $("#SealNoThree").val(item.SealNo);
+                                    finalTotalBundles += parseInt(item.NumberOfBundles);
+                                    finalTotalAmount += parseInt(item.TotalValue);
+                                }
+                                else if (item.DenominationTitle == '20') {
+                                    $("#numberOfPacketsFour").val(item.NumberOfBundles);
+                                    $("#totalValueFour").val(item.TotalValue);
+                                    $("#SealNoFour").val(item.SealNo);
+                                    finalTotalBundles += parseInt(item.NumberOfBundles);
+                                    finalTotalAmount += parseInt(item.TotalValue);
+                                }
+                                else if (item.DenominationTitle == '50') {
+                                    $("#numberOfPacketsFive").val(item.NumberOfBundles);
+                                    $("#totalValueFive").val(item.TotalValue);
+                                    $("#SealNoFive").val(item.SealNo);
+                                    finalTotalBundles += parseInt(item.NumberOfBundles);
+                                    finalTotalAmount += parseInt(item.TotalValue);
+                                }
+                                else if (item.DenominationTitle == '100') {
+                                    $("#numberOfPacketsSix").val(item.NumberOfBundles);
+                                    $("#totalValueSix").val(item.TotalValue);
+                                    $("#SealNoSix").val(item.SealNo);
+                                    finalTotalBundles += parseInt(item.NumberOfBundles);
+                                    finalTotalAmount += parseInt(item.TotalValue);
+                                }
+                                else if (item.DenominationTitle == '500') {
+                                    $("#numberOfPacketsSeven").val(item.NumberOfBundles);
+                                    $("#totalValueSeven").val(item.TotalValue);
+                                    $("#SealNoSeven").val(item.SealNo);
+                                    finalTotalBundles += parseInt(item.NumberOfBundles);
+                                    finalTotalAmount += parseInt(item.TotalValue);
+                                }
+                                else if (item.DenominationTitle == '1000') {
+                                    $("#numberOfPacketsEight").val(item.NumberOfBundles);
+                                    $("#totalValueEight").val(item.TotalValue);
+                                    $("#SealNoEight").val(item.SealNo);
+                                    finalTotalBundles += parseInt(item.NumberOfBundles);
+                                    finalTotalAmount += parseInt(item.TotalValue);
+                                }
+                                else if (item.DenominationTitle == '5000') {
+                                    $("#numberOfPacketsNine").val(item.NumberOfBundles);
+                                    $("#totalValueNine").val(item.TotalValue);
+                                    $("#SealNoNine").val(item.SealNo);
+                                    finalTotalBundles += parseInt(item.NumberOfBundles);
+                                    finalTotalAmount += parseInt(item.TotalValue);
+                                }
+                                $("#finalTotalNumber").val(finalTotalBundles);
+                                $("#finalTotalValue").val(finalTotalAmount);
                             });
                     }
                     else {
@@ -288,7 +339,7 @@
             var finalTotalBundles = 0;
             var OrderBookingId = $("#OrderBookingId").val();
             const ProjectBranchId = $('#ProjectBranchId option:selected').attr('value');
-            $.get('/CPC/AnnexureI/GetAnnxureIBookingData?Id=' + OrderBookingId + '&PriojId=' + ProjectBranchId, function (response) {
+            $.get('/CPC/UnsortedCash/GetAnnxureIBookingData?Id=' + OrderBookingId, function (response) {
                 if (response) {
                     $.each(response.Details,
                         function (index, item) {
@@ -297,53 +348,53 @@
                             branchtoAppend.empty();
                             branchtoAppend.append(new Option(" - Select - ", "0"));
                             if (item.DenominationTitle == '10') {
-                                $("#numberOfPacketsThree").val(item.NoOfBundles);
-                                $("#totalValueThree").val(item.TotalAmount);
+                                $("#numberOfPacketsThree").val(item.NumberOfBundles);
+                                $("#totalValueThree").val(item.TotalValue);
                                 $("#SealNoThree").val(item.SealNo);
-                                finalTotalBundles += parseInt(item.NoOfBundles);
-                                finalTotalAmount += parseInt(item.TotalAmount);
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
                             }
                             else if (item.DenominationTitle == '20') {
-                                $("#numberOfPacketsFour").val(item.NoOfBundles);
-                                $("#totalValueFour").val(item.TotalAmount);
+                                $("#numberOfPacketsFour").val(item.NumberOfBundles);
+                                $("#totalValueFour").val(item.TotalValue);
                                 $("#SealNoFour").val(item.SealNo);
-                                finalTotalBundles += parseInt(item.NoOfBundles);
-                                finalTotalAmount += parseInt(item.TotalAmount);
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
                             }
                             else if (item.DenominationTitle == '50') {
-                                $("#numberOfPacketsFive").val(item.NoOfBundles);
-                                $("#totalValueFive").val(item.TotalAmount);
+                                $("#numberOfPacketsFive").val(item.NumberOfBundles);
+                                $("#totalValueFive").val(item.TotalValue);
                                 $("#SealNoFive").val(item.SealNo);
-                                finalTotalBundles += parseInt(item.NoOfBundles);
-                                finalTotalAmount += parseInt(item.TotalAmount);
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
                             }
                             else if (item.DenominationTitle == '100') {
-                                $("#numberOfPacketsSix").val(item.NoOfBundles);
-                                $("#totalValueSix").val(item.TotalAmount);
+                                $("#numberOfPacketsSix").val(item.NumberOfBundles);
+                                $("#totalValueSix").val(item.TotalValue);
                                 $("#SealNoSix").val(item.SealNo);
-                                finalTotalBundles += parseInt(item.NoOfBundles);
-                                finalTotalAmount += parseInt(item.TotalAmount);
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
                             }
                             else if (item.DenominationTitle == '500') {
-                                $("#numberOfPacketsSeven").val(item.NoOfBundles);
-                                $("#totalValueSeven").val(item.TotalAmount);
+                                $("#numberOfPacketsSeven").val(item.NumberOfBundles);
+                                $("#totalValueSeven").val(item.TotalValue);
                                 $("#SealNoSeven").val(item.SealNo);
-                                finalTotalBundles += parseInt(item.NoOfBundles);
-                                finalTotalAmount += parseInt(item.TotalAmount);
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
                             }
                             else if (item.DenominationTitle == '1000') {
-                                $("#numberOfPacketsEight").val(item.NoOfBundles);
-                                $("#totalValueEight").val(item.TotalAmount);
+                                $("#numberOfPacketsEight").val(item.NumberOfBundles);
+                                $("#totalValueEight").val(item.TotalValue);
                                 $("#SealNoEight").val(item.SealNo);
-                                finalTotalBundles += parseInt(item.NoOfBundles);
-                                finalTotalAmount += parseInt(item.TotalAmount);
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
                             }
                             else if (item.DenominationTitle == '5000') {
-                                $("#numberOfPacketsNine").val(item.NoOfBundles);
-                                $("#totalValueNine").val(item.TotalAmount);
+                                $("#numberOfPacketsNine").val(item.NumberOfBundles);
+                                $("#totalValueNine").val(item.TotalValue);
                                 $("#SealNoNine").val(item.SealNo);
-                                finalTotalBundles += parseInt(item.NoOfBundles);
-                                finalTotalAmount += parseInt(item.TotalAmount);
+                                finalTotalBundles += parseInt(item.NumberOfBundles);
+                                finalTotalAmount += parseInt(item.TotalValue);
                             }
                             $("#finalTotalNumber").val(finalTotalBundles);
                             $("#finalTotalValue").val(finalTotalAmount);

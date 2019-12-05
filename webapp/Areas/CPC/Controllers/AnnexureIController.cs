@@ -367,7 +367,7 @@ namespace WebApp.Areas.CPC.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return Json(null, JsonRequestBehavior.AllowGet);
             }
         }
 
