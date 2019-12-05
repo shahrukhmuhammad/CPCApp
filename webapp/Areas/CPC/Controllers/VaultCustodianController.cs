@@ -93,7 +93,7 @@ namespace WebApp.Areas.CPC.Controllers
                         #region Save Details
                         valutCustodianRepo.Create(lsToSave);
                         #endregion
-                        //Update Status
+                        //Update Unsorted Cash Status
                         unsortedCashRepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id);
                         model.Id = res.Value;
                     }
@@ -187,6 +187,7 @@ namespace WebApp.Areas.CPC.Controllers
                 //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
                 #endregion
                 valutCustodianRepo.InActiveRecord(Id);
+                //unsortedCashRepo.ChangeStatus(Id, CurrentUser.Id);
 
                 TempData["SuccessMsg"] = "Vault Custodian Entry has been deleted successfully.";
             }
