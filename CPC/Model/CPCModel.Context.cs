@@ -27,6 +27,7 @@ namespace CPC.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AppUser> AppUsers { get; set; }
         public virtual DbSet<CPCAnnexureI> CPCAnnexureIs { get; set; }
         public virtual DbSet<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
         public virtual DbSet<CPCAnnexureII> CPCAnnexureIIs { get; set; }
@@ -56,7 +57,6 @@ namespace CPC.Model
         public virtual DbSet<Vew_CPCAnnexureI> Vew_CPCAnnexureI { get; set; }
         public virtual DbSet<Vew_Orderbookings> Vew_Orderbookings { get; set; }
         public virtual DbSet<Vew_UnsortedCash> Vew_UnsortedCash { get; set; }
-        public virtual DbSet<AppUser> AppUsers { get; set; }
         public virtual DbSet<Vew_VaultCustodian> Vew_VaultCustodian { get; set; }
     
         public virtual int f_TestMaxCode()
