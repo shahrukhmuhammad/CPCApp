@@ -251,7 +251,7 @@
     <Compile Include="Areas\CPC\Controllers\DashboardController.cs" />
     <Compile Include="Areas\CPC\Controllers\AnnexureIController.cs" />
     <Compile Include="Areas\CPC\Controllers\VaultCustodianController.cs" />
-    <Compile Include="Areas\CPC\Controllers\VaultConsolidated.cs" />
+    <Compile Include="Areas\CPC\Controllers\VaultConsolidatedController.cs" />
     <Compile Include="Areas\CPC\Controllers\OrderApprovalController.cs" />
     <Compile Include="Areas\CPC\Controllers\SortedCashController.cs" />
     <Compile Include="Areas\CPC\Controllers\UnsortedCashController.cs" />

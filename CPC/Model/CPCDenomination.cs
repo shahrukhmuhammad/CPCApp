@@ -17,17 +17,20 @@ namespace CPC.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CPCDenomination()
         {
+            this.CPCAnnexureIDetails = new HashSet<CPCAnnexureIDetail>();
             this.CPCAnnexureIIDetails = new HashSet<CPCAnnexureIIDetail>();
             this.CPCCashInTransitDenominations = new HashSet<CPCCashInTransitDenomination>();
             this.CPCSortedCashDetails = new HashSet<CPCSortedCashDetail>();
             this.CPCUnsortedCashDetails = new HashSet<CPCUnsortedCashDetail>();
             this.CPCVaultCustodianDetails = new HashSet<CPCVaultCustodianDetail>();
-            this.CPCAnnexureIDetails = new HashSet<CPCAnnexureIDetail>();
+            this.CPCVaultConsolidatedDetails = new HashSet<CPCVaultConsolidatedDetail>();
         }
     
         public System.Guid Id { get; set; }
         public Nullable<int> DenominationTitle { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCAnnexureIIDetail> CPCAnnexureIIDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -39,6 +42,6 @@ namespace CPC.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCVaultCustodianDetail> CPCVaultCustodianDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
+        public virtual ICollection<CPCVaultConsolidatedDetail> CPCVaultConsolidatedDetails { get; set; }
     }
 }

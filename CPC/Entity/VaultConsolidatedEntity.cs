@@ -13,13 +13,13 @@ namespace CPC
     {
         private SOSTechCPCEntities context;
 
-        public List<CPCSortedCash> GetAll()
+        public List<CPCVaultConsolidated> GetAll()
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCSortedCashes.Include(x => x.CPCSortedCashDetails).Include(x => x.CPCProjectBranch).Where(x => x.IsActive).OrderBy(x => x.Id).ToList();
+                    return context.CPCVaultConsolidateds.Include(x => x.CPCVaultConsolidatedDetails).Include(x => x.CPCProjectBranch).Where(x => x.IsActive).OrderBy(x => x.Id).ToList();
                 }
             }
             catch (Exception ex)
@@ -59,13 +59,13 @@ namespace CPC
         }
 
 
-        public CPCSortedCash GetById(Guid Id)
+        public CPCVaultConsolidated GetById(Guid Id)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCSortedCashes.Include(x => x.CPCSortedCashDetails.Select(y => y.CPCDenomination)).Where(x => x.Id == Id).FirstOrDefault();
+                    return context.CPCVaultConsolidateds.Include(x => x.CPCCity).Include(x => x.CPCOrderBooking).Include(x => x.CPCProjectBranch).Include(x => x.CPCVaultConsolidatedDetails.Select(y => y.CPCDenomination)).Where(x => x.Id == Id).FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -98,7 +98,7 @@ namespace CPC
 
 
         #region Add/Update Employee
-        public Guid? Create(CPCSortedCash model)
+        public Guid? Create(CPCVaultConsolidated model)
         {
             try
             {
@@ -106,10 +106,10 @@ namespace CPC
                 {
                     #region Save Department
                     int consNumber = context.CPCSortedCashes.Max(x => x.ConsignmentNumber) <= 0 ? 1 : (int)context.CPCSortedCashes.Max(x => x.ConsignmentNumber) + 1;
-                    model.ConsignmentNumber = consNumber;
+                    model.SerialNumber = consNumber;
                     model.Status = 1;
                     model.CreatedOn = DateTime.Now;
-                    context.CPCSortedCashes.Add(model);
+                    context.CPCVaultConsolidateds.Add(model);
                     context.SaveChanges();
                     #endregion
                     return model.Id;
@@ -121,14 +121,14 @@ namespace CPC
             }
         }
 
-        public bool Create(List<CPCSortedCashDetail> modelList)
+        public bool Create(List<CPCVaultConsolidatedDetail> modelList)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Save Department
-                    context.CPCSortedCashDetails.AddRange(modelList);
+                    context.CPCVaultConsolidatedDetails.AddRange(modelList);
                     context.SaveChanges();
                     #endregion
                     return true;
@@ -243,13 +243,13 @@ namespace CPC
 
         #endregion
 
-        public int GetNextConsignmentNumber()
+        public int GetNextSerialNumber()
         {
             try
             {
                 using (var context = new SOSTechCPCEntities())
                 {
-                    return context.CPCSortedCashes.Max(x => x.ConsignmentNumber) <= 0 ? 1 : (int)context.CPCSortedCashes.Max(x => x.ConsignmentNumber) + 1;
+                    return context.CPCVaultConsolidateds.Max(x => x.SerialNumber) <= 0 ? 1 : (int)context.CPCVaultConsolidateds.Max(x => x.SerialNumber) + 1;
                 }
             }
             catch (Exception ex)

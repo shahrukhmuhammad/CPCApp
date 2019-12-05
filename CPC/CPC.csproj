@@ -66,9 +66,6 @@
     <Compile Include="Entity\SortedCashEntity.cs" />
     <Compile Include="Entity\UnsortedCashEntity.cs" />
     <Compile Include="Entity\Utils.cs" />
-    <Compile Include="Model\AppUser.cs">
-      <DependentUpon>CPCModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\CPCAnnexureI.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
@@ -153,6 +150,12 @@
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CPCUnsortedCashDetail.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CPCVaultConsolidated.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CPCVaultConsolidatedDetail.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CPCVaultCustodian.cs">
