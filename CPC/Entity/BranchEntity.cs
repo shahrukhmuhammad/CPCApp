@@ -33,7 +33,7 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.CPCProjectBranches.Where(x => x.Id == Id).FirstOrDefault();
+                    return context.CPCProjectBranches.Include(y=> y.CPCCity).Where(x => x.Id == Id).FirstOrDefault();
                 }
             }
             catch (Exception ex)

@@ -43,10 +43,12 @@ namespace WebApp.Areas.CPC.Controllers
         public ActionResult Details(Guid Id)
         {
             var model = valutCustodianRepo.GetById(Id);
-            ViewBag.Employees = employeeRepo.GetAll();
+            var emp = employeeRepo.GetById(model.SupervisorId.Value);
+            ViewData["Employee"] = $"{emp.Code} - {emp.Name}";
             ViewBag.DenominationList = commonRepo.GetAllDenomination();
             var branchInfo = branchRepo.GetById(model.ProjectBranchId);
             ViewData["BranchName"] = $"{branchInfo.BranchCode} - {branchInfo.BranchName}";
+            ViewData["CityName"] = branchInfo.CPCCity.CityName;
             return View(model);
         }
         #endregion
@@ -91,8 +93,7 @@ namespace WebApp.Areas.CPC.Controllers
                         #region Save Details
                         valutCustodianRepo.Create(lsToSave);
                         #endregion
-
-                        //Update Status
+                        //Update Unsorted Cash Status
                         unsortedCashRepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id);
                         model.Id = res.Value;
                     }
@@ -227,6 +228,7 @@ namespace WebApp.Areas.CPC.Controllers
                 //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
                 #endregion
                 valutCustodianRepo.InActiveRecord(Id);
+                //unsortedCashRepo.ChangeStatus(Id, CurrentUser.Id);
 
                 TempData["SuccessMsg"] = "Vault Custodian Entry has been deleted successfully.";
             }

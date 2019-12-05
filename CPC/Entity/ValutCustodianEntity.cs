@@ -9,9 +9,16 @@ using System.Threading.Tasks;
 
 namespace CPC
 {
+    
     public class ValutCustodianEntity
     {
         private SOSTechCPCEntities context;
+        private UnsortedCashEntity unsortedCashRepo;
+
+        public ValutCustodianEntity()
+        {
+            unsortedCashRepo = new UnsortedCashEntity();
+        }
 
         public List<CPCVaultCustodian> GetAll()
         {
@@ -35,6 +42,20 @@ namespace CPC
                 using (context = new SOSTechCPCEntities())
                 {
                     return context.CPCVaultCustodians.Include(x => x.CPCVaultCustodianDetails.Select(y => y.CPCDenomination)).Where(x => x.Id == Id).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public Vew_VaultCustodian GetDetailsById(Guid Id)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.Vew_VaultCustodian.Where(x => x.Id == Id).FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -209,30 +230,28 @@ namespace CPC
 
         #endregion
 
-        //public void ChangeStatus(Guid Id, Guid UserId)
-        //{
-
-        //    try
-        //    {
-        //        using (context = new SOSTechCPCEntities())
-        //        {
-        //            #region Update Status
-        //            var res = context.CPCAnnexureIs.Include(x => x.CPCAnnexureIDetails).Where(x => x.OrderBookingId == bookingId).FirstOrDefault();
-        //            if (res != null)
-        //            {
-        //                var resDetail = res.CPCAnnexureIDetails.Where(x => x.ProjectBranchId == ProjBranchId).ToList();
-        //                resDetail.ForEach(x => { x.DetailStatus = (int)AnnexureStatus.Proceeded; });
-        //                //resDetail.UpdatedOn = DateTime.Now;
-        //                //resDetail.UpdatedBy = userId;
-        //                context.SaveChanges();
-        //            }
-        //            #endregion
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //    }
-        //}
+        public void ChangeStatus(Guid BookingId, Guid UserId)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Update Status
+                    var res = context.CPCVaultCustodians.Where(x => x.OrderBookingId == BookingId).FirstOrDefault();
+                    if (res != null)
+                    {
+                        res.Status = (int)AnnexureStatus.Proceeded;
+                        res.UpdatedOn = DateTime.Now;
+                        res.UpdatedBy = UserId;
+                        context.SaveChanges();
+                    }
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
         public int GetNextSrNo()
         {
             try
@@ -270,6 +289,9 @@ namespace CPC
                     {
                         res.IsActive = false;
                         context.SaveChanges();
+
+                        //change status
+                       // unsortedCashRepo.ChangeStatus(res.OrderBookingId, Curre)
                     }
                     #endregion
                     return true;

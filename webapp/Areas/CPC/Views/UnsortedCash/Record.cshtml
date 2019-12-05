@@ -408,11 +408,11 @@
             $('.addNewCompany').on('click', function () {
                 $('#loading-mask').show();
                 var target = "";
-                target = "/CPC/UnsortedCash/_UnsortedCashList";
+                target = "/CPC/AnnexureI/_AnnexureIList";
                 // load the url and show modal on success
                 $("#addNewCompany-Modal .modal-dialog").load(target, function () {
                     $("#addNewCompany-Modal").modal("show");
-                    filterDataTable("#UnsortedCash-dataTable", [0, 1, 2, 3, 4], [5]);
+                    filterDataTable("#AnnexureIBooking-dataTable", [0, 1, 2, 3, 4], [5]);
                     $('#loading-mask').hide();
                 });
             });

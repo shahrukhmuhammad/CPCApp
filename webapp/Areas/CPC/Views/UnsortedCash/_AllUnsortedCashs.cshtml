@@ -36,13 +36,13 @@
         </div>*@
         <div class="modal-body">
             <div class="table-responsive">
-                <table id="UnsortedCash-dataTable" class="table table-hover table-striped table-condensed">
+                <table id="UnsortedCashs-dataTable" class="table table-hover table-striped table-condensed">
                     <thead>
                         <tr>
                             <th><input type="checkbox" onchange="checkAll(this, 'checkIt');" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Consignment No." id="UnsortedCash-dataTable_0" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Date" id="UnsortedCash-dataTable_1" /></th>
-                            @*<th><input class="form-control input-sm input-tbl" type="text" placeholder="City" id="UnsortedCash-dataTable_2" /></th>*@
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Order No" id="UnsortedCash-dataTable_0" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Consignment No." id="UnsortedCash-dataTable_1" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Date" id="UnsortedCash-dataTable_2" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Client" id="UnsortedCash-dataTable_3" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Status" id="UnsortedCash-dataTable_4" /></th>
                             <th class="text-center" width="100px">Action</th>
@@ -51,37 +51,37 @@
                     <tbody>
                         @foreach (var x in Model)
                         {
-                            <tr>
-                                <td>
+                        <tr>
+                            <td>
+                                @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.CPC))
+                                {
+                                    <input type="checkbox" class="checkIt" value="@x.Id" />
+                                }
+                            </td>
+                            <td>@x.OrderNumber</td>
+                            <td><a href="@Url.Action("Details","UnsortedCash",new { Id = x.Id })">@x.SerialNumber</a></td>
+                            <td>@x.Date</td>
+                            <td> @($"{x.CPCProjectBranch.BranchCode} - {x.CPCProjectBranch.BranchName}")</td>
+                            @if (x.Status == 1)
+                            {
+                                <td> <label class="label label-warning">@AnnexureStatus.Inprocess</label></td>
+                            }
+                            else
+                            {
+                                <td> <label class="label label-warning">@AnnexureStatus.Completed</label></td>
+                            }
+                            <td class="text-center">
+                                <div class="btn-group btn-group-xs" role="group">
+                                    @*<a href="@Url.Action("Details","UnsortedCash")/@x.Id/1" class="btn btn-primary" title="Details">*@
+                                    <a href="@Url.Action("Details","UnsortedCash",new { Id = x.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
                                     @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.CPC))
                                     {
-                                        <input type="checkbox" class="checkIt" value="@x.Id" />
+                                        @*<a href="@Url.Action("Record","UnsortedCashDetail")/@x.Id" class="btn btn-info" title="Edit"><i class="fa fa-edit"></i></a>*@
+                                        <a href="javascript://" onclick="deleteRecord('@Url.Action("Delete")', '@x.Id')" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
                                     }
-                                </td>
-                                <td><a href="@Url.Action("Details","UnsortedCash",new { Id = x.Id })">@x.SerialNumber</a></td>
-                                <td>@x.Date</td>
-                                @*<td>@x.CityId</td>*@
-                                <td> @($"{x.CPCProjectBranch.BranchCode} - {x.CPCProjectBranch.BranchName}")</td>
-                                @if (x.Status == 1)
-                                {
-                                    <td> <label class="label label-warning">@AnnexureStatus.Inprocess</label></td>
-                                }
-                                else
-                                {
-                                    <td> <label class="label label-warning">@AnnexureStatus.Completed</label></td>
-                                }
-                                <td class="text-center">
-                                    <div class="btn-group btn-group-xs" role="group">
-                                        @*<a href="@Url.Action("Details","UnsortedCash")/@x.Id/1" class="btn btn-primary" title="Details">*@
-                                        <a href="@Url.Action("Details","UnsortedCash",new { Id = x.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
-                                        @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.CPC))
-                                        {
-                                            @*<a href="@Url.Action("Record","UnsortedCashDetail")/@x.Id" class="btn btn-info" title="Edit"><i class="fa fa-edit"></i></a>*@
-                                            <a href="javascript://" onclick="deleteRecord('@Url.Action("Delete")', '@x.Id')" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
-                                        }
-                                    </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>
