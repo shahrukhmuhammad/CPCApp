@@ -80,7 +80,7 @@ namespace WebApp.Areas.CPC.Controllers
                     model.CreatedBy = CurrentUser.Id;
                     model.CreatedOn = DateTime.Now;
                     model.IsActive = true;
-                    model.Status = 1;
+                    model.Status =(int)AnnexureStatus.Inprocess;
                     model.Date = Utils.SetDateFormate(Date);
                     model.Id = Guid.NewGuid();
                     var res = unsortedCashRepo.Create(model);
