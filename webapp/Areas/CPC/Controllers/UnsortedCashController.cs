@@ -177,7 +177,6 @@ namespace WebApp.Areas.CPC.Controllers
         {
             try
             {
-                //var List = unsortedCashRepo.GetAllDetailsById(id, BranchId).Where(x => x.Status == (int)AnnexureStatus.Inprocess);
                 var List = unsortedCashRepo.GetAllDetailsById(id);
                 return Json(new
                 {
@@ -187,6 +186,7 @@ namespace WebApp.Areas.CPC.Controllers
                     List.FirstOrDefault().SerialNumber,
                     List.FirstOrDefault().CityId,
                     List.FirstOrDefault().CityName,
+                    List.FirstOrDefault().OrderBookingId,
 
                     Details = List.Select(x => new {
                         x.DenominationId,
