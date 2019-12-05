@@ -38,8 +38,8 @@ namespace CPC.Model
         public Nullable<int> OrderNumber { get; set; }
         public Nullable<System.Guid> OrderBookingId { get; set; }
     
-        public virtual CPCOrderBooking CPCOrderBooking { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
+        public virtual CPCOrderBooking CPCOrderBooking { get; set; }
     }
 }

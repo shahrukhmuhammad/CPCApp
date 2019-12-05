@@ -25,8 +25,8 @@ namespace CPC.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AppUser> AppUsers { get; set; }
         public virtual DbSet<CPCAnnexureI> CPCAnnexureIs { get; set; }
+        public virtual DbSet<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
         public virtual DbSet<CPCAnnexureII> CPCAnnexureIIs { get; set; }
         public virtual DbSet<CPCAnnexureIIDetail> CPCAnnexureIIDetails { get; set; }
         public virtual DbSet<CPCAnnexureIII> CPCAnnexureIIIs { get; set; }
@@ -47,9 +47,10 @@ namespace CPC.Model
         public virtual DbSet<CPCSortedCashDetail> CPCSortedCashDetails { get; set; }
         public virtual DbSet<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
         public virtual DbSet<CPCUnsortedCashDetail> CPCUnsortedCashDetails { get; set; }
+        public virtual DbSet<CPCVaultConsolidated> CPCVaultConsolidateds { get; set; }
+        public virtual DbSet<CPCVaultConsolidatedDetail> CPCVaultConsolidatedDetails { get; set; }
         public virtual DbSet<CPCVaultCustodian> CPCVaultCustodians { get; set; }
         public virtual DbSet<CPCVaultCustodianDetail> CPCVaultCustodianDetails { get; set; }
-        public virtual DbSet<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
         public virtual DbSet<Vew_CPCAnnexureI> Vew_CPCAnnexureI { get; set; }
         public virtual DbSet<Vew_Orderbookings> Vew_Orderbookings { get; set; }
         public virtual DbSet<Vew_UnsortedCash> Vew_UnsortedCash { get; set; }
