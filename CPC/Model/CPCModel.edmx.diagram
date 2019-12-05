@@ -69,6 +69,7 @@
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Unsor__66B53B20" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Vault__7DCDAAA2" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Vault__1940BAED" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.AppUser" Width="1.5" PointX="13.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

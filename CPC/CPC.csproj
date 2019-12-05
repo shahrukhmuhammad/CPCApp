@@ -66,6 +66,153 @@
     <Compile Include="Entity\SortedCashEntity.cs" />
     <Compile Include="Entity\UnsortedCashEntity.cs" />
     <Compile Include="Entity\Utils.cs" />
+    <Compile Include="Model\AppLogs_GetAll_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppLogs_GetByContactId_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppLogs_GetById_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppLogs_GetByOfficeId_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppLogs_GetByReferenceId_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppLogs_GetByTypeAndContactId_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppLogs_GetByTypeAndOfficeId_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppLogs_GetByType_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppMessageAttachments_GetById_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppMessageAttachments_GetByMessageId_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppMessages_GetByContactIdAndStatus_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppMessages_GetById_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppMessages_GetByParentId_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppModuleSMTP_GetAll_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppModules_GetAll_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppModules_GetById_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppNotifications_GetAll_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppNotifications_GetByContactIdAndType_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppNotifications_GetByContactId_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppNotifications_GetById_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppNotifications_GetByOfficeId_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppNotifications_GetRecentByContactIdAndType_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppRoles_GetAll_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppRoles_GetById_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppSettingNotifications_GetAllByModule_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppSettingNotifications_GetById_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppSettings_GetAll_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppSMTP_GetAll_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppSMTP_GetById_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppSMTP_GetByThirdParty_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppSMTP_GetByTitle_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUser.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUserExtras_GetByAppUserId_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUsers_CheckDuplicateUsername_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUsers_ForceGetAll_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUsers_GetAllByOfficeId_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUsers_GetAllByRoleId_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUsers_GetAll_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUsers_GetById_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUsers_GetByPermission_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUsers_LoginEmployee_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUsers_Login_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUsers_PasswordRecovery_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUsers_SelectAllByType_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUsers_UsernameRecoveryByEmail_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AppUsers_UsernameRecoveryByQA_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CertificateSettings_SelectList_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CertificateSettings_Select_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Certifications_Select_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\CPCAnnexureI.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
@@ -162,6 +309,33 @@
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\CPCVaultCustodianDetail.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EmailTemplates_GetById_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ExtraFieldSections_GetById_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ExtraFieldSections_GetByModule_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ExtraFieldSections_GetByParentId_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Offices_GetAll_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Offices_GetBreadCrumb_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Offices_GetById_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Offices_GetByParentId_Result.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TaxTypes_SelectAll_Result.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Vew_CPCAnnexureI.cs">
