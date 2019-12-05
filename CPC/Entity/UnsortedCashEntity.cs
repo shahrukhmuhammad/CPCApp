@@ -127,21 +127,19 @@ namespace CPC
         //}
 
         #region Update Status
-        public void ChangeStatus(Guid Id, Guid UserId)
+        public void ChangeStatus(Guid? bookingId, Guid UserId)
         {
-
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Update Status
-                    var res = context.CPCAnnexureIs.Include(x => x.CPCAnnexureIDetails).Where(x => x.OrderBookingId == bookingId).FirstOrDefault();
+                    var res = context.CPCUnsortedCashes.Where(x => x.OrderBookingId == bookingId).FirstOrDefault();
                     if (res != null)
                     {
-                        var resDetail = res.CPCAnnexureIDetails.Where(x => x.ProjectBranchId == ProjBranchId).ToList();
-                        resDetail.ForEach(x => { x.DetailStatus = (int)AnnexureStatus.Proceeded; });
-                        //resDetail.UpdatedOn = DateTime.Now;
-                        //resDetail.UpdatedBy = userId;
+                        res.Status = (int)AnnexureStatus.Proceeded;
+                        res.UpdatedOn = DateTime.Now;
+                        res.UpdatedBy = UserId;
                         context.SaveChanges();
                     }
                     #endregion

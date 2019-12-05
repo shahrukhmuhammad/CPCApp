@@ -18,6 +18,7 @@ namespace WebApp.Areas.CPC.Controllers
         private EmployeeEntity employeeRepo;
         private BranchEntity branchRepo;
         private Common commonRepo;
+        private UnsortedCashEntity unsortedCashRepo;
 
         public VaultCustodianController()
         {
@@ -25,6 +26,7 @@ namespace WebApp.Areas.CPC.Controllers
             employeeRepo = new EmployeeEntity();
             branchRepo = new BranchEntity();
             commonRepo = new Common();
+            unsortedCashRepo = new UnsortedCashEntity();
         }
         public ActionResult VaultCustodians()
         {
@@ -91,7 +93,7 @@ namespace WebApp.Areas.CPC.Controllers
                         #endregion
 
                         //Update Status
-                        valutCustodianRepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id);
+                        unsortedCashRepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id);
                         model.Id = res.Value;
                     }
 
