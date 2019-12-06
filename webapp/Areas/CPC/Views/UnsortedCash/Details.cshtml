@@ -60,7 +60,7 @@
                                 <td><b>Amount</b></td>
                                 <td><b>Seal No</b></td>
                             </tr>
-                            <tr>
+                            @*<tr>
                                 <td>
                                     Rs.1/-
                                 </td>
@@ -137,7 +137,7 @@
                                 <td>
                                     @(unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault() != null ? unsortedCashdetails.Where(x => x.CPCDenomination.DenominationTitle == 5).FirstOrDefault().SealNo : "0")
                                 </td>
-                            </tr>
+                            </tr>*@
                             <tr>
                                 <td>
                                     Rs.10/-
