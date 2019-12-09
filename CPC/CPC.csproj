@@ -302,6 +302,12 @@
     <Compile Include="Model\CPCVaultConsolidated.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\CPCVaultConsolidatedBundle.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CPCVaultConsolidatedBundlesDetail.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\CPCVaultConsolidatedDetail.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>

@@ -123,8 +123,45 @@ namespace CPC
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    #region Save Department
+                    #region Save
                     context.CPCVaultConsolidatedDetails.AddRange(modelList);
+                    context.SaveChanges();
+                    #endregion
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool CreateVaultConsolidatedBundle(List<CPCVaultConsolidatedBundle> modelList)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Save
+                    context.CPCVaultConsolidatedBundles.AddRange(modelList);
+                    context.SaveChanges();
+                    #endregion
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public bool CreateVaultConsolidatedBundleDetails(List<CPCVaultConsolidatedBundlesDetail> modelList)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Save
+                    context.CPCVaultConsolidatedBundlesDetails.AddRange(modelList);
                     context.SaveChanges();
                     #endregion
                     return true;
