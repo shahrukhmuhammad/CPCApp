@@ -52,6 +52,7 @@ namespace WebApp.Areas.CPC.Controllers
             return View(model);
         }
         #endregion
+
         #region Record
         public ActionResult Record(Guid? Id)
         {

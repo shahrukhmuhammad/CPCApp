@@ -136,7 +136,7 @@ namespace CPC
             }
         }
 
-        public bool CreateVaultConsolidatedBundle(List<CPCVaultConsolidatedBundle> modelList)
+        public bool CreateVaultConsolidatedBundle(List<CPCVaultConsolidatedBundle> modelList, List<CPCVaultConsolidatedBundlesDetail> childList)
         {
             try
             {
@@ -144,6 +144,7 @@ namespace CPC
                 {
                     #region Save
                     context.CPCVaultConsolidatedBundles.AddRange(modelList);
+                    //context.CPCVaultConsolidatedBundlesDetails.AddRange(childList);
                     context.SaveChanges();
                     #endregion
                     return true;

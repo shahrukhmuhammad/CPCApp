@@ -98,10 +98,12 @@ namespace WebApp.Areas.CPC.Controllers
                         #endregion
 
                         #region Save Sub Master
+                        var lsMasterToSave = new List<CPCVaultConsolidatedBundle>();
+                        var lsChildToSave = new List<CPCVaultConsolidatedBundlesDetail>();
                         var lsVaultConsolidatedBundle = CPCVaultConsolidatedBundle.Where(x => x.DenominationId != Guid.Empty).ToList();
                         foreach (var item in lsVaultConsolidatedBundle)
                         {
-                            var obj = new CPCVaultConsolidatedBundle();
+                            //var obj = new CPCVaultConsolidatedBundle();
                             //var masterId = Guid.NewGuid();
                             var objConsolidatedDetail = lsToSave.Where(x => x.DenominationId == item.DenominationId).FirstOrDefault();
 
@@ -113,6 +115,7 @@ namespace WebApp.Areas.CPC.Controllers
                                 item.OrderBookingId = model.OrderBookingId.Value;
                                 item.CreatedOn = DateTime.Now;
                                 item.CreatedBy = CurrentUser.Id;
+                                lsMasterToSave.Add(item);
                                 #endregion
 
                                 #region Bundles Details
@@ -122,13 +125,15 @@ namespace WebApp.Areas.CPC.Controllers
                                     x.Id = Guid.NewGuid();
                                     x.ConsolidatedBundlesId = item.Id;
                                 });
+                                lsChildToSave.AddRange(detailsList);
                                 #endregion
                             }
                         }
-                        vaultConsolidatedRepo.CreateVaultConsolidatedBundle(lsVaultConsolidatedBundle);
+                        if(lsMasterToSave.Count > 0 )
+                            vaultConsolidatedRepo.CreateVaultConsolidatedBundle(lsMasterToSave, lsChildToSave);
                         #endregion 
 
-                        //valutCustodianRepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id);
+                        valutCustodianRepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id);
                         model.Id = res.Value;
                     }
 
