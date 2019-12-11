@@ -85,7 +85,7 @@
                                                 <td>@item.DenominationTitle</td>
                                                 <td>@item.NoOfBundles</td>
                                                 <td>@item.TotalAmount</td>
-                                                @if (annexureIDetails != null)
+                                                @if (annexureIDetails != null && annexureIDetails.Count > 0)
                                                 {
                                                     <td>@(annexureIDetails.Where(y => y.ProjectBranchId == item.ProjectBranchId).FirstOrDefault().SealNo != null ? annexureIDetails.Where(y=> y.ProjectBranchId == item.ProjectBranchId).FirstOrDefault().SealNo : "")</td>
                                                     <td>@(annexureIDetails.Where(y => y.ProjectBranchId == item.ProjectBranchId).FirstOrDefault().ShipmentReciptNo != null ? annexureIDetails.Where(y => y.ProjectBranchId == item.ProjectBranchId).FirstOrDefault().ShipmentReciptNo : "")</td>

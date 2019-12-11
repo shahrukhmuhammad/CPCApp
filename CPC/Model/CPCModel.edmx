@@ -385,7 +385,6 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SerialNumber" Type="bigint" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="CityId" Type="uniqueidentifier" />
           <Property Name="ProjectBranchId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TotalNumberBundles" Type="int" />
           <Property Name="TotalBalance" Type="bigint" Nullable="false" />
@@ -395,6 +394,7 @@
           <Property Name="UpdatedBy" Type="uniqueidentifier" />
           <Property Name="Status" Type="tinyint" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CityId" Type="uniqueidentifier" />
           <Property Name="OrderNumber" Type="int" />
           <Property Name="OrderBookingId" Type="uniqueidentifier" />
         </EntityType>
@@ -432,6 +432,27 @@
           <Property Name="OrderBookingId" Type="uniqueidentifier" />
           <Property Name="SupervisorId" Type="uniqueidentifier" />
         </EntityType>
+        <EntityType Name="CPCVaultConsolidatedBundles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderBookingId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DenominationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ConsolidatedDetailsId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CPCVaultConsolidatedBundlesDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ConsolidatedBundlesId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NumberOfBundles" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="SorterId" Type="uniqueidentifier" />
+        </EntityType>
         <EntityType Name="CPCVaultConsolidatedDetails">
           <Key>
             <PropertyRef Name="Id" />
@@ -444,7 +465,6 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SealNo" Type="nvarchar" MaxLength="50" />
-          <Property Name="SorterId" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="CPCVaultCustodian">
           <Key>
@@ -476,9 +496,9 @@
           <Property Name="VaultCustodianId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="NumberOfBundles" Type="int" Nullable="false" />
           <Property Name="TotalValue" Type="int" Nullable="false" />
+          <Property Name="SealNo" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SealNo" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SOSTechCPC.dbo.Vew_CPCAnnexureI' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -810,6 +830,30 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_VaultCustodian' does not have a
             </Principal>
             <Dependent Role="CPCCashProcessingHouse">
               <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CPCConsol__Conso__0FEC5ADD">
+          <End Role="CPCVaultConsolidatedBundles" Type="Self.CPCVaultConsolidatedBundles" Multiplicity="1" />
+          <End Role="CPCVaultConsolidatedBundlesDetails" Type="Self.CPCVaultConsolidatedBundlesDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCVaultConsolidatedBundles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCVaultConsolidatedBundlesDetails">
+              <PropertyRef Name="ConsolidatedBundlesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CPCConsol__Conso__11D4A34F">
+          <End Role="CPCVaultConsolidatedDetails" Type="Self.CPCVaultConsolidatedDetails" Multiplicity="1" />
+          <End Role="CPCVaultConsolidatedBundles" Type="Self.CPCVaultConsolidatedBundles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCVaultConsolidatedDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCVaultConsolidatedBundles">
+              <PropertyRef Name="ConsolidatedDetailsId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1663,6 +1707,8 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_VaultCustodian' does not have a
           <EntitySet Name="CPCUnsortedCash" EntityType="Self.CPCUnsortedCash" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CPCUnsortedCashDetails" EntityType="Self.CPCUnsortedCashDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CPCVaultConsolidated" EntityType="Self.CPCVaultConsolidated" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CPCVaultConsolidatedBundles" EntityType="Self.CPCVaultConsolidatedBundles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CPCVaultConsolidatedBundlesDetails" EntityType="Self.CPCVaultConsolidatedBundlesDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CPCVaultConsolidatedDetails" EntityType="Self.CPCVaultConsolidatedDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CPCVaultCustodian" EntityType="Self.CPCVaultCustodian" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CPCVaultCustodianDetails" EntityType="Self.CPCVaultCustodianDetails" Schema="dbo" store:Type="Tables" />
@@ -1841,6 +1887,14 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_VaultCustodian' does not have a
           <AssociationSet Name="FK__CPCCashPr__Proje__731B1205" Association="Self.FK__CPCCashPr__Proje__731B1205">
             <End Role="CPCProject" EntitySet="CPCProject" />
             <End Role="CPCCashProcessingHouse" EntitySet="CPCCashProcessingHouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CPCConsol__Conso__0FEC5ADD" Association="Self.FK__CPCConsol__Conso__0FEC5ADD">
+            <End Role="CPCVaultConsolidatedBundles" EntitySet="CPCVaultConsolidatedBundles" />
+            <End Role="CPCVaultConsolidatedBundlesDetails" EntitySet="CPCVaultConsolidatedBundlesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CPCConsol__Conso__11D4A34F" Association="Self.FK__CPCConsol__Conso__11D4A34F">
+            <End Role="CPCVaultConsolidatedDetails" EntitySet="CPCVaultConsolidatedDetails" />
+            <End Role="CPCVaultConsolidatedBundles" EntitySet="CPCVaultConsolidatedBundles" />
           </AssociationSet>
           <AssociationSet Name="FK__CPCOrderB__Order__79C80F94" Association="Self.FK__CPCOrderB__Order__79C80F94">
             <End Role="CPCOrderBookings" EntitySet="CPCOrderBookings" />
@@ -2521,7 +2575,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_VaultCustodian' does not have a
           <EntitySet Name="CPCUnsortedCashes" EntityType="SOSTechCPCModel.CPCUnsortedCash" />
           <EntitySet Name="CPCUnsortedCashDetails" EntityType="SOSTechCPCModel.CPCUnsortedCashDetail" />
           <EntitySet Name="CPCVaultConsolidateds" EntityType="SOSTechCPCModel.CPCVaultConsolidated" />
-          <EntitySet Name="CPCVaultConsolidatedDetails" EntityType="SOSTechCPCModel.CPCVaultConsolidatedDetail" />
           <EntitySet Name="CPCVaultCustodians" EntityType="SOSTechCPCModel.CPCVaultCustodian" />
           <EntitySet Name="CPCVaultCustodianDetails" EntityType="SOSTechCPCModel.CPCVaultCustodianDetail" />
           <EntitySet Name="Vew_CPCAnnexureI" EntityType="SOSTechCPCModel.Vew_CPCAnnexureI" />
@@ -2612,10 +2665,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_VaultCustodian' does not have a
             <End Role="CPCDenomination" EntitySet="CPCDenominations" />
             <End Role="CPCVaultCustodianDetail" EntitySet="CPCVaultCustodianDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__CPCVaultC__Denom__7EC1CEDB" Association="SOSTechCPCModel.FK__CPCVaultC__Denom__7EC1CEDB">
-            <End Role="CPCDenomination" EntitySet="CPCDenominations" />
-            <End Role="CPCVaultConsolidatedDetail" EntitySet="CPCVaultConsolidatedDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK__CPCOrderB__Order__79C80F94" Association="SOSTechCPCModel.FK__CPCOrderB__Order__79C80F94">
             <End Role="CPCOrderBooking" EntitySet="CPCOrderBookings" />
             <End Role="CPCOrderBookingDetail" EntitySet="CPCOrderBookingDetails" />
@@ -2660,15 +2709,30 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_VaultCustodian' does not have a
             <End Role="CPCUnsortedCash" EntitySet="CPCUnsortedCashes" />
             <End Role="CPCUnsortedCashDetail" EntitySet="CPCUnsortedCashDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__CPCVaultC__Vault__7DCDAAA2" Association="SOSTechCPCModel.FK__CPCVaultC__Vault__7DCDAAA2">
-            <End Role="CPCVaultConsolidated" EntitySet="CPCVaultConsolidateds" />
-            <End Role="CPCVaultConsolidatedDetail" EntitySet="CPCVaultConsolidatedDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK__CPCVaultC__Vault__1940BAED" Association="SOSTechCPCModel.FK__CPCVaultC__Vault__1940BAED">
             <End Role="CPCVaultCustodian" EntitySet="CPCVaultCustodians" />
             <End Role="CPCVaultCustodianDetail" EntitySet="CPCVaultCustodianDetails" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="CPCVaultConsolidatedDetails" EntityType="SOSTechCPCModel.CPCVaultConsolidatedDetail" />
+          <AssociationSet Name="FK__CPCVaultC__Denom__7EC1CEDB" Association="SOSTechCPCModel.FK__CPCVaultC__Denom__7EC1CEDB">
+            <End Role="CPCDenomination" EntitySet="CPCDenominations" />
+            <End Role="CPCVaultConsolidatedDetail" EntitySet="CPCVaultConsolidatedDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CPCVaultC__Vault__7DCDAAA2" Association="SOSTechCPCModel.FK__CPCVaultC__Vault__7DCDAAA2">
+            <End Role="CPCVaultConsolidated" EntitySet="CPCVaultConsolidateds" />
+            <End Role="CPCVaultConsolidatedDetail" EntitySet="CPCVaultConsolidatedDetails" />
+          </AssociationSet>
+          <EntitySet Name="CPCVaultConsolidatedBundlesDetails" EntityType="SOSTechCPCModel.CPCVaultConsolidatedBundlesDetail" />
+          <EntitySet Name="CPCVaultConsolidatedBundles" EntityType="SOSTechCPCModel.CPCVaultConsolidatedBundle" />
+          <AssociationSet Name="FK__CPCConsol__Conso__0FEC5ADD" Association="SOSTechCPCModel.FK__CPCConsol__Conso__0FEC5ADD">
+            <End Role="CPCVaultConsolidatedBundle" EntitySet="CPCVaultConsolidatedBundles" />
+            <End Role="CPCVaultConsolidatedBundlesDetail" EntitySet="CPCVaultConsolidatedBundlesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CPCConsol__Conso__11D4A34F" Association="SOSTechCPCModel.FK__CPCConsol__Conso__11D4A34F">
+            <End Role="CPCVaultConsolidatedDetail" EntitySet="CPCVaultConsolidatedDetails" />
+            <End Role="CPCVaultConsolidatedBundle" EntitySet="CPCVaultConsolidatedBundles" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="AppLogs_GetAll_Result">
           <Property Type="Guid" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="OfficeId" Nullable="true" />
@@ -4182,22 +4246,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_VaultCustodian' does not have a
           <NavigationProperty Name="CPCProjectBranch" Relationship="SOSTechCPCModel.FK__CPCVaultC__Proje__019E3B86" FromRole="CPCVaultConsolidated" ToRole="CPCProjectBranch" />
           <NavigationProperty Name="CPCVaultConsolidatedDetails" Relationship="SOSTechCPCModel.FK__CPCVaultC__Vault__7DCDAAA2" FromRole="CPCVaultConsolidated" ToRole="CPCVaultConsolidatedDetail" />
         </EntityType>
-        <EntityType Name="CPCVaultConsolidatedDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="DenominationId" Type="Guid" Nullable="false" />
-          <Property Name="VaultConsolidatedId" Type="Guid" Nullable="false" />
-          <Property Name="NumberOfBundles" Type="Int32" Nullable="false" />
-          <Property Name="TotalValue" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-          <Property Name="SealNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SorterId" Type="Guid" />
-          <NavigationProperty Name="CPCDenomination" Relationship="SOSTechCPCModel.FK__CPCVaultC__Denom__7EC1CEDB" FromRole="CPCVaultConsolidatedDetail" ToRole="CPCDenomination" />
-          <NavigationProperty Name="CPCVaultConsolidated" Relationship="SOSTechCPCModel.FK__CPCVaultC__Vault__7DCDAAA2" FromRole="CPCVaultConsolidatedDetail" ToRole="CPCVaultConsolidated" />
-        </EntityType>
         <EntityType Name="CPCVaultCustodian">
           <Key>
             <PropertyRef Name="Id" />
@@ -4659,18 +4707,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_VaultCustodian' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CPCVaultC__Denom__7EC1CEDB">
-          <End Type="SOSTechCPCModel.CPCDenomination" Role="CPCDenomination" Multiplicity="1" />
-          <End Type="SOSTechCPCModel.CPCVaultConsolidatedDetail" Role="CPCVaultConsolidatedDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CPCDenomination">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CPCVaultConsolidatedDetail">
-              <PropertyRef Name="DenominationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__CPCOrderB__Order__79C80F94">
           <End Type="SOSTechCPCModel.CPCOrderBooking" Role="CPCOrderBooking" Multiplicity="1" />
           <End Type="SOSTechCPCModel.CPCOrderBookingDetail" Role="CPCOrderBookingDetail" Multiplicity="*" />
@@ -4803,6 +4839,46 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_VaultCustodian' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__CPCVaultC__Vault__1940BAED">
+          <End Type="SOSTechCPCModel.CPCVaultCustodian" Role="CPCVaultCustodian" Multiplicity="1" />
+          <End Type="SOSTechCPCModel.CPCVaultCustodianDetail" Role="CPCVaultCustodianDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCVaultCustodian">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCVaultCustodianDetail">
+              <PropertyRef Name="VaultCustodianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CPCVaultConsolidatedDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DenominationId" Type="Guid" Nullable="false" />
+          <Property Name="VaultConsolidatedId" Type="Guid" Nullable="false" />
+          <Property Name="NumberOfBundles" Type="Int32" Nullable="false" />
+          <Property Name="TotalValue" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="SealNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CPCDenomination" Relationship="SOSTechCPCModel.FK__CPCVaultC__Denom__7EC1CEDB" FromRole="CPCVaultConsolidatedDetail" ToRole="CPCDenomination" />
+          <NavigationProperty Name="CPCVaultConsolidated" Relationship="SOSTechCPCModel.FK__CPCVaultC__Vault__7DCDAAA2" FromRole="CPCVaultConsolidatedDetail" ToRole="CPCVaultConsolidated" />
+          <NavigationProperty Name="CPCVaultConsolidatedBundles" Relationship="SOSTechCPCModel.FK__CPCConsol__Conso__11D4A34F" FromRole="CPCVaultConsolidatedDetail" ToRole="CPCVaultConsolidatedBundle" />
+        </EntityType>
+        <Association Name="FK__CPCVaultC__Denom__7EC1CEDB">
+          <End Type="SOSTechCPCModel.CPCDenomination" Role="CPCDenomination" Multiplicity="1" />
+          <End Type="SOSTechCPCModel.CPCVaultConsolidatedDetail" Role="CPCVaultConsolidatedDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCDenomination">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCVaultConsolidatedDetail">
+              <PropertyRef Name="DenominationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__CPCVaultC__Vault__7DCDAAA2">
           <End Type="SOSTechCPCModel.CPCVaultConsolidated" Role="CPCVaultConsolidated" Multiplicity="1" />
           <End Type="SOSTechCPCModel.CPCVaultConsolidatedDetail" Role="CPCVaultConsolidatedDetail" Multiplicity="*" />
@@ -4815,15 +4891,51 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_VaultCustodian' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CPCVaultC__Vault__1940BAED">
-          <End Type="SOSTechCPCModel.CPCVaultCustodian" Role="CPCVaultCustodian" Multiplicity="1" />
-          <End Type="SOSTechCPCModel.CPCVaultCustodianDetail" Role="CPCVaultCustodianDetail" Multiplicity="*" />
+        <EntityType Name="CPCVaultConsolidatedBundlesDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ConsolidatedBundlesId" Type="Guid" Nullable="false" />
+          <Property Name="NumberOfBundles" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="SorterId" Type="Guid" />
+          <NavigationProperty Name="CPCVaultConsolidatedBundle" Relationship="SOSTechCPCModel.FK__CPCConsol__Conso__0FEC5ADD" FromRole="CPCVaultConsolidatedBundlesDetail" ToRole="CPCVaultConsolidatedBundle" />
+        </EntityType>
+        <EntityType Name="CPCVaultConsolidatedBundle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="OrderBookingId" Type="Guid" Nullable="false" />
+          <Property Name="DenominationId" Type="Guid" Nullable="false" />
+          <Property Name="ConsolidatedDetailsId" Type="Guid" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="CPCVaultConsolidatedBundlesDetails" Relationship="SOSTechCPCModel.FK__CPCConsol__Conso__0FEC5ADD" FromRole="CPCVaultConsolidatedBundle" ToRole="CPCVaultConsolidatedBundlesDetail" />
+          <NavigationProperty Name="CPCVaultConsolidatedDetail" Relationship="SOSTechCPCModel.FK__CPCConsol__Conso__11D4A34F" FromRole="CPCVaultConsolidatedBundle" ToRole="CPCVaultConsolidatedDetail" />
+        </EntityType>
+        <Association Name="FK__CPCConsol__Conso__0FEC5ADD">
+          <End Type="SOSTechCPCModel.CPCVaultConsolidatedBundle" Role="CPCVaultConsolidatedBundle" Multiplicity="1" />
+          <End Type="SOSTechCPCModel.CPCVaultConsolidatedBundlesDetail" Role="CPCVaultConsolidatedBundlesDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CPCVaultCustodian">
+            <Principal Role="CPCVaultConsolidatedBundle">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="CPCVaultCustodianDetail">
-              <PropertyRef Name="VaultCustodianId" />
+            <Dependent Role="CPCVaultConsolidatedBundlesDetail">
+              <PropertyRef Name="ConsolidatedBundlesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CPCConsol__Conso__11D4A34F">
+          <End Type="SOSTechCPCModel.CPCVaultConsolidatedDetail" Role="CPCVaultConsolidatedDetail" Multiplicity="1" />
+          <End Type="SOSTechCPCModel.CPCVaultConsolidatedBundle" Role="CPCVaultConsolidatedBundle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CPCVaultConsolidatedDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CPCVaultConsolidatedBundle">
+              <PropertyRef Name="ConsolidatedDetailsId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6608,21 +6720,6 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_VaultCustodian' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CPCVaultConsolidatedDetails">
-            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCVaultConsolidatedDetail">
-              <MappingFragment StoreEntitySet="CPCVaultConsolidatedDetails">
-                <ScalarProperty Name="SorterId" ColumnName="SorterId" />
-                <ScalarProperty Name="SealNo" ColumnName="SealNo" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
-                <ScalarProperty Name="NumberOfBundles" ColumnName="NumberOfBundles" />
-                <ScalarProperty Name="VaultConsolidatedId" ColumnName="VaultConsolidatedId" />
-                <ScalarProperty Name="DenominationId" ColumnName="DenominationId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CPCVaultCustodians">
             <EntityTypeMapping TypeName="SOSTechCPCModel.CPCVaultCustodian">
               <MappingFragment StoreEntitySet="CPCVaultCustodian">
@@ -6787,6 +6884,43 @@ warning 6002: The table/view 'SOSTechCPC.dbo.Vew_VaultCustodian' does not have a
                 <ScalarProperty Name="ProjectBranchId" ColumnName="ProjectBranchId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CPCVaultConsolidatedDetails">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCVaultConsolidatedDetail">
+              <MappingFragment StoreEntitySet="CPCVaultConsolidatedDetails">
+                <ScalarProperty Name="SealNo" ColumnName="SealNo" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+                <ScalarProperty Name="NumberOfBundles" ColumnName="NumberOfBundles" />
+                <ScalarProperty Name="VaultConsolidatedId" ColumnName="VaultConsolidatedId" />
+                <ScalarProperty Name="DenominationId" ColumnName="DenominationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CPCVaultConsolidatedBundlesDetails">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCVaultConsolidatedBundlesDetail">
+              <MappingFragment StoreEntitySet="CPCVaultConsolidatedBundlesDetails">
+                <ScalarProperty Name="SorterId" ColumnName="SorterId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="NumberOfBundles" ColumnName="NumberOfBundles" />
+                <ScalarProperty Name="ConsolidatedBundlesId" ColumnName="ConsolidatedBundlesId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CPCVaultConsolidatedBundles">
+            <EntityTypeMapping TypeName="SOSTechCPCModel.CPCVaultConsolidatedBundle">
+              <MappingFragment StoreEntitySet="CPCVaultConsolidatedBundles">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ConsolidatedDetailsId" ColumnName="ConsolidatedDetailsId" />
+                <ScalarProperty Name="DenominationId" ColumnName="DenominationId" />
+                <ScalarProperty Name="OrderBookingId" ColumnName="OrderBookingId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

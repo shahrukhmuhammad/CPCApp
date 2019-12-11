@@ -91,7 +91,7 @@
                                     <td>Amount</td>
                                     <td>Seal No.</td>
                                 </tr>
-                                <tr>
+                                @*<tr>
                                     <td>
                                         Rs.1/-
                                         <input type="hidden" name="CPCUnsortedCashDetail[0].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 1).FirstOrDefault().Id)" />
@@ -135,110 +135,110 @@
                                     <td>
                                         <input id="SealNoTwo" type="text" value="0" name="CPCUnsortedCashDetail[2].SealNo" class="form-control input-sm clearField" />
                                     </td>
-                                </tr>
+                                </tr>*@
                                 <tr>
                                     <td>
                                         Rs.10/-
-                                        <input type="hidden" name="CPCUnsortedCashDetail[3].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 10).FirstOrDefault().Id)" />
+                                        <input type="hidden" name="CPCUnsortedCashDetail[0].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 10).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="10">
-                                        <input id="numberOfPacketsThree" type="number" value="0" name="CPCUnsortedCashDetail[3].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
+                                        <input id="numberOfPacketsThree" type="number" value="0" name="CPCUnsortedCashDetail[0].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueThree" type="number" value="0" name="CPCUnsortedCashDetail[3].TotalValue" class="form-control input-sm clearField" />
+                                        <input id="totalValueThree" type="number" value="0" name="CPCUnsortedCashDetail[0].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                     <td>
-                                        <input id="SealNoThree" type="text" value="0" name="CPCUnsortedCashDetail[3].SealNo" class="form-control input-sm clearField" />
+                                        <input id="SealNoThree" type="text" value="0" name="CPCUnsortedCashDetail[0].SealNo" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         Rs.20/-
-                                        <input type="hidden" name="CPCUnsortedCashDetail[4].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 20).FirstOrDefault().Id)" />
+                                        <input type="hidden" name="CPCUnsortedCashDetail[1].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 20).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="20">
-                                        <input id="numberOfPacketsFour" type="number" value="0" name="CPCUnsortedCashDetail[4].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
+                                        <input id="numberOfPacketsFour" type="number" value="0" name="CPCUnsortedCashDetail[1].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueFour" type="number" value="0" name="CPCUnsortedCashDetail[4].TotalValue" class="form-control input-sm clearField" />
+                                        <input id="totalValueFour" type="number" value="0" name="CPCUnsortedCashDetail[1].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                     <td>
-                                        <input id="SealNoFour" type="text" value="0" name="CPCUnsortedCashDetail[4].SealNo" class="form-control input-sm clearField" />
+                                        <input id="SealNoFour" type="text" value="0" name="CPCUnsortedCashDetail[1].SealNo" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         Rs.50/-
-                                        <input type="hidden" name="CPCUnsortedCashDetail[5].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 50).FirstOrDefault().Id)" />
+                                        <input type="hidden" name="CPCUnsortedCashDetail[2].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 50).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="50">
-                                        <input id="numberOfPacketsFive" type="number" value="0" name="CPCUnsortedCashDetail[5].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
+                                        <input id="numberOfPacketsFive" type="number" value="0" name="CPCUnsortedCashDetail[2].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueFive" type="number" value="0" name="CPCUnsortedCashDetail[5].TotalValue" class="form-control input-sm clearField" />
+                                        <input id="totalValueFive" type="number" value="0" name="CPCUnsortedCashDetail[2].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                     <td>
-                                        <input id="SealNoFive" type="text" value="0" name="CPCUnsortedCashDetail[5].SealNo" class="form-control input-sm clearField" />
+                                        <input id="SealNoFive" type="text" value="0" name="CPCUnsortedCashDetail[2].SealNo" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         Rs.100/-
-                                        <input type="hidden" name="CPCUnsortedCashDetail[6].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 100).FirstOrDefault().Id)" />
+                                        <input type="hidden" name="CPCUnsortedCashDetail[3].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 100).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="100">
-                                        <input id="numberOfPacketsSix" type="number" value="0" name="CPCUnsortedCashDetail[6].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
+                                        <input id="numberOfPacketsSix" type="number" value="0" name="CPCUnsortedCashDetail[3].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueSix" type="number" value="0" name="CPCUnsortedCashDetail[6].TotalValue" class="form-control input-sm clearField" />
+                                        <input id="totalValueSix" type="number" value="0" name="CPCUnsortedCashDetail[3].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                     <td>
-                                        <input id="SealNoSix" type="text" value="0" name="CPCUnsortedCashDetail[6].SealNo" class="form-control input-sm clearField" />
+                                        <input id="SealNoSix" type="text" value="0" name="CPCUnsortedCashDetail[3].SealNo" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         Rs.500/-
-                                        <input type="hidden" name="CPCUnsortedCashDetail[7].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 500).FirstOrDefault().Id)" />
+                                        <input type="hidden" name="CPCUnsortedCashDetail[4].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 500).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="500">
-                                        <input id="numberOfPacketsSeven" type="number" value="0" name="CPCUnsortedCashDetail[7].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
+                                        <input id="numberOfPacketsSeven" type="number" value="0" name="CPCUnsortedCashDetail[4].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueSeven" type="number" value="0" name="CPCUnsortedCashDetail[7].TotalValue" class="form-control input-sm clearField" />
+                                        <input id="totalValueSeven" type="number" value="0" name="CPCUnsortedCashDetail[4].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                     <td>
-                                        <input id="SealNoSeven" type="text" value="0" name="CPCUnsortedCashDetail[7].SealNo" class="form-control input-sm clearField" />
+                                        <input id="SealNoSeven" type="text" value="0" name="CPCUnsortedCashDetail[4].SealNo" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         Rs.1000/-
-                                        <input type="hidden" name="CPCUnsortedCashDetail[8].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 1000).FirstOrDefault().Id)" />
+                                        <input type="hidden" name="CPCUnsortedCashDetail[5].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 1000).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="1000">
-                                        <input id="numberOfPacketsEight" type="number" value="0" name="CPCUnsortedCashDetail[8].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
+                                        <input id="numberOfPacketsEight" type="number" value="0" name="CPCUnsortedCashDetail[5].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueEight" type="number" value="0" name="CPCUnsortedCashDetail[8].TotalValue" class="form-control input-sm clearField" />
+                                        <input id="totalValueEight" type="number" value="0" name="CPCUnsortedCashDetail[5].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                     <td>
-                                        <input id="SealNoEight" type="text" value="0" name="CPCUnsortedCashDetail[8].SealNo" class="form-control input-sm clearField" />
+                                        <input id="SealNoEight" type="text" value="0" name="CPCUnsortedCashDetail[5].SealNo" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         Rs.5000/-
-                                        <input type="hidden" name="CPCUnsortedCashDetail[9].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 5000).FirstOrDefault().Id)" />
+                                        <input type="hidden" name="CPCUnsortedCashDetail[6].DenominationId" value="@(denomList.Where(x=> x.DenominationTitle == 5000).FirstOrDefault().Id)" />
                                     </td>
                                     <td data-id="5000">
-                                        <input id="numberOfPacketsNine" type="number" value="0" name="CPCUnsortedCashDetail[9].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
+                                        <input id="numberOfPacketsNine" type="number" value="0" name="CPCUnsortedCashDetail[6].NumberOfBundles" class="form-control input-sm inp totalfinalNumber clearField" />
                                     </td>
                                     <td>
-                                        <input id="totalValueNine" type="number" value="0" name="CPCUnsortedCashDetail[9].TotalValue" class="form-control input-sm clearField" />
+                                        <input id="totalValueNine" type="number" value="0" name="CPCUnsortedCashDetail[6].TotalValue" class="form-control input-sm clearField" />
                                     </td>
                                     <td>
-                                        <input id="SealNoNine" type="text" value="0" name="CPCUnsortedCashDetail[9].SealNo" class="form-control input-sm clearField" />
+                                        <input id="SealNoNine" type="text" value="0" name="CPCUnsortedCashDetail[6].SealNo" class="form-control input-sm clearField" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -324,28 +324,28 @@
                         function (index, item) {
                             $('#CityName').val(item.CityName);
                             $('#CityId').val(item.CityId);
-                        if (item.DenominationTitle == '1') {
-                            $("#numberOfPacketsZero").val(item.NoOfBundles);
-                            $("#totalValueZero").val(item.TotalAmount);
-                            $("#SealNoZero").val(item.SealNo);
-                            finalTotalBundles += parseInt(item.NoOfBundles);
-                            finalTotalAmount += parseInt(item.TotalAmount);
-                        }
-                        else if (item.DenominationTitle == '2') {
-                            $("#numberOfPacketsOne").val(item.NoOfBundles);
-                            $("#totalValueOne").val(item.TotalAmount);
-                            $("#SealNoOne").val(item.SealNo);
-                            finalTotalBundles += parseInt(item.NoOfBundles);
-                            finalTotalAmount += parseInt(item.TotalAmount);
-                        }
-                        else if (item.DenominationTitle == '5') {
-                            $("#numberOfPacketsTwo").val(item.NoOfBundles);
-                            $("#totalValueTwo").val(item.TotalAmount);
-                            $("#SealNoTwo").val(item.SealNo);
-                            finalTotalBundles += parseInt(item.NoOfBundles);
-                            finalTotalAmount += parseInt(item.TotalAmount);
-                        }
-                        else if (item.DenominationTitle == '10') {
+                        //if (item.DenominationTitle == '1') {
+                        //    $("#numberOfPacketsZero").val(item.NoOfBundles);
+                        //    $("#totalValueZero").val(item.TotalAmount);
+                        //    $("#SealNoZero").val(item.SealNo);
+                        //    finalTotalBundles += parseInt(item.NoOfBundles);
+                        //    finalTotalAmount += parseInt(item.TotalAmount);
+                        //}
+                        //else if (item.DenominationTitle == '2') {
+                        //    $("#numberOfPacketsOne").val(item.NoOfBundles);
+                        //    $("#totalValueOne").val(item.TotalAmount);
+                        //    $("#SealNoOne").val(item.SealNo);
+                        //    finalTotalBundles += parseInt(item.NoOfBundles);
+                        //    finalTotalAmount += parseInt(item.TotalAmount);
+                        //}
+                        //else if (item.DenominationTitle == '5') {
+                        //    $("#numberOfPacketsTwo").val(item.NoOfBundles);
+                        //    $("#totalValueTwo").val(item.TotalAmount);
+                        //    $("#SealNoTwo").val(item.SealNo);
+                        //    finalTotalBundles += parseInt(item.NoOfBundles);
+                        //    finalTotalAmount += parseInt(item.TotalAmount);
+                        //}
+                        if (item.DenominationTitle == '10') {
                             $("#numberOfPacketsThree").val(item.NoOfBundles);
                             $("#totalValueThree").val(item.TotalAmount);
                             $("#SealNoThree").val(item.SealNo);

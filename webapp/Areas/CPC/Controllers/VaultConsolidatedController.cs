@@ -72,12 +72,15 @@ namespace WebApp.Areas.CPC.Controllers
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Record(CPCVaultConsolidated model, List<CPCVaultConsolidatedDetail> CPCVaultConsolidatedDetail, string Date)
+        public ActionResult Record(CPCVaultConsolidated model, List<CPCVaultConsolidatedDetail> CPCVaultConsolidatedDetail, List<CPCVaultConsolidatedBundle> CPCVaultConsolidatedBundle, string Date)
         {
             try
             {
                 if (model.Id.IsEmpty())
                 {
+                    //var ss = new CPCVaultConsolidated();
+                    //var b = ss.CPCVaultConsolidatedBundles.First();
+                    //b.CPCVaultConsolidatedBundlesDetails.First().Amount
                     model.CreatedBy = CurrentUser.Id;
                     model.CreatedOn = DateTime.Now;
                     model.IsActive = true;
@@ -87,14 +90,50 @@ namespace WebApp.Areas.CPC.Controllers
                     var res = vaultConsolidatedRepo.Create(model);
                     if (res.HasValue)
                     {
+
+                        #region Save Details
                         var lsToSave = CPCVaultConsolidatedDetail.Where(x => x.NumberOfBundles > 0 && (x.TotalValue != 0)).ToList();
                         lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.VaultConsolidatedId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
-                        #region Save Details
                         vaultConsolidatedRepo.Create(lsToSave);
                         #endregion
 
-                        valutCustodianRepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id);
+                        #region Save Sub Master
+                        var lsMasterToSave = new List<CPCVaultConsolidatedBundle>();
+                        var lsChildToSave = new List<CPCVaultConsolidatedBundlesDetail>();
+                        var lsVaultConsolidatedBundle = CPCVaultConsolidatedBundle.Where(x => x.DenominationId != Guid.Empty).ToList();
+                        foreach (var item in lsVaultConsolidatedBundle)
+                        {
+                            //var obj = new CPCVaultConsolidatedBundle();
+                            //var masterId = Guid.NewGuid();
+                            var objConsolidatedDetail = lsToSave.Where(x => x.DenominationId == item.DenominationId).FirstOrDefault();
 
+                            if (objConsolidatedDetail != null && item.CPCVaultConsolidatedBundlesDetails.Count > 0)
+                            {
+                                #region Bundles Master
+                                item.Id = Guid.NewGuid();
+                                item.ConsolidatedDetailsId = objConsolidatedDetail.Id;
+                                item.OrderBookingId = model.OrderBookingId.Value;
+                                item.CreatedOn = DateTime.Now;
+                                item.CreatedBy = CurrentUser.Id;
+                                lsMasterToSave.Add(item);
+                                #endregion
+
+                                #region Bundles Details
+                                var detailsList = item.CPCVaultConsolidatedBundlesDetails.Where(x => x.SorterId != Guid.Empty && x.NumberOfBundles > 0).ToList();
+                                detailsList.ForEach(x =>
+                                {
+                                    x.Id = Guid.NewGuid();
+                                    x.ConsolidatedBundlesId = item.Id;
+                                });
+                                lsChildToSave.AddRange(detailsList);
+                                #endregion
+                            }
+                        }
+                        if(lsMasterToSave.Count > 0 )
+                            vaultConsolidatedRepo.CreateVaultConsolidatedBundle(lsMasterToSave, lsChildToSave);
+                        #endregion 
+
+                        valutCustodianRepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id);
                         model.Id = res.Value;
                     }
 

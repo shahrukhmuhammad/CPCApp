@@ -12,26 +12,23 @@ namespace CPC.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CPCVaultConsolidatedDetail
+    public partial class CPCVaultConsolidatedBundle
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CPCVaultConsolidatedDetail()
+        public CPCVaultConsolidatedBundle()
         {
-            this.CPCVaultConsolidatedBundles = new HashSet<CPCVaultConsolidatedBundle>();
+            this.CPCVaultConsolidatedBundlesDetails = new HashSet<CPCVaultConsolidatedBundlesDetail>();
         }
     
         public System.Guid Id { get; set; }
+        public System.Guid OrderBookingId { get; set; }
         public System.Guid DenominationId { get; set; }
-        public System.Guid VaultConsolidatedId { get; set; }
-        public int NumberOfBundles { get; set; }
-        public int TotalValue { get; set; }
+        public System.Guid ConsolidatedDetailsId { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
-        public string SealNo { get; set; }
     
-        public virtual CPCDenomination CPCDenomination { get; set; }
-        public virtual CPCVaultConsolidated CPCVaultConsolidated { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CPCVaultConsolidatedBundle> CPCVaultConsolidatedBundles { get; set; }
+        public virtual ICollection<CPCVaultConsolidatedBundlesDetail> CPCVaultConsolidatedBundlesDetails { get; set; }
+        public virtual CPCVaultConsolidatedDetail CPCVaultConsolidatedDetail { get; set; }
     }
 }
