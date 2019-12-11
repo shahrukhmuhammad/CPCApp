@@ -46,6 +46,11 @@ namespace BaseApp.Entity
         public const string ViewHRMS = "ViewHRMS";
         public const string ViewCPC = "ViewCPC";
         public const string ViewBank = "ViewBank";
+        public const string ViewOrderRequests = "ViewOrderRequests";
+        public const string ViewOrderCollection = "ViewOrderCollection";
+        public const string ViewVaultUnsortedHandler = "ViewVaultUnsortedHandler";
+        public const string ViewVaultManager = "ViewVaultManager";
+        public const string ViewSupervisor = "ViewSupervisor";
         #endregion
 
         #region Control Permissions
@@ -60,6 +65,11 @@ namespace BaseApp.Entity
         public const string CPC = "CPC";
         public const string Bank = "Bank";
         public const string CPC_RGM = "CPC_RGM";
+        public const string OrderRequests = "OrderRequests";
+        public const string OrderCollection = "ViewOrderCollection";
+        public const string VaultUnsortedHandler = "VaultUnsortedHandler";
+        public const string VaultManager = "VaultManager";
+        public const string Supervisor = "Supervisor";
         #endregion
 
 

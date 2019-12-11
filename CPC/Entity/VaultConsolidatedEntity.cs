@@ -264,26 +264,26 @@ namespace CPC
             }
         }
 
-        public bool InActiveRecord(Guid Id)
+        public CPCVaultConsolidated InActiveRecord(Guid Id)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    #region Update Employee
-                    var res = context.CPCSortedCashes.Where(x => x.Id == Id).FirstOrDefault();
+                    #region inactive consolidated Vault
+                    var res = context.CPCVaultConsolidateds.Where(x => x.Id == Id).FirstOrDefault();
                     if (res != null)
                     {
                         res.IsActive = false;
                         context.SaveChanges();
                     }
                     #endregion
-                    return true;
+                    return res;
                 }
             }
             catch (Exception ex)
             {
-                return false;
+                return null;
             }
         }
     }

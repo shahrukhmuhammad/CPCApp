@@ -46,20 +46,21 @@
         </div>
     </div>
 
-    @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.ViewBank, BaseApp.Entity.AppPermission.Bank))
-    {
+    @{ 
+        if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.ViewBank, BaseApp.Entity.AppPermission.Bank))
+        {
         <div>
             <div class="panel panel-default">
                 <div class="panel-heading no-padding" role="tab">
                     <h4 class="panel-title">
-                        <a class="list-group-item @SetActiveController("Home")" href="@Url.Action("Index","Home")"><i class="fa fa-dashboard clr-green"></i> Dashboard</a>
+                        <a class="list-group-item @SetActiveController("Home")" href="@Url.Action("Index", "Home")"><i class="fa fa-dashboard clr-green"></i> Dashboard</a>
                     </h4>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading no-padding" role="tab">
                     <h4 class="panel-title">
-                        <a class="list-group-item @SetActiveController("Orderbooking")" href="@Url.Action("Orderbookings","Orderbooking")"><i class="fa fa-list-alt clr-green"></i> Order Booking</a>
+                        <a class="list-group-item @SetActiveController("Orderbooking")" href="@Url.Action("Orderbookings", "Orderbooking")"><i class="fa fa-list-alt clr-green"></i> Order Booking</a>
                     </h4>
                 </div>
             </div>
@@ -81,5 +82,6 @@
                 </div>
             </div>
         </div>
-    }
+            }
+        }
 </div>

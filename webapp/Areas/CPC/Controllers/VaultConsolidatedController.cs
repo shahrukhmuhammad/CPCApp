@@ -122,7 +122,7 @@ namespace WebApp.Areas.CPC.Controllers
                     //realtime.UpdateMessages(null);
                     #endregion
 
-                    TempData["SuccessMsg"] = model.SerialNumber  + " has been created successfully.";
+                    TempData["SuccessMsg"] = model.SerialNumber + " has been created successfully.";
                 }
                 else
                 {
@@ -186,9 +186,12 @@ namespace WebApp.Areas.CPC.Controllers
                 #region Activity Log
                 //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
                 #endregion
-                vaultConsolidatedRepo.InActiveRecord(Id);
-
-                TempData["SuccessMsg"] = "Department has been deleted successfully.";
+                CPCVaultConsolidated res = vaultConsolidatedRepo.InActiveRecord(Id);
+                if (res != null)
+                {
+                    valutCustodianRepo.avaiableRecord(res.OrderBookingId, res.ProjectBranchId);
+                    TempData["SuccessMsg"] = "Department has been deleted successfully.";
+                }
             }
             catch (Exception ex)
             {

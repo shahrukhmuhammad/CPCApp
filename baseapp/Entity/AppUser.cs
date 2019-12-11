@@ -92,7 +92,8 @@ namespace BaseApp.Entity
         FullTime = 1, PartTime = 2, VaryingWeekly = 3, Contractor = 4, Freelance = 5
     }
 
-    public enum AppUserType { Administrator = 1, Manager = 2, Employee = 3 }
+    public enum AppUserType { Administrator = 1, Manager = 2, Employee = 3, Bank = 4, OrderRequests = 5, OrderCollection = 6, VaultUnsortedHandler = 7, VaultManager = 8,
+        Supervisor = 9 }
 
     #region Extras
     public class AppUserExtra

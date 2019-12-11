@@ -221,13 +221,13 @@ namespace CPC
         #endregion
 
         #region Delete
-        public bool InActiveRecord(Guid Id)
+        public CPCAnnexureI InActiveRecord(Guid Id)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    #region Update Annexure Status
+                    #region inactive Custodian Record
                     var res = context.CPCAnnexureIs.Where(x => x.Id == Id).FirstOrDefault();
                     if (res != null)
                     {
@@ -235,12 +235,12 @@ namespace CPC
                         context.SaveChanges();
                     }
                     #endregion
-                    return true;
+                    return res;
                 }
             }
             catch (Exception ex)
             {
-                return false;
+                return null;
             }
         }
         public bool DeleteDetails(Guid Id)
@@ -404,6 +404,40 @@ namespace CPC
             }
             catch (Exception ex)
             {
+            }
+        }
+
+        public bool avaiableRecord(Guid? bookingId, Guid projBranchId)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region inactive custodian status
+                    var res = context.CPCAnnexureIs.Include(x => x.CPCAnnexureIDetails).Where(x => x.OrderBookingId == bookingId).FirstOrDefault();
+                    var resDetails = res.CPCAnnexureIDetails.Where(x => x.AnnexureIId == res.Id && x.ProjectBranchId == projBranchId);
+                    if (res != null)
+                    {
+                        if (res.Status == (int)AnnexureStatus.Proceeded)
+                        {
+                            res.Status = (int)AnnexureStatus.Inprocess;
+                            resDetails.FirstOrDefault().DetailStatus = (int)AnnexureStatus.Inprocess;
+                        }
+                        else
+                        {
+                            resDetails.FirstOrDefault().DetailStatus = (int)AnnexureStatus.Inprocess;
+                        }
+                        context.SaveChanges();
+                        return true;
+                    }
+                    #endregion
+                    else
+                    { return false; }
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }

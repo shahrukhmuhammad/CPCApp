@@ -305,9 +305,10 @@ namespace WebApp.Areas.Secure.Controllers
         [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
         public ActionResult Login(string Username, string Password, string returnUrl, string rememberMeTime, bool rememberMe = false)
         {
+            var user = new AppUser();
             try
             {
-                var user = appUser.GetUserByLogin(Username, Password);
+                user = appUser.GetUserByLogin(Username, Password);
 
                 if (user == null)
                 {
@@ -353,8 +354,14 @@ namespace WebApp.Areas.Secure.Controllers
                 #endregion
                 TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
             }
-
-            return string.IsNullOrEmpty(returnUrl) ? RedirectToAction("Index", "Dashboard", new { Area = "Dashboard" }) : RedirectToLocal(returnUrl);
+            if (user != null && user.Type == AppUserType.Bank)
+            {
+                return string.IsNullOrEmpty(returnUrl) ? RedirectToAction("orderbookings", "orderbooking", new { Area = "" }) : RedirectToLocal(returnUrl);
+            }
+            else
+            {
+                return string.IsNullOrEmpty(returnUrl) ? RedirectToAction("Index", "Dashboard", new { Area = "Dashboard" }) : RedirectToLocal(returnUrl);
+            }
         }
 
         public ActionResult Logout()

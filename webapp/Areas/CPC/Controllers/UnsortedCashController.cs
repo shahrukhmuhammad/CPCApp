@@ -15,10 +15,10 @@ namespace WebApp.Areas.CPC.Controllers
     public class UnsortedCashController : AppController
     {
         private UnsortedCashEntity unsortedCashRepo;
+        private AnnexureIEntity annexureIrepo;
         private EmployeeEntity employeeRepo;
         private BranchEntity branchRepo;
         private Common commonRepo;
-        private AnnexureIEntity annexureIrepo;
 
         public UnsortedCashController()
         {
@@ -227,9 +227,13 @@ namespace WebApp.Areas.CPC.Controllers
                 #region Activity Log
                 //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
                 #endregion
-                unsortedCashRepo.InActiveRecord(Id);
-
-                TempData["SuccessMsg"] = "Department has been deleted successfully.";
+                CPCUnsortedCash res = unsortedCashRepo.InActiveRecord(Id);
+                if (res != null)
+                {
+                    annexureIrepo.avaiableRecord(res.OrderBookingId, res.ProjectBranchId);
+                    TempData["SuccessMsg"] = "Department has been deleted successfully.";
+                }
+                
             }
             catch (Exception ex)
             {

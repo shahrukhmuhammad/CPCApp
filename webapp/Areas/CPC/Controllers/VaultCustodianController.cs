@@ -227,10 +227,14 @@ namespace WebApp.Areas.CPC.Controllers
                 #region Activity Log
                 //appLog.Create(CurrentUser.OfficeId, Id, CurrentUser.Id, AppLogType.Activity, "CRM", "Contact Deleted", "~/CRM/Contact/Delete > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td>Contact deleted by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
                 #endregion
-                valutCustodianRepo.InActiveRecord(Id);
+                CPCVaultCustodian res = valutCustodianRepo.InActiveRecord(Id);
                 //unsortedCashRepo.ChangeStatus(Id, CurrentUser.Id);
-
-                TempData["SuccessMsg"] = "Vault Custodian Entry has been deleted successfully.";
+                if (res != null)
+                {
+                    unsortedCashRepo.avaiableRecord(res.OrderBookingId, res.ProjectBranchId);
+                    TempData["SuccessMsg"] = "Vault Custodian Entry has been deleted successfully.";
+                }
+                
             }
             catch (Exception ex)
             {

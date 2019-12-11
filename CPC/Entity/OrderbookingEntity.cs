@@ -392,5 +392,30 @@ namespace CPC
                 return 0;
             }
         }
+
+        public bool avaiableRecord(Guid? bookingId)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region inactive OrderBooking status
+                    var res = context.CPCOrderBookings.Where(x => x.Id == bookingId).FirstOrDefault();
+                    if (res != null)
+                    {
+                        res.Status = (int)AnnexureStatus.Approved;
+                        context.SaveChanges();
+                        return true;
+                    }
+                    #endregion
+                    else
+                    { return false; }
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

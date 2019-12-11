@@ -333,13 +333,13 @@ namespace CPC
             }
         }
 
-        public bool InActiveRecord(Guid Id)
+        public CPCUnsortedCash InActiveRecord(Guid Id)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    #region Update Employee
+                    #region inactive Custodian Record
                     var res = context.CPCUnsortedCashes.Where(x => x.Id == Id).FirstOrDefault();
                     if (res != null)
                     {
@@ -347,7 +347,33 @@ namespace CPC
                         context.SaveChanges();
                     }
                     #endregion
-                    return true;
+                    return res;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+        public bool avaiableRecord(Guid? bookingId, Guid projBranchId)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region inactive unsorted status
+                    var res = context.CPCUnsortedCashes.Where(x => x.OrderBookingId == bookingId && x.ProjectBranchId == projBranchId).FirstOrDefault();
+                    if (res != null)
+                    {
+                        res.Status = (int)AnnexureStatus.Inprocess;
+                        context.SaveChanges();
+                        return true;
+                    }
+                    #endregion
+                    else
+                    { return false; }
                 }
             }
             catch (Exception ex)

@@ -249,17 +249,24 @@ else
                             <div class="tile-Title">Insights</div>
                         </a>
                         @*@if (AppModule.GetById("HRMS").Status && CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All))
-                            {
-                                <a class="btn btn-primary tile @SetActiveArea("HRMS")" href="~/HRMS/Dashboard/">
-                                    <div class="tile-Icon"><span class="fa fa-2x fa-users"></span></div>
-                                    <div class="tile-Title">HRMS</div>
-                                </a>
-                            }*@
+        {
+            <a class="btn btn-primary tile @SetActiveArea("HRMS")" href="~/HRMS/Dashboard/">
+                <div class="tile-Icon"><span class="fa fa-2x fa-users"></span></div>
+                <div class="tile-Title">HRMS</div>
+            </a>
+        }*@
                         @if (AppModule.GetById("CPC").Status && (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All) || CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.ViewCPC)))
                         {
                             <a class="btn btn-primary tile @SetActiveArea("CPC")" href="~/CPC">
                                 <div class="tile-Icon"><span class="fa fa-2x fa-building"></span></div>
                                 <div class="tile-Title">CPC</div>
+                            </a>
+                        }
+                        @if ((CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All) || CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.ViewBank, BaseApp.Entity.AppPermission.Bank)))
+                        {
+                            <a class="btn btn-primary tile @SetActiveController("Orderbooking")" href="~/Orderbooking/Orderbookings">
+                                <div class="tile-Icon"><span class="fa fa-2x fa-building"></span></div>
+                                <div class="tile-Title">Bank</div>
                             </a>
                         }
                         @if (CurrentUser.IsSuperAdmin() && CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All))
