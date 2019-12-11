@@ -6,11 +6,6 @@
     var vaultCustodiandetails = Model.CPCVaultCustodianDetails;
     var denomList = ViewBag.DenominationList as List<CPCDenomination>;
 }
-@*<style>
-    .label {
-        font-size: inherit;
-    }
-</style>*@
 
 <form id="lead-frm" class="user-Profile" method="post" enctype="multipart/form-data">
 
@@ -24,7 +19,7 @@
     <div class="col-sm-12">
         <div class="panel panel-default">
             <div class="panel-body">
-                <h4> Vault Custodian </h4>
+                <h4> Vault Custodian Details</h4>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="row">
@@ -96,6 +91,7 @@
                                         <td><b>Denomination</b></td>
                                         <td><b>Volume in Bundles</b></td>
                                         <td><b>Amount</b></td>
+                                        <td><b>Seal No</b></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -122,7 +118,6 @@
                                         <td>
                                             @(vaultCustodiandetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault() != null ? vaultCustodiandetails.Where(x => x.CPCDenomination.DenominationTitle == 10).FirstOrDefault().SealNo : "0")
                                         </td>
-                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -282,11 +277,13 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td><b>Total</b></td>
-                                        <td>@finalNumberOfPackets</td>
-                                        <td>@finalTotalValue</td>
+                                        <td><b>@finalNumberOfPackets</b></td>
+                                        <td><b>@finalTotalValue</b></td>
+                                        <td></td>
                                     </tr>
                                 </tbody>
                             </table>
