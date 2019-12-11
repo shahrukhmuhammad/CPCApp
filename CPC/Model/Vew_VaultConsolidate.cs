@@ -12,34 +12,29 @@ namespace CPC.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CPCUnsortedCash
+    public partial class Vew_VaultConsolidate
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CPCUnsortedCash()
-        {
-            this.CPCUnsortedCashDetails = new HashSet<CPCUnsortedCashDetail>();
-        }
-    
         public System.Guid Id { get; set; }
         public long SerialNumber { get; set; }
         public System.DateTime Date { get; set; }
         public System.Guid ProjectBranchId { get; set; }
         public Nullable<int> TotalNumberBundles { get; set; }
         public long TotalBalance { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public System.Guid CreatedBy { get; set; }
-        public Nullable<System.DateTime> UpdatedOn { get; set; }
-        public Nullable<System.Guid> UpdatedBy { get; set; }
         public Nullable<byte> Status { get; set; }
         public bool IsActive { get; set; }
         public Nullable<System.Guid> CityId { get; set; }
         public Nullable<int> OrderNumber { get; set; }
-        public Nullable<System.Guid> OrderBookingId { get; set; }
-    
-        public virtual CPCCity CPCCity { get; set; }
-        public virtual CPCOrderBooking CPCOrderBooking { get; set; }
-        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CPCUnsortedCashDetail> CPCUnsortedCashDetails { get; set; }
+        public System.Guid OrderBookingId { get; set; }
+        public System.Guid DenominationId { get; set; }
+        public Nullable<int> DenominationTitle { get; set; }
+        public int NumberOfBundles { get; set; }
+        public int TotalValue { get; set; }
+        public string SealNo { get; set; }
+        public string BranchName { get; set; }
+        public string BranchCode { get; set; }
+        public string CityName { get; set; }
+        public Nullable<System.Guid> SupervisorId { get; set; }
+        public System.Guid VaultConsolidatedId { get; set; }
+        public string SupervisorName { get; set; }
     }
 }

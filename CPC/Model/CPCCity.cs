@@ -18,9 +18,9 @@ namespace CPC.Model
         public CPCCity()
         {
             this.CPCProjectBranches = new HashSet<CPCProjectBranch>();
-            this.CPCUnsortedCashes = new HashSet<CPCUnsortedCash>();
             this.CPCVaultConsolidateds = new HashSet<CPCVaultConsolidated>();
             this.CPCVaultCustodians = new HashSet<CPCVaultCustodian>();
+            this.CPCUnsortedCashes = new HashSet<CPCUnsortedCash>();
         }
     
         public System.Guid Id { get; set; }
@@ -29,10 +29,10 @@ namespace CPC.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCProjectBranch> CPCProjectBranches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCVaultConsolidated> CPCVaultConsolidateds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCVaultCustodian> CPCVaultCustodians { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
     }
 }

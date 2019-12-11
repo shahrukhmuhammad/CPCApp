@@ -30,5 +30,6 @@ namespace CPC.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCVaultConsolidatedBundlesDetail> CPCVaultConsolidatedBundlesDetails { get; set; }
         public virtual CPCVaultConsolidatedDetail CPCVaultConsolidatedDetail { get; set; }
+        public virtual CPCDenomination CPCDenomination { get; set; }
     }
 }
