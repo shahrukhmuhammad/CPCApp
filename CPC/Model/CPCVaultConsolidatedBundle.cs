@@ -27,8 +27,8 @@ namespace CPC.Model
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
     
+        public virtual CPCVaultConsolidatedDetail CPCVaultConsolidatedDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCVaultConsolidatedBundlesDetail> CPCVaultConsolidatedBundlesDetails { get; set; }
-        public virtual CPCVaultConsolidatedDetail CPCVaultConsolidatedDetail { get; set; }
     }
 }

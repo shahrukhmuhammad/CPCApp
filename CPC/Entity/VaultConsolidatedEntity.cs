@@ -136,6 +136,37 @@ namespace CPC
             }
         }
 
+        #region Bundle Details
+        public List<CPCVaultConsolidatedBundle> GetByIdConsolidatedBundle(Guid VaultConsolicatedId)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    var lsDetailsId = context.CPCVaultConsolidatedDetails.Where(x => x.VaultConsolidatedId == VaultConsolicatedId).Select(x => x.Id).ToList();
+                    return context.CPCVaultConsolidatedBundles.Include(x => x.CPCVaultConsolidatedBundlesDetails.Select(y => y.CPCEmployee)).Where(x => lsDetailsId.Contains(x.ConsolidatedDetailsId)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<CPCVaultConsolidatedBundle> GetAllConsolidatedBundle()
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.CPCVaultConsolidatedBundles.Include(x => x.CPCVaultConsolidatedBundlesDetails.Select(y => y.CPCEmployee)).OrderBy(x => x.Id).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
         public bool CreateVaultConsolidatedBundle(List<CPCVaultConsolidatedBundle> modelList, List<CPCVaultConsolidatedBundlesDetail> childList)
         {
             try

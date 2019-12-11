@@ -71,10 +71,11 @@
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCVaultConsolidatedDetail" Width="1.5" PointX="15.25" PointY="14" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Denom__7EC1CEDB" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Vault__7DCDAAA2" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCVaultConsolidatedBundlesDetail" Width="1.5" PointX="19.375" PointY="21.25" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCVaultConsolidatedBundle" Width="1.5" PointX="17.5" PointY="14.25" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCConsol__Conso__0FEC5ADD" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCConsol__Conso__11D4A34F" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCVaultConsolidatedBundlesDetail" Width="1.5" PointX="19.75" PointY="9.25" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Sorte__39AD8A7F" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCConsol__Conso__0FEC5ADD" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -27,6 +27,7 @@ namespace CPC
                 throw ex;
             }
         }
+        
         public Guid? GetByUserId(Guid Id)
         {
             try

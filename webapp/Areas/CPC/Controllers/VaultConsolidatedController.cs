@@ -43,7 +43,8 @@ namespace WebApp.Areas.CPC.Controllers
         public ActionResult Details(Guid Id)
         {
             var model = vaultConsolidatedRepo.GetById(Id);
-            ViewBag.Employees = employeeRepo.GetAll();
+            ViewBag.ConsolidatedBundleList = vaultConsolidatedRepo.GetByIdConsolidatedBundle(Id);
+            //ViewBag.Employees = employeeRepo.GetAll();
             ViewBag.DenominationList = commonRepo.GetAllDenomination();
             var branchInfo = branchRepo.GetById(model.ProjectBranchId);
             ViewData["BranchName"] = $"{branchInfo.BranchCode} - {branchInfo.BranchName}";
