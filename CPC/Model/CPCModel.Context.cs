@@ -46,9 +46,6 @@ namespace CPC.Model
         public virtual DbSet<CPCOrderBooking> CPCOrderBookings { get; set; }
         public virtual DbSet<CPCProject> CPCProjects { get; set; }
         public virtual DbSet<CPCProjectBranch> CPCProjectBranches { get; set; }
-        public virtual DbSet<CPCSortedCash> CPCSortedCashes { get; set; }
-        public virtual DbSet<CPCSortedCashDetail> CPCSortedCashDetails { get; set; }
-        public virtual DbSet<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
         public virtual DbSet<CPCUnsortedCashDetail> CPCUnsortedCashDetails { get; set; }
         public virtual DbSet<CPCVaultConsolidated> CPCVaultConsolidateds { get; set; }
         public virtual DbSet<CPCVaultCustodian> CPCVaultCustodians { get; set; }
@@ -58,8 +55,12 @@ namespace CPC.Model
         public virtual DbSet<Vew_UnsortedCash> Vew_UnsortedCash { get; set; }
         public virtual DbSet<Vew_VaultCustodian> Vew_VaultCustodian { get; set; }
         public virtual DbSet<CPCVaultConsolidatedDetail> CPCVaultConsolidatedDetails { get; set; }
-        public virtual DbSet<CPCVaultConsolidatedBundle> CPCVaultConsolidatedBundles { get; set; }
         public virtual DbSet<CPCVaultConsolidatedBundlesDetail> CPCVaultConsolidatedBundlesDetails { get; set; }
+        public virtual DbSet<CPCVaultConsolidatedBundle> CPCVaultConsolidatedBundles { get; set; }
+        public virtual DbSet<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
+        public virtual DbSet<CPCSortedCash> CPCSortedCashes { get; set; }
+        public virtual DbSet<CPCSortedCashDetail> CPCSortedCashDetails { get; set; }
+        public virtual DbSet<Vew_VaultConsolidate> Vew_VaultConsolidate { get; set; }
     
         public virtual int f_TestMaxCode()
         {

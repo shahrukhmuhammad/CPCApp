@@ -15,18 +15,23 @@ namespace CPC.Model
     public partial class CPCSortedCashDetail
     {
         public System.Guid Id { get; set; }
-        public System.Guid DenominationId { get; set; }
         public System.Guid SortedCashId { get; set; }
-        public int NumberOfBundlesReIssuable { get; set; }
-        public int NumberOfBundlesSoiled { get; set; }
-        public int NumberOfBundlesMachineRejected { get; set; }
-        public int NumberOfBundlesCounterFeit { get; set; }
-        public int NumberOfBundlesMismatch { get; set; }
+        public int NumberOfPiecesReIssuable { get; set; }
+        public int NumberOfPiecesSoiled { get; set; }
+        public int NumberOfPiecesMachineRejected { get; set; }
+        public int NumberOfPiecesCounterFeit { get; set; }
+        public int NumberOfPiecesMismatch { get; set; }
         public int TotalValue { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
+        public Nullable<int> AssignedBundles { get; set; }
+        public Nullable<int> NumberOfPiecesClaim { get; set; }
+        public Nullable<int> NumberOfPiecesDesecrated { get; set; }
+        public Nullable<int> NumberOfPiecesShort { get; set; }
+        public Nullable<int> NumberOfPiecesExcess { get; set; }
+        public Nullable<int> NumberOfPiecesUnprocess { get; set; }
+        public Nullable<int> AssignedAmount { get; set; }
     
-        public virtual CPCDenomination CPCDenomination { get; set; }
         public virtual CPCSortedCash CPCSortedCash { get; set; }
     }
 }

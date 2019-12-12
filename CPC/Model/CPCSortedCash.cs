@@ -33,7 +33,11 @@ namespace CPC.Model
         public Nullable<System.Guid> UpdatedBy { get; set; }
         public Nullable<byte> Status { get; set; }
         public bool IsActive { get; set; }
+        public Nullable<int> OrderNumber { get; set; }
+        public Nullable<System.Guid> OrderBookingId { get; set; }
+        public Nullable<System.Guid> DenominationId { get; set; }
     
+        public virtual CPCDenomination CPCDenomination { get; set; }
         public virtual CPCProjectBranch CPCProjectBranch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCSortedCashDetail> CPCSortedCashDetails { get; set; }
