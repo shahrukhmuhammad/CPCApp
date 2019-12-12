@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace WebApp.Areas.CPC.Controllers
 {
-    [AppAuthorize(AppPermission.All, AppPermission.ViewCPC, AppPermission.CPC)]
+    [AppAuthorize(AppPermission.All, AppPermission.ViewCPC, AppPermission.CPC, AppPermission.ViewVaultUnsortedHandler, AppPermission.VaultUnsortedHandler)]
     public class AnnexureIController : AppController
     {
         private AnnexureIEntity annexureIRepo;

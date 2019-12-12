@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace WebApp.Controllers
 {
-    [AppAuthorize(AppPermission.All, AppPermission.Bank, AppPermission.ViewBank)] //AppPermission.ViewCPC, AppPermission.CPC
+    [AppAuthorize(AppPermission.All, AppPermission.Bank, AppPermission.ViewBank, AppPermission.OrderCollection, AppPermission.ViewOrderCollection)] //AppPermission.ViewCPC, AppPermission.CPC
     
     public class OrderbookingController : AppController
     {
