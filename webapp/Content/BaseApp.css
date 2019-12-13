@@ -2315,3 +2315,11 @@ asd {
 .field-validation-error {
     color: #ff4136 !important;
 }
+
+.menu-links a:hover {
+    text-decoration: none;
+}
+
+.mg-r {
+    margin-right: 10px;
+}

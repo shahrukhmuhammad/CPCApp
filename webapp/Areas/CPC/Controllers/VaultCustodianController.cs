@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace WebApp.Areas.CPC.Controllers
 {
-    [AppAuthorize(AppPermission.All, AppPermission.ViewCPC, AppPermission.CPC)]
+    [AppAuthorize(AppPermission.All, AppPermission.ViewCPC, AppPermission.CPC, AppPermission.ViewSupervisor, AppPermission.Supervisor)]
     public class VaultCustodianController : AppController
     {
         private ValutCustodianEntity valutCustodianRepo;

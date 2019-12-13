@@ -70,38 +70,14 @@
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Order__2F9A1060" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Proje__29221CFB" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Unsor__66B53B20" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCSortedCashDetail" Width="1.875" PointX="17.5" PointY="25.25" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Denom__477199F1" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Sorte__4959E263" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.Vew_VaultConsolidate" Width="1.5" PointX="15.375" PointY="0.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.AppLog" Width="1.5" PointX="0.75" PointY="9.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.AppMessageAttachment" Width="1.5" PointX="15.75" PointY="7.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.AppMessage" Width="1.5" PointX="17.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.AppModuleSMTP" Width="1.5" PointX="15.75" PointY="10.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.AppNotification" Width="1.5" PointX="17.75" PointY="5.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.AppRole" Width="1.5" PointX="17.75" PointY="9.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.AppSecurityQuestion" Width="1.5" PointX="18.75" PointY="17.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.AppSettingNotification" Width="1.5" PointX="19.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.AppSMTP" Width="1.5" PointX="19.75" PointY="4.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.AppUserPermission" Width="1.5" PointX="19.75" PointY="9.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.AtmrRegionHead" Width="1.5" PointX="20.75" PointY="12.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.BenefitType" Width="1.5" PointX="20.75" PointY="15.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.BonusType" Width="1.5" PointX="21.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CertificateSetting" Width="1.5" PointX="21.75" PointY="5.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.Certification" Width="1.5" PointX="21.75" PointY="20.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.EmailTemplate" Width="1.5" PointX="21.75" PointY="9.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.ExtraFieldSection" Width="1.5" PointX="22.75" PointY="12.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.Office" Width="1.5" PointX="23.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.TaxType" Width="1.5" PointX="23.75" PointY="7.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.UserSecurity" Width="1.5" PointX="22.75" PointY="16.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.AppModule" Width="1.5" PointX="23.75" PointY="19.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.AppSetting" Width="1.5" PointX="23.75" PointY="22.75" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.AppUserExtra" Width="1.5" PointX="24.75" PointY="12.75" />
         <EntityTypeShape EntityType="SOSTechCPCModel.CPCSortedCash" Width="1.5" PointX="16.25" PointY="18.625" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCSortedCashDetail" Width="1.5" PointX="18.5" PointY="25.25" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Denom__467D75B8" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Sorte__39AD8A7F" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Proje__69C6B1F5" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Sorte__6ABAD62E" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.Vew_SortedCash" Width="1.5" PointX="17.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.Vew_VaultConsolidate" Width="1.5" PointX="15.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

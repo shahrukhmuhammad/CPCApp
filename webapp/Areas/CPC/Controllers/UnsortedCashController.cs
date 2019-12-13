@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace WebApp.Areas.CPC.Controllers
 {
-    [AppAuthorize(AppPermission.All, AppPermission.ViewCPC, AppPermission.CPC)]
+    [AppAuthorize(AppPermission.All, AppPermission.ViewCPC, AppPermission.CPC, AppPermission.ViewVaultManager, AppPermission.VaultManager)]
     public class UnsortedCashController : AppController
     {
         private UnsortedCashEntity unsortedCashRepo;
