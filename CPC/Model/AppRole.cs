@@ -12,18 +12,14 @@ namespace CPC.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CPCVaultCustodianDetail
+    public partial class AppRole
     {
         public System.Guid Id { get; set; }
-        public System.Guid DenominationId { get; set; }
-        public System.Guid VaultCustodianId { get; set; }
-        public int NumberOfBundles { get; set; }
-        public int TotalValue { get; set; }
-        public string SealNo { get; set; }
+        public bool IsSystem { get; set; }
+        public string Code { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Permissions { get; set; }
         public System.DateTime CreatedOn { get; set; }
-        public System.Guid CreatedBy { get; set; }
-    
-        public virtual CPCDenomination CPCDenomination { get; set; }
-        public virtual CPCVaultCustodian CPCVaultCustodian { get; set; }
     }
 }

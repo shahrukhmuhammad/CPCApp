@@ -27,6 +27,7 @@ namespace CPC.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AppRole> AppRoles { get; set; }
         public virtual DbSet<AppUser> AppUsers { get; set; }
         public virtual DbSet<CPCAnnexureI> CPCAnnexureIs { get; set; }
         public virtual DbSet<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }
@@ -46,22 +47,22 @@ namespace CPC.Model
         public virtual DbSet<CPCOrderBooking> CPCOrderBookings { get; set; }
         public virtual DbSet<CPCProject> CPCProjects { get; set; }
         public virtual DbSet<CPCProjectBranch> CPCProjectBranches { get; set; }
+        public virtual DbSet<CPCSortedCash> CPCSortedCashes { get; set; }
+        public virtual DbSet<CPCSortedCashDetail> CPCSortedCashDetails { get; set; }
+        public virtual DbSet<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
         public virtual DbSet<CPCUnsortedCashDetail> CPCUnsortedCashDetails { get; set; }
         public virtual DbSet<CPCVaultConsolidated> CPCVaultConsolidateds { get; set; }
+        public virtual DbSet<CPCVaultConsolidatedBundle> CPCVaultConsolidatedBundles { get; set; }
+        public virtual DbSet<CPCVaultConsolidatedBundlesDetail> CPCVaultConsolidatedBundlesDetails { get; set; }
+        public virtual DbSet<CPCVaultConsolidatedDetail> CPCVaultConsolidatedDetails { get; set; }
         public virtual DbSet<CPCVaultCustodian> CPCVaultCustodians { get; set; }
         public virtual DbSet<CPCVaultCustodianDetail> CPCVaultCustodianDetails { get; set; }
         public virtual DbSet<Vew_CPCAnnexureI> Vew_CPCAnnexureI { get; set; }
         public virtual DbSet<Vew_Orderbookings> Vew_Orderbookings { get; set; }
-        public virtual DbSet<Vew_UnsortedCash> Vew_UnsortedCash { get; set; }
-        public virtual DbSet<Vew_VaultCustodian> Vew_VaultCustodian { get; set; }
-        public virtual DbSet<CPCVaultConsolidatedDetail> CPCVaultConsolidatedDetails { get; set; }
-        public virtual DbSet<CPCVaultConsolidatedBundlesDetail> CPCVaultConsolidatedBundlesDetails { get; set; }
-        public virtual DbSet<CPCVaultConsolidatedBundle> CPCVaultConsolidatedBundles { get; set; }
-        public virtual DbSet<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
-        public virtual DbSet<CPCSortedCashDetail> CPCSortedCashDetails { get; set; }
-        public virtual DbSet<Vew_VaultConsolidate> Vew_VaultConsolidate { get; set; }
-        public virtual DbSet<CPCSortedCash> CPCSortedCashes { get; set; }
         public virtual DbSet<Vew_SortedCash> Vew_SortedCash { get; set; }
+        public virtual DbSet<Vew_UnsortedCash> Vew_UnsortedCash { get; set; }
+        public virtual DbSet<Vew_VaultConsolidate> Vew_VaultConsolidate { get; set; }
+        public virtual DbSet<Vew_VaultCustodian> Vew_VaultCustodian { get; set; }
     
         public virtual int f_TestMaxCode()
         {

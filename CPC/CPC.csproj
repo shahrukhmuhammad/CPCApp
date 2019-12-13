@@ -132,6 +132,9 @@
     <Compile Include="Model\AppNotifications_GetRecentByContactIdAndType_Result.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\AppRole.cs">
+      <DependentUpon>CPCModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\AppRoles_GetAll_Result.cs">
       <DependentUpon>CPCModel.tt</DependentUpon>
     </Compile>
