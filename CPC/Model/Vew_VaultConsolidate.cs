@@ -19,6 +19,7 @@ namespace CPC.Model
         public System.DateTime Date { get; set; }
         public System.Guid ProjectBranchId { get; set; }
         public Nullable<int> TotalNumberBundles { get; set; }
+        public int NumberOfBundles { get; set; }
         public long TotalBalance { get; set; }
         public Nullable<byte> Status { get; set; }
         public bool IsActive { get; set; }
@@ -26,15 +27,16 @@ namespace CPC.Model
         public Nullable<int> OrderNumber { get; set; }
         public System.Guid OrderBookingId { get; set; }
         public System.Guid DenominationId { get; set; }
+        public System.Guid VaultConsolidatedDetailsId { get; set; }
         public Nullable<int> DenominationTitle { get; set; }
-        public int NumberOfBundles { get; set; }
         public int TotalValue { get; set; }
         public string SealNo { get; set; }
         public string BranchName { get; set; }
         public string BranchCode { get; set; }
         public string CityName { get; set; }
         public Nullable<System.Guid> SupervisorId { get; set; }
+        public Nullable<System.Guid> SorterId { get; set; }
+        public string Name { get; set; }
         public System.Guid VaultConsolidatedId { get; set; }
-        public string SupervisorName { get; set; }
     }
 }

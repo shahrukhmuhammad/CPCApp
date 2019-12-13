@@ -70,13 +70,14 @@
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Order__2F9A1060" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Proje__29221CFB" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCUnsort__Unsor__66B53B20" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCSortedCash" Width="1.5" PointX="15.25" PointY="25.125" />
-        <EntityTypeShape EntityType="SOSTechCPCModel.CPCSortedCashDetail" Width="1.5" PointX="17.5" PointY="25.25" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Denom__477199F1" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCSortedCash" Width="1.5" PointX="16.25" PointY="18.625" />
+        <EntityTypeShape EntityType="SOSTechCPCModel.CPCSortedCashDetail" Width="1.5" PointX="18.5" PointY="25.25" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Denom__467D75B8" />
+        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Sorte__39AD8A7F" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Proje__69C6B1F5" />
         <AssociationConnector Association="SOSTechCPCModel.FK__CPCSorted__Sorte__6ABAD62E" />
         <EntityTypeShape EntityType="SOSTechCPCModel.Vew_VaultConsolidate" Width="1.5" PointX="15.375" PointY="0.75" />
-        <AssociationConnector Association="SOSTechCPCModel.FK__CPCVaultC__Denom__477199F1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

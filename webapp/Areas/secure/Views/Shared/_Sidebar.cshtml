@@ -261,7 +261,7 @@
                         </div>
                     </div>
                 }
-                <div class="panel panel-default">
+                @*<div class="panel panel-default">
                     <div class="panel-heading no-padding" role="tab">
                         <h4 class="panel-title">
                             <a class="list-group-item @SetActiveController("AnnexureII")" href="@Url.Action("AnnexureIIs", "AnnexureII")"><i class="fa fa-list-alt clr-green"></i> Branch Cash Receipt</a>
@@ -281,7 +281,7 @@
                             <a class="list-group-item @SetActiveController("CashInTransit")" href="@Url.Action("CashInTransits", "CashInTransit")"><i class="fa fa-list-alt clr-green"></i> CIT Shipment</a>
                         </h4>
                     </div>
-                </div>
+                </div>*@
                 @if ((IsCurrentArea("CPC") && (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.ViewOrderRequests, BaseApp.Entity.AppPermission.OrderRequests, BaseApp.Entity.AppPermission.All))))
                 {
                     <div class="panel panel-default">

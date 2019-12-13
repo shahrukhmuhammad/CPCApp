@@ -20,7 +20,7 @@ namespace CPC.Model
         public int Amount { get; set; }
         public Nullable<System.Guid> SorterId { get; set; }
     
-        public virtual CPCEmployee CPCEmployee { get; set; }
         public virtual CPCVaultConsolidatedBundle CPCVaultConsolidatedBundle { get; set; }
+        public virtual CPCEmployee CPCEmployee { get; set; }
     }
 }

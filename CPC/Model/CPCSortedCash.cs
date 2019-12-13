@@ -36,6 +36,11 @@ namespace CPC.Model
         public Nullable<int> OrderNumber { get; set; }
         public Nullable<System.Guid> OrderBookingId { get; set; }
         public Nullable<System.Guid> DenominationId { get; set; }
+        public Nullable<int> DenominationTitle { get; set; }
+        public string SealNumber { get; set; }
+        public Nullable<System.Guid> CityId { get; set; }
+        public string CityName { get; set; }
+        public string BranchName { get; set; }
     
         public virtual CPCDenomination CPCDenomination { get; set; }
         public virtual CPCProjectBranch CPCProjectBranch { get; set; }

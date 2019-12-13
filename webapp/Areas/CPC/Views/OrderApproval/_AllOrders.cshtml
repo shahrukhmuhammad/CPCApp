@@ -3,16 +3,6 @@
     var detailsList = ViewBag.DetailsList as List<Vew_Orderbookings>;
 }
 
-<style>
-    .menu-links a:hover {
-        text-decoration: none;
-    }
-
-    .mg-r {
-        margin-right: 10px;
-    }
-</style>
-
 <div class="form-Modal">
     <div class="modal-content bg-transparent">
         <div class="modal-header">
@@ -68,18 +58,18 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group btn-group-xs" role="group">
-                                        <a href="@Url.Action("Details","OrderApproval")/@x.Id" class="btn btn-primary mg-r" title="Details"><i class="fa fa-eye fa-2x"></i> </a>
+                                        <a href="@Url.Action("Details","OrderApproval")/@x.Id" class="btn btn-primary mg-r" title="Details"><i class="fa fa-eye"></i> </a>
+                                        @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All))
+                                        {
+                                            if (x.Status == (int)AnnexureStatus.Approved)
+                                            {
+                                            }
+                                            else
+                                            {
+                                                <a href="javascript://" onclick="approveRecord('@Url.Action("Approve")', '@x.Id')" class="btn btn-success" title="Approve"><i class="fa fa-check"></i> </a>
+                                            }
+                                        }
                                     </div>
-                                    @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All))
-                                    {
-                                        if (x.Status == (int)AnnexureStatus.Approved)
-                                        {
-                                        }
-                                        else
-                                        {
-                                            <a href="javascript://" onclick="approveRecord('@Url.Action("Approve")', '@x.Id')" class="btn btn-success" title="Approve"><i class="fa fa-check"></i> </a>
-                                        }
-                                    }
                                 </td>
                             </tr>
                         }
