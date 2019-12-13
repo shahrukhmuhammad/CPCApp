@@ -40,11 +40,11 @@ namespace WebApp.Areas.CPC.Controllers
 
         public ActionResult Details(Guid Id)
         {
-            var model = sortedCashRepo.GetById(Id);
-            ViewBag.Employees = employeeRepo.GetAll();
-            ViewBag.DenominationList = commonRepo.GetAllDenomination();
-            var branchInfo = branchRepo.GetById(model.ProjectBranchId);
-            ViewData["BranchName"] = $"{branchInfo.BranchCode} - {branchInfo.BranchName}";
+            var model = sortedCashRepo.GetByIdVew(Id);
+            //ViewBag.Employees = employeeRepo.GetAll();
+            //ViewBag.DenominationList = commonRepo.GetAllDenomination();
+            //var branchInfo = branchRepo.GetById(model.ProjectBranchId);
+            //ViewData["BranchName"] = $"{branchInfo.BranchCode} - {branchInfo.BranchName}";
             return View(model);
         }
         #endregion
@@ -79,19 +79,21 @@ namespace WebApp.Areas.CPC.Controllers
                     model.CreatedBy = CurrentUser.Id;
                     model.CreatedOn = DateTime.Now;
                     model.IsActive = true;
-                    model.Status = 1;
+                    model.Status = (int)AnnexureStatus.Inprocess;
                     model.Date = Utils.SetDateFormate(Date);
                     model.Id = Guid.NewGuid();
+
+                    var lsToSave = model.CPCSortedCashDetails.Where(x => (x.NumberOfPiecesReIssuable > 0 || x.NumberOfPiecesSoiled > 0 || x.NumberOfPiecesMachineRejected > 0 ||
+                        x.NumberOfPiecesCounterFeit > 0 || x.NumberOfPiecesMismatch > 0) || (x.NumberOfPiecesClaim > 0) || (x.NumberOfPiecesDesecrated > 0)
+                         || (x.NumberOfPiecesShort > 0) || (x.NumberOfPiecesExcess > 0) || (x.NumberOfPiecesUnprocess > 0)).ToList();
+
+                    lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.SortedCashId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
+                    #region Save Details
                     var res = sortedCashRepo.Create(model);
+                    //sortedCashRepo.Create(lsToSave);
+                    #endregion
                     if (res.HasValue)
                     {
-                        var lsToSave = CPCSortedCashDetail.Where(x => (x.NumberOfPiecesReIssuable > 0 || x.NumberOfPiecesSoiled > 0 || x.NumberOfPiecesMachineRejected > 0 ||
-                        x.NumberOfPiecesCounterFeit > 0 || x.NumberOfPiecesMismatch > 0) && (x.TotalValue != 0)).ToList();
-                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.SortedCashId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
-                        #region Save Details
-                        sortedCashRepo.Create(lsToSave);
-                        #endregion
-
                         model.Id = res.Value;
                     }
 

@@ -38,6 +38,15 @@ namespace WebApp.Areas.CPC.Controllers
             return PartialView(model);
         }
 
+        #region VaultConsolidated Popup
+        public ActionResult _VaultConsolidatedList()
+        {
+            var model = vaultConsolidatedRepo.GetAllApproved();
+            ViewBag.DetailsList = vaultConsolidatedRepo.GetAllDetails();
+            return PartialView(model);
+        }
+        #endregion
+
         #region Details
 
         public ActionResult Details(Guid Id)
@@ -51,6 +60,7 @@ namespace WebApp.Areas.CPC.Controllers
             return View(model);
         }
         #endregion
+
         #region Record
         public ActionResult Record(Guid? Id)
         {
@@ -130,7 +140,7 @@ namespace WebApp.Areas.CPC.Controllers
                                 #endregion
                             }
                         }
-                        if(lsMasterToSave.Count > 0 )
+                        if (lsMasterToSave.Count > 0)
                             vaultConsolidatedRepo.CreateVaultConsolidatedBundle(lsMasterToSave, lsChildToSave);
                         #endregion 
 
@@ -278,6 +288,46 @@ namespace WebApp.Areas.CPC.Controllers
         //}
         #endregion
 
+        #region Remote function
+        [HttpGet]
+        public JsonResult GetVaultConsolidatedData(Guid id, Guid denomId)
+        {
+            try
+            {
+                var List = vaultConsolidatedRepo.GetAllDetailsById().Where(x => x.Status == (int)AnnexureStatus.Inprocess && (x.OrderBookingId == id && x.DenominationId == denomId)).ToList();
+                for (int i = 0; i < List.Count(); i++)
+                {
+                    List.FirstOrDefault().TotalNumberBundles += List[i].NumberOfBundles;
+                }
+                return Json(new
+                {
+                    List.FirstOrDefault().OrderNumber,
+                    List.FirstOrDefault().OrderBookingId,
+                    List.FirstOrDefault().SerialNumber,
+                    List.FirstOrDefault().Date,
+                    List.FirstOrDefault().DenominationTitle,
+                    List.FirstOrDefault().DenominationId,
+                    List.FirstOrDefault().ProjectBranchId,
+                    List.FirstOrDefault().BranchName,
+                    List.FirstOrDefault().SealNo,
+                    List.FirstOrDefault().CityId,
+                    List.FirstOrDefault().CityName,
+                    List.FirstOrDefault().TotalValue,
+                    List.FirstOrDefault().TotalNumberBundles,
+                    Details = List.Select(x => new
+                    {
+                        x.NumberOfBundles,
+                        x.SorterId,
+                        x.Name,
+                    }).ToList().Distinct(),
 
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
     }
 }

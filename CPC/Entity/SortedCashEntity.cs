@@ -74,6 +74,21 @@ namespace CPC
             }
         }
 
+        public List<Vew_SortedCash> GetByIdVew(Guid Id)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.Vew_SortedCash.Where(x => x.Id == Id).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         //public List<CustomSelectList> GetDepartmentDropdown(Guid? Id = null)
         //{
         //    try
@@ -105,10 +120,8 @@ namespace CPC
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Save Department
-                    int consNumber = GetNextConsignmentNumber();
-                    model.ConsignmentNumber = consNumber;
-                    model.Status = 1;
-                    model.CreatedOn = DateTime.Now;
+                    //int consNumber = GetNextConsignmentNumber();
+                    //context.Entry(model).State = EntityState.Detached;
                     context.CPCSortedCashes.Add(model);
                     context.SaveChanges();
                     #endregion

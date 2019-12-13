@@ -12,18 +12,34 @@ namespace CPC.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class CPCSortedCashDetail
+    public partial class Vew_SortedCash
     {
         public System.Guid Id { get; set; }
-        public System.Guid SortedCashId { get; set; }
+        public System.Guid CPCSortedCashDetailId { get; set; }
+        public long ConsignmentNumber { get; set; }
+        public System.DateTime Date { get; set; }
+        public string Station { get; set; }
+        public System.Guid ProjectBranchId { get; set; }
+        public Nullable<int> TotalNumberBundles { get; set; }
+        public string CityName { get; set; }
+        public long TotalBalance { get; set; }
+        public Nullable<byte> Status { get; set; }
+        public bool IsActive { get; set; }
+        public Nullable<int> OrderNumber { get; set; }
+        public Nullable<System.Guid> OrderBookingId { get; set; }
+        public Nullable<System.Guid> DenominationId { get; set; }
+        public Nullable<int> DenominationTitle { get; set; }
+        public string SealNumber { get; set; }
+        public string BranchName { get; set; }
+        public string BranchCode { get; set; }
+        public Nullable<System.Guid> SorterId { get; set; }
+        public string Name { get; set; }
         public Nullable<int> NumberOfPiecesReIssuable { get; set; }
         public Nullable<int> NumberOfPiecesSoiled { get; set; }
         public Nullable<int> NumberOfPiecesMachineRejected { get; set; }
         public Nullable<int> NumberOfPiecesCounterFeit { get; set; }
         public Nullable<int> NumberOfPiecesMismatch { get; set; }
         public Nullable<int> TotalValue { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public System.Guid CreatedBy { get; set; }
         public Nullable<int> AssignedBundles { get; set; }
         public Nullable<int> NumberOfPiecesClaim { get; set; }
         public Nullable<int> NumberOfPiecesDesecrated { get; set; }
@@ -31,8 +47,5 @@ namespace CPC.Model
         public Nullable<int> NumberOfPiecesExcess { get; set; }
         public Nullable<int> NumberOfPiecesUnprocess { get; set; }
         public Nullable<int> AssignedAmount { get; set; }
-        public Nullable<System.Guid> SorterId { get; set; }
-    
-        public virtual CPCSortedCash CPCSortedCash { get; set; }
     }
 }

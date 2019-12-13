@@ -42,9 +42,8 @@
                             <th><input type="checkbox" onchange="checkAll(this, 'checkIt');" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Order No." id="SortedCash-dataTable_0" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Consignment No." id="SortedCash-dataTable_1" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Denomination" id="SortedCash-dataTable_1" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Date" id="SortedCash-dataTable_2" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Station" id="SortedCash-dataTable_3" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Denomination" id="SortedCash-dataTable_2" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Date" id="SortedCash-dataTable_3" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Client" id="SortedCash-dataTable_4" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Status" id="SortedCash-dataTable_5" /></th>
                             <th class="text-center" width="100px">Action</th>
@@ -62,9 +61,8 @@
                             </td>
                             <td><a href="@Url.Action("Details","SortedCash",new { Id = x.Id })">@x.OrderNumber</a></td>
                             <td>@x.ConsignmentNumber</td>
-                            <td>@x.CPCDenomination.DenominationTitle</td>
+                            <td>@x.DenominationTitle</td>
                             <td>@x.Date</td>
-                            <td>@x.Station</td>
                             <td> @($"{x.CPCProjectBranch.BranchCode} - {x.CPCProjectBranch.BranchName}")</td>
                             @if (x.Status == 1)
                             {

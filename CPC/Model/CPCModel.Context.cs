@@ -58,9 +58,10 @@ namespace CPC.Model
         public virtual DbSet<CPCVaultConsolidatedBundlesDetail> CPCVaultConsolidatedBundlesDetails { get; set; }
         public virtual DbSet<CPCVaultConsolidatedBundle> CPCVaultConsolidatedBundles { get; set; }
         public virtual DbSet<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
-        public virtual DbSet<CPCSortedCash> CPCSortedCashes { get; set; }
         public virtual DbSet<CPCSortedCashDetail> CPCSortedCashDetails { get; set; }
         public virtual DbSet<Vew_VaultConsolidate> Vew_VaultConsolidate { get; set; }
+        public virtual DbSet<CPCSortedCash> CPCSortedCashes { get; set; }
+        public virtual DbSet<Vew_SortedCash> Vew_SortedCash { get; set; }
     
         public virtual int f_TestMaxCode()
         {

@@ -28,13 +28,13 @@ namespace CPC
             }
         }
 
-        public List<Vew_CPCAnnexureI> GetAllDetails()
+        public List<Vew_VaultConsolidate> GetAllDetails()
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
-                    return context.Vew_CPCAnnexureI.ToList();
+                    return context.Vew_VaultConsolidate.ToList();
                 }
             }
             catch (Exception ex)
@@ -42,6 +42,22 @@ namespace CPC
                 return null;
             }
         }
+
+        public List<Vew_VaultConsolidate> GetAllDetailsById()
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.Vew_VaultConsolidate.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public List<Vew_CPCAnnexureI> GetByDateBranchId(Guid branchId, DateTime dateofCollection)
         {
             try
@@ -348,6 +364,21 @@ namespace CPC
                     }
                     #endregion
                     return res;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public List<Vew_VaultConsolidate> GetAllApproved()
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    return context.Vew_VaultConsolidate.ToList();
                 }
             }
             catch (Exception ex)
