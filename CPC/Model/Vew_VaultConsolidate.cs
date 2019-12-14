@@ -22,6 +22,7 @@ namespace CPC.Model
         public int NumberOfBundles { get; set; }
         public long TotalBalance { get; set; }
         public Nullable<byte> Status { get; set; }
+        public Nullable<byte> VaultConsolidatedDetailsStatus { get; set; }
         public bool IsActive { get; set; }
         public Nullable<System.Guid> CityId { get; set; }
         public Nullable<int> OrderNumber { get; set; }

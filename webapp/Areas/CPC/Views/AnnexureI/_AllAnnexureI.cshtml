@@ -50,7 +50,7 @@
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Cash Handed Over CPC" id="AnnexureI-dataTable_2" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Cash Handed Over CIT" id="AnnexureI-dataTable_3" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="CPC Handing Over Cash" id="AnnexureI-dataTable_4" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Created On" id="AnnexureI-dataTable_5" /></th>
+                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Status" id="AnnexureI-dataTable_5" /></th>
                             <th class="text-center" width="100px">Action</th>
                         </tr>
                     </thead>
@@ -79,7 +79,20 @@
                             <td>@(empList.Where(y => y.Id == x.CashHandedOverCITStaffAId).FirstOrDefault() != null ? empList.Where(y => y.Id == x.CashHandedOverCITStaffAId).FirstOrDefault().Name : "")</td>
                             <td>@(empList.Where(y => y.Id == x.SignatureCPCHandingOverCashAId).FirstOrDefault() != null ? empList.Where(y => y.Id == x.SignatureCPCHandingOverCashAId).FirstOrDefault().Name : "")</td>
 
-                            <td>@x.CreatedOn</td>
+                            <td>
+                                @if (x.Status == (int)AnnexureStatus.Approved)
+                                {
+                                    <label class="label label-primary">Approved</label>
+                                }
+                                else if (x.Status == (int)AnnexureStatus.Completed)
+                                {
+                                    <label class="label label-success">Completed</label>
+                                }
+                                else
+                                {
+                                    <label class="label label-info">Inprocess</label>
+                                }
+                            </td>
                             <td class="text-center">
                                 <div class="btn-group btn-group-xs" role="group">
                                     <a href="@Url.Action("Details","AnnexureI")/@x.Id" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CPC
 {
-    
+
     public class ValutCustodianEntity
     {
         private SOSTechCPCEntities context;
@@ -86,14 +86,14 @@ namespace CPC
         //    }
         //}
 
-        
+
 
         #region Add/Update
         public Guid? Create(CPCVaultCustodian model)
         {
             try
             {
-              
+
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Save
@@ -231,17 +231,17 @@ namespace CPC
 
         #endregion
 
-        public void ChangeStatus(Guid BookingId, Guid UserId)
+        public void ChangeStatus(Guid BookingId, Guid UserId, Guid BranchId, AnnexureStatus status)
         {
             try
             {
                 using (context = new SOSTechCPCEntities())
                 {
                     #region Update Status
-                    var res = context.CPCVaultCustodians.Where(x => x.OrderBookingId == BookingId).FirstOrDefault();
+                    var res = context.CPCVaultCustodians.Where(x => x.OrderBookingId == BookingId && x.ProjectBranchId == BranchId).FirstOrDefault();
                     if (res != null)
                     {
-                        res.Status = (int)AnnexureStatus.Proceeded;
+                        res.Status = (byte)status;
                         res.UpdatedOn = DateTime.Now;
                         res.UpdatedBy = UserId;
                         context.SaveChanges();

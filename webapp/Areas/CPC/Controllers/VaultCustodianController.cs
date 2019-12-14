@@ -95,7 +95,7 @@ namespace WebApp.Areas.CPC.Controllers
                         valutCustodianRepo.Create(lsToSave);
                         #endregion
                         //Update Unsorted Cash Status
-                        unsortedCashRepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id);
+                        unsortedCashRepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id, model.ProjectBranchId, AnnexureStatus.Proceeded);
                         model.Id = res.Value;
                     }
 

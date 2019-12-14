@@ -99,7 +99,7 @@ namespace WebApp.Areas.CPC.Controllers
                         #endregion
 
                         //Update Orderbooking Status
-                        orderbookingRepo.ChangeStatus(model.OrderBookingId);
+                        orderbookingRepo.ChangeStatus(model.OrderBookingId, model.CreatedBy, AnnexureStatus.Proceeded);
                         model.Id = res.Value;
                     }
 

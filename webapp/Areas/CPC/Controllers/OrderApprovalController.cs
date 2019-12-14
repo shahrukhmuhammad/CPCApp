@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace WebApp.Areas.CPC.Controllers
 {
-    [AppAuthorize(AppPermission.All, AppPermission.CPC)]
+    [AppAuthorize(AppPermission.All, AppPermission.CPC, BaseApp.Entity.AppPermission.ViewOrderRequests, BaseApp.Entity.AppPermission.OrderRequests)]
 
     public class OrderApprovalController : AppController
     {

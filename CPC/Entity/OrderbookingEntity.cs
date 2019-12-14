@@ -251,27 +251,28 @@ namespace CPC
         }
         #endregion
         #region Change Status
-        public void ChangeStatus(Guid? bookingId)
-        {
-            try
-            {
-                using (context = new SOSTechCPCEntities())
-                {
-                    #region Update Record
-                    var res = context.CPCOrderBookings.Where(x => x.Id == bookingId).FirstOrDefault();
-                    if (res != null)
-                    {
-                        res.UpdatedOn = DateTime.Now;
-                        res.Status = (int)AnnexureStatus.Inprocess;
-                        context.SaveChanges();
-                    }
-                    #endregion
-                }
-            }
-            catch (Exception ex)
-            {
-            }
-        }
+        //public void ChangeStatus(Guid bookingId, Guid UserId)
+        //{
+        //    try
+        //    {
+        //        using (context = new SOSTechCPCEntities())
+        //        {
+        //            #region Update Record
+        //            var res = context.CPCOrderBookings.Where(x => x.Id == bookingId).FirstOrDefault();
+        //            if (res != null)
+        //            {
+        //                res.UpdatedOn = DateTime.Now;
+        //                res.UpdatedBy = UserId;
+        //                res.Status = (int)AnnexureStatus.Completed;
+        //                context.SaveChanges();
+        //            }
+        //            #endregion
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //    }
+        //}
         #endregion
         #region Delete
         public bool InActiveRecord(Guid Id)
@@ -417,5 +418,30 @@ namespace CPC
                 return false;
             }
         }
+
+        #region Update Status
+        public void ChangeStatus(Guid? bookingId, Guid UserId, AnnexureStatus status)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Update Child
+                    var res = context.CPCOrderBookings.Where(x => x.Id == bookingId).FirstOrDefault();
+                    if (res != null)
+                    {
+                        res.Status = (byte)status;
+                        res.UpdatedOn = DateTime.Now;
+                        res.UpdatedBy = UserId;
+                        context.SaveChanges();
+                    }
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        #endregion
     }
 }

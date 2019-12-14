@@ -15,6 +15,7 @@ namespace WebApp.Areas.CPC.Controllers
     public class SortedCashController : AppController
     {
         private SortedCashEntity sortedCashRepo;
+        private VaultConsolidatedEntity vaultConsolidatedRepo;
         private EmployeeEntity employeeRepo;
         private BranchEntity branchRepo;
         private Common commonRepo;
@@ -22,6 +23,7 @@ namespace WebApp.Areas.CPC.Controllers
         public SortedCashController()
         {
             sortedCashRepo = new SortedCashEntity();
+            vaultConsolidatedRepo = new VaultConsolidatedEntity();
             employeeRepo = new EmployeeEntity();
             branchRepo = new BranchEntity();
             commonRepo = new Common();
@@ -94,6 +96,7 @@ namespace WebApp.Areas.CPC.Controllers
                     #endregion
                     if (res.HasValue)
                     {
+                        vaultConsolidatedRepo.ChangeStatus(model.DenominationId, model.OrderBookingId, CurrentUser.Id, model.ProjectBranchId);
                         model.Id = res.Value;
                     }
 

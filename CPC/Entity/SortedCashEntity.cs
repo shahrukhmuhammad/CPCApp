@@ -294,5 +294,28 @@ namespace CPC
                 return false;
             }
         }
+
+        #region Update Status
+        public void ChangeStatus(Guid? bookingId, Guid userId, Guid? ProjBranchId)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Update Record
+                    var res = context.CPCSortedCashes.Where(x => x.OrderBookingId == bookingId && x.ProjectBranchId == ProjBranchId).ToList();
+                    if (res != null && res.Count > 0)
+                    {
+                        res.ForEach(x => { x.Status = (int)AnnexureStatus.Completed; x.UpdatedOn = DateTime.Now; x.UpdatedBy = userId; });
+                        context.SaveChanges();
+                    }
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        #endregion
     }
 }

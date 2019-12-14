@@ -45,21 +45,21 @@
                                 <td>
                                     @if (x.Status == (int)AnnexureStatus.Approved)
                                     {
-                                        <label class="label label-success">Approved</label>
+                                        <label class="label label-primary">Approved</label>
                                     }
                                     else if (x.Status == (int)AnnexureStatus.Inprocess)
                                     {
-                                        <label class="label label-warning">Inprocess</label>
+                                        <label class="label label-info">Inprocess</label>
                                     }
                                     else if (x.Status == (int)AnnexureStatus.Completed)
                                     {
-                                        <label class="label label-warning">Completed</label>
+                                        <label class="label label-success">Completed</label>
                                     }
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group btn-group-xs" role="group">
                                         <a href="@Url.Action("Details","OrderApproval")/@x.Id" class="btn btn-primary mg-r" title="Details"><i class="fa fa-eye"></i> </a>
-                                        @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All))
+                                        @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.ViewOrderRequests, BaseApp.Entity.AppPermission.OrderRequests))
                                         {
                                             if (x.Status == (int)AnnexureStatus.Approved)
                                             {

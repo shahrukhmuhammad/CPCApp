@@ -92,8 +92,8 @@ namespace WebApp.Areas.CPC.Controllers
                         unsortedCashRepo.Create(lsToSave);
                         #endregion
 
-                        annexureIrepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id, model.ProjectBranchId);
-                        annexureIrepo.ChangeMasterStatus(model.OrderBookingId, CurrentUser.Id);
+                        annexureIrepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id, model.ProjectBranchId, AnnexureStatus.Inprocess);
+                        //annexureIrepo.ChangeMasterStatus(model.OrderBookingId, CurrentUser.Id);
                         model.Id = res.Value;
                     }
 
