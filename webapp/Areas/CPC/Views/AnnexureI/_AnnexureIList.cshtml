@@ -26,35 +26,39 @@
                     <tbody>
                         @foreach (var x in Model)
                         {
-                        <tr>
-                            <td>
-                                @x.OrderNumber
-                            </td>
-                            <td>
-                                @x.SrNo
-                            </td>
-                            <td>
-                                @x.DateOfCollection.ToString(Constants.DATE_FORMAT_CLIENT_SIDE)
-                            </td>
+                            <tr>
+                                <td>
+                                    @x.OrderNumber
+                                </td>
+                                <td>
+                                    @x.SrNo
+                                </td>
+                                <td>
+                                    @x.DateOfCollection.ToString(Constants.DATE_FORMAT_CLIENT_SIDE)
+                                </td>
 
-                            <td>@(detailsList.Where(ab => ab.Id == x.Id).ToList() != null ? detailsList.Where(ab => ab.Id == x.Id).Sum(y => y.NoOfBundles) : 0)</td>
-                            <td>@(detailsList.Where(ab => ab.Id == x.Id).ToList() != null ? detailsList.Where(ab => ab.Id == x.Id).Sum(y => y.TotalAmount) : 0)</td>
-                            <td>
-                                @if (x.Status == (int)AnnexureStatus.Approved)
-                                {
-                                    <label class="label label-success">Approved</label>
-                                }
-                                else
-                                {
-                                    <label class="label label-warning">Inprocess</label>
-                                }
-                            </td>
-                            <td class="text-center">
-                                <div class="btn-group btn-group-xs" role="group">
-                                    <a onclick="getOrderId('@(x.Id)')" href="javascript://" class="btn btn-primary mg-r" title="Details"><i class="fa fa-check fa-2x"></i> </a>
-                                </div>
-                            </td>
-                        </tr>
+                                <td>@(detailsList.Where(ab => ab.Id == x.Id).ToList() != null ? detailsList.Where(ab => ab.Id == x.Id).Sum(y => y.NoOfBundles) : 0)</td>
+                                <td>@(detailsList.Where(ab => ab.Id == x.Id).ToList() != null ? detailsList.Where(ab => ab.Id == x.Id).Sum(y => y.TotalAmount) : 0)</td>
+                                <td>
+                                    @if (x.Status == (int)AnnexureStatus.Inprocess)
+                                    {
+                                        <label class="label label-info">Inprocess</label>
+                                    }
+                                    else if (x.Status == (int)AnnexureStatus.Proceeded)
+                                    {
+                                        <label class="label label-primary">Proceeded</label>
+                                    }
+                                    else
+                                    {
+                                        <label class="label label-success">Completed</label>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group btn-group-xs" role="group">
+                                        <a onclick="getOrderId('@(x.Id)')" href="javascript://" class="btn btn-primary mg-r" title="Details"><i class="fa fa-check fa-2x"></i> </a>
+                                    </div>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>

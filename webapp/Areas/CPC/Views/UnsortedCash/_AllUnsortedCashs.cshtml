@@ -64,11 +64,11 @@
                             <td> @($"{x.CPCProjectBranch.BranchCode} - {x.CPCProjectBranch.BranchName}")</td>
                             @if (x.Status == 1)
                             {
-                                <td> <label class="label label-warning">@AnnexureStatus.Inprocess</label></td>
+                                <td> <label class="label label-info">@AnnexureStatus.Inprocess</label></td>
                             }
                             else
                             {
-                                <td> <label class="label label-warning">@AnnexureStatus.Completed</label></td>
+                                <td> <label class="label label-success">@AnnexureStatus.Completed</label></td>
                             }
                             <td class="text-center">
                                 <div class="btn-group btn-group-xs" role="group">

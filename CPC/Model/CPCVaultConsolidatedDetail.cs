@@ -28,6 +28,7 @@ namespace CPC.Model
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
         public string SealNo { get; set; }
+        public Nullable<byte> Status { get; set; }
     
         public virtual CPCDenomination CPCDenomination { get; set; }
         public virtual CPCVaultConsolidated CPCVaultConsolidated { get; set; }

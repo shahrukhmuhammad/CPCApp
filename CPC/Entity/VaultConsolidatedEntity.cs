@@ -12,7 +12,7 @@ namespace CPC
     public class VaultConsolidatedEntity
     {
         private SOSTechCPCEntities context;
-
+        
         public List<CPCVaultConsolidated> GetAll()
         {
             try
@@ -386,5 +386,58 @@ namespace CPC
                 return null;
             }
         }
+
+        #region Update Status
+        public void ChangeStatus(Guid? denomId, Guid? bookingId, Guid userId, Guid? ProjBranchId)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Update Record
+                    var res = context.CPCVaultConsolidatedDetails.Include(x => x.CPCVaultConsolidated).Where(x => x.CPCVaultConsolidated.OrderBookingId == bookingId && x.CPCVaultConsolidated.ProjectBranchId == ProjBranchId).ToList();
+                    if (res != null && res.Count > 0)
+                    {
+                        //Child Status
+                        var denomObj = res.Where(x => x.DenominationId == denomId).FirstOrDefault();
+                        if (denomObj != null)
+                        {
+                            denomObj.Status = (int)AnnexureStatus.Completed;
+                            context.SaveChanges();
+                        }
+                        
+                        //For Master
+                        if (res.Count == res.Where(x => x.Status == (int)AnnexureStatus.Completed).Count())
+                        {
+                            res.FirstOrDefault().CPCVaultConsolidated.Status = (int)AnnexureStatus.Completed;
+                            res.FirstOrDefault().CPCVaultConsolidated.UpdatedBy = userId;
+                            res.FirstOrDefault().CPCVaultConsolidated.UpdatedOn = DateTime.Now;
+                            context.SaveChanges();
+
+                            //Update Sorter Cash Entry Status
+                            var sortedcashEntity = new SortedCashEntity();
+                            sortedcashEntity.ChangeStatus(bookingId,userId, ProjBranchId);
+
+                            //Update Custodian Entry Status
+                            var vaultCustodianEntity = new ValutCustodianEntity();
+                            vaultCustodianEntity.ChangeStatus(bookingId.Value, userId, ProjBranchId.Value, AnnexureStatus.Completed);
+
+                            //Update Unsorted Cash Entry Status
+                            var unsortedCashEntity = new UnsortedCashEntity();
+                            unsortedCashEntity.ChangeStatus(bookingId.Value, userId, ProjBranchId.Value, AnnexureStatus.Completed);
+
+                            //Update Unsorted Cash Entry Status
+                            var annexureIEntity = new AnnexureIEntity();
+                            annexureIEntity.ChangeStatus(bookingId.Value, userId, ProjBranchId.Value, AnnexureStatus.Completed);
+                        }
+                    }
+                    #endregion
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        #endregion
     }
 }

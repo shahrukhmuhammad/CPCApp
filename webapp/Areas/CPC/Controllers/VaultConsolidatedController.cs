@@ -41,7 +41,7 @@ namespace WebApp.Areas.CPC.Controllers
         #region VaultConsolidated Popup
         public ActionResult _VaultConsolidatedList()
         {
-            var model = vaultConsolidatedRepo.GetAllApproved();
+            var model = vaultConsolidatedRepo.GetAllApproved().Where(x => x.VaultConsolidatedDetailsStatus == (int)AnnexureStatus.Inprocess).ToList();
             ViewBag.DetailsList = vaultConsolidatedRepo.GetAllDetails();
             return PartialView(model);
         }
@@ -73,11 +73,8 @@ namespace WebApp.Areas.CPC.Controllers
             {
                 model.SerialNumber = vaultConsolidatedRepo.GetNextSerialNumber();
                 model.Date = DateTime.Now;
-                //model.IsActive = true;
             }
-            //ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             ViewBag.BrachList = new SelectList(branchRepo.GetDropdown(), "Value", "Text");
-            //ViewBag.DenominationList = new SelectList(commonRepo.GetAllDenominationDropdown(), "Value", "Text");
             ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
             ViewBag.DenominationList = commonRepo.GetAllDenomination();
             return View(model);
@@ -104,7 +101,7 @@ namespace WebApp.Areas.CPC.Controllers
 
                         #region Save Details
                         var lsToSave = CPCVaultConsolidatedDetail.Where(x => x.NumberOfBundles > 0 && (x.TotalValue != 0)).ToList();
-                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.VaultConsolidatedId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
+                        lsToSave.ForEach(x => { x.Id = Guid.NewGuid(); x.VaultConsolidatedId = model.Id; x.Status = (int)AnnexureStatus.Inprocess; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
                         vaultConsolidatedRepo.Create(lsToSave);
                         #endregion
 
@@ -213,19 +210,6 @@ namespace WebApp.Areas.CPC.Controllers
         }
         #endregion
 
-        #region Remote Functions
-
-        //[HttpPost]
-        //public JsonResult GetCentersByRegionId(Guid Id)
-        //{
-        //    return Json("");//centerRepo.GetCentersDropdown(Id));
-        //}
-        //[HttpPost]
-        //public JsonResult GetDesignationsByDepartId(Guid Id)
-        //{
-        //    return Json("");//designationRepo.GetDesignationDropdown(Id));
-        //}
-        #endregion
 
         #region Delete
         [HttpPost]
@@ -294,11 +278,11 @@ namespace WebApp.Areas.CPC.Controllers
         {
             try
             {
-                var List = vaultConsolidatedRepo.GetAllDetailsById().Where(x => x.Status == (int)AnnexureStatus.Inprocess && (x.OrderBookingId == id && x.DenominationId == denomId)).ToList();
-                for (int i = 0; i < List.Count(); i++)
-                {
-                    List.FirstOrDefault().TotalNumberBundles += List[i].NumberOfBundles;
-                }
+                var List = vaultConsolidatedRepo.GetAllDetailsById().Where(x => x.VaultConsolidatedDetailsStatus == (int)AnnexureStatus.Inprocess && (x.OrderBookingId == id && x.DenominationId == denomId)).ToList();
+                //for (int i = 0; i < List.Count(); i++)
+                //{
+                //    List.FirstOrDefault().TotalNumberBundles += List[i].NumberOfBundles;
+                //}
                 return Json(new
                 {
                     List.FirstOrDefault().OrderNumber,
@@ -319,7 +303,7 @@ namespace WebApp.Areas.CPC.Controllers
                         x.NumberOfBundles,
                         x.SorterId,
                         x.Name,
-                    }).ToList().Distinct(),
+                    }).ToList(),
 
                 }, JsonRequestBehavior.AllowGet);
             }

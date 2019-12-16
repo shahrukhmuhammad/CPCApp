@@ -38,11 +38,15 @@
                                 <td>
                                     @if (x.Status == (int)AnnexureStatus.Approved)
                                     {
-                                        <label class="label label-success">Approved</label>
+                                        <label class="label label-primary">Approved</label>
+                                    }
+                                    else if (x.Status == (int)AnnexureStatus.Completed)
+                                    {
+                                        <label class="label label-success">Completed</label>
                                     }
                                     else
                                     {
-                                        <label class="label label-warning">Inprocess</label>
+                                        <label class="label label-info">Inprocess</label>
                                     }
                                 </td>
                                 <td class="text-center">
