@@ -128,6 +128,7 @@ namespace CPC
         Completed = 2,
         Approved = 3,
         Proceeded = 4,
+        Rejected = 5
     }
 
     //public enum BankStatus

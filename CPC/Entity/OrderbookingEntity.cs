@@ -250,6 +250,7 @@ namespace CPC
             }
         }
         #endregion
+
         #region Change Status
         //public void ChangeStatus(Guid bookingId, Guid UserId)
         //{
@@ -274,6 +275,7 @@ namespace CPC
         //    }
         //}
         #endregion
+
         #region Delete
         public bool InActiveRecord(Guid Id)
         {
@@ -366,6 +368,35 @@ namespace CPC
         //    }
         //}
 
+        #endregion
+
+        #region Request Decline
+        public bool DeclineRequest(Guid Id, Guid EmployeeId, Guid UserId)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Update Status
+                    var res = context.CPCOrderBookings.Where(x => x.Id == Id).FirstOrDefault();
+                    if (res != null)
+                    {
+                        res.ApprovedById = EmployeeId;
+                        res.ApprovedOn = DateTime.Now;
+                        res.UpdatedBy = UserId;
+                        res.UpdatedOn = DateTime.Now;
+                        res.Status = (int)AnnexureStatus.Rejected;
+                        context.SaveChanges();
+                    }
+                    #endregion
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         #endregion
 
         public int GetNextSrNo()

@@ -52,6 +52,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-4">
+                                    <div class="row form-group">
+                                        <label class="col-sm-5 horizontal-label">Cash Collection Point</label>
+                                        <div class="col-sm-7">
+                                            @Html.DropDownListFor(x => x.CashCollectionPoint, new List<SelectListItem>
+                                       {
+                                           new SelectListItem{ Text="< Select >", Value = "0" },
+                                           new SelectListItem{ Text="CCP is Branch", Value = "Branch" },
+                                           new SelectListItem{ Text="CCP is Cash Processing Cell", Value = "BranchCash Processing Cell" }
+                                       }, new { @class = "form-control input-sm select2" })
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -65,7 +78,7 @@
                                     <th style="width:15% !important">Branch</th>
                                     <th>Denomination</th>
                                     <th style="width:10% !important">No. Of Bundles</th>
-                                    <th>Total Amount</th>                                    
+                                    <th>Total Amount</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -92,8 +105,8 @@
 
     <select id="listBranches" style="display:none;"></select>
     @*<select id="listProjects" style="display:none;">
-        <option> - Select - </option>
-    </select>*@
+            <option> - Select - </option>
+        </select>*@
     <select id="listDenomination" style="display:none;"></select>
     <select id="listCPH" style="display:none;">
         <option> - Select - </option>
@@ -106,7 +119,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#Date").data("DateTimePicker").date(moment('@Model.Date.ToShortDateString()'));
-           
+
             //Project ddl change event
             //$(document).on('change', '.project', function (e) {
             //    e.preventDefault();
@@ -250,7 +263,7 @@
             _html += '<td><select class="form-control input-sm select2" id="ddlDenomination' + (row - 1) + '" name="CPCOrderBookingDetail[' + (row - 1) + '].DenominationId"></select></td>'
 
             _html += '<td><input type="number" class="form-control input-sm inp" name="CPCOrderBookingDetail[' + (row - 1) + '].NoOfBundles" pattern="[0-9]"></td>'
-            _html += '<td><input type="number" class="form-control input-sm" name="CPCOrderBookingDetail[' + (row - 1) + '].TotalAmount" pattern="[0-9]" readonly></td>'            
+            _html += '<td><input type="number" class="form-control input-sm" name="CPCOrderBookingDetail[' + (row - 1) + '].TotalAmount" pattern="[0-9]" readonly></td>'
             _html += '<td> <a href="javascript://" class="btn btn-xs btn-danger btn-removeRow" data-original-title="Delete"><i class="fa fa-trash"></i> Delete</a> </td></tr>';
 
             return _html;

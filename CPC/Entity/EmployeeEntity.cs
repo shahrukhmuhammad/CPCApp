@@ -83,6 +83,28 @@ namespace CPC
             }
         }
 
+        public List<CustomSelectList> GetDropdownCNIC(Guid? Id = null)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    var ls = new List<CPCEmployee>();
+                    if (Id.HasValue)
+                    {
+                        ls = context.CPCEmployees.Where(x => x.Id == Id).ToList();
+                        return ls.Select(x => new CustomSelectList { Value = x.Id.ToString(), Text = x.Code + " - " + x.CNIC }).ToList();
+                    }
+                    ls = context.CPCEmployees.ToList();
+                    return ls.Select(x => new CustomSelectList { Value = x.Id.ToString(), Text = x.Code + " - " + x.CNIC }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         #region Add/Update Employee
         public Guid? Create(CPCAnnexureI model)

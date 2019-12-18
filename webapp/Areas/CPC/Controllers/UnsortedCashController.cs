@@ -50,6 +50,7 @@ namespace WebApp.Areas.CPC.Controllers
             return View(model);
         }
         #endregion
+
         #region Record
         public ActionResult Record(Guid? Id)
         {
@@ -92,7 +93,7 @@ namespace WebApp.Areas.CPC.Controllers
                         unsortedCashRepo.Create(lsToSave);
                         #endregion
 
-                        annexureIrepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id, model.ProjectBranchId, AnnexureStatus.Inprocess);
+                        annexureIrepo.ChangeStatus(model.OrderBookingId, CurrentUser.Id, model.ProjectBranchId, AnnexureStatus.Proceeded);
                         //annexureIrepo.ChangeMasterStatus(model.OrderBookingId, CurrentUser.Id);
                         model.Id = res.Value;
                     }

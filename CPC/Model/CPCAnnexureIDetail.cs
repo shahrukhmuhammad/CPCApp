@@ -27,8 +27,8 @@ namespace CPC.Model
         public Nullable<System.Guid> CashProcessingCellId { get; set; }
         public Nullable<byte> DetailStatus { get; set; }
     
-        public virtual CPCAnnexureI CPCAnnexureI { get; set; }
         public virtual CPCDenomination CPCDenomination { get; set; }
         public virtual CPCProjectBranch CPCProjectBranch { get; set; }
+        public virtual CPCAnnexureI CPCAnnexureI { get; set; }
     }
 }

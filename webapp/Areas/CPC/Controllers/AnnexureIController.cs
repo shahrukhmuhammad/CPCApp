@@ -52,6 +52,7 @@ namespace WebApp.Areas.CPC.Controllers
             return View(model);
         }
         #endregion
+
         #region Record
         public ActionResult Record(Guid? Id)
         {
@@ -68,6 +69,7 @@ namespace WebApp.Areas.CPC.Controllers
                 //model.IsActive = true;
             }
             ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
+            ViewBag.EmployeeCNICList = new SelectList(employeeRepo.GetDropdownCNIC(), "Value", "Text");
             ViewBag.BrachList = new SelectList(branchRepo.GetDropdown(), "Value", "Text");
             ViewBag.DenominationList = new SelectList(commonRepo.GetAllDenominationDropdown().Where(x=> x.Text != Convert.ToString(1) && x.Text != Convert.ToString(2) && x.Text != Convert.ToString(5)), "Value", "Text");
             ViewBag.CPHList = new SelectList(cashpPocessinHousegRepo.GetDropdown(), "Value", "Text");
@@ -376,5 +378,19 @@ namespace WebApp.Areas.CPC.Controllers
             }
         }
         #endregion
+
+        [HttpGet]
+        public JsonResult FetchHirerachyCNIC(Guid id)
+        {
+            try
+            {
+                var List = employeeRepo.GetDropdownCNIC(id);
+                return Json(employeeRepo.GetDropdownCNIC(id), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

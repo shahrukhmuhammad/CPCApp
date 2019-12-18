@@ -37,6 +37,12 @@ namespace CPC.Model
         public bool IsActive { get; set; }
         public Nullable<int> OrderNumber { get; set; }
         public Nullable<System.Guid> OrderBookingId { get; set; }
+        public string CashHandedOverCPCStaffACNIC { get; set; }
+        public string CashHandedOverCPCStaffBCNIC { get; set; }
+        public string CashHandedOverCITStaffACNIC { get; set; }
+        public string CashHandedOverCITStaffBCNIC { get; set; }
+        public string SignatureCPCHandingOverCashACNIC { get; set; }
+        public string SignatureCPCHandingOverCashBCNIC { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCAnnexureIDetail> CPCAnnexureIDetails { get; set; }

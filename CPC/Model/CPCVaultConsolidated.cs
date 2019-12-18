@@ -38,9 +38,9 @@ namespace CPC.Model
         public Nullable<System.Guid> SupervisorId { get; set; }
     
         public virtual CPCCity CPCCity { get; set; }
-        public virtual CPCOrderBooking CPCOrderBooking { get; set; }
         public virtual CPCProjectBranch CPCProjectBranch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCVaultConsolidatedDetail> CPCVaultConsolidatedDetails { get; set; }
+        public virtual CPCOrderBooking CPCOrderBooking { get; set; }
     }
 }

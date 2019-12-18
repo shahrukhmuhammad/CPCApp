@@ -55,18 +55,23 @@
                                     {
                                         <label class="label label-success">Completed</label>
                                     }
+                                    else if (x.Status == (int)AnnexureStatus.Rejected)
+                                    {
+                                        <label class="label label-danger">Declined</label>
+                                    }
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group btn-group-xs" role="group">
                                         <a href="@Url.Action("Details","OrderApproval")/@x.Id" class="btn btn-primary mg-r" title="Details"><i class="fa fa-eye"></i> </a>
                                         @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.ViewOrderRequests, BaseApp.Entity.AppPermission.OrderRequests))
                                         {
-                                            if (x.Status == (int)AnnexureStatus.Approved)
-                                            {
+                                            if (x.Status == (int)AnnexureStatus.Approved || x.Status == (int)AnnexureStatus.Rejected || x.Status == (int)AnnexureStatus.Completed || x.Status == (int)AnnexureStatus.Proceeded)
+                                            { 
                                             }
                                             else
                                             {
                                                 <a href="javascript://" onclick="approveRecord('@Url.Action("Approve")', '@x.Id')" class="btn btn-success" title="Approve"><i class="fa fa-check"></i> </a>
+                                                <a href="javascript://" onclick="approveRecord('@Url.Action("Decline")', '@x.Id')" class="btn btn-danger" title="Decline"><i class="fa fa-trash"></i> </a>
                                             }
                                         }
                                     </div>

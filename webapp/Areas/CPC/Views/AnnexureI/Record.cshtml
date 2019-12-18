@@ -41,7 +41,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 text-left horizontal-label">Order Number</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBoxFor(x => x.OrderNumber, new { @class = "form-control input-sm", @readonly="readyonly" })
+                                            @Html.TextBoxFor(x => x.OrderNumber, new { @class = "form-control input-sm", @readonly = "readyonly" })
                                             <a href="javascript://" class="btn btn-sm btn-primary addNewCompany"><i class="fa fa-plus"></i> Select Order</a>
                                         </div>
                                     </div>
@@ -88,9 +88,9 @@
                         </table>
 
                         @*<div class="col-sm-1">
-                            <label>&nbsp; &nbsp;</label> <br />
-                            <button class="btn btn-primary btn-sm btn-custom" type="button" id="AddNewRow" title="Add New Row"><i class="fa fa-plus"></i> Add New Row</button>
-                        </div>*@
+                                <label>&nbsp; &nbsp;</label> <br />
+                                <button class="btn btn-primary btn-sm btn-custom" type="button" id="AddNewRow" title="Add New Row"><i class="fa fa-plus"></i> Add New Row</button>
+                            </div>*@
                     </div>
 
                     <div class="row">
@@ -100,17 +100,37 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CPC</b> Staff First Person</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCPCStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.CashHandedOverCPCStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "CashHandedOverCPCStaffACNIC" })
                                             @Html.ValidationMessageFor(m => m.CashHandedOverCPCStaffAId)
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row form-group">
+                                        <label class="col-sm-6 horizontal-label">CPC Staff First Person CNIC</label>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(x => x.CashHandedOverCPCStaffACNIC, (SelectList)ViewBag.EmployeeCNICList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.ValidationMessageFor(m => m.CashHandedOverCPCStaffACNIC)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CPC</b> Staff Second Person</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCPCStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.CashHandedOverCPCStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "CashHandedOverCPCStaffBCNIC" })
                                             @Html.ValidationMessageFor(m => m.CashHandedOverCPCStaffBId)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
+                                        <label class="col-sm-6 horizontal-label">CPC Staff Second Person CNIC</label>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(x => x.CashHandedOverCPCStaffBCNIC, (SelectList)ViewBag.EmployeeCNICList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.ValidationMessageFor(m => m.CashHandedOverCPCStaffBCNIC)
                                         </div>
                                     </div>
                                 </div>
@@ -120,35 +140,74 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> First Person</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "CashHandedOverCITStaffACNIC" })
                                             @Html.ValidationMessageFor(m => m.CashHandedOverCITStaffAId)
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row form-group">
-                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Second Person</label>
+                                        <label class="col-sm-6 horizontal-label">CIT First Person CNIC</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffACNIC, (SelectList)ViewBag.EmployeeCNICList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.ValidationMessageFor(m => m.CashHandedOverCITStaffACNIC)
                                         </div>
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
+                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Second Person</label>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "CashHandedOverCITStaffBCNIC" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
+                                        <label class="col-sm-6 horizontal-label">CIT Second Person CNIC</label>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffBCNIC, (SelectList)ViewBag.EmployeeCNICList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.ValidationMessageFor(m => m.CashHandedOverCITStaffBCNIC)
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label"> <b>CPC</b> Staff Handing Over Cash and Verifying First Person</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "SignatureCPCHandingOverCashACNIC" })
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row form-group">
+                                        <label class="col-sm-6 horizontal-label">CPC Verifying First Person CNIC</label>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashACNIC, (SelectList)ViewBag.EmployeeCNICList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.ValidationMessageFor(m => m.SignatureCPCHandingOverCashACNIC)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label"><b>CPC</b> Staff Handing Over Cash and Verifying Second Person</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "SignatureCPCHandingOverCashBCNIC" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
+                                        <label class="col-sm-6 horizontal-label">CPC Verifying Second Person CNIC</label>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashBCNIC, (SelectList)ViewBag.EmployeeCNICList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                            @Html.ValidationMessageFor(m => m.SignatureCPCHandingOverCashBCNIC)
                                         </div>
                                     </div>
                                 </div>
@@ -178,7 +237,7 @@
     <select id="listCPH" style="display:none;">
         <option> - Select - </option>
     </select>
-    @Html.HiddenFor(x=> x.OrderBookingId)
+    @Html.HiddenFor(x => x.OrderBookingId)
 </form>
 <div class="modal fade" id="addNewCompany-Modal" tabindex="-1" role="dialog" aria-labelledby="addNewCompany-Modal" data-backdrop="static">
     <div class="modal-dialog" role="document">
@@ -193,7 +252,7 @@
         function getOrderId(Id) {
             $('#OrderId').val(Id);
             loadOrderData(Id);
-            $('#addNewCompany-Modal').modal('toggle'); 
+            $('#addNewCompany-Modal').modal('toggle');
         }
         function loadOrderData(Id) {
             //debugger;
@@ -245,6 +304,27 @@
             return _html;
         }
 
+        function filterBranches(Id, EmployeeListNumber) {
+            debugger;
+
+            //var branchtoAppend = $('#CashHandedOverCPCStaffACNIC');
+            var branchtoAppend = $('#'+EmployeeListNumber);
+            var url = '@Url.Action("FetchHirerachyCNIC", "AnnexureI")';
+
+            $.getJSON(url,
+                { Id: Id },
+                function (response) {
+                    branchtoAppend.empty();
+                    //console.log(response);
+                    //roads.append(new Option(" - Select - ", "0"));
+                    $.each(response,
+                        function (index, item) {
+                            var branch = new Option(item.Text, item.Value);
+                            branchtoAppend.append(branch);
+                        });
+                });
+        }
+
         $(document).ready(function () {
             //Add Shipping Company
             $('.addNewCompany').on('click', function () {
@@ -260,7 +340,17 @@
             });
 
             $("#DateOfCollection").data("DateTimePicker").date(moment('@Model.DateOfCollection.ToShortDateString()'));
-            
+
+
+            $(document).on('change', '.cpc', function (e) {
+                debugger;
+                e.preventDefault();
+                var dataa = $(this).select2('data');
+                var EmployeeListNumber = $(this).attr("dataName");
+                filterBranches(dataa[0].id, EmployeeListNumber);
+            });
+
+
 
             $('#btn_Select1').on('click', function () {
                 debugger;
@@ -272,21 +362,6 @@
                 e.preventDefault();
                 var dataa = $(this).select2('data');
                 filterCpcHouses(dataa[0].id, $(this).closest('tr').attr("data-id"));
-            });
-
-            //cph ddl change event
-            $(document).on('change', '.cpc', function (e) {
-                e.preventDefault();
-                //console.log($(this));
-                //const id = $('#ProjectBranchId option:selected').attr('value');
-                var dataa = $(this).select2('data');
-                //console.log(dataa[0].id);
-                //accountGridRowIndex = $(this).closest('tr').attr("data-id");
-
-                filterBranches(dataa[0].id, $(this).closest('tr').attr("data-id"));
-                //console.log(accountGridRowIndex);
-                //const totalValue = GetTotalVal($(this).val(), data[0].text);
-                //$(this).closest('td').next('td').find('input').val(totalValue);
             });
 
             //generateBranchDDL(branchArray);
@@ -382,23 +457,6 @@
                 });
         }
 
-        function filterBranches(Id, counter) {
-            var branchtoAppend = $('#ddlBranch' + (parseInt(counter) - 1));
-            var url = '@Url.Action("FetchHirerachy", "AnnexureI")';
-
-            $.getJSON(url,
-                { Id: Id },
-                function (response) {
-                    branchtoAppend.empty();
-                    //console.log(response);
-                    //roads.append(new Option(" - Select - ", "0"));
-                    $.each(response,
-                        function (index, item) {
-                            var branch = new Option(item.Text, item.Value);
-                            branchtoAppend.append(branch);
-                        });
-                });
-        }
         //Functions
         function generateHtml(row) {
             var _html = '<tr class="rows" data-id="' + row + '">'
