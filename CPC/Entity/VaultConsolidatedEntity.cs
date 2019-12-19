@@ -426,7 +426,7 @@ namespace CPC
                             var unsortedCashEntity = new UnsortedCashEntity();
                             unsortedCashEntity.ChangeStatus(bookingId.Value, userId, ProjBranchId.Value, AnnexureStatus.Completed);
 
-                            //Update Unsorted Cash Entry Status
+                            //Update Annexur Cash Entry Status
                             var annexureIEntity = new AnnexureIEntity();
                             annexureIEntity.ChangeStatus(bookingId.Value, userId, ProjBranchId.Value, AnnexureStatus.Completed);
                         }

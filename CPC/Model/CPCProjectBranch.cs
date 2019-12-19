@@ -20,11 +20,11 @@ namespace CPC.Model
             this.CPCAnnexureIDetails = new HashSet<CPCAnnexureIDetail>();
             this.CPCAnnexureIIs = new HashSet<CPCAnnexureII>();
             this.CPCAnnexureIIIs = new HashSet<CPCAnnexureIII>();
-            this.CPCOrderBookingDetails = new HashSet<CPCOrderBookingDetail>();
             this.CPCSortedCashes = new HashSet<CPCSortedCash>();
             this.CPCUnsortedCashes = new HashSet<CPCUnsortedCash>();
             this.CPCVaultConsolidateds = new HashSet<CPCVaultConsolidated>();
             this.CPCVaultCustodians = new HashSet<CPCVaultCustodian>();
+            this.CPCOrderBookingDetails = new HashSet<CPCOrderBookingDetail>();
         }
     
         public System.Guid Id { get; set; }
@@ -47,8 +47,6 @@ namespace CPC.Model
         public virtual CPCCashProcessingHouse CPCCashProcessingHouse { get; set; }
         public virtual CPCCity CPCCity { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CPCOrderBookingDetail> CPCOrderBookingDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCSortedCash> CPCSortedCashes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCUnsortedCash> CPCUnsortedCashes { get; set; }
@@ -56,5 +54,7 @@ namespace CPC.Model
         public virtual ICollection<CPCVaultConsolidated> CPCVaultConsolidateds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCVaultCustodian> CPCVaultCustodians { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCOrderBookingDetail> CPCOrderBookingDetails { get; set; }
     }
 }

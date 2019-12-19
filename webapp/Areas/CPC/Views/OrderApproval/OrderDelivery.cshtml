@@ -1,9 +1,8 @@
 ﻿
 @model CPCOrderBooking
 @{
-    ViewBag.Title = "Order Booking Details";
+    ViewBag.Title = "Order Delivery Approval";
     var details = ViewBag.Details as List<Vew_Orderbookings>;
-    var annexureIDetails = ViewBag.AnnexureIDetails as List<Vew_CPCAnnexureI>;
 }
 
 <style>
@@ -16,15 +15,16 @@
     }
 </style>
 <form id="lead-frm" class="user-Profile" method="post" enctype="multipart/form-data">
-
+    @Html.AntiForgeryToken()
     <div class="row">
         <div class="col-sm-12 text-right">
             <div class="btn-group" role="group">
                 <a href="javascript://" onclick="window.history.back()" class="btn btn-default"><i class="fa fa-close"></i> Cancel / Back</a>
+                <button type="submit" id="submit" class="btn btn-success"><i class="fa fa-check"></i> Submit</button>
+
             </div>
         </div>
     </div>
-
 
     <div class="row">
         <div class="col-sm-12">
@@ -72,13 +72,6 @@
                                     <th>Denomination</th>
                                     <th>No. Of Bundles</th>
                                     <th>Total Amount</th>
-                                    <th>Pickup Point</th>
-                                    @if (annexureIDetails != null)
-                                    {
-                                        <th>Seal No</th>
-                                        <th>Shipment Receipt</th>
-                                    }
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -95,15 +88,6 @@
                                                 <td>@item.DenominationTitle</td>
                                                 <td>@item.NoOfBundles</td>
                                                 <td>@item.TotalAmount</td>
-                                                <td class="text-center">
-                                                    @(item.CashCollectionPoint == (int)CashPoint.CPH ? CashPoint.CPH : CashPoint.Branch)
-                                                </td>
-                                                @if (annexureIDetails != null && annexureIDetails.Count > 0)
-                                                {
-                                                    <td>@(annexureIDetails.Where(y => y.ProjectBranchId == item.ProjectBranchId).FirstOrDefault().SealNo != null ? annexureIDetails.Where(y => y.ProjectBranchId == item.ProjectBranchId).FirstOrDefault().SealNo : "")</td>
-                                                    <td>@(annexureIDetails.Where(y => y.ProjectBranchId == item.ProjectBranchId).FirstOrDefault().ShipmentReciptNo != null ? annexureIDetails.Where(y => y.ProjectBranchId == item.ProjectBranchId).FirstOrDefault().ShipmentReciptNo : "")</td>
-                                                }
-
                                             </tr>
                                             i++;
                                         }
@@ -114,7 +98,6 @@
                                             <td>No Details Found</td>
                                         </tr>
                                     }
-
                                 }
                             </tbody>
                         </table>
@@ -128,6 +111,7 @@
         <div class="col-sm-12 text-right">
             <div class="btn-group" role="group">
                 <a href="javascript://" onclick="window.history.back()" class="btn btn-default"><i class="fa fa-close"></i> Cancel / Back</a>
+                <button type="submit" id="submit" class="btn btn-success"><i class="fa fa-check"></i> Submit</button>
             </div>
         </div>
     </div>

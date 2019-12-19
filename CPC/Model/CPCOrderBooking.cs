@@ -17,11 +17,11 @@ namespace CPC.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CPCOrderBooking()
         {
+            this.CPCAnnexureIs = new HashSet<CPCAnnexureI>();
             this.CPCOrderBookingDetails = new HashSet<CPCOrderBookingDetail>();
             this.CPCUnsortedCashes = new HashSet<CPCUnsortedCash>();
             this.CPCVaultConsolidateds = new HashSet<CPCVaultConsolidated>();
             this.CPCVaultCustodians = new HashSet<CPCVaultCustodian>();
-            this.CPCAnnexureIs = new HashSet<CPCAnnexureI>();
         }
     
         public System.Guid Id { get; set; }
@@ -35,8 +35,11 @@ namespace CPC.Model
         public bool IsActive { get; set; }
         public Nullable<System.Guid> ApprovedById { get; set; }
         public Nullable<System.DateTime> ApprovedOn { get; set; }
-        public string CashCollectionPoint { get; set; }
+        public Nullable<System.Guid> CashDeliverByPersonA { get; set; }
+        public Nullable<System.Guid> CashDeliverByPersonB { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CPCAnnexureI> CPCAnnexureIs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCOrderBookingDetail> CPCOrderBookingDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -45,7 +48,5 @@ namespace CPC.Model
         public virtual ICollection<CPCVaultConsolidated> CPCVaultConsolidateds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CPCVaultCustodian> CPCVaultCustodians { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CPCAnnexureI> CPCAnnexureIs { get; set; }
     }
 }

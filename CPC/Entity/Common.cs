@@ -128,7 +128,15 @@ namespace CPC
         Completed = 2,
         Approved = 3,
         Proceeded = 4,
-        Rejected = 5
+        Rejected = 5,
+        Sorted = 6,
+        PendingDelivery = 7
+    }
+
+    public enum CashPoint
+    {
+        CPH = 1, //Cash Processing House
+        Branch = 2,
     }
 
     //public enum BankStatus

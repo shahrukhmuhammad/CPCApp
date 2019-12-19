@@ -399,8 +399,8 @@ namespace CPC
                             res.UpdatedOn = DateTime.Now;
 
                             #region Update Bank Status
-                            var orderbookingEntity =new OrderbookingEntity();
-                            orderbookingEntity.ChangeStatus(bookingId, userId, AnnexureStatus.Completed);
+                            var orderbookingEntity = new OrderbookingEntity();
+                            orderbookingEntity.ChangeStatus(bookingId, userId, AnnexureStatus.Sorted);
                             #endregion
                         }
                         context.SaveChanges();

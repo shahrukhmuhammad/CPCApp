@@ -3,6 +3,15 @@
     var detailsList = ViewBag.DetailsList as List<Vew_Orderbookings>;
 }
 
+<style>
+    .menu-links a:hover {
+        text-decoration: none;
+    }
+
+    .btn-group a {
+        margin-bottom: 5px;
+    }
+</style>
 <div class="form-Modal">
     <div class="modal-content bg-transparent">
         <div class="modal-header">
@@ -25,8 +34,8 @@
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Date" id="Orderbooking-dataTable_1" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="No Of Bundles" id="Orderbooking-dataTable_2" /></th>
                             <th><input class="form-control input-sm input-tbl" type="text" placeholder="Total Amount" id="Orderbooking-dataTable_3" /></th>
-                            <th><input class="form-control input-sm input-tbl" type="text" placeholder="Status" id="Orderbooking-dataTable_4" /></th>
-                            <th class="text-center" width="100px">Action</th>
+                            <th width="90px"><input class="form-control input-sm input-tbl" type="text" placeholder="Status" id="Orderbooking-dataTable_4" /></th>
+                            <th class="text-center" width="150px">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,21 +52,25 @@
                                 <td>@(detailsList.Where(ab => ab.Id == x.Id).ToList() != null ? detailsList.Where(ab => ab.Id == x.Id).Sum(y => y.NoOfBundles) : 0)</td>
                                 <td>@(detailsList.Where(ab => ab.Id == x.Id).ToList() != null ? detailsList.Where(ab => ab.Id == x.Id).Sum(y => y.TotalAmount) : 0)</td>
                                 <td>
-                                    @if (x.Status == (int)AnnexureStatus.Approved)
+                                    @if (x.Status == (int)AnnexureStatus.Sorted)
+                                    {
+                                        <label class="label label-primary">Cash Sorted</label> <br />
+                                    }
+                                    else if (x.Status == (int)AnnexureStatus.Approved)
                                     {
                                         <label class="label label-primary">Approved</label>
-                                    }
-                                    else if (x.Status == (int)AnnexureStatus.Inprocess)
-                                    {
-                                        <label class="label label-info">Inprocess</label>
                                     }
                                     else if (x.Status == (int)AnnexureStatus.Completed)
                                     {
                                         <label class="label label-success">Completed</label>
                                     }
-                                    else if (x.Status == (int)AnnexureStatus.Rejected)
+                                    else if (x.Status == (int)AnnexureStatus.PendingDelivery)
                                     {
-                                        <label class="label label-danger">Declined</label>
+                                        <label class="label label-warning">Pending Delivery</label>
+                                    }
+                                    else
+                                    {
+                                        <label class="label label-info">Inprocess</label>
                                     }
                                 </td>
                                 <td class="text-center">
@@ -65,13 +78,14 @@
                                         <a href="@Url.Action("Details","OrderApproval")/@x.Id" class="btn btn-primary mg-r" title="Details"><i class="fa fa-eye"></i> </a>
                                         @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.ViewOrderRequests, BaseApp.Entity.AppPermission.OrderRequests))
                                         {
-                                            if (x.Status == (int)AnnexureStatus.Approved || x.Status == (int)AnnexureStatus.Rejected || x.Status == (int)AnnexureStatus.Completed || x.Status == (int)AnnexureStatus.Proceeded)
-                                            { 
-                                            }
-                                            else
+                                            if (x.Status == (int)AnnexureStatus.Inprocess)
                                             {
-                                                <a href="javascript://" onclick="approveRecord('@Url.Action("Approve")', '@x.Id')" class="btn btn-success" title="Approve"><i class="fa fa-check"></i> </a>
-                                                <a href="javascript://" onclick="approveRecord('@Url.Action("Decline")', '@x.Id')" class="btn btn-danger" title="Decline"><i class="fa fa-trash"></i> </a>
+                                                <a href="javascript://" onclick="approveRecord('@Url.Action("Approve")', '@x.Id')" class="btn btn-success mg-r" title="Approve"><i class="fa fa-check"></i> </a>
+                                                <a href="javascript://" onclick="approveRecord('@Url.Action("Decline")', '@x.Id')" class="btn btn-danger mg-r" title="Decline"><i class="fa fa-trash"></i> </a>
+                                            }
+                                            else if (x.Status == (int)AnnexureStatus.PendingDelivery)
+                                            {
+                                                <a href="@Url.Action("OrderDelivery","OrderApproval")/@x.Id" class="btn btn-success" title="Deliver"><i class="fa fa-truck"></i> Deliver</a>
                                             }
                                         }
                                     </div>

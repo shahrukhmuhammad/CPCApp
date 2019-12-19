@@ -38,5 +38,11 @@ namespace CPC.Model
         public string ApprovedByName { get; set; }
         public Nullable<System.DateTime> ApprovedOn { get; set; }
         public byte Status { get; set; }
+        public Nullable<System.Guid> CashDeliverByPersonA { get; set; }
+        public string CashDeliverByPersonAName { get; set; }
+        public Nullable<System.Guid> CashDeliverByPersonB { get; set; }
+        public string CashDeliverByPersonBName { get; set; }
+        public Nullable<byte> CashCollectionPoint { get; set; }
+        public Nullable<byte> CashDeliveryPoint { get; set; }
     }
 }

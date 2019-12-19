@@ -902,6 +902,38 @@ function deleteDelableRecord(delableUrl, targetUrl, recordId) {
 };
 //--- 
 
+function RequestOrderCash(targetUrl, recordId, returnUrl) {
+    bootbox.dialog({
+        message: "Are you sure you want to request Sorted Cash against this Order ?",
+        title: "Request For Sorted Cash",
+        buttons: {
+            main: {
+                label: "Cancel",
+                className: "btn-default",
+                callback: function () {
+                    show: false;
+                }
+            },
+            danger: {
+                label: "Request",
+                className: "btn-success",
+                callback: function () {
+                    $.ajax({
+                        url: targetUrl + '/' + recordId,
+                        type: 'POST'
+                    }).always(function () {
+                        if (returnUrl == null) {
+                            window.location.reload(true);
+                        }
+                        else {
+                            window.location.replace(returnUrl);
+                        }
+                    });
+                }
+            }
+        }
+    });
+};
 //--- Iphone Browser back button issue
 $(window).bind("pageshow", function (event) {
     if (event.originalEvent.persisted) {

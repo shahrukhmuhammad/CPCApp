@@ -41,7 +41,6 @@ namespace CPC.Model
         public virtual DbSet<CPCCity> CPCCities { get; set; }
         public virtual DbSet<CPCDenomination> CPCDenominations { get; set; }
         public virtual DbSet<CPCDepartment> CPCDepartments { get; set; }
-        public virtual DbSet<CPCOrderBookingDetail> CPCOrderBookingDetails { get; set; }
         public virtual DbSet<CPCProject> CPCProjects { get; set; }
         public virtual DbSet<CPCProjectBranch> CPCProjectBranches { get; set; }
         public virtual DbSet<CPCSortedCash> CPCSortedCashes { get; set; }
@@ -54,15 +53,16 @@ namespace CPC.Model
         public virtual DbSet<CPCVaultCustodian> CPCVaultCustodians { get; set; }
         public virtual DbSet<CPCVaultCustodianDetail> CPCVaultCustodianDetails { get; set; }
         public virtual DbSet<Vew_CPCAnnexureI> Vew_CPCAnnexureI { get; set; }
-        public virtual DbSet<Vew_Orderbookings> Vew_Orderbookings { get; set; }
         public virtual DbSet<Vew_SortedCash> Vew_SortedCash { get; set; }
         public virtual DbSet<Vew_UnsortedCash> Vew_UnsortedCash { get; set; }
         public virtual DbSet<Vew_VaultCustodian> Vew_VaultCustodian { get; set; }
         public virtual DbSet<CPCVaultConsolidatedDetail> CPCVaultConsolidatedDetails { get; set; }
         public virtual DbSet<Vew_VaultConsolidate> Vew_VaultConsolidate { get; set; }
-        public virtual DbSet<CPCOrderBooking> CPCOrderBookings { get; set; }
         public virtual DbSet<CPCEmployee> CPCEmployees { get; set; }
         public virtual DbSet<CPCAnnexureI> CPCAnnexureIs { get; set; }
+        public virtual DbSet<Vew_Orderbookings> Vew_Orderbookings { get; set; }
+        public virtual DbSet<CPCOrderBookingDetail> CPCOrderBookingDetails { get; set; }
+        public virtual DbSet<CPCOrderBooking> CPCOrderBookings { get; set; }
     
         public virtual int f_TestMaxCode()
         {

@@ -23,8 +23,10 @@ namespace CPC.Model
         public System.DateTime CreatedOn { get; set; }
         public System.Guid CreatedBy { get; set; }
         public Nullable<System.Guid> CashProcessingCellId { get; set; }
+        public Nullable<byte> CashCollectionPoint { get; set; }
+        public Nullable<byte> CashDeliveryPoint { get; set; }
     
-        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
         public virtual CPCOrderBooking CPCOrderBooking { get; set; }
+        public virtual CPCProjectBranch CPCProjectBranch { get; set; }
     }
 }

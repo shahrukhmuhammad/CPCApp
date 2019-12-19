@@ -15,7 +15,6 @@
     }
 </style>
 <form id="lead-frm" class="user-Profile" method="post" enctype="multipart/form-data">
-
     <div class="row">
         <div class="col-sm-12 text-right">
             <div class="btn-group" role="group">
@@ -23,7 +22,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="row">
         <div class="col-sm-12">
@@ -49,14 +47,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="row form-group">
-                                        <label class="col-sm-5 text-left horizontal-label">Cash Collection Point</label>
-                                        <div class="col-sm-7">
-                                            <label class="label label-default">@Model.CashCollectionPoint</label>
+                                @*<div class="col-sm-4">
+                                        <div class="row form-group">
+                                            <label class="col-sm-5 text-left horizontal-label">Cash Collection Point</label>
+                                            <div class="col-sm-7">
+                                                <label class="label label-default">@Model.CashCollectionPoint</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </div>*@
                             </div>
                         </div>
                     </div>
@@ -71,6 +69,7 @@
                                     <th>Denomination</th>
                                     <th>No. Of Bundles</th>
                                     <th>Total Amount</th>
+                                    <th>Pickup Point</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,6 +86,9 @@
                                                 <td>@item.DenominationTitle</td>
                                                 <td>@item.NoOfBundles</td>
                                                 <td>@item.TotalAmount</td>
+                                                <td class="text-center">
+                                                    @(item.CashCollectionPoint == (int)CashPoint.CPH ? CashPoint.CPH : CashPoint.Branch)
+                                                </td>
                                             </tr>
                                             i++;
                                         }
@@ -97,7 +99,6 @@
                                             <td>No Details Found</td>
                                         </tr>
                                     }
-
                                 }
                             </tbody>
                         </table>

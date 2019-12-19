@@ -52,19 +52,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="row form-group">
-                                        <label class="col-sm-5 horizontal-label">Cash Collection Point</label>
-                                        <div class="col-sm-7">
-                                            @Html.DropDownListFor(x => x.CashCollectionPoint, new List<SelectListItem>
-                                       {
-                                           new SelectListItem{ Text="< Select >", Value = "0" },
-                                           new SelectListItem{ Text="CCP is Branch", Value = "Branch" },
-                                           new SelectListItem{ Text="CCP is Cash Processing Cell", Value = "BranchCash Processing Cell" }
-                                       }, new { @class = "form-control input-sm select2" })
+                                @*<div class="col-sm-4">
+                                        <div class="row form-group">
+                                            <label class="col-sm-5 horizontal-label">Cash Collection Point</label>
+                                            <div class="col-sm-7">
+                                                @Html.DropDownListFor(x => x.CashCollectionPoint, new List<SelectListItem>
+                                           {
+                                               new SelectListItem{ Text="< Select >", Value = "0" },
+                                               new SelectListItem{ Text="CCP is Branch", Value = "Branch" },
+                                               new SelectListItem{ Text="CCP is Cash Processing Cell", Value = "BranchCash Processing Cell" }
+                                           }, new { @class = "form-control input-sm select2" })
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </div>*@
                             </div>
                         </div>
                     </div>
@@ -79,6 +79,7 @@
                                     <th>Denomination</th>
                                     <th style="width:10% !important">No. Of Bundles</th>
                                     <th>Total Amount</th>
+                                    <th>Pickup Point</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -110,6 +111,9 @@
     <select id="listDenomination" style="display:none;"></select>
     <select id="listCPH" style="display:none;">
         <option> - Select - </option>
+    </select>
+
+    <select id="listCashPoint" style="display:none;">
     </select>
 </form>
 
@@ -145,6 +149,7 @@
             //generateProjectDDL(projectArray);
             generateDenomDDL(denomArray);
             generateCPHDDL(cphArray);
+            generateCPointDDL(cashPointArray);
             //generateBranchDDL(branchArray);
 
             //$("#txtVoucherDate").mask("99-99-9999");
@@ -157,6 +162,7 @@
                 //bindBranchDDL(0);
                 bindDenomDDL(0);
                 bindCphDDL(0);
+                bindCashPointDDL(0);
                 //bindProjectDDL(0);
                 for (var i = 2; i <= 5; i++) {
                     AddNewRow(i);
@@ -164,6 +170,7 @@
                     bindDenomDDL(i - 1);
                     bindCphDDL(i - 1);
                     //bindProjectDDL(i - 1);
+                    bindCashPointDDL(i - 1);
                 }
             }
 
@@ -199,6 +206,7 @@
                 //bindBranchDDL(rownum - 1);
                 bindDenomDDL(rownum - 1);
                 bindCphDDL(rownum - 1);
+                bindCashPointDDL(rownum - 1);
                 //bindProjectDDL(rownum - 1);
                 $(".select2").select2();
             });
@@ -258,12 +266,13 @@
             var _html = '<tr class="rows" data-id="' + row + '">'
             _html += '<td class="text-center" > ' + row + '</td>'
             _html += '<td><select class="form-control input-sm select2 cpc" id="ddlCph' + (row - 1) + '" name="CPCOrderBookingDetail[' + (row - 1) + '].CashProcessingCellId">   </select></td>'
-
             _html += '<td><select class="form-control input-sm select2" id="ddlBranch' + (row - 1) + '" name="CPCOrderBookingDetail[' + (row - 1) + '].ProjectBranchId">   </select></td>'
             _html += '<td><select class="form-control input-sm select2" id="ddlDenomination' + (row - 1) + '" name="CPCOrderBookingDetail[' + (row - 1) + '].DenominationId"></select></td>'
-
             _html += '<td><input type="number" class="form-control input-sm inp" name="CPCOrderBookingDetail[' + (row - 1) + '].NoOfBundles" pattern="[0-9]"></td>'
             _html += '<td><input type="number" class="form-control input-sm" name="CPCOrderBookingDetail[' + (row - 1) + '].TotalAmount" pattern="[0-9]" readonly></td>'
+
+            _html += '<td><select class="form-control input-sm" id="ddlCpoint' + (row - 1) + '" name="CPCOrderBookingDetail[' + (row - 1) + '].CashCollectionPoint">   </select></td>'
+
             _html += '<td> <a href="javascript://" class="btn btn-xs btn-danger btn-removeRow" data-original-title="Delete"><i class="fa fa-trash"></i> Delete</a> </td></tr>';
 
             return _html;
@@ -274,6 +283,7 @@
         //var projectArray = @*@Html.Raw(Json.Encode(ViewBag.ProjectList));*@
         var denomArray = @Html.Raw(Json.Encode(ViewBag.DenominationList));
         var cphArray = @Html.Raw(Json.Encode(ViewBag.CPHList));
+        var cashPointArray = @Html.Raw(Json.Encode(ViewBag.CashPointList));
         //console.log(array);
 
 
@@ -299,6 +309,12 @@
             $("#orderbooking-datatable > tbody > tr #ddlCph" + row + "").append(options);
         }
 
+        function bindCashPointDDL(row) {
+            //debugger
+            var options = $("#listCashPoint > option").clone();
+            $("#orderbooking-datatable > tbody > tr #ddlCpoint" + row + "").append(options);
+        }
+
         //function generateBranchDDL(array) {
         //    //debugger
         //    for (var i = 0; i < array.length; i++) {
@@ -321,6 +337,12 @@
             //debugger
             for (var i = 0; i < array.length; i++) {
                 $("#listCPH").append($("<option /> ").val(array[i].Value).text(array[i].Text));
+            }
+        }
+        function generateCPointDDL(array) {
+            //debugger
+            for (var i = 0; i < array.length; i++) {
+                $("#listCashPoint").append($("<option /> ").val(array[i].Value).text(array[i].Text));
             }
         }
 

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 
 namespace WebApp.Controllers
 {
@@ -54,7 +55,6 @@ namespace WebApp.Controllers
         #region Record
         public ActionResult Record(Guid? Id)
         {
-            ViewData["IsView"] = Convert.ToString(TempData["IsView"]);
             var model = new CPCOrderBooking();
             if (Id.HasValue)
             {
@@ -68,9 +68,24 @@ namespace WebApp.Controllers
             ViewBag.BrachList = new SelectList(branchRepo.GetDropdown(), "Value", "Text");
             ViewBag.DenominationList = new SelectList(commonRepo.GetAllDenominationDropdown().Where(x => x.Text != Convert.ToString(1) && x.Text != Convert.ToString(2) && x.Text != Convert.ToString(5)), "Value", "Text");
             ViewBag.CPHList = new SelectList(cashpPocessinHousegRepo.GetDropdown(), "Value", "Text");
+            ViewBag.CashPointList = new SelectList(GetCashPointDropdown(), "Value", "Text");
             //ViewBag.ProjectList = new SelectList(commonRepo.GetAllProjectsDropdown(), "Value", "Text");
             return View(model);
         }
+        public static List<CustomSelectList> GetCashPointDropdown()
+        {
+            try
+            {
+                var ls = EnumHelper.GetSelectList(typeof(CashPoint));
+                return ls.Select(x => new CustomSelectList { Value = x.Value.ToString(), Text = x.Text.ToString() }).ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Record(CPCOrderBooking model, List<CPCOrderBookingDetail> CPCOrderBookingDetail, string Date)
         {
@@ -181,12 +196,6 @@ namespace WebApp.Controllers
             return Json(null, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public JsonResult DuplicationCheck(int SrNo)
-        {
-            return Json("", JsonRequestBehavior.AllowGet);
-            //return Json(orderbookingRepo.IsDuplicate(SrNo), JsonRequestBehavior.AllowGet);
-        }
-        [HttpGet]
         public JsonResult FetchCashProcessingHouses(Guid Id)
         {
             try
@@ -222,15 +231,13 @@ namespace WebApp.Controllers
             return PartialView(model);
         }
         #endregion
-        #endregion
 
-        #region Remote function
         [HttpGet]
         public JsonResult GetOrderBookingData(Guid id)
         {
             try
             {
-                var List = orderbookingRepo.GetAllDetailsById(id).Where(x=> x.Status == (int)AnnexureStatus.Approved);
+                var List = orderbookingRepo.GetAllDetailsById(id).Where(x => x.Status == (int)AnnexureStatus.Approved);
                 return Json(new
                 {
                     List.FirstOrDefault().OrderNo,
@@ -254,6 +261,20 @@ namespace WebApp.Controllers
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        [HttpPost]
+        public JsonResult RequestCash(Guid Id)
+        {
+            try
+            {
+                orderbookingRepo.ChangeStatus(Id,CurrentUser.Id, AnnexureStatus.PendingDelivery);
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
             }
         }
 

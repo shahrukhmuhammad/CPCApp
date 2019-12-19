@@ -50,6 +50,15 @@ namespace WebApp.Areas.CPC.Controllers
         }
         #endregion
 
+        #region Order Delivery
+        public ActionResult OrderDelivery(Guid Id)
+        {
+            var model = orderbookingRepo.GetById(Id);
+            ViewBag.Details = orderbookingRepo.GetAllDetailsById(Id);
+            return View(model);
+        }
+        #endregion
+
         #region Approve
         [HttpPost]
         public JsonResult Approve(Guid Id)
