@@ -68,6 +68,10 @@
                                     {
                                         <label class="label label-warning">Pending Delivery</label>
                                     }
+                                    else if (x.Status == (int)AnnexureStatus.Delivered)
+                                    {
+                                        <label class="label label-success">Delivered</label>
+                                    }
                                     else
                                     {
                                         <label class="label label-info">Inprocess</label>
@@ -80,8 +84,8 @@
                                         {
                                             if (x.Status == (int)AnnexureStatus.Inprocess)
                                             {
-                                                <a href="javascript://" onclick="approveRecord('@Url.Action("Approve")', '@x.Id')" class="btn btn-success mg-r" title="Approve"><i class="fa fa-check"></i> </a>
-                                                <a href="javascript://" onclick="approveRecord('@Url.Action("Decline")', '@x.Id')" class="btn btn-danger mg-r" title="Decline"><i class="fa fa-trash"></i> </a>
+                                                <a href="javascript://" onclick="changeStatus('@Url.Action("Approve")', '@x.Id','','Are you sure you want to Approve this record ?','Approve Order Request')" class="btn btn-success mg-r" title="Approve"><i class="fa fa-check"></i> </a>
+                                                <a href="javascript://" onclick="changeStatus('@Url.Action("Decline")', '@x.Id','', 'Are you sure you want to Reject this record ?','Reject Order Request')" class="btn btn-danger mg-r" title="Decline"><i class="fa fa-trash"></i> </a>
                                             }
                                             else if (x.Status == (int)AnnexureStatus.PendingDelivery)
                                             {

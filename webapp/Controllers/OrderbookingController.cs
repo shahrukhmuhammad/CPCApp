@@ -277,6 +277,19 @@ namespace WebApp.Controllers
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpPost]
+        public JsonResult ConfirmReceived(Guid Id)
+        {
+            try
+            {
+                orderbookingRepo.ChangeStatus(Id, CurrentUser.Id, AnnexureStatus.Completed);
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         #endregion
         #region Delete

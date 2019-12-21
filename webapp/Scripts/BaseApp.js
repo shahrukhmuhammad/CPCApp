@@ -902,10 +902,10 @@ function deleteDelableRecord(delableUrl, targetUrl, recordId) {
 };
 //--- 
 
-function RequestOrderCash(targetUrl, recordId, returnUrl) {
+function changeStatus(targetUrl, recordId, returnUrl, messageText, titleText) {
     bootbox.dialog({
-        message: "Are you sure you want to request Sorted Cash against this Order ?",
-        title: "Request For Sorted Cash",
+        message: messageText, //"Are you sure you want to request Sorted Cash against this Order ?",
+        title: titleText, //"Request For Sorted Cash",
         buttons: {
             main: {
                 label: "Cancel",
@@ -915,8 +915,8 @@ function RequestOrderCash(targetUrl, recordId, returnUrl) {
                 }
             },
             danger: {
-                label: "Request",
-                className: "btn-success",
+                label: "Save",
+                className: "btn-primary",
                 callback: function () {
                     $.ajax({
                         url: targetUrl + '/' + recordId,

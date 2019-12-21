@@ -172,6 +172,48 @@ namespace CPC
             }
         }
 
+        public bool UpdateDelivery(CPCOrderBooking model, List<CPCOrderBookingDetail> details)
+        {
+            try
+            {
+                using (context = new SOSTechCPCEntities())
+                {
+                    #region Save
+                    var dbMaster = context.CPCOrderBookings.Where(x => x.Id == model.Id).FirstOrDefault();
+                    if (dbMaster != null)
+                    {
+                        dbMaster.UpdatedBy = model.UpdatedBy;
+                        dbMaster.UpdatedOn = model.UpdatedOn;
+                        dbMaster.Status = model.Status;
+                        dbMaster.CashDeliverByPersonA = model.CashDeliverByPersonA;
+                        dbMaster.CashDeliverByPersonB = model.CashDeliverByPersonB;
+                        context.SaveChanges();
+                        //Update Details
+                        var dbDetails = context.CPCOrderBookingDetails.Where(x => x.OrderbookingId == model.Id).ToList();
+                        //details.ForEach(x =>
+                        //{
+                        //    x.CashDeliveryPoint = details.Where(y => y.Id == x.Id).FirstOrDefault() != null ? details.Where(y => y.Id == x.Id).FirstOrDefault().CashDeliveryPoint : null;
+                        //});
+                        foreach (var item in dbDetails)
+                        {
+                            var obj = details.Where(y => y.Id == item.Id).FirstOrDefault();
+                            item.CashDeliveryPoint = obj != null ? obj.CashDeliveryPoint : null;
+                        }
+                        context.SaveChanges();
+                    }
+                    
+                    #endregion
+                    //return model.Id;
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                return false;
+            }
+        }
+
         public bool Create(List<CPCOrderBookingDetail> modelList)
         {
             try
@@ -223,7 +265,7 @@ namespace CPC
         #endregion
 
         #region Request Approve
-        public bool ApproveRequest(Guid Id, Guid EmployeeId, Guid UserId)
+        public CPCOrderBooking ApproveRequest(Guid Id, Guid EmployeeId, Guid UserId)
         {
             try
             {
@@ -241,12 +283,12 @@ namespace CPC
                         context.SaveChanges();
                     }
                     #endregion
-                    return true;
+                    return res;
                 }
             }
             catch (Exception ex)
             {
-                return false;
+                return null;
             }
         }
         #endregion

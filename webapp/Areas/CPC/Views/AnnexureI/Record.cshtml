@@ -41,7 +41,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 text-left horizontal-label">Order Number</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBoxFor(x => x.OrderNumber, new { @class = "form-control input-sm", @readonly = "readyonly" })
+                                            @Html.TextBoxFor(x => x.OrderNumber, new { @class = "form-control input-sm", @readonly = "readyonly", @required = "required" })
+                                            @Html.ValidationMessageFor(m => m.OrderNumber)
                                             <a href="javascript://" class="btn btn-sm btn-primary addNewCompany"><i class="fa fa-plus"></i> Select Order</a>
                                         </div>
                                     </div>
@@ -100,7 +101,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CPC</b> Staff First Person</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCPCStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "CashHandedOverCPCStaffACNIC" })
+                                            @Html.DropDownListFor(x => x.CashHandedOverCPCStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "CashHandedOverCPCStaffACNIC", @required= "required" })
                                             @Html.ValidationMessageFor(m => m.CashHandedOverCPCStaffAId)
                                         </div>
                                     </div>
@@ -110,7 +111,6 @@
                                         <label class="col-sm-6 horizontal-label">CPC Staff First Person CNIC</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.CashHandedOverCPCStaffACNIC, (SelectList)ViewBag.EmployeeCNICList, " Select Employee ", new { @class = "form-control input-sm select2" })
-                                            @Html.ValidationMessageFor(m => m.CashHandedOverCPCStaffACNIC)
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CPC</b> Staff Second Person</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCPCStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "CashHandedOverCPCStaffBCNIC" })
+                                            @Html.DropDownListFor(x => x.CashHandedOverCPCStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "CashHandedOverCPCStaffBCNIC", @required = "required" })
                                             @Html.ValidationMessageFor(m => m.CashHandedOverCPCStaffBId)
                                         </div>
                                     </div>
@@ -130,7 +130,6 @@
                                         <label class="col-sm-6 horizontal-label">CPC Staff Second Person CNIC</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.CashHandedOverCPCStaffBCNIC, (SelectList)ViewBag.EmployeeCNICList, " Select Employee ", new { @class = "form-control input-sm select2" })
-                                            @Html.ValidationMessageFor(m => m.CashHandedOverCPCStaffBCNIC)
                                         </div>
                                     </div>
                                 </div>
@@ -140,7 +139,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> First Person</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "CashHandedOverCITStaffACNIC" })
+                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "CashHandedOverCITStaffACNIC", @required = "required" })
                                             @Html.ValidationMessageFor(m => m.CashHandedOverCITStaffAId)
                                         </div>
                                     </div>
@@ -150,7 +149,6 @@
                                         <label class="col-sm-6 horizontal-label">CIT First Person CNIC</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.CashHandedOverCITStaffACNIC, (SelectList)ViewBag.EmployeeCNICList, " Select Employee ", new { @class = "form-control input-sm select2" })
-                                            @Html.ValidationMessageFor(m => m.CashHandedOverCITStaffACNIC)
                                         </div>
                                     </div>
                                 </div>
@@ -160,7 +158,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CIT</b> Staff Second Person</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "CashHandedOverCITStaffBCNIC" })
+                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "CashHandedOverCITStaffBCNIC", @required = "required" })
+                                            @Html.ValidationMessageFor(m => m.CashHandedOverCITStaffBId)
                                         </div>
                                     </div>
                                 </div>
@@ -168,8 +167,7 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label">CIT Second Person CNIC</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffBCNIC, (SelectList)ViewBag.EmployeeCNICList, " Select Employee ", new { @class = "form-control input-sm select2" })
-                                            @Html.ValidationMessageFor(m => m.CashHandedOverCITStaffBCNIC)
+                                            @Html.DropDownListFor(x => x.CashHandedOverCITStaffBCNIC, (SelectList)ViewBag.EmployeeCNICList, " Select Employee ", new { @class = "form-control input-sm select2" })                                            
                                         </div>
                                     </div>
                                 </div>
@@ -179,7 +177,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label"> <b>CPC</b> Staff Handing Over Cash and Verifying First Person</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "SignatureCPCHandingOverCashACNIC" })
+                                            @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashAId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "SignatureCPCHandingOverCashACNIC", @required = "required" })
+                                            @Html.ValidationMessageFor(m => m.SignatureCPCHandingOverCashAId)
                                         </div>
                                     </div>
                                 </div>
@@ -188,7 +187,6 @@
                                         <label class="col-sm-6 horizontal-label">CPC Verifying First Person CNIC</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashACNIC, (SelectList)ViewBag.EmployeeCNICList, " Select Employee ", new { @class = "form-control input-sm select2" })
-                                            @Html.ValidationMessageFor(m => m.SignatureCPCHandingOverCashACNIC)
                                         </div>
                                     </div>
                                 </div>
@@ -198,7 +196,9 @@
                                     <div class="row form-group">
                                         <label class="col-sm-6 horizontal-label"><b>CPC</b> Staff Handing Over Cash and Verifying Second Person</label>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "SignatureCPCHandingOverCashBCNIC" })
+                                            @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashBId, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2 cpc", @dataName = "SignatureCPCHandingOverCashBCNIC", @required = "required" })
+                                            @Html.ValidationMessageFor(m => m.SignatureCPCHandingOverCashBId)
+
                                         </div>
                                     </div>
                                 </div>
@@ -207,7 +207,6 @@
                                         <label class="col-sm-6 horizontal-label">CPC Verifying Second Person CNIC</label>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(x => x.SignatureCPCHandingOverCashBCNIC, (SelectList)ViewBag.EmployeeCNICList, " Select Employee ", new { @class = "form-control input-sm select2" })
-                                            @Html.ValidationMessageFor(m => m.SignatureCPCHandingOverCashBCNIC)
                                         </div>
                                     </div>
                                 </div>
@@ -295,9 +294,9 @@
 
             _html += '<td><input type="hidden" class="form-control input-sm" name="CPCAnnexureIDetail[' + (row - 1) + '].TotalAmount" value="' + item.TotalAmount + '" /> ' + item.TotalAmount + '</td>'
 
-            _html += '<td><input type="text" class="form-control input-sm" name="CPCAnnexureIDetail[' + (row - 1) + '].SealNo"></td>'
+            _html += '<td><input type="text" class="form-control input-sm" name="CPCAnnexureIDetail[' + (row - 1) + '].SealNo" required></td>'
 
-            _html += '<td><input type="number" class="form-control input-sm" name="CPCAnnexureIDetail[' + (row - 1) + '].ShipmentReciptNo" pattern="[0-9]"></td></tr>'
+            _html += '<td><input type="number" class="form-control input-sm" name="CPCAnnexureIDetail[' + (row - 1) + '].ShipmentReciptNo" pattern="[0-9]" required></td></tr>'
 
             //_html += '<td> <a href="javascript://" class="btn btn-xs btn-danger btn-removeRow" data-original-title="Delete"><i class="fa fa-trash"></i> Delete</a> </td></tr>';
 

@@ -32,7 +32,8 @@
                                     <div class="row form-group">
                                         <label class="col-sm-4 text-left horizontal-label">Order Number</label>
                                         <div class="col-sm-8">
-                                            @Html.TextBoxFor(x => x.OrderNumber, new { @class = "form-control input-sm", @readonly = "readonly" })
+                                            @Html.TextBoxFor(x => x.OrderNumber, new { @class = "form-control input-sm", @readonly = "readonly", @required = "required" })
+                                            @Html.ValidationMessageFor(m => m.OrderNumber)
                                             <a href="javascript://" class="btn btn-sm btn-primary addNewCompany"><i class="fa fa-plus"></i> Select Order</a>
                                         </div>
                                     </div>

@@ -47,14 +47,37 @@
                                         </div>
                                     </div>
                                 </div>
-                                @*<div class="col-sm-4">
-                                        <div class="row form-group">
-                                            <label class="col-sm-5 text-left horizontal-label">Cash Collection Point</label>
-                                            <div class="col-sm-7">
-                                                <label class="label label-default">@Model.CashCollectionPoint</label>
-                                            </div>
+                                <div class="col-sm-4">
+                                    <div class="row form-group">
+                                        <label class="col-sm-5 text-left horizontal-label">Order Status</label>
+                                        <div class="col-sm-7">
+                                            @if (Model.Status == (int)AnnexureStatus.Sorted)
+                                            {
+                                                <label class="label label-primary">Cash Sorted</label> <br />
+                                            }
+                                            else if (Model.Status == (int)AnnexureStatus.Approved)
+                                            {
+                                                <label class="label label-primary">Approved</label>
+                                            }
+                                            else if (Model.Status == (int)AnnexureStatus.Completed)
+                                            {
+                                                <label class="label label-success">Completed</label>
+                                            }
+                                            else if (Model.Status == (int)AnnexureStatus.PendingDelivery)
+                                            {
+                                                <label class="label label-warning">Pending Delivery</label>
+                                            }
+                                            else if (Model.Status == (int)AnnexureStatus.Delivered)
+                                            {
+                                                <label class="label label-success"> Delivered</label>
+                                            }
+                                            else
+                                            {
+                                                <label class="label label-info">Inprocess</label>
+                                            }
                                         </div>
-                                    </div>*@
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -70,6 +93,7 @@
                                     <th>No. Of Bundles</th>
                                     <th>Total Amount</th>
                                     <th>Pickup Point</th>
+                                    <th>Delivery Point</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,8 +111,15 @@
                                                 <td>@item.NoOfBundles</td>
                                                 <td>@item.TotalAmount</td>
                                                 <td class="text-center">
-                                                    @(item.CashCollectionPoint == (int)CashPoint.CPH ? CashPoint.CPH : CashPoint.Branch)
+                                                    @(item.CashCollectionPoint == (int)CashPoint.Branch ? $"{item.BranchCode} - {item.BranchName}" : item.CashProcessingCellTitle )
                                                 </td>
+                                                @if (item.CashDeliveryPoint != null)
+                                                {
+                                                    <td class="text-center">
+                                                        @(item.CashDeliveryPoint == (int)CashPoint.Branch ? $"{item.BranchCode} - {item.BranchName}" : item.CashProcessingCellTitle )
+                                                    </td>
+                                                }
+
                                             </tr>
                                             i++;
                                         }

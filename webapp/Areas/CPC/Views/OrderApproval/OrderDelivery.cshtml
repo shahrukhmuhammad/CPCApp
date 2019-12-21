@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Order Delivery Approval";
     var details = ViewBag.Details as List<Vew_Orderbookings>;
+    var cashPointList = ViewBag.CashPointList as List<CustomSelectList>;
 }
 
 <style>
@@ -14,8 +15,11 @@
         color: red;
     }
 </style>
-<form id="lead-frm" class="user-Profile" method="post" enctype="multipart/form-data">
+<form id="lead-frm" class="user-Profile" method="post">
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.OrderNo)
+
     <div class="row">
         <div class="col-sm-12 text-right">
             <div class="btn-group" role="group">
@@ -50,14 +54,33 @@
                                         </div>
                                     </div>
                                 </div>
-                                @*<div class="col-sm-4">
-                                        <div class="row form-group">
-                                            <label class="col-sm-5 text-left horizontal-label">Cash Collection Point</label>
-                                            <div class="col-sm-7">
-                                                <label class="label label-default">@Model.CashCollectionPoint</label>
-                                            </div>
+                                <div class="col-sm-4">
+                                    <div class="row form-group">
+                                        <label class="col-sm-5 text-left horizontal-label">Order Status</label>
+                                        <div class="col-sm-7">
+                                            @if (Model.Status == (int)AnnexureStatus.Sorted)
+                                            {
+                                                <label class="label label-primary">Cash Sorted</label> <br />
+                                            }
+                                            else if (Model.Status == (int)AnnexureStatus.Approved)
+                                            {
+                                                <label class="label label-primary">Approved</label>
+                                            }
+                                            else if (Model.Status == (int)AnnexureStatus.Completed)
+                                            {
+                                                <label class="label label-success">Completed</label>
+                                            }
+                                            else if (Model.Status == (int)AnnexureStatus.PendingDelivery)
+                                            {
+                                                <label class="label label-warning">Pending Delivery</label>
+                                            }
+                                            else
+                                            {
+                                                <label class="label label-info">Inprocess</label>
+                                            }
                                         </div>
-                                    </div>*@
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -72,6 +95,8 @@
                                     <th>Denomination</th>
                                     <th>No. Of Bundles</th>
                                     <th>Total Amount</th>
+                                    <th>Pickup Point</th>
+                                    <th>Delivery Point</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -82,12 +107,28 @@
                                         foreach (var item in details)
                                         {
                                             <tr>
-                                                <td>@i</td>
+                                                <td>
+                                                    @i
+                                                    <input type="hidden" name="CPCOrderBookingDetail[@(i -1)].Id" value="@item.CPCOrderBookingDetailsId" />
+                                                    <input type="hidden" name="CPCOrderBookingDetail[@(i -1)].ProjectBranchId" value="@item.ProjectBranchId" />
+                                                    <input type="hidden" name="CPCOrderBookingDetail[@(i -1)].DenominationId" value="@item.DenominationId" />
+                                                </td>
                                                 <td>@item.CashProcessingCellTitle</td>
                                                 <td>@($"{item.BranchCode} - {item.BranchName}")</td>
                                                 <td>@item.DenominationTitle</td>
                                                 <td>@item.NoOfBundles</td>
                                                 <td>@item.TotalAmount</td>
+                                                <td class="text-center">
+                                                    @(item.CashCollectionPoint == (int)CashPoint.Branch ? $"{item.BranchCode} - {item.BranchName}" : item.CashProcessingCellTitle )
+                                                </td>
+                                                <td>
+                                                    <select class="form-control input-sm" id="ddlCPoint@(i -1)" name="CPCOrderBookingDetail[@(i -1)].CashDeliveryPoint">
+                                                        @foreach (var x in cashPointList)
+                                                        {
+                                                            <option value="@x.Value">@x.Text</option>
+                                                        }
+                                                    </select>
+                                                </td>
                                             </tr>
                                             i++;
                                         }
@@ -102,6 +143,30 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
+                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CPC</b> Staff First Person</label>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(Model => Model.CashDeliverByPersonA, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row form-group">
+                                        <label class="col-sm-6 horizontal-label">Cash Handed Over By <b>CPC</b> Staff Second Person</label>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(Model => Model.CashDeliverByPersonB, (SelectList)ViewBag.EmployeeList, " Select Employee ", new { @class = "form-control input-sm select2" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -117,4 +182,10 @@
     </div>
 </form>
 
-
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(".select2").select2();
+        });
+    </script>
+}

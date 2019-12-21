@@ -55,7 +55,7 @@ namespace BaseApp.System
             mailMessage = new MailMessage
             {
                 From = new MailAddress(emailFrom, emailFrmName),
-                IsBodyHtml = true
+                IsBodyHtml = false
             };
         }
 

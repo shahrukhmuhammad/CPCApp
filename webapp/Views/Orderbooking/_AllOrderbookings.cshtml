@@ -8,9 +8,10 @@
     .menu-links a:hover {
         text-decoration: none;
     }
+
     .btn-group a {
         margin-bottom: 5px;
-    } 
+    }
 </style>
 
 <div class="form-Modal">
@@ -85,6 +86,10 @@
                                     {
                                         <label class="label label-warning">Pending Delivery</label>
                                     }
+                                    else if (x.Status == (int)AnnexureStatus.Delivered)
+                                    {
+                                        <label class="label label-success">Delivered</label>
+                                    }
                                     else
                                     {
                                         <label class="label label-info">Inprocess</label>
@@ -103,7 +108,11 @@
                                         @if (x.Status == (int)AnnexureStatus.Sorted)
                                         {
                                             @*<a href="javascript://" data-id="@x.Id" id="btn-Collect" class="btn btn-success btn-xs" title="Collect"><i class="fa fa-inbox"></i> Collect </a>*@
-                                            <a href="javascript://" class="btn btn-success btn-xs" onclick="RequestOrderCash('@Url.Action("RequestCash")', '@x.Id', '@Url.Action("Orderbookings","Orderbooking")')" title="Collect"><i class="fa fa-inbox"></i> Collect</a>
+                                            <a href="javascript://" class="btn btn-success btn-xs" onclick="changeStatus('@Url.Action("RequestCash")', '@x.Id', '', 'Are you sure you want to request Sorted Cash against this Order ?', 'Request For Sorted Cash')" title="Collect"><i class="fa fa-inbox"></i> Collect</a>
+                                        }
+                                        else if (x.Status == (int)AnnexureStatus.Delivered)
+                                        {
+                                            <a href="javascript://" class="btn btn-success btn-xs" onclick="changeStatus('@Url.Action("ConfirmReceived")', '@x.Id', '', 'Are you sure you want to Confirm Received this Order ?', 'Order Received Confirmation')" title="Confirm Received"><i class="fa fa-money"></i> Received</a>
                                         }
                                         @if (CurrentUser.HasAnyPermission(BaseApp.Entity.AppPermission.All, BaseApp.Entity.AppPermission.CPC))
                                         {

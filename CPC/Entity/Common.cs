@@ -130,7 +130,8 @@ namespace CPC
         Proceeded = 4,
         Rejected = 5,
         Sorted = 6,
-        PendingDelivery = 7
+        PendingDelivery = 7,
+        Delivered = 8
     }
 
     public enum CashPoint

@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
+using WebApp.Controllers;
 
 namespace WebApp.Areas.CPC.Controllers
 {
@@ -55,7 +57,79 @@ namespace WebApp.Areas.CPC.Controllers
         {
             var model = orderbookingRepo.GetById(Id);
             ViewBag.Details = orderbookingRepo.GetAllDetailsById(Id);
+            ViewBag.EmployeeList = new SelectList(employeeRepo.GetDropdown(), "Value", "Text");
+            //ViewBag.CashPointList = new SelectList(EnumHelper.GetSelectList(typeof(CashPoint)).Select(x => new CustomSelectList { Value = x.Value.ToString(), Text = x.Text.ToString() }).ToList(), "Value", "Text");
+            ViewBag.CashPointList = EnumHelper.GetSelectList(typeof(CashPoint)).Select(x => new CustomSelectList { Value = x.Value.ToString(), Text = x.Text.ToString() }).ToList();
             return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult OrderDelivery(CPCOrderBooking model, List<CPCOrderBookingDetail> CPCOrderBookingDetail)
+        {
+            try
+            {
+                if (!model.Id.IsEmpty() && CPCOrderBookingDetail != null && CPCOrderBookingDetail.Count > 0)
+                {
+                    #region Update Details
+                    model.UpdatedBy = CurrentUser.Id;
+                    model.UpdatedOn = DateTime.Now;
+                    model.Status = (int)AnnexureStatus.Delivered;
+
+                    //var lsToSave = CPCOrderBookingDetail.ToList();
+                    //lsToSave.ForEach(x => { x. = Guid.NewGuid(); x.OrderbookingId = model.Id; x.CreatedOn = DateTime.Now; x.CreatedBy = CurrentUser.Id; });
+                    bool res = orderbookingRepo.UpdateDelivery(model, CPCOrderBookingDetail);
+                    #endregion
+
+
+                    #region Activity Log
+                    //appLog.Create(CurrentUser.OfficeId, model.Id, CurrentUser.Id, AppLogType.Activity, "CRM - Lead", model.FullName + " lead created", "~/CRM/Contact/LeadRecord > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td><strong>" + model.FullName + "</strong> lead created by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
+                    #endregion
+
+                    #region EmailSending
+
+                    //Emailer.Send(model.Email, EmailTemplateType.ContactSignup, model);
+
+                    //var appMessageModel = new AppMessage();
+                    //appMessageModel.Email = model.Email;
+                    //appMessageModel.Status = AppMessageStatus.Outbox;
+                    //appMessageModel.Subject = EmailTemplateType.ContactSignup;
+                    //appMessageModel.Message = EmailTemplateType.ContactSignup;
+                    //TempData["SuccessMsg"] = "Message has been sent successfully.";
+                    //realtime.UpdateMessages(null);
+                    //appMessageModel.CreatorId = appMessageModel.ContactId = CurrentUser.Id;
+                    //appMessageModel.Id = appMsg.Create(appMessageModel);
+
+                    ////var cntact = appUser.GetUserById(new Guid(x));
+                    //appMsg.Create(null, appMessageModel.Id, appMessageModel.CreatorId, null, AppMessageStatus.Inbox, EmailTemplateType.ContactSignup, model.Id, null);
+
+                    //realtime.UpdateMessages(null);
+                    #endregion
+
+                    if (res)
+                    {
+                        TempData["SuccessMsg"] = "Order No " + model.OrderNo + " has been Delivered successfully.";
+                    }
+                    else
+                        TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
+                }
+                else
+                {
+                    #region Activity Log
+                    //appLog.Create(CurrentUser.OfficeId, model.Id, CurrentUser.Id, AppLogType.Activity, "CRM - Lead", model.FullName + " lead updated", "~/CRM/Contact/LeadRecord > HttpPost", "<table class='table table-hover table-striped table-condensed' style='margin-bottom:15px;'><tr><th class='text-center'>Description</th></tr><tr><td><strong>" + model.FullName + "</strong> lead updated by <strong>" + CurrentUser.FullName + "</strong>.</td></tr></table>");
+                    #endregion
+                    TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
+
+                }
+            }
+            catch (Exception ex)
+            {
+                #region Error Log
+                //appLog.Create(CurrentUser.OfficeId, null, CurrentUser.Id, AppLogType.Error, "CRM - Lead", ex.GetType().Name.ToSpacedTitleCase(), "~/CMS/FileManager/Index > HttpPost", "<table class='table table-hover table-striped'><tr><th class='text-right'>Source</th><td>" + ex.Source + "</td></tr><tr><th class='text-right'>URL</th><td>" + Request.Url.ToString() + "</td></tr><tr><th class='text-right'>Message</th><td>" + ex.Message + "</td></tr></table><table class='table table-hover table-striped table-condensed'><tr><th class='text-center'>Inner Exception</th></tr><tr><td>" + ex.InnerException + "</td></tr><tr><th class='text-center'>Stack Trace</th></tr><tr><td>" + ex.StackTrace.ToString() + "</td></tr></table>");
+                #endregion
+
+                TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
+            }
+            return RedirectToAction("Index");
         }
         #endregion
 
@@ -72,9 +146,10 @@ namespace WebApp.Areas.CPC.Controllers
                 if (empId.HasValue)
                 {
                     var res = orderbookingRepo.ApproveRequest(Id, empId.Value,CurrentUser.Id);
-                    if (res)
+                    if (res != null)
                     {
-                        TempData["SuccessMsg"] = "Order has been Approved successfully.";
+                        TempData["SuccessMsg"] = "Order No " + res.OrderNo + " has been Approved successfully.";
+                        Emailer.Send("muhammad.shahrukh@sosgroup.com.pk", "Order No " + res.OrderNo + " has been Approved successfully. by " + CurrentUser.Code + " - " + CurrentUser.FullName + ".", "Order Approved");
                     }
                     else
                         TempData["ErrorMsg"] = "We have encountered an error while processing your request, Please see log for details.";
